@@ -1,0 +1,68 @@
+{
+ "id": "nha_phong_khach",
+ "name": "Phòng khách nhà phố",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng khách nhà phố (trong nhà đèn sáng)",
+  "description": "Phòng khách nhà phố, trong nhà đèn sáng, phòng khách, nhà, bàn thờ, tivi, living room, nhà phố, trong nhà đèn sáng, indoor",
+  "kind": "house_living_room",
+  "tags": [
+   "phòng khách",
+   "nhà",
+   "bàn thờ",
+   "tivi",
+   "living room",
+   "nhà phố",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "nha_phong_khach"
+  ],
+  "catalog_id": "nha_phong_khach",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: bộ ghế gỗ + bàn trà, bàn thờ treo tường đèn đỏ, tivi cũ, cửa sổ song sắt, quạt trần, lịch treo, gạch bông."
+ },
+ "flow_prompt": "Vietnamese townhouse living room, wooden sofa set and tea table, small wall-mounted ancestor altar with red light, old television, window with iron bars, ceiling fan, patterned cement tiles, warm dim light, frontal view, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "nha_phong_khach"
+ },
+ "floor_y": 1901,
+ "slots": {
+  "left": {
+   "x": 1075,
+   "y": 1901,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 1901,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2765,
+   "y": 1901,
+   "scale": 1.0
+  },
+  "sofa": {
+   "x": 1613,
+   "y": 1814,
+   "scale": 0.95
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "indoor": "Vietnamese townhouse living room, wooden sofa set and tea table, small wall-mounted ancestor altar with red light, old television, window with iron bars, ceiling fan, patterned cement tiles, warm dim light, frontal view, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "night": "Vietnamese townhouse living room, wooden sofa set and tea table, small wall-mounted ancestor altar with red light, old television, window with iron bars, ceiling fan, patterned cement tiles, warm dim light, frontal view, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "day": "Vietnamese townhouse living room, wooden sofa set and tea table, small wall-mounted ancestor altar with red light, old television, window with iron bars, ceiling fan, patterned cement tiles, warm dim light, frontal view, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

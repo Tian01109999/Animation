@@ -1,0 +1,36 @@
+{
+ "id": "ghost_hand_ankle",
+ "label": "Tay ma nắm cổ chân",
+ "label_en": "Ghost hand grabbing an ankle",
+ "tags": [
+  "tay ma",
+  "nắm cổ chân",
+  "kinh dị",
+  "ghost hand",
+  "ankle",
+  "grab"
+ ],
+ "props": [
+  "ghost_hand_ankle",
+  "ghost_hand",
+  "grabbed_ankle"
+ ],
+ "style": "cutout",
+ "image": "ghost_hand_ankle.png",
+ "kind": "ghost_hand_ankle",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "shoe": "#f2f2f0",
+  "pants": "#3e6aa6",
+  "ghost_skin": "#e4e2dc",
+  "nails": "#4a4a52",
+  "shock_lines": true,
+  "bg": "dark_tiles"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

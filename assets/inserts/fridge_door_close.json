@@ -1,0 +1,34 @@
+{
+ "id": "fridge_door_close",
+ "label": "Cửa tủ lạnh mờ sương (cận)",
+ "label_en": "Frosted fridge door (close-up)",
+ "tags": [
+  "tủ lạnh",
+  "tủ mát",
+  "cửa kính",
+  "sương",
+  "fridge",
+  "cooler",
+  "frost"
+ ],
+ "props": [
+  "fridge",
+  "fridge_door",
+  "cooler_door",
+  "freezer"
+ ],
+ "style": "cutout",
+ "image": "fridge_door_close.png",
+ "kind": "fridge_door_close",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "handprint": false,
+  "impact_text": null
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

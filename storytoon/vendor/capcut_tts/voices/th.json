@@ -1,0 +1,35 @@
+[
+  {
+    "id": "BV568_streaming",
+    "maCu": "BV_TH_2",
+    "resourceId": "7483736089434264065",
+    "lang": "th",
+    "tenCapcut": "นภา (Napa)",
+    "ten": "นภา (Napa)",
+    "moTa": "Giọng nữ tiếng Thái",
+    "gioi": "nu",
+    "mau": "/audio/giong-capcut/BV568_streaming.mp3?v=2"
+  },
+  {
+    "id": "BV567_streaming",
+    "maCu": "BV_TH_1",
+    "resourceId": "7483736024871342608",
+    "lang": "th",
+    "tenCapcut": "สุนิสา (Sunisa)",
+    "ten": "สุนิสา (Sunisa)",
+    "moTa": "Giọng nữ tiếng Thái",
+    "gioi": "nu",
+    "mau": "/audio/giong-capcut/BV567_streaming.mp3"
+  },
+  {
+    "id": "BV421_thth_streaming",
+    "maCu": "BV_TH_3",
+    "resourceId": "7268502477702435330",
+    "lang": "th",
+    "tenCapcut": "Sweet Little Girl",
+    "ten": "Sweet Little Girl",
+    "moTa": "Giọng bé gái tiếng Thái",
+    "gioi": "nu",
+    "mau": "/audio/giong-capcut/BV421_thth_streaming.mp3"
+  }
+]

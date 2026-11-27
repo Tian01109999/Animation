@@ -1,0 +1,84 @@
+{
+ "id": "cho_xe_om_ven_duong",
+ "name": "Chòi xe ôm / trạm chờ cạnh cửa hàng (hoàng hôn)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chòi xe ôm / trạm chờ cạnh cửa hàng (hoàng hôn) (hoàng hôn)",
+  "description": "Chòi xe ôm / trạm chờ cạnh cửa hàng (hoàng hôn), hoàng hôn, xe ôm, trạm chờ, ven đường, đường quê, chòi, mái che, hoàng hôn, dusk",
+  "kind": "roadside_shelter",
+  "tags": [
+   "xe ôm",
+   "trạm chờ",
+   "ven đường",
+   "đường quê",
+   "chòi",
+   "mái che",
+   "hoàng hôn",
+   "dusk"
+  ],
+  "time_variants": [
+   "cho_xe_om_ven_duong",
+   "cho_xe_om_ven_duong__night",
+   "cho_xe_om_ven_duong__day"
+  ],
+  "catalog_id": "cho_xe_om_ven_duong",
+  "variant": "dusk",
+  "style": "cutout"
+ },
+ "flow_prompt": "Side-scrolling flat composition at dusk: small glowing convenience store glass front on the left, a simple motorbike taxi shelter with slanted grey roof, two hanging cone lamps and a wooden bench in the center, wooden power pole with sagging wires and a bare dead tree on the right, two-lane road with yellow dashed center line, dark green bushes, indigo to mauve sky with pink elongated clouds, ground fog, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cho_xe_om_ven_duong"
+ },
+ "floor_y": 1740,
+ "slots": {
+  "bench": {
+   "x": 2060,
+   "y": 1740,
+   "scale": 0.55
+  },
+  "store_door": {
+   "x": 845,
+   "y": 1760,
+   "scale": 0.55
+  },
+  "roadside": {
+   "x": 2950,
+   "y": 1790,
+   "scale": 0.55
+  },
+  "center": {
+   "x": 2060,
+   "y": 1740,
+   "scale": 0.55
+  }
+ },
+ "signs": [
+  {
+   "text": "MOTO TAXI",
+   "box": [
+    1914,
+    762,
+    2346,
+    880
+   ],
+   "style": "plain"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ }
+}

@@ -1,0 +1,40 @@
+{
+ "id": "missing_poster_numbered",
+ "label": "Tờ tìm người dán tường, đánh số, dải xé",
+ "label_en": "Missing poster, numbered, tear-off tabs",
+ "tags": [
+  "tìm người",
+  "mất tích",
+  "tờ rơi",
+  "đánh số",
+  "missing",
+  "poster",
+  "numbered"
+ ],
+ "props": [
+  "missing_poster_numbered",
+  "numbered_poster"
+ ],
+ "style": "cutout",
+ "image": "missing_poster_numbered.png",
+ "kind": "missing_poster_numbered",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "header": "M I S S I N G",
+  "name": "MAY LIN",
+  "age": "Age 22 · 1.58 m",
+  "desc": "Last seen near the bun shop",
+  "datetime": "11:40 PM · OCT 3",
+  "phone": "555-0193",
+  "number": 7,
+  "rotation": -4,
+  "photo": "archetype:nu_tre_van_phong",
+  "bg": "wall_grey"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

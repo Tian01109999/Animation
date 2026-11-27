@@ -1,0 +1,34 @@
+{
+ "id": "blue_drums_cart",
+ "label": "Thùng phuy xanh trên xe đẩy",
+ "label_en": "Blue drums on a hand cart",
+ "tags": [
+  "thùng phuy",
+  "xe đẩy",
+  "thùng xanh",
+  "blue drum",
+  "barrel",
+  "cart"
+ ],
+ "props": [
+  "blue_drum",
+  "barrel",
+  "drum_cart",
+  "hand_cart"
+ ],
+ "style": "cutout",
+ "image": "blue_drums_cart.png",
+ "kind": "blue_drums_cart",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "count": 3,
+  "drum_color": "#2a6fd0",
+  "chip": null
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

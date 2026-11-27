@@ -1,0 +1,65 @@
+{
+ "name": "Hẻm tối",
+ "floor_y": 1900,
+ "time_of_day": "night",
+ "slots": {
+  "far_left": {
+   "x": 1560,
+   "y": 1450,
+   "scale": 0.534
+  },
+  "left": {
+   "x": 1250,
+   "y": 1880,
+   "scale": 0.951
+  },
+  "center": {
+   "x": 1920,
+   "y": 1900,
+   "scale": 0.971
+  },
+  "right": {
+   "x": 2580,
+   "y": 1880,
+   "scale": 0.951
+  },
+  "far_right": {
+   "x": 2250,
+   "y": 1450,
+   "scale": 0.534
+  },
+  "counter": {
+   "x": 1920,
+   "y": 1600,
+   "scale": 0.68
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2467.5,
+   "y": 503.9999999999999,
+   "color": "#ffd98a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  },
+  "near": {
+   "image": "bg_near.png",
+   "parallax": 1.15
+  }
+ },
+ "id": "hem_toi",
+ "bg": "bg.png",
+ "size": [
+  3840,
+  2160
+ ]
+}

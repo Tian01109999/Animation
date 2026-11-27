@@ -1,0 +1,38 @@
+{
+ "id": "map_card",
+ "label": "Thẻ bản đồ vẽ tay",
+ "label_en": "Hand-drawn map card",
+ "tags": [
+  "bản đồ",
+  "sơ đồ",
+  "hiện trường",
+  "map"
+ ],
+ "props": [
+  "map",
+  "map_card"
+ ],
+ "style": "cutout",
+ "image": "map_card.png",
+ "kind": "map_card",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "title": "Canal-side road",
+  "subtitle": "SCENE MAP",
+  "road_label": "Route 9",
+  "water_label": "Old canal",
+  "marker": {
+   "x": 0.58,
+   "y": 0.52,
+   "label": "car went in here · 03:00"
+  },
+  "tag": "old canal · 1998",
+  "bg": "smoke_dark"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

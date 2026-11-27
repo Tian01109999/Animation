@@ -1,0 +1,497 @@
+﻿[
+    {
+        "characters":  [
+                           {
+                               "archetype":  "young investigator / journalist man (lead): slick black side-parted hair, dark charcoal blazer over white shirt with a thin dark tie, slim dark trousers, black shoes",
+                               "gender":  "male",
+                               "age":  "25-35",
+                               "look":  "Same flat-vector puppet look as the library (round head, dot eyes, rosy cheeks, soft cel shade). Distinguishing points: neat side-part hairline, long narrow body, blazer seams drawn as light grey lines. In about half the frames he is shown only from behind as a big over-shoulder head and shoulders (back of hair with two highlight arcs, ears, collar).",
+                               "expressions":  "worried/sad (night walk, 180), tense shout with blush while aiming (187), angry scowl while scolding (211), neutral seen from behind",
+                               "poses":  "walking side view with hands clasped at the waist (180); two-handed aim with arms straight out, a gun-like prop (187: keep it generic, or swap for a flashlight); leaning forward to scold someone sitting (211); big over-the-shoulder back view in the foreground (182, 194, 196). This back-view head is the most reused framing in the batch and should be its own pose/view."
+                           },
+                           {
+                               "archetype":  "bald tattooed butcher / street-food cook (villain)",
+                               "gender":  "male",
+                               "age":  "50-65",
+                               "look":  "Bald, peach-tan skin, scarred and burned half of the face, a mole on one cheek, a grey vest or open white shirt over a long dark butcher apron with stains, snake/vine tattoo running down one arm, a bracelet, bare feet or sandals, thin long legs",
+                               "expressions":  "smug smirk with one eye half-closed (185, 193), calm neutral, eyes closed and bandaged in a hospital bed (200)",
+                               "poses":  "pushing a flat hand-cart loaded with a blue drum (185); standing with a knife or cleaver over a steel table (187: generic and non-graphic); walking while holding a rope (193); dragging someone by the arm on a rooftop (188); lying in an ICU bed with a bandaged head (200)"
+                           },
+                           {
+                               "archetype":  "young woman with a bob and a pink hair clip (victim / sister)",
+                               "gender":  "female",
+                               "age":  "18-25",
+                               "look":  "Dark brown bob with bangs, a pink barrette, light-blue denim jacket, white top, denim shorts, white sneakers",
+                               "expressions":  "crying, seen from behind while hugging (181); cheerful blush while pulling a suitcase (191); wide-eyed shock while seated (211); frightened (188)",
+                               "poses":  "embrace/hug seen from behind with the other person\u0027s arms around her (181); pulling a rolling suitcase while carrying a box (191); sitting on a stool hugging her knees (211); lying on a table (187, sensitive, only as a generic \u0027lying down\u0027 pose)"
+                           },
+                           {
+                               "archetype":  "grandmother with a silver bun in a purple polka-dot blouse",
+                               "gender":  "female",
+                               "age":  "70+",
+                               "look":  "Silver hair in a top bun, forehead wrinkles, rosy cheeks, pearl necklace, purple blouse with white dots, long dark-purple sarong skirt. Similar to ba_cu_toc_bac_bui but with a different outfit and colour scheme.",
+                               "expressions":  "worried wavy mouth (182), sad concern (200)",
+                               "poses":  "hugging an old book or photo album to her chest (182); sitting on a chair at a bedside with a hand on the patient (200)"
+                           },
+                           {
+                               "archetype":  "senior police chief / commander",
+                               "gender":  "male",
+                               "age":  "55-65",
+                               "look":  "Grey swept-back hair, rectangular glasses, khaki/tan uniform with a name bar and shoulder epaulettes",
+                               "expressions":  "shocked or dismayed, hand covering the mouth (186)",
+                               "poses":  "seated behind a big wooden desk with a hand over the mouth (186); a khaki-sleeved arm pushes an ID wallet across a table (201)"
+                           },
+                           {
+                               "archetype":  "crying middle-aged man / father figure",
+                               "gender":  "male",
+                               "age":  "40-55",
+                               "look":  "Buzz-cut black hair, tan skin, stubble wrinkles, dark grey zip jacket over a white tee",
+                               "expressions":  "crying with streaming blue tears, eyebrows up, open mouth (181)",
+                               "poses":  "hugging someone with raised open palms over their back (181)"
+                           },
+                           {
+                               "archetype":  "gap-toothed laughing boy (old photo)",
+                               "gender":  "male",
+                               "age":  "6-9",
+                               "look":  "Round face, bowl-cut black hair, missing front tooth, white shirt with a red collar, a bracelet",
+                               "expressions":  "big closed-eye laugh",
+                               "poses":  "waving with one hand raised (183, framed photo)"
+                           },
+                           {
+                               "archetype":  "crowd / bystanders filming on phones (extras)",
+                               "gender":  "mixed",
+                               "age":  "teens to elderly",
+                               "look":  "Small simplified extras: a ponytail woman in a white tee, a man with glasses, an elder in a blue cap, a woman in a lilac blouse with a long skirt, a shirtless older man",
+                               "expressions":  "surprised \u0027o\u0027 mouth, neutral, frowning",
+                               "poses":  "holding phones up to film (189); standing in a line (194); a waving group (192)"
+                           },
+                           {
+                               "archetype":  "market vendors (extras)",
+                               "gender":  "mixed",
+                               "age":  "30-60",
+                               "look":  "A woman in a red/pink top with a headband carrying a basket; a butcher-stall clerk in a tan uniform",
+                               "expressions":  "neutral, tired",
+                               "poses":  "walking past a stall with a shoulder bag (196); standing behind a meat counter (196)"
+                           }
+                       ],
+        "locations":  [
+                          {
+                              "kind":  "riverside stilt-house slum / wooden pier at night",
+                              "layout":  "Side-scrolling wide shot. A cracked concrete embankment or rickety wooden pier in the foreground; dark river water in the middle with a streetlight reflected as horizontal dashes; a row of dark stilt houses, a few lit windows and palm silhouettes behind; a big flat round tree silhouette; an elevated walkway or bridge on the right with a sodium lamp and its halo",
+                              "palette":  "night: deep indigo to violet sky (#2a2440 to #4a3a5a), warm orange lamp glow #f0b860, near-black silhouettes",
+                              "time":  "night / late dusk (180, 185)"
+                          },
+                          {
+                              "kind":  "apartment rooftop at dawn with a city skyline",
+                              "layout":  "High 3/4 perspective down a long flat roof. Laundry line with colourful hanging clothes, white and blue water tanks on stands, AC condenser units, TV antenna poles, a potted plant, a red plastic chair, a low parapet wall running to the vanishing point on the right; a dense skyline of tall buildings behind",
+                              "palette":  "dawn purple-lilac sky fading to a peach/orange horizon (#6b5a8c, #f2b884), lavender-grey roof",
+                              "time":  "dawn (188)"
+                          },
+                          {
+                              "kind":  "Southeast-Asian shophouse alley (soi), one-point perspective",
+                              "layout":  "Central road with a dashed centre line running to the vanishing point. Two rows of 3-4 storey shophouses with roll-down shutters, awnings, vertical hanging banners and signboards, a tangle of overhead power cables between poles; a small spirit-house shrine on a post at front left; parked blue scooters on the right; a red plastic stool; a streetlight pool on the ground",
+                              "palette":  "night: blue-violet (#3c4470) with warm streetlight; morning: hazy beige-grey with fog",
+                              "time":  "night (189, 192) and foggy early morning (194)"
+                          },
+                          {
+                              "kind":  "courthouse / government building facade",
+                              "layout":  "Low frontal view. Huge orange tiled pediment roof, a dark navy band for a sign (put an ENGLISH word such as \u0027CRIMINAL COURT\u0027 or leave it blank), a long colonnade of cream columns with dark arched windows, wide front steps with tiny figures, trees at the edges. No national flag (use a plain or neutral banner)",
+                              "palette":  "daytime blue sky with soft clouds, orange-terracotta roof, cream columns",
+                              "time":  "day (190)"
+                          },
+                          {
+                              "kind":  "covered wet market",
+                              "layout":  "A corrugated metal roof with trusses fills the top third. Row of stalls: fruit and veg stall with a striped awning and hanging bananas, butcher counter with a white-tiled base, a hanging-meat rail, a scale and a chopping block, fish stall with styrofoam boxes on a blue counter, a pharmacy cabinet with a cross sign at the left edge; blurred umbrellas and shoppers behind",
+                              "palette":  "overcast grey-green with red stall sign accents",
+                              "time":  "early morning (196)"
+                          },
+                          {
+                              "kind":  "commercial restaurant kitchen",
+                              "layout":  "Side view. White-tiled lower wall, grey upper wall; a long stainless prep counter with bowls; a magnetic knife rack with cleavers; an exhaust fan box; a wall notice; a microwave on a shelf; a stainless steel table on the left; a wooden chopping-block stump; blue and silver canisters; a walk-in freezer door on the right with a temperature readout; a dark tiled floor with a drain",
+                              "palette":  "desaturated grey-green #8a9488, white tiles, cool steel",
+                              "time":  "night interior (187)"
+                          },
+                          {
+                              "kind":  "walk-in freezer / cold storage interior",
+                              "layout":  "One-point perspective down a frosty steel room. Wire shelving on both sides holding handbags, backpacks, shoes and a helmet (generic personal belongings), meat hooks on ceiling rails, a fluorescent tube, an evaporator fan unit with icicles, a floor drain, scattered frost spots and snow motes",
+                              "palette":  "icy blue-grey #b9c8d8, white frost, a few colour pops from the bags",
+                              "time":  "interior, any time (194)"
+                          },
+                          {
+                              "kind":  "underground cell / basement storeroom seen through bars",
+                              "layout":  "Full-frame steel grid or bars in front (as if through a window grate); behind them a dim tiled room with two blue drums, a stained mattress or sack, a leaning door panel; a ledge in the foreground with a cup of incense sticks",
+                              "palette":  "rust-red and brown interior with a violet glow, dark frame",
+                              "time":  "night (193)"
+                          },
+                          {
+                              "kind":  "ICU hospital room",
+                              "layout":  "Bed facing the camera with a striped blanket; a vital-signs monitor on the wall (ECG lines, HR 72, SpO2, BP), a ventilator unit with a sine-wave display, a medical gas rail with coloured outlets, an IV pole, a night window with a starry city, a glass door marked \u0027ICU 4\u0027, a visitor chair",
+                              "palette":  "pale mint-grey #c9d6d2, dark monitor screens with green/cyan/yellow traces",
+                              "time":  "night (200)"
+                          },
+                          {
+                              "kind":  "police chief office",
+                              "layout":  "Frontal view. A big wooden desk with a nameplate, a green banker lamp, stacked takeout boxes, a desk phone, a grey filing cabinet with trophies; framed certificates on the wall and a framed shield-star emblem (generic, invented); a ceiling with fluorescent lights and a smoke detector; window blinds on the right",
+                              "palette":  "pale teal-grey walls #c4d2d2, brown desk, gold accents",
+                              "time":  "day interior (186)"
+                          },
+                          {
+                              "kind":  "home investigation room",
+                              "layout":  "Beige wall with a large cork board covered in missing-person cards (red header bands), notes, a map, sticky notes and red string connecting the pins; a trestle desk with a laptop and an architect lamp; a red stool, a cardboard box on the floor, a floor mattress",
+                              "palette":  "warm beige and cork brown with red accents",
+                              "time":  "night interior (211, 213)"
+                          },
+                          {
+                              "kind":  "bare rental room / storage room",
+                              "layout":  "Side view. An empty room with a hanging bulb, pinned papers on the wall, an open window showing the building opposite, a folding table, a standing fan, rolling suitcases (pink, blue, yellow), cardboard boxes, a floor mattress, a wooden door on the left",
+                              "palette":  "dusty taupe-beige #b8ab98",
+                              "time":  "day interior (191)"
+                          },
+                          {
+                              "kind":  "bun / noodle shop front close-up",
+                              "layout":  "Frontal shop facade. A big red signboard with gold border and lettering (an invented ENGLISH name such as \u0027NOODLE \u0026 BUNS · SINCE 1990\u0027), a red tiled awning, a cream wall with a dark menu board, a framed portrait, a red shrine shelf with lamps, a roll-down shutter on the right, a tiled base",
+                              "palette":  "red #b8432f, gold #e8c86a, cream",
+                              "time":  "day (197)"
+                          },
+                          {
+                              "kind":  "small grocery / snack shop front at night (sepia flashback)",
+                              "layout":  "Frontal view. A cream signboard (ENGLISH, invented), a slatted awning, shelves packed with boxes and jars, a small counter with a monitor, an upright drinks fridge, hanging bulbs, roll-down shutters on both sides, a lone figure on the right",
+                              "palette":  "sepia / desaturated olive-brown for a memory look",
+                              "time":  "night, flashback (184)"
+                          },
+                          {
+                              "kind":  "bokeh city / alley backdrops for close-ups",
+                              "layout":  "Heavily blurred backgrounds: a purple dusk skyline with coloured billboard blobs (181), a warm amber alley with lights (182), a dark room with bokeh circles (208)",
+                              "palette":  "purple-pink dusk; amber-brown; teal-dark",
+                              "time":  "dusk / night"
+                          },
+                          {
+                              "kind":  "table-top surfaces for inserts",
+                              "layout":  "Top-down wood-grain desk (202, 203), green felt counter with a wood frame (201), dark textured paper (206), dusty pink background (209), split-screen brown | grey halves (199)",
+                              "palette":  "varies",
+                              "time":  "n/a"
+                          }
+                      ],
+        "inserts":  [
+                        {
+                            "what":  "hand-held phone, SMS chat (POV of a hand gripping the phone)",
+                            "design":  "A cartoon hand with chunky fingers wrapped around a tall dark phone. Header with back arrow, round avatar with an initial, a contact name and an \u0027SMS · offline\u0027 line, a call icon. Blue outgoing bubbles on the right (\u0027Where are you?\u0027, \u0027Pick up the phone\u0027, \u0027Mom cried all night\u0027), grey incoming \u0027Help me\u0027 plus a typing-dots bubble, an input bar with + and a blue send arrow. Differs from the existing phone_chat because of the hand grip and dark mode (205)"
+                        },
+                        {
+                            "what":  "GPS tracker on a phone held in a hand",
+                            "design":  "Dark map grid with streets and a curved river band, a blue route polyline ending in a blue location dot with a red pin, a highlighted green block, status bar \u002707:15\u0027, a top chip \u0027Last location: \u003cname\u003e (rider)\u0027, a bottom bar \u0027Stopped 2 days\u0027 with a green \u0027Start\u0027 button. Paired with an info card: \u0027GPS · STOPPED AT SHOP 48 HRS · LAST UPDATE 2 DAYS AGO\u0027 (210)"
+                        },
+                        {
+                            "what":  "unsent draft message + cracked screen",
+                            "design":  "Black/navy background, a small grey caption \u0027Draft · not sent · 07:12\u0027, one wide dark pill bubble with large white text, a blue round send-arrow button, a spider-web screen-crack overlay (radial lines + dashed arcs) from an impact point (198)"
+                        },
+                        {
+                            "what":  "split-screen handwriting comparison of two price tags",
+                            "design":  "A frame split vertically (warm brown left, slate grey right). On each side a cream hanging tag on a string with an eyelet; a handwritten word plus a red underline and a number (\u0027PRAE / 1990\u0027 vs \u0027SPECIAL / 10.-\u0027); a red dashed line connecting the tags; small captions \u0027basement wall\u0027 / \u0027shop sign\u0027; a centre label card with a red side bar \u0027SAME HANDWRITING\u0027 (199)"
+                        },
+                        {
+                            "what":  "police ID wallet / badge pushed across a table",
+                            "design":  "A brown leather bifold with a gold hexagon badge on the left and an ID card on the right (blue header \u0027ID CARD\u0027, photo, lines). A khaki-sleeved hand presses it on green felt; a typed paper sheet and a black pistol-like object on the table (replace with keys or a radio for safety) (201)"
+                        },
+                        {
+                            "what":  "open notebook missing-persons list with a pointing finger",
+                            "design":  "A two-page lined notebook on a wooden desk with a red margin line. Title \u0027MISSING · SOI 41\u0027. 23 numbered rows: name, age, date and a short note (\u0027bun shop\u0027, \u0027dark month\u0027, \u0027rider\u0027, \u0027nursing student\u0027); the first two rows boxed in red; water-drop rings; cartoon fingers pointing at the last entry. Corner stat card \u0027MISSING 23\u0027. Existing ledger_book is similar but has no hands or red box (202)"
+                        },
+                        {
+                            "what":  "architectural blueprint (section + ground-floor plan) with stamp",
+                            "design":  "White sheet with a blue line-drawing frame on a wood desk. Left: section \u0027SECTION A-A\u0027 with floors 2-4 and ground rooms SHOP | KITCHEN | COLD ROOM, a hatched basement under the ground line with a dimension. Right: \u0027GROUND FLOOR\u0027 plan with door swings, a dashed basement outline \u0027basement line (filled)\u0027, dimensions 4.00 / 16.00 m. Title block \u0027District Office · 4-storey shophouse · Request: fill basement · 1997\u0027, signature, a purple round approval stamp, a coffee ring (203)"
+                        },
+                        {
+                            "what":  "cross-section depth diagram with GPS dot",
+                            "design":  "Dark navy infographic. Three coloured outlined boxes above the ground line (STOREFRONT, KITCHEN, COLD ROOM), the label \u0027Street level 0 m\u0027, a red dashed hatched basement box below, a blue pulsing location dot, a dashed vertical dimension \u0027-3 m\u0027 in red, a caption \u0027Basement 4 x 6 m · \"filled 1997\"\u0027. Info card \u0027ALTITUDE -3 m · UNDERGROUND\u0027 (204)"
+                        },
+                        {
+                            "what":  "open palm holding an engraved bracelet",
+                            "design":  "A large frontal cartoon hand on a dark background with a dashed blue-grey circle highlight, a dried red stain, an engraved silver tag with a name and year (English, e.g. \u0027TON 1990\u0027) (206)"
+                        },
+                        {
+                            "what":  "evidence on the pavement (top-down)",
+                            "design":  "A concrete slab floor with a drain grate, scattered leaves and cigarette butts. A pink-case phone with a cracked screen, a takeout paper box with a red round stamp (use an invented ENGLISH stamp such as \u0027LIANG\u0027S\u0027), a single white sneaker, a water puddle (207)"
+                        },
+                        {
+                            "what":  "digital wristwatch on a forearm",
+                            "design":  "Side view of an arm across the frame with a white bandage wrap, a chunky black square digital watch, an LCD showing \u002702:45 PM\u0027, bokeh background. Do NOT copy the brand name: leave it blank or use an invented word (208)"
+                        },
+                        {
+                            "what":  "engraved pendant / dog-tag held by fingertips",
+                            "design":  "A round silver medallion with a highlight, a single engraved letter (use a Latin letter), hanging from a broken chain pinched by fingers, a dusty pink background with dark specks (209)"
+                        },
+                        {
+                            "what":  "frozen hand close-up",
+                            "design":  "A hand in a dark sleeve pressed on a frosty diagonal-striped floor, frost tips on the fingertips, a cast shadow, snow specks, a timer card \u0027TRAPPED IN COLD ROOM · 10 MIN\u0027 (212). Variant of the existing hand_on_floor"
+                        },
+                        {
+                            "what":  "cork investigation board with red string",
+                            "design":  "A cork board in a wood frame. Missing-person cards (red header band, grey photo frame with a silhouette, text lines), a pinned map with a dotted red circle and dots, a photo, receipts or slips with pushpins, yellow/pink/blue sticky notes, red string zig-zagging between pins (211, 213)"
+                        },
+                        {
+                            "what":  "paper receipt + stat cards",
+                            "design":  "A torn-edge thermal receipt: shop header, \u0027customer: \u003cname\u003e\u0027, date \u002712/03 · 04:10\u0027, lines (minced pork 5 kg 750 / shallots 1 bunch 20 / flour 25 kg 640), dashed separators, \u0027TOTAL 1,410\u0027, \u0027THANK YOU\u0027. Beside it two info cards: \u0027BUNS SOLD PER DAY 500\u0027 (bun icon, yellow bar) and \u0027PORK BOUGHT PER DAY 0 kg\u0027 (scale icon, red bar, red number) (212)"
+                        },
+                        {
+                            "what":  "rule note pinned to a board",
+                            "design":  "A torn lined notebook page with red tape, red \u0027RULE #1\u0027, bold navy \u0027DON\u0027T EAT THE SPECIAL FILLING!\u0027 with a red underline, a smaller line \u0027at Uncle\u0027s shop\u0027. Existing rule_paper covers this, so only an English text variant is needed (191, 213)"
+                        },
+                        {
+                            "what":  "framed old photograph",
+                            "design":  "A brown wooden frame with a gold inner line and a cream mat; a faded photo of a laughing kid waving; an orange date stamp in the corner (\u002790 7 14\u0027) (183)"
+                        },
+                        {
+                            "what":  "ICU vital-signs monitor",
+                            "design":  "A dark screen with a grey bezel, green ECG and cyan pleth traces, big green \u0027HR 72\u0027, \u0027SpO2 97\u0027, yellow \u0027BP 118/76\u0027, a red alarm dot (200)"
+                        },
+                        {
+                            "what":  "freezer door temperature readout",
+                            "design":  "A red \u0027-18°C\u0027 label on a steel walk-in freezer door (187). Could be a close-up insert of a digital thermometer panel"
+                        },
+                        {
+                            "what":  "blue drum on a flat hand-cart",
+                            "design":  "A blue plastic barrel with ribs and a cap, a dark drip line, on a grey flat-bed trolley with a push handle and spoked wheels (185); a pair of blue drums (193)"
+                        },
+                        {
+                            "what":  "knife / cleaver rack",
+                            "design":  "A magnetic bar with alternating cleavers and long knives with wooden handles (187). Keep non-graphic"
+                        },
+                        {
+                            "what":  "live viewer counter card",
+                            "design":  "Info-card style: phone icon, small label \u0027LIVE VIEWERS\u0027, huge \u002736,504\u0027, subtitle \u0027WATCHING LIVE\u0027 (189). Could be a preset of the existing info_card overlay"
+                        },
+                        {
+                            "what":  "dawn clock card",
+                            "design":  "A cream card with a gold side bar, a sun icon, a location line, big \u002705:04\u0027 / \u002705:59\u0027, a progress bar (188, 194). Variant of time_card in a light-card style"
+                        },
+                        {
+                            "what":  "chapter/location card light style",
+                            "design":  "A cream card with a gold left bar, a black pill tag with a dot (\u0027THREE MONTHS LATER\u0027), a document icon, a bold title, a spaced small-caps English subtitle \u0027CRIMINAL COURT · THREE MONTHS LATER\u0027 (190, 200). The existing location_card is dark maroon, so this light style is new"
+                        },
+                        {
+                            "what":  "suitcases / luggage",
+                            "design":  "Rolling hard-shell suitcases (yellow, pink, blue) with luggage tags (191)"
+                        },
+                        {
+                            "what":  "handbags / personal belongings on shelves",
+                            "design":  "Tote, saddle bag, crossbody, purple handbag, yellow backpack, green helmet, pairs of shoes, a row of phones in a tray, all with a frost rim (194)"
+                        }
+                    ],
+        "new_vs_existing":  "I opened all 35 frames (180-214). The catalog currently holds 24 archetypes plus a few extra folders (chu_tu, co_lan, toi); the app-extracted *_scene_1300s characters are no longer under assets/characters. There are 36 location folders and 28 inserts on disk, plus bao_cu.\n\nNOT yet covered:\n\nCHARACTERS\n- Slick-haired young investigator in a dark blazer and tie, with a big over-the-shoulder back-of-head view. The back view is reused heavily and needs a dedicated \u0027back_head_closeup\u0027 framing.\n- Bald tattooed scar-faced butcher/cook villain with an apron and a smug half-closed-eye smirk.\n- Young woman with a bob and pink barrette in a denim jacket and shorts (crying hug from behind, seated knee-hug, shocked).\n- Granny in a purple polka-dot blouse holding a book. This is a costume variant of ba_cu_toc_bac_bui.\n- Old police chief in a khaki uniform with glasses (hand-over-mouth shock). cong_an exists, but not an elderly or khaki one.\n- Crying middle-aged man with blue tear streams and raised palms.\n- Gap-toothed laughing kid (photo).\n- Small crowd extras filming on phones.\n- Market vendors.\n- Missing poses/expressions: hug (two-person, from behind), hands clasped while walking, two-arm aim, pushing a cart, rope drag, lying in a hospital bed with a bandaged head, sitting knee-hug, hand over the mouth, smug one-eye smirk, crying with tear streams.\n\nLOCATIONS (none exist yet)\n- Riverside stilt-house pier at night\n- Rooftop at dawn with laundry and water tanks plus a skyline\n- Shophouse soi in one-point perspective (spirit house, cables, scooters), night and foggy-morning variants. hem_toi_pho is a different, Vietnamese-alley look.\n- Courthouse colonnade facade\n- Covered wet market (butcher, fruit and fish stalls)\n- Commercial steel kitchen\n- Walk-in freezer with shelves of belongings\n- Basement cell seen through bars\n- ICU room. hanh_lang_benh_vien is only a corridor.\n- Police chief office with desk, certificates and trophies. don_cong_an is a generic station.\n- Home investigation room with a cork board\n- Bare storage room with suitcases. phong_ngu_tro is close but different.\n- Red-sign noodle/bun shop facade\n- Sepia grocery shop front\n- Blurred bokeh backdrops (purple skyline, amber alley)\n- Plain surfaces for inserts (wood desk top-down, green felt, split-screen)\n\nINSERTS (new)\n- Hand-held phone in POV grip: dark-mode SMS, GPS tracker map, unsent draft with cracked-screen overlay. The existing phone_chat/phone_lock have no hand.\n- Split-screen price-tag handwriting comparison with a \u0027SAME HANDWRITING\u0027 label\n- Police ID/badge wallet pushed by hand\n- Blueprint (section + floor plan + stamp + title block)\n- Dark cross-section depth diagram (-3 m basement, GPS dot)\n- Open palm with an engraved bracelet\n- Top-down pavement evidence (cracked pink phone, drain grate, stamped takeout box, sneaker)\n- Digital wristwatch on a bandaged forearm (no brand)\n- Engraved pendant on a chain\n- Frozen hand. This is a frost variant of hand_on_floor.\n- Cork investigation board with red string and missing cards\n- Thermal receipt\n- Framed old photo with a date stamp\n- ICU vital monitor\n- Freezer door \u0027-18°C\u0027 readout\n- Blue drum on a flat trolley\n- Cleaver/knife rack\n- Suitcases\n- Frosted handbags/belongings\n\nPARTIAL OVERLAPS (only English presets or style variants needed)\n- rule_paper: English \u0027RULE #1\u0027 text\n- ledger_book: add finger-pointing hands and red box rows for the missing list\n- info_card: live-viewer counter, stat cards \u0027500 / 0 kg\u0027\n- time_card: light cream variant with sun icon and progress bar\n- location_card: light cream variant with black pill tag and small-caps English subtitle\n- missing_poster: cork-board card mini version\n\nCOPYRIGHT/ENGLISH NOTES\n- Every Thai text in these frames (shop signs, court sign, receipt, list, blueprint labels, chat) must be redrawn as invented English words.\n- Drop the national flag on the court, the \u0027CASIO\u0027 watch brand, the \u0027Sigma Lens\u0027 watermark and the specific character and shop names.\n- Replace the gun in 187/201 with a flashlight or radio if keeping it generic.\n- The bound victim on the kitchen table (187) and the blood stains should stay non-graphic or be skipped."
+    },
+    {
+        "characters":  [
+                           {
+                               "archetype":  "Thug or butcher in a dirty apron, the villain type (seen in 228, 232, 233, 236, 243, 244, 245)",
+                               "gender":  "male",
+                               "age":  "adult to older",
+                               "look":  "Buzz-cut or stubble-dotted scalp. A big scar or burn on one side of the face that covers one eye and the cheek, plus a mole on the cheek. Grey or white tank top or work shirt under a black pinstripe butcher apron or a brown apron. Heavy rubber boots, string or bead bracelet, thick gold chain. Forearms have snake or vein tattoo lines. In 245 there is an older, gentle variant: bald with grey sides, a stitched head scar, wrinkles and a gold chain.",
+                               "expressions":  "Smirk with one eye half shut (233, 243). Shouting or roaring with an open mouth and an asymmetric brow (243). Pained squint with \u003e\u003c eyes and clenched teeth (228). Dazed in a hospital bed, mouth in a small o (244). Big laugh with ^^ closed eyes, open mouth and blush (245).",
+                               "poses":  "Pushing a cart full of drums. Holding a cleaver low. Lunging in a fight. Getting choked from behind. Lying in a hospital bed with a bandage taped to the head."
+                           },
+                           {
+                               "archetype":  "Young plain-clothes detective, the protagonist",
+                               "gender":  "male",
+                               "age":  "young adult",
+                               "look":  "Short black hair, either side-parted or a spiky crew cut. Dark navy jacket over a white tee, with white stripe panels on the jacket front in the night scenes. Wristwatch. Long slim legs.",
+                               "expressions":  "Worried with a sweat drop and a wavy mouth (247). Shocked with wide ringed eyes and a hand over the mouth (248). Pained \u003e\u003c squint with clenched teeth (233). Calm small smile (246).",
+                               "poses":  "Walking while aiming a flashlight forward (235). Blocking an overhead strike with a stick held across the head (233). Phone in hand in one half of a split screen (246). Hand over mouth (248). Hand cupped to ear, listening at a wall, seen from behind over the shoulder (220)."
+                           },
+                           {
+                               "archetype":  "Tired police sergeant in a khaki uniform",
+                               "gender":  "male",
+                               "age":  "middle-aged",
+                               "look":  "Buzz cut with a combed hairline, moustache, chewing a toothpick, thin gold neck chain. Khaki-brown uniform shirt with gold chevron sleeve stripes, a name bar and a gold badge. Neither of the existing police assets (the `cong_an` character or the generic `police_uniform` outfit) has this shape. Must be drawn with generic insignia only: no national emblems and no readable text.",
+                               "expressions":  "Bored and deadpan with the toothpick (234, 238, 240). Shifty side-eye smirk, shown on the passenger in 234.",
+                               "poses":  "Driving with both hands on the wheel, seat belt on, seen through the windshield (234). Phone held to the ear (238). Standing front-on in a station (240)."
+                           },
+                           {
+                               "archetype":  "Young woman, a student or tenant, carrying luggage",
+                               "gender":  "female",
+                               "age":  "young (around 20)",
+                               "look":  "Straight dark hair to the shoulders or longer, with a pink hair clip. Pale-blue zip hoodie with drawstrings, denim shorts or skirt, white sneakers. A pink hard-shell suitcase and a pale-blue suitcase, each with a yellow luggage tag.",
+                               "expressions":  "Nervous with a wavy mouth and a worried brow (246). Soft smile (239). Angry shout with fangs and blush while fighting (228).",
+                               "poses":  "Walking while pulling a suitcase in profile (239). Standing next to suitcases holding a phone (246). Choking an attacker from behind with an arm lock (228)."
+                           },
+                           {
+                               "archetype":  "Kind grandma who runs a shop",
+                               "gender":  "female",
+                               "age":  "elderly",
+                               "look":  "Silver-grey hair in a top bun, deep forehead wrinkles. Purple blouse with white polka dots, a white undershirt collar, reading glasses hanging on a cord around the neck. The existing `ba_cu_toc_bac_bui` has a similar silhouette, so this could be an outfit variant of her: purple polka-dot blouse plus glasses on a cord.",
+                               "expressions":  "Crying with tear streams and a hand over the mouth (241). Gentle smile (245).",
+                               "poses":  "Hand covering the mouth while crying (241). Standing front-on in front of a shop (245). Holding a patient\u0027s hand (229, shown as a sleeve only)."
+                           },
+                           {
+                               "archetype":  "Delivery rider",
+                               "gender":  "male",
+                               "age":  "young adult",
+                               "look":  "Black baseball cap, low ponytail, green rider jacket with a lanyard and a phone or ID card on the chest. Generic green only, with no app brand or logo.",
+                               "expressions":  "Nervous, with a wavy mouth.",
+                               "poses":  "Standing front-on in a corridor or alley (240)."
+                           },
+                           {
+                               "archetype":  "Missing young woman, shown only as an ID-style portrait",
+                               "gender":  "female",
+                               "age":  "about 22",
+                               "look":  "High black bun, side bangs, stud earrings, white top, rosy cheeks. Flat portrait style. Could be a `photo_portrait` variant of an existing female archetype instead of a new rig.",
+                               "expressions":  "Neutral small smile.",
+                               "poses":  "Bust portrait only, used inside the missing-person poster insert."
+                           }
+                       ],
+        "locations":  [
+                          {
+                              "kind":  "Rooftop of a city building at dusk, used for a fight scene",
+                              "layout":  "Purple and orange skyline with red aircraft-warning lights on the towers. A low parapet ledge in the middle, a water tank on the left, an AC condenser unit at bottom left, two potted spiky plants, a power pole with wires, and a side building facade running off in perspective on the right.",
+                              "palette":  "Purple dusk #4a3d66 / #8a6fa0, glowing orange #f2b27a at the horizon",
+                              "time":  "dusk"
+                          },
+                          {
+                              "title":  "x",
+                              "kind":  "Back alley behind a restaurant or kitchen at night, with a cold room",
+                              "layout":  "Brick wall, a steel walk-in freezer door, a grey back door, blue plastic drums, a small bucket, tufts of grass, a red-lit window on the right, an overhead pipe and an exhaust vent.",
+                              "palette":  "Dark maroon brown with a red rim light and a cool grey-blue door",
+                              "time":  "night"
+                          },
+                          {
+                              "kind":  "Commercial kitchen at night, dark, lit by a flashlight beam",
+                              "layout":  "White tiled wall, a square exhaust fan, a steel prep counter with rows of bowls, a knife or utensil rail, a shelf with a microwave, a wooden barrel or bin, and a freezer door on the right. A red temperature display reads -18C (that text is fine as is). The spotlight is a vignette overlay.",
+                              "palette":  "Desaturated olive grey, with a white spotlight disc",
+                              "time":  "night"
+                          },
+                          {
+                              "kind":  "Inside a walk-in freezer",
+                              "layout":  "Frosted metal wall panels and wire shelving in perspective. Items left on the shelf: a green motorbike helmet, a canvas tote bag and a plum-coloured basket. Frost specks.",
+                              "palette":  "Icy blue-grey #a9bccd",
+                              "time":  "any"
+                          },
+                          {
+                              "kind":  "Inside a car, front view through the windshield",
+                              "layout":  "Dashboard edge at the bottom, windshield glare streaks, two front seats with headrests, a driver and a passenger, a small bobblehead figure on the dash.",
+                              "palette":  "Grey interior with skin tones",
+                              "time":  "day"
+                          },
+                          {
+                              "kind":  "Night street duel on a residential edge",
+                              "layout":  "Starry navy sky, silhouettes of low houses with lit windows, palm tree silhouettes, a single orange streetlamp glow at the right, and a dark ground strip with steps.",
+                              "palette":  "Navy #0f1626 with a warm lamp #f0b860",
+                              "time":  "night"
+                          },
+                          {
+                              "kind":  "Dorm or apartment corridor, tenant moving out",
+                              "layout":  "Beige wall with brown doors and a cork notice board. A plain grey wall with a brown door works as a side-scroll walking background (239). Tiled sidewalk floor.",
+                              "palette":  "Warm beige and grey",
+                              "time":  "day"
+                          },
+                          {
+                              "kind":  "Police station office, blurred background",
+                              "layout":  "Fluorescent ceiling, cork board with pinned posters, a wall clock, a dark door, a fire extinguisher, blue sign panels (they must stay blank or show English only), filing cabinets. This partly overlaps the existing `don_cong_an`; the new part is a blurred bokeh variant.",
+                              "palette":  "Teal grey",
+                              "time":  "day"
+                          },
+                          {
+                              "kind":  "Front of a small grocery shop, blurred",
+                              "layout":  "Green awning band, shelves of colourful packaged goods, potted plants hanging above.",
+                              "palette":  "Cream, green and multicolour bokeh",
+                              "time":  "day"
+                          },
+                          {
+                              "kind":  "Hospital bed close-up",
+                              "layout":  "White pillow and white blanket with soft vertical folds, a pale sage wall, a blurred dark window. Similar to `hanh_lang_benh_vien`, but this is a bed-level ward view.",
+                              "palette":  "Sage #b9c6bf and white",
+                              "time":  "day"
+                          },
+                          {
+                              "kind":  "Split-screen phone call frame",
+                              "layout":  "Vertical divider in the middle. Left half: a corridor with suitcases. Right half: a dark office with a cork board. This is a reusable 2-panel composition template, not a single location.",
+                              "palette":  "Warm left half, dark right half",
+                              "time":  "any"
+                          },
+                          {
+                              "kind":  "Shop or noodle-stall front at night seen on CCTV, with a monitor frame",
+                              "layout":  "A bezel containing a monochrome noisy image of a shopfront with a lit window, a vendor, steamer stacks, a fridge and a car silhouette. The overlay reads CAM 01 REC, a timestamp, playback x1 and a progress bar. The existing `cua_hang_cctv_tren_cao` covers the CCTV look; the new part is the monitor-bezel frame plus a street shopfront subject.",
+                              "palette":  "Greyscale green-tint",
+                              "time":  "night"
+                          }
+                      ],
+        "inserts":  [
+                        {
+                            "what":  "CCTV monitor playback frame (215)",
+                            "design":  "A rounded dark-grey monitor bezel with a green power LED. Inside: scanlines, \u0027CAM 01\u0027 plus a red dot and \u0027REC\u0027 at top left, an English date/time stamp at top right, \u0027\u003e x1\u0027 with a progress bar at the bottom. The shop sign in the frame must become an English generic name such as \u0027NOODLES \u0026 BUNS\u0027 or be left blank. New: the existing inserts have no CCTV-monitor frame."
+                        },
+                        {
+                            "what":  "Missing-person poster, tilted, taped and numbered (216)",
+                            "design":  "An off-white sheet with tape at the corners. Red headline \u0027MISSING PERSON\u0027 over \u0027MISSING\u0027 letter-spaced. A framed flat portrait, a red circle badge with a number (7), and name, age, date, time and location lines in English. Pull-tabs at the bottom. The existing `missing_poster` should be checked. New parts: the numbered badge, the tilt and the blurred-wall variant."
+                        },
+                        {
+                            "what":  "Cold-room thermometer alarm panel (217)",
+                            "design":  "A white panel with frost on top, on corrugated frosted metal walls. A black LCD shows red glowing segment digits \u0027-16.1\u0027 and \u0027°C\u0027 with a red \u0027ALARM\u0027 dot. Label \u0027COLD ROOM\u0027 (English only). Three round buttons. Not in the catalog yet."
+                        },
+                        {
+                            "what":  "Hand POV: spoon in a bowl of soup with meatballs (218)",
+                            "design":  "Top-down table, a pale plate of broth with meatballs and herb flecks, a glass of water, a tiny saucer. One hand in a green sleeve holds the spoon from the top right. Not in the catalog yet."
+                        },
+                        {
+                            "what":  "Hands tearing a ruled notebook page with a rule written on it (219)",
+                            "design":  "Two hands in navy sleeves rip a lined notebook sheet with a jagged tear. Red headline \u0027RULE #1\u0027, a big bold line such as \u0027DON\u0027T EAT THE SPECIAL FILLING\u0027 and a red underline, then a small line \u0027at Uncle\u0027s shop\u0027. A red tape tab at the top. The existing `rule_paper` should be checked. New: the torn-in-two state with hands."
+                        },
+                        {
+                            "what":  "Title card on a cracked wall with an over-the-shoulder listener (220)",
+                            "design":  "Grungy grey concrete with a vertical crack and a dark stain. A big dark headline with a red glow (\u0027THE NEIGHBOUR\u0027 in English only) and letter-spaced subtitle text. In the foreground, the back of a man\u0027s head and his hand cupped to the wall. Close to the existing `black_frame_text`, but this is a wall-texture title-card variant."
+                        },
+                        {
+                            "what":  "Three paper bun bags with a red stamp on a desk, plus a stat chip (221)",
+                            "design":  "Three white paper takeaway bags with a red circle stamp; the stamp must use an English or blank wordmark such as \u0027BUNS\u0027. A brown desk edge and a blurred office. Top-left counter chip: \u00273 bags · FREE BUNS ON THE DESK\u0027. New."
+                        },
+                        {
+                            "what":  "Shop banner sign with a marigold garland (222)",
+                            "design":  "A red signboard with a gold double border and yellow-orange flower garland beads along the top. Big cream headline plus a subline, all in English generic text such as \u0027AUNTIE\u0027S STEAMED BUNS\u0027 and \u0027FRESH PORK DAILY\u0027. A red \u0027NEW!\u0027 tag at the top right and a red wooden slat wall below. New."
+                        },
+                        {
+                            "what":  "Evidence layout: silver jewellery with numbered markers (223)",
+                            "design":  "Dark slate background with these items: a pendant, a hair clip, a bangle, a ring, a wristwatch, a beaded bracelet and a necklace with a diamond pendant. Each has a yellow evidence tag numbered 1-7. Top-left info card: \u0027VICTIMS\u0027 pill, \u0027UNDER 25\u0027, \u0027SILVER JEWELLERY\u0027 with a yellow highlight. New. The evidence markers can be reused on their own."
+                        },
+                        {
+                            "what":  "Hands breaking a steamed bun open to show the filling (224)",
+                            "design":  "Two hands tear a white bun in half to show pink meat filling with peppercorns. Dark blurred backdrop. New, with a food-close-up feel."
+                        },
+                        {
+                            "what":  "Items-on-hand checklist card plus a flashlight and a broken mop handle (226)",
+                            "design":  "Top-down wood plank floor with a black flashlight and a hand gripping a splintered wooden pole with a red tip. A dashed outline of a gun crossed out in red. The card reads \u0027ON HAND\u0027, \u0027X GUN\u0027, \u0027! FLASHLIGHT x1\u0027, \u0027MOP HANDLE x1\u0027 (highlighted), \u0027NO GUN · A TORCH · A BROKEN MOP HANDLE\u0027. New."
+                        },
+                        {
+                            "what":  "Gun falling into a floor drain or grinder hole (227)",
+                            "design":  "Top-down view of a white panelled floor with a round dark drain, fan blades inside and a spark burst. A pink smear and a red recording dot at the top right. New, though it could be generalised as a \u0027thing falling into a drain\u0027 shot."
+                        },
+                        {
+                            "what":  "Hospital hand-holding close-up (229)",
+                            "design":  "A patient\u0027s brown arm lying on a white blanket with an IV cannula, tape and a scar. A visitor\u0027s hand in a purple polka-dot sleeve reaches down to hold it. New."
+                        },
+                        {
+                            "what":  "Phone: outgoing or incoming call screen held in hand (230)",
+                            "design":  "A dark phone with a status bar showing 08:12, a circle avatar with an initial, caller name text and 00:00, and a 3x2 grid of round buttons with captions in English: \u0027Mute\u0027, \u0027Keypad\u0027, \u0027Speaker\u0027, \u0027Add call\u0027, \u0027Video\u0027, \u0027Contacts\u0027. A red end-call button. Thumb pressing. A hand-held POV with a blurred office behind. New: a call screen is not among the existing phone_chat, phone_lock and phone_bank."
+                        },
+                        {
+                            "what":  "Blue plastic drums on a flatbed cart, with a counter chip (232)",
+                            "design":  "Three ribbed blue plastic drums with a dark drip stain, on a grey flatbed hand cart with big wheels. Chip: \u0027! 0 drums · BLUE DRUMS\u0027. Also usable as standalone props: two blue drums and a small bucket (235). New."
+                        },
+                        {
+                            "what":  "Cleaver plus sharpening steel close-up (236)",
+                            "design":  "Two tattooed forearms honing a rectangular steel cleaver (with a hole, a riveted brown handle and a red edge) along a ridged honing rod. Spark burst. Dark green background. New. A cleaver held in hand also appears in 233."
+                        },
+                        {
+                            "what":  "Handing over a steamed bun (237)",
+                            "design":  "A hand in a navy sleeve holds a white bun in the palm while a tattooed hand reaches in from the right. Blurred shop background. New."
+                        },
+                        {
+                            "what":  "Motorbike helmet and bags left in a freezer (225)",
+                            "design":  "A green full-face helmet with a dark visor on a wire shelf, a canvas tote and a plum basket below, with frost. Hinting at a missing person\u0027s belongings. New."
+                        },
+                        {
+                            "what":  "Stat or info chip overlays (221, 223, 226, 232)",
+                            "design":  "A small rounded beige card with a red or yellow left accent bar, an icon, a big red number plus a unit, and a small caps English caption. The format is a reusable template. Is it in overlays.json? It is not in inserts."
+                        }
+                    ],
+        "new_vs_existing":  "The current catalogs list 28 inserts (29 PNGs including bao_cu), 24 location bases (36 folders including variants) and 27 characters. puppetgen has 12 expressions: neutral, happy, sad, angry, scared, evil, surprised, nervous, shocked, crying, tired, smirk.\n\nNOT yet covered:\n\nCHARACTERS\n- Butcher or thug in an apron with a facial burn scar over one eye, stubble scalp, tattooed forearms, rubber boots and a gold chain. There is no apron outfit in the OUTFITS list.\n- Khaki police sergeant with chevrons, moustache and toothpick. The existing police_uniform is a different style and has no toothpick or chain.\n- Young female tenant in a pale-blue hoodie and shorts, with a pink hair clip and suitcases.\n- Navy-jacket detective with flashlight poses.\n- Grandma outfit variant: purple polka-dot blouse with glasses on a cord. This could be a variant of ba_cu_toc_bac_bui.\n- Delivery rider with a black cap, green jacket and lanyard.\n- A face-scar/burn FX slot and a forehead stitched-scar slot, which also cover the hospital head bandage.\n\nEXPRESSIONS / POSES\n- \u0027laughing\u0027 with ^^ closed eyes, wide open mouth and flush.\n- \u0027pained\u0027 with \u003e\u003c squint and clenched teeth (a mouth \u0027clench\u0027 is missing; \u0027grin\u0027 is close but different).\n- \u0027shout_angry\u0027 with fangs; the \u0027shout\u0027 mouth exists but no preset uses it.\n- \u0027deadpan_toothpick\u0027 as an accessory.\n- Hand-over-mouth pose for shocked or crying.\n- Phone-to-ear pose.\n- Driving with hands on the wheel.\n- Flashlight aim.\n- Overhead stick block, choke hold and cart push.\n- Lying in bed with a head bandage.\n- Over-the-shoulder back-of-head with a hand cupped to the wall.\n\nLOCATIONS\n- Dusk city rooftop with a parapet, AC unit and water tank.\n- Night restaurant back alley with a freezer door and blue drums.\n- Commercial kitchen with tiles, exhaust fan and bowls, plus a flashlight-vignette overlay.\n- Walk-in freezer interior with wire shelves.\n- Car interior seen through the windshield.\n- Night residential skyline with palms and one streetlamp.\n- Dorm corridor with suitcases.\n- Hospital ward bed close-up.\n- Small grocery shopfront.\n- A split-screen 2-panel template.\n\nThese overlap partly with existing locations: don_cong_an (police office), cua_hang_cctv_tren_cao (CCTV look) and hanh_lang_benh_vien.\n\nINSERTS, all new\n- CCTV monitor playback frame.\n- Cold-room thermometer alarm panel.\n- Phone call screen.\n- Evidence layout with numbered yellow markers.\n- Items checklist card with flashlight, broken mop handle and a crossed-out gun outline.\n- Blue drums on a flatbed cart.\n- Cleaver with honing steel.\n- Spoon in a meatball soup, hand POV.\n- Hands tearing a rule notebook page.\n- Bun broken open to show the filling.\n- Hand passing a bun.\n- Three stamped paper bun bags.\n- Red shop banner with a flower garland.\n- Hospital hand-hold with an IV.\n- Gun falling into a drain.\n- Helmet and bags on a freezer shelf.\n- Cracked-wall title card with a listener.\n- Stat or counter chip template.\n\nPossibly existing and needing variants only: missing_poster (add the numbered badge and tilt), rule_paper (add a torn state) and black_frame_text (add a wall-texture title).\n\nNot seen in this batch: a GPS or map phone screen, a receipt, a blueprint, a cross-section diagram, a cork investigation board as a close-up (it is only blurred in 230 and 240), price tags, and a wristwatch close-up (it is only evidence item 5).\n\nENGLISH RULE\nEvery Thai string in these frames has to become generic English or be left out. That covers the shop names on signs, bags and stamps, the poster name and address, the call-button captions, the panel label and the rule text. The \u0027Sigma Lens\u0027 watermark, specific names (the shop owners, the victim\u0027s name and the street) and any national flag must not be reproduced."
+    }
+]

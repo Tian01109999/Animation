@@ -1,0 +1,75 @@
+{
+ "id": "phong_nhan_vien",
+ "name": "Phòng nhân viên / văn phòng sau",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng nhân viên / văn phòng sau (trong nhà đèn sáng)",
+  "description": "Phòng nhân viên / văn phòng sau, trong nhà đèn sáng, phòng nhân viên, văn phòng, phòng sau, kho, trong nhà đèn sáng, indoor",
+  "kind": "staff_room",
+  "tags": [
+   "phòng nhân viên",
+   "văn phòng",
+   "phòng sau",
+   "kho",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "phong_nhan_vien",
+   "phong_nhan_vien__night"
+  ],
+  "catalog_id": "phong_nhan_vien",
+  "variant": "indoor",
+  "style": "cutout"
+ },
+ "flow_prompt": "Small dim staff back room of a shop seen in one-point perspective, warm grey concrete walls with a long water stain, single ceiling bulb glow, wall calendar with red header, a pinned paper, electrical breaker box with one red switch and dangling wire, blue steel double locker on the right, brown wooden desk with a red ledger book and desk lamp, black office chair in foreground, heavy vignette, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_nhan_vien"
+ },
+ "floor_y": 1850,
+ "slots": {
+  "left": {
+   "x": 1670,
+   "y": 1782,
+   "scale": 1.008
+  },
+  "center": {
+   "x": 1995,
+   "y": 1850,
+   "scale": 1.109
+  },
+  "right": {
+   "x": 2306,
+   "y": 1782,
+   "scale": 1.008
+  },
+  "desk": {
+   "x": 1378,
+   "y": 1725,
+   "scale": 0.924,
+   "clip_bottom": 1468
+  }
+ },
+ "signs": [],
+ "layers": {
+  "far": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  },
+  "mid": {
+   "image": "bg_empty.png",
+   "parallax": 1.0
+  },
+  "near": {
+   "image": "bg_near.png",
+   "parallax": 1.15
+  }
+ }
+}

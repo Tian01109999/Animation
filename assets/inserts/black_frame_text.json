@@ -1,0 +1,29 @@
+{
+ "id": "black_frame_text",
+ "label": "Khung đen chỉ có chữ",
+ "label_en": "Black frame with text only",
+ "tags": [
+  "khung đen",
+  "chữ",
+  "kinh dị",
+  "black frame",
+  "title card"
+ ],
+ "props": [
+  "black_frame"
+ ],
+ "style": "cutout",
+ "image": "black_frame_text.png",
+ "kind": "black_frame_text",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "text": null,
+  "bg": "dark_gradient"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

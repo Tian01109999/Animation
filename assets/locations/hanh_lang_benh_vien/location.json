@@ -1,0 +1,87 @@
+{
+ "id": "hanh_lang_benh_vien",
+ "name": "Hành lang bệnh viện",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hành lang bệnh viện (ban đêm)",
+  "description": "Hành lang bệnh viện, ban đêm, bệnh viện, hành lang, xe lăn, hospital, corridor, lối thoát, ban đêm, night",
+  "kind": "hospital_corridor",
+  "tags": [
+   "bệnh viện",
+   "hành lang",
+   "xe lăn",
+   "hospital",
+   "corridor",
+   "lối thoát",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hanh_lang_benh_vien"
+  ],
+  "catalog_id": "hanh_lang_benh_vien",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "1 điểm tụ: tường xanh nhạt nửa dưới, nửa trên trắng, hàng ghế chờ inox, cửa phòng đánh số, đèn trần chập chờn, xe lăn bỏ trống, biển lối thoát xanh."
+ },
+ "flow_prompt": "Empty hospital corridor at night in one-point perspective, pale green lower walls and white upper walls, row of steel waiting chairs, numbered doors, flickering ceiling lights, an empty wheelchair, green exit light glow, eerie, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hanh_lang_benh_vien"
+ },
+ "floor_y": 1784,
+ "slots": {
+  "left": {
+   "x": 1699,
+   "y": 1784,
+   "scale": 0.978
+  },
+  "center": {
+   "x": 1920,
+   "y": 1784,
+   "scale": 0.978
+  },
+  "right": {
+   "x": 2141,
+   "y": 1784,
+   "scale": 0.978
+  },
+  "far": {
+   "x": 1920,
+   "y": 1358,
+   "scale": 0.37
+  }
+ },
+ "signs": [
+  {
+   "text": "EXIT",
+   "box": [
+    1894,
+    1025,
+    1946,
+    1045
+   ],
+   "style": "plain"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920.0,
+   "y": 700,
+   "color": "#f4fff8"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Empty hospital corridor at night in one-point perspective, pale green lower walls and white upper walls, row of steel waiting chairs, numbered doors, flickering ceiling lights, an empty wheelchair, green exit light glow, eerie, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "indoor": "Empty hospital corridor at night in one-point perspective, pale green lower walls and white upper walls, row of steel waiting chairs, numbered doors, flickering ceiling lights, an empty wheelchair, green exit light glow, eerie, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "EXIT"
+ ]
+}

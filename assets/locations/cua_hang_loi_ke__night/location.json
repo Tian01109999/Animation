@@ -1,0 +1,101 @@
+{
+ "id": "cua_hang_loi_ke__night",
+ "name": "Cửa hàng tiện lợi – lối giữa hai kệ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Cửa hàng tiện lợi – lối giữa hai kệ (ban đêm)",
+  "description": "Cửa hàng tiện lợi – lối giữa hai kệ, ban đêm, cửa hàng, tạp hoá, cửa hàng tiện lợi, 24h, shop, lối kệ, kệ hàng, ban đêm, night",
+  "kind": "store_aisle",
+  "tags": [
+   "cửa hàng",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "lối kệ",
+   "kệ hàng",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "cua_hang_loi_ke",
+   "cua_hang_loi_ke__night"
+  ],
+  "catalog_id": "cua_hang_loi_ke",
+  "variant": "night",
+  "style": "cutout"
+ },
+ "flow_prompt": "Convenience store interior at night, one-point perspective down a central aisle, two white gondola shelves packed with simple colorful rectangular product boxes, back wall of glass-door drink fridges with colorful bottles under a dark green header strip, round wall clock above, white grid ceiling with fluorescent panels, light grey square floor tiles, clean bright fluorescent light, slight haze, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_loi_ke"
+ },
+ "floor_y": 1900,
+ "slots": {
+  "far_left": {
+   "x": 1643,
+   "y": 1639,
+   "scale": 0.723
+  },
+  "left": {
+   "x": 1620,
+   "y": 1900,
+   "scale": 1.109
+  },
+  "center": {
+   "x": 1920,
+   "y": 1900,
+   "scale": 1.109
+  },
+  "right": {
+   "x": 2220,
+   "y": 1900,
+   "scale": 1.109
+  },
+  "far_right": {
+   "x": 2197,
+   "y": 1639,
+   "scale": 0.723
+  },
+  "vanishing": {
+   "x": 1920,
+   "y": 1418,
+   "scale": 0.396
+  }
+ },
+ "signs": [
+  {
+   "text": "COLD DRINKS",
+   "box": [
+    1743,
+    989,
+    2097,
+    1038
+   ],
+   "style": "plain"
+  },
+  {
+   "text": "AISLE 3",
+   "box": [
+    1797,
+    657,
+    2043,
+    747
+   ],
+   "style": "plain"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920.0,
+   "y": 700,
+   "color": "#ffffff"
+  }
+ ]
+}

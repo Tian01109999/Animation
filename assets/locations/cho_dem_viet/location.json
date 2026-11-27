@@ -1,0 +1,97 @@
+{
+ "id": "cho_dem_viet",
+ "name": "Chợ đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chợ đêm (ban đêm)",
+  "description": "Chợ đêm, ban đêm, chợ đêm, sạp, xe đẩy, night market, ghế nhựa, đèn dây, ban đêm, night",
+  "kind": "night_market",
+  "tags": [
+   "chợ đêm",
+   "sạp",
+   "xe đẩy",
+   "night market",
+   "ghế nhựa",
+   "đèn dây",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "cho_dem_viet"
+  ],
+  "catalog_id": "cho_dem_viet",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Dãy sạp bạt xanh đỏ, dây đèn bóng tròn võng, xe đẩy, ghế nhựa đỏ, khói bốc từ nồi; xa: nhà phố tối."
+ },
+ "flow_prompt": "Vietnamese night market street, rows of stalls with blue and red tarps, sagging strings of round warm bulbs, food cart with steam, red plastic stools, dark shophouses behind, flat 2D, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cho_dem_viet"
+ },
+ "floor_y": 1944,
+ "slots": {
+  "left": {
+   "x": 960,
+   "y": 1944,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 1944,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2880,
+   "y": 1944,
+   "scale": 1.0
+  },
+  "behind_cart": {
+   "x": 2112,
+   "y": 1771,
+   "scale": 0.95,
+   "clip_bottom": 1320
+  }
+ },
+ "signs": [
+  {
+   "text": "NOODLE SOUP",
+   "box": [
+    1770,
+    1615,
+    2470,
+    1725
+   ],
+   "style": "plain"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1960,
+   "y": 900,
+   "color": "#ffcf7a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Vietnamese night market street, rows of stalls with blue and red tarps, sagging strings of round warm bulbs, food cart with steam, red plastic stools, dark shophouses behind, flat 2D, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "NOODLE SOUP"
+ ]
+}

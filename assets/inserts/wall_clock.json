@@ -1,0 +1,35 @@
+{
+ "id": "wall_clock",
+ "label": "Đồng hồ treo tường",
+ "label_en": "Wall clock",
+ "tags": [
+  "đồng hồ",
+  "giờ",
+  "3 giờ sáng",
+  "clock",
+  "time"
+ ],
+ "props": [
+  "clock",
+  "wall_clock"
+ ],
+ "style": "cutout",
+ "image": "wall_clock.png",
+ "kind": "wall_clock",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "hour": 3,
+  "minute": 0,
+  "second_hand": true,
+  "mirrored": false,
+  "frozen": false,
+  "band_color": "#1f6f5c",
+  "bg": "wall_grey"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

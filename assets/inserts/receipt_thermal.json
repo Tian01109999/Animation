@@ -1,0 +1,68 @@
+{
+ "id": "receipt_thermal",
+ "label": "Hoá đơn mua hàng (giấy nhiệt) + thẻ số liệu",
+ "label_en": "Shop receipt (thermal) + stat cards",
+ "tags": [
+  "hoá đơn",
+  "biên lai",
+  "mua hàng",
+  "receipt",
+  "bill",
+  "stats"
+ ],
+ "props": [
+  "receipt",
+  "thermal_receipt",
+  "bill"
+ ],
+ "style": "cutout",
+ "image": "receipt_thermal.png",
+ "kind": "receipt_thermal",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "shop": "GOLDEN STEAM BUNS",
+  "address": "14 Market Lane · Open 4 AM",
+  "customer": "Customer: Mr. K",
+  "datetime": "12/03 · 04:10",
+  "items": [
+   [
+    "Minced pork 5 kg",
+    "750"
+   ],
+   [
+    "Shallots 1 bunch",
+    "20"
+   ],
+   [
+    "Flour 25 kg",
+    "640"
+   ]
+  ],
+  "total": "1,410",
+  "footer": "THANK YOU",
+  "cards": [
+   {
+    "label": "BUNS SOLD PER DAY",
+    "value": "500",
+    "icon": "bun",
+    "color": "#e8b93a",
+    "bar": 0.9
+   },
+   {
+    "label": "PORK BOUGHT PER DAY",
+    "value": "0 kg",
+    "icon": "scale",
+    "color": "#c8352e",
+    "value_color": "#c8352e",
+    "bar": 0.04
+   }
+  ],
+  "bg": "wood_dark"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

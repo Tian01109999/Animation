@@ -1,0 +1,79 @@
+{
+ "id": "san_chua",
+ "name": "Sân chùa / miếu làng",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sân chùa / miếu làng (ban ngày)",
+  "description": "Sân chùa / miếu làng, ban ngày, chùa, miếu, sân chùa, lư hương, temple, pagoda, cây đa, ban ngày, day",
+  "kind": "temple_yard",
+  "tags": [
+   "chùa",
+   "miếu",
+   "sân chùa",
+   "lư hương",
+   "temple",
+   "pagoda",
+   "cây đa",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "san_chua"
+  ],
+  "catalog_id": "san_chua",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Cổng tam quan mái cong, sân gạch, lư hương lớn khói nhang, cây đa/bồ đề to, đèn lồng đỏ, tượng nhỏ."
+ },
+ "flow_prompt": "Vietnamese village pagoda courtyard, curved tiled roof gate, brick yard, large incense burner with smoke, big old banyan tree, red lanterns, dusk light, peaceful but eerie, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "san_chua"
+ },
+ "floor_y": 1944,
+ "slots": {
+  "left": {
+   "x": 1152,
+   "y": 1944,
+   "scale": 0.9
+  },
+  "center": {
+   "x": 1920,
+   "y": 1944,
+   "scale": 0.9
+  },
+  "right": {
+   "x": 2688,
+   "y": 1944,
+   "scale": 0.9
+  },
+  "gate": {
+   "x": 1920,
+   "y": 1380,
+   "scale": 0.55
+  }
+ },
+ "signs": [],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "day": "Vietnamese village pagoda courtyard, curved tiled roof gate, brick yard, large incense burner with smoke, big old banyan tree, red lanterns, dusk light, peaceful but eerie, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "dusk": "Vietnamese village pagoda courtyard, curved tiled roof gate, brick yard, large incense burner with smoke, big old banyan tree, red lanterns, dusk light, peaceful but eerie, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "night": "Vietnamese village pagoda courtyard, curved tiled roof gate, brick yard, large incense burner with smoke, big old banyan tree, red lanterns, dusk light, peaceful but eerie, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

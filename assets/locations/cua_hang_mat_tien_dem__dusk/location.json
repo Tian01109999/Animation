@@ -1,0 +1,97 @@
+{
+ "id": "cua_hang_mat_tien_dem__dusk",
+ "name": "Cửa hàng tiện lợi ven đường quê – toàn cảnh đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Cửa hàng tiện lợi ven đường quê – toàn cảnh đêm (hoàng hôn)",
+  "description": "Cửa hàng tiện lợi ven đường quê – toàn cảnh đêm, hoàng hôn, cửa hàng, tạp hoá, cửa hàng tiện lợi, 24h, shop, mặt tiền, toàn cảnh, bãi đỗ, hoàng hôn, dusk",
+  "kind": "store_exterior_night",
+  "tags": [
+   "cửa hàng",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "mặt tiền",
+   "toàn cảnh",
+   "bãi đỗ",
+   "hoàng hôn",
+   "dusk"
+  ],
+  "time_variants": [
+   "cua_hang_mat_tien_dem",
+   "cua_hang_mat_tien_dem__dusk"
+  ],
+  "catalog_id": "cua_hang_mat_tien_dem",
+  "variant": "dusk",
+  "style": "cutout"
+ },
+ "flow_prompt": "Wide night establishing shot of an isolated small 24-hour convenience store beside a rural two-lane road, brightly lit glass front showing shelves inside, dark green and orange fascia band, empty parking lot with white lines, small roadside shrine on a pole on the left, tall street lamp with glowing halo and bare dead tree on the right, bus shelter, dark mountain silhouettes, lake, full moon, starry navy sky, simple low-poly shapes with flat shading, light bloom, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_mat_tien_dem"
+ },
+ "floor_y": 1512,
+ "slots": {
+  "inside_counter": {
+   "x": 1690,
+   "y": 1258,
+   "scale": 0.22
+  },
+  "forecourt": {
+   "x": 2112,
+   "y": 1512,
+   "scale": 0.3
+  },
+  "bus_stop": {
+   "x": 3302,
+   "y": 1472,
+   "scale": 0.28
+  },
+  "roadside_left": {
+   "x": 576,
+   "y": 1620,
+   "scale": 0.3
+  },
+  "center": {
+   "x": 2112,
+   "y": 1512,
+   "scale": 0.3
+  }
+ },
+ "signs": [
+  {
+   "text": "MINI MART 24H",
+   "box": [
+    1610,
+    708,
+    2290,
+    814
+   ],
+   "style": "plain"
+  }
+ ],
+ "lights": [
+  {
+   "x": 3180,
+   "y": 540,
+   "color": "#ffd98a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ }
+}

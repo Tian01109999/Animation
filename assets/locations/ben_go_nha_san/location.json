@@ -1,0 +1,87 @@
+{
+ "id": "ben_go_nha_san",
+ "name": "Bến gỗ + nhà sàn ven sông (đêm)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Bến gỗ + nhà sàn ven sông (đêm) / Riverside wooden pier and stilt houses at night (ban đêm / night)",
+  "description": "Bến gỗ + nhà sàn ven sông (đêm), ban đêm. Wide side view at night: rickety wooden pier in the foreground with a broken plank, rope coil and bucket; dark river with lamp reflections; a row of stilt houses with a few lit windows, palm and big round tree silhouettes; an elevated walkway on the right with a sodium lamp and halo; indigo-violet starry sky (night). bến gỗ, nhà sàn, bờ sông, cầu, đèn đường, pier, stilt houses, river, ban đêm, night",
+  "kind": "riverside_pier_night",
+  "tags": [
+   "bến gỗ",
+   "nhà sàn",
+   "bờ sông",
+   "cầu",
+   "đèn đường",
+   "pier",
+   "stilt houses",
+   "river",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "ben_go_nha_san"
+  ],
+  "catalog_id": "ben_go_nha_san",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn ngang rộng: bến gỗ ọp ẹp tiền cảnh (ván gãy, cuộn dây, xô), sông tối phản chiếu đèn thành vệt ngang; dãy nhà sàn (far) vài cửa sổ sáng, bóng dừa + cây tán tròn; cầu đi bộ trên cao bên phải + đèn natri vầng cam; trời chàm-tím có sao.",
+  "label_en": "Riverside wooden pier and stilt houses at night (night)",
+  "description_en": "Wide side view at night: rickety wooden pier in the foreground with a broken plank, rope coil and bucket; dark river with lamp reflections; a row of stilt houses with a few lit windows, palm and big round tree silhouettes; an elevated walkway on the right with a sodium lamp and halo; indigo-violet starry sky"
+ },
+ "flow_prompt": "Riverside stilt house village at night, rickety wooden pier in the foreground, dark river with streetlight reflections, row of dark stilt houses with a few lit windows, palm silhouettes, big round tree silhouette, elevated walkway on the right with a sodium lamp halo, indigo violet starry sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "ben_go_nha_san"
+ },
+ "floor_y": 1730,
+ "slots": {
+  "center": {
+   "x": 1350,
+   "y": 1730,
+   "scale": 0.95
+  },
+  "left": {
+   "x": 560,
+   "y": 1730,
+   "scale": 0.95
+  },
+  "right": {
+   "x": 2150,
+   "y": 1730,
+   "scale": 0.95
+  },
+  "bridge": {
+   "x": 3350,
+   "y": 830,
+   "scale": 0.45
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 3020,
+   "y": 450,
+   "color": "#f0b860"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Riverside stilt house village at night, rickety wooden pier in the foreground, dark river with streetlight reflections, row of dark stilt houses with a few lit windows, palm silhouettes, big round tree silhouette, elevated walkway on the right with a sodium lamp halo, indigo violet starry sky, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

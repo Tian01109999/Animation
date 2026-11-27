@@ -1,0 +1,42 @@
+{
+ "id": "rule_note_torn",
+ "label": "Hai tay xé tờ nội quy",
+ "label_en": "Hands tearing a rule note",
+ "tags": [
+  "xé giấy",
+  "nội quy",
+  "luật",
+  "torn note",
+  "rule",
+  "ripped paper"
+ ],
+ "props": [
+  "torn_note",
+  "torn_rule_paper",
+  "ripped_paper"
+ ],
+ "style": "cutout",
+ "image": "rule_note_torn.png",
+ "kind": "rule_note_torn",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "title": "RULE #1",
+  "rules": [
+   "DON'T EAT THE SPECIAL FILLING!"
+  ],
+  "note": "at Uncle's shop",
+  "red_rule_index": 0,
+  "gap": 70,
+  "tilt": 5,
+  "sleeve_color": "#1f2a4a",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

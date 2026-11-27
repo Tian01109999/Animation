@@ -1,0 +1,67 @@
+{
+ "id": "lop_hoc",
+ "name": "Lớp học",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Lớp học (ban ngày)",
+  "description": "Lớp học, ban ngày, lớp học, trường, bảng đen, classroom, school, bàn ghế, ban ngày, day",
+  "kind": "school_classroom",
+  "tags": [
+   "lớp học",
+   "trường",
+   "bảng đen",
+   "classroom",
+   "school",
+   "bàn ghế",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "lop_hoc"
+  ],
+  "catalog_id": "lop_hoc",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Bảng đen xanh ở giữa, bàn ghế gỗ xếp hàng, cửa sổ chớp xanh, quạt trần, ảnh treo trên bảng (khung trống)."
+ },
+ "flow_prompt": "Vietnamese school classroom, green chalkboard in the center, rows of wooden desks and benches, pale yellow walls, green louvered window shutters, ceiling fans, empty frames above the board, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "lop_hoc"
+ },
+ "floor_y": 1858,
+ "slots": {
+  "teacher": {
+   "x": 1920,
+   "y": 1858,
+   "scale": 0.95
+  },
+  "left": {
+   "x": 960,
+   "y": 1987,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 2880,
+   "y": 1987,
+   "scale": 1.05
+  },
+  "center": {
+   "x": 1920,
+   "y": 1858,
+   "scale": 0.95
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Vietnamese school classroom, green chalkboard in the center, rows of wooden desks and benches, pale yellow walls, green louvered window shutters, ceiling fans, empty frames above the board, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "night": "Vietnamese school classroom, green chalkboard in the center, rows of wooden desks and benches, pale yellow walls, green louvered window shutters, ceiling fans, empty frames above the board, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

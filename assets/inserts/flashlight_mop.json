@@ -1,0 +1,49 @@
+{
+ "id": "flashlight_mop",
+ "label": "Đèn pin + cán chổi gãy trên sàn",
+ "label_en": "Flashlight + broken mop handle on the floor",
+ "tags": [
+  "đèn pin",
+  "cán chổi",
+  "vũ khí tạm",
+  "flashlight",
+  "torch",
+  "mop handle"
+ ],
+ "props": [
+  "flashlight",
+  "torch",
+  "mop_handle"
+ ],
+ "style": "cutout",
+ "image": "flashlight_mop.png",
+ "kind": "flashlight_mop",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "title": "ON HAND",
+  "items": [
+   [
+    "ok",
+    "FLASHLIGHT x1"
+   ],
+   [
+    "hl",
+    "MOP HANDLE x1"
+   ],
+   [
+    "no",
+    "PHONE · NO SIGNAL"
+   ]
+  ],
+  "footer": "NO BACKUP · A TORCH · A BROKEN MOP HANDLE",
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "id": "notebook_list_hand",
+ "label": "Sổ tay danh sách mất tích viết tay + ngón tay chỉ",
+ "label_en": "Handwritten notebook missing-list",
+ "tags": [
+  "sổ tay",
+  "danh sách",
+  "mất tích",
+  "ngón tay chỉ",
+  "notebook",
+  "list",
+  "missing",
+  "pointing"
+ ],
+ "props": [
+  "notebook_list",
+  "missing_list",
+  "handwritten_list"
+ ],
+ "style": "cutout",
+ "image": "notebook_list_hand.png",
+ "kind": "notebook_list_hand",
+ "camera_default": "pan_down_slow",
+ "text_language": "en",
+ "params": {
+  "title": "MISSING · BLOCK 41",
+  "count": 23,
+  "rows": null,
+  "boxed_rows": [
+   0,
+   1
+  ],
+  "card": {
+   "label": "MISSING",
+   "value": "23"
+  },
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "bg": "wood_dark",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

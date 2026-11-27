@@ -1,0 +1,122 @@
+{
+ "id": "cho_co_mai",
+ "name": "Chợ có mái che (sáng sớm)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chợ có mái che (sáng sớm) / Covered wet market (early morning) (ban ngày / day)",
+  "description": "Chợ có mái che (sáng sớm), ban ngày. Covered market under a corrugated metal roof with trusses: fruit and vegetable stall with a striped awning and hanging bananas, butcher counter with a white tiled base, hanging rail, scale and chopping block, fish stall with styrofoam boxes on a blue counter, pharmacy cabinet with a green cross, blurred umbrellas and shoppers behind, wet concrete floor (day). chợ, chợ có mái, sạp thịt, sạp cá, rau quả, wet market, butcher, market, ban ngày, day",
+  "kind": "wet_market",
+  "tags": [
+   "chợ",
+   "chợ có mái",
+   "sạp thịt",
+   "sạp cá",
+   "rau quả",
+   "wet market",
+   "butcher",
+   "market",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "cho_co_mai"
+  ],
+  "catalog_id": "cho_co_mai",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Mái tôn + vì kèo chiếm 1/3 trên; hàng sạp: tủ thuốc chữ thập xanh (trái), sạp rau quả mái sọc + nải chuối, quầy thịt ốp gạch trắng + ray treo + cân + thớt, sạp cá quầy xanh + thùng xốp; nền sau (far) ô dù + người mua mờ; sàn ướt. Biển BUTCHER / FISH / FRUIT & VEG = signs.",
+  "label_en": "Covered wet market (early morning) (day)",
+  "description_en": "Covered market under a corrugated metal roof with trusses: fruit and vegetable stall with a striped awning and hanging bananas, butcher counter with a white tiled base, hanging rail, scale and chopping block, fish stall with styrofoam boxes on a blue counter, pharmacy cabinet with a green cross, blurred umbrellas and shoppers behind, wet concrete floor"
+ },
+ "flow_prompt": "Covered wet market in the early morning, corrugated metal roof with trusses, fruit and vegetable stall with striped awning and hanging bananas, butcher counter with a white tiled base, hanging scale and chopping block, fish stall with styrofoam boxes on a blue counter, blurred umbrellas behind, wet concrete floor, overcast grey-green light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cho_co_mai"
+ },
+ "floor_y": 2009,
+ "slots": {
+  "butcher": {
+   "x": 2160,
+   "y": 1620,
+   "scale": 0.92,
+   "clip_bottom": 1340
+  },
+  "fruit_vendor": {
+   "x": 960,
+   "y": 1620,
+   "scale": 0.92,
+   "clip_bottom": 1310
+  },
+  "left": {
+   "x": 1075,
+   "y": 2009,
+   "scale": 1.05
+  },
+  "center": {
+   "x": 1920,
+   "y": 2009,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 2880,
+   "y": 2009,
+   "scale": 1.05
+  }
+ },
+ "signs": [
+  {
+   "text": "BUTCHER",
+   "box": [
+    1820,
+    730,
+    2500,
+    850
+   ],
+   "style": "red_board"
+  },
+  {
+   "text": "FISH",
+   "box": [
+    3120,
+    760,
+    3500,
+    860
+   ],
+   "style": "red_board"
+  },
+  {
+   "text": "FRUIT & VEG",
+   "box": [
+    600,
+    750,
+    1330,
+    850
+   ],
+   "style": "white_board"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.9
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "day": "Covered wet market in the early morning, corrugated metal roof with trusses, fruit and vegetable stall with striped awning and hanging bananas, butcher counter with a white tiled base, hanging scale and chopping block, fish stall with styrofoam boxes on a blue counter, blurred umbrellas behind, wet concrete floor, overcast grey-green light, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "BUTCHER",
+  "FISH",
+  "FRUIT & VEG"
+ ]
+}

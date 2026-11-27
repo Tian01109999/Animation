@@ -1,0 +1,81 @@
+{
+ "id": "phong_ky_tuc_xa",
+ "name": "Phòng ký túc xá + vali",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng ký túc xá + vali / Dorm room with suitcases (ban ngày / day)",
+  "description": "Phòng ký túc xá + vali, ban ngày. Bare dusty-beige dorm or rental room by day: hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table with a kettle, standing fan, rolling suitcases (pink, blue, yellow), cardboard boxes, floor mattress, wooden door on the left (day). ký túc xá, phòng trọ, vali, chuyển nhà, thùng giấy, dorm room, suitcases, ban ngày, day",
+  "kind": "dorm_room",
+  "tags": [
+   "ký túc xá",
+   "phòng trọ",
+   "vali",
+   "chuyển nhà",
+   "thùng giấy",
+   "dorm room",
+   "suitcases",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "phong_ky_tuc_xa"
+  ],
+  "catalog_id": "phong_ky_tuc_xa",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: tường be bụi, bóng đèn treo, giấy ghim tường, cửa sổ mở thấy nhà đối diện, bàn gấp + ấm nước, quạt đứng, vali hồng/xanh/vàng có thẻ hành lý, thùng giấy chồng, nệm sàn, cửa gỗ bên trái.",
+  "label_en": "Dorm room with suitcases (day)",
+  "description_en": "Bare dusty-beige dorm or rental room by day: hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table with a kettle, standing fan, rolling suitcases (pink, blue, yellow), cardboard boxes, floor mattress, wooden door on the left"
+ },
+ "flow_prompt": "Bare dorm room by day, dusty beige walls, hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table, standing fan, rolling suitcases in pink blue and yellow, cardboard boxes, floor mattress, wooden door on the left, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_ky_tuc_xa"
+ },
+ "floor_y": 2030,
+ "slots": {
+  "center": {
+   "x": 1997,
+   "y": 2030,
+   "scale": 1.05
+  },
+  "left": {
+   "x": 998,
+   "y": 2030,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 2918,
+   "y": 2030,
+   "scale": 1.05
+  },
+  "door": {
+   "x": 461,
+   "y": 1728,
+   "scale": 0.9
+  },
+  "window": {
+   "x": 1920,
+   "y": 1858,
+   "scale": 0.95
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 1920,
+   "y": 310,
+   "color": "#fff1c8"
+  }
+ ],
+ "flow_prompts": {
+  "day": "Bare dorm room by day, dusty beige walls, hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table, standing fan, rolling suitcases in pink blue and yellow, cardboard boxes, floor mattress, wooden door on the left, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

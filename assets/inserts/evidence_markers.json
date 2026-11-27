@@ -1,0 +1,47 @@
+{
+ "id": "evidence_markers",
+ "label": "Tang vật trang sức + biển số đánh dấu",
+ "label_en": "Evidence items with numbered markers",
+ "tags": [
+  "tang vật",
+  "trang sức",
+  "bạc",
+  "biển số",
+  "evidence",
+  "jewellery",
+  "markers"
+ ],
+ "props": [
+  "evidence_markers",
+  "jewellery",
+  "jewelry",
+  "evidence"
+ ],
+ "style": "cutout",
+ "image": "evidence_markers.png",
+ "kind": "evidence_markers",
+ "camera_default": "pan_down_slow",
+ "text_language": "en",
+ "params": {
+  "items": [
+   "pendant",
+   "hair_clip",
+   "bangle",
+   "ring",
+   "watch",
+   "beads",
+   "necklace"
+  ],
+  "pendant_letter": "M",
+  "card": {
+   "pill": "VICTIMS",
+   "title": "UNDER 25",
+   "sub": "SILVER JEWELLERY"
+  }
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

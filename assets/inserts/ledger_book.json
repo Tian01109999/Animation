@@ -1,0 +1,56 @@
+{
+ "id": "ledger_book",
+ "label": "Sổ ghi danh nhân viên (sổ đỏ)",
+ "label_en": "Staff register (red ledger)",
+ "tags": [
+  "sổ",
+  "danh sách",
+  "nhân viên",
+  "mất tích",
+  "ledger",
+  "register",
+  "book"
+ ],
+ "props": [
+  "ledger",
+  "ledger_book",
+  "book",
+  "staff_register"
+ ],
+ "style": "cutout",
+ "image": "ledger_book.png",
+ "kind": "ledger_book",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "columns": [
+   "Name",
+   "Hired",
+   "Status",
+   "Date"
+  ],
+  "rows": [
+   [
+    "Tam Le",
+    "2009",
+    "MISSING",
+    "02/03"
+   ],
+   [
+    "Hoa Pham",
+    "2013",
+    "MISSING",
+    "06/17"
+   ]
+  ],
+  "highlight_row": 0,
+  "strike_row": null,
+  "title": "STAFF REGISTER",
+  "bg": "wood_dark"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "id": "phone_bank",
+ "label": "Điện thoại – ứng dụng ngân hàng",
+ "label_en": "Phone - banking app",
+ "tags": [
+  "điện thoại",
+  "ngân hàng",
+  "số dư",
+  "chuyển khoản",
+  "phone",
+  "bank",
+  "balance",
+  "money"
+ ],
+ "props": [
+  "phone_bank",
+  "bank_app",
+  "bank_balance"
+ ],
+ "style": "cutout",
+ "image": "phone_bank.png",
+ "kind": "phone_bank",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "bank_name": "LOTUS BANK",
+  "balance": "$1,250.00",
+  "account": "CHECKING · ****2731",
+  "transactions": [
+   {
+    "label": "Hospital bill",
+    "amount": "-$350.00"
+   },
+   {
+    "label": "Monthly salary",
+    "amount": "+$620.00"
+   }
+  ],
+  "bg": "blur_location",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,55 @@
+{
+ "id": "nen_toi_truu_tuong__indoor",
+ "name": "Nền tối trừu tượng (sân khấu chèn/thoại)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Nền tối trừu tượng (sân khấu chèn/thoại) (trong nhà đèn sáng)",
+  "description": "Nền tối trừu tượng (sân khấu chèn/thoại), trong nhà đèn sáng, nền tối, trừu tượng, chèn, thoại, trong nhà đèn sáng, indoor",
+  "kind": "abstract_dark",
+  "tags": [
+   "nền tối",
+   "trừu tượng",
+   "chèn",
+   "thoại",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "nen_toi_truu_tuong",
+   "nen_toi_truu_tuong__indoor"
+  ],
+  "catalog_id": "nen_toi_truu_tuong",
+  "variant": "indoor",
+  "style": "cutout"
+ },
+ "flow_prompt": "Plain dark navy radial gradient background with a slightly lighter center, faint low-opacity floor tile grid, heavy vignette, film grain, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "nen_toi_truu_tuong"
+ },
+ "floor_y": 2117,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2117,
+   "scale": 1.6
+  },
+  "left": {
+   "x": 1382,
+   "y": 2117,
+   "scale": 1.6
+  },
+  "right": {
+   "x": 2458,
+   "y": 2117,
+   "scale": 1.6
+  }
+ },
+ "signs": []
+}

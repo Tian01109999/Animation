@@ -1,0 +1,90 @@
+{
+ "id": "san_thuong_binh_minh",
+ "name": "Sân thượng chung cư lúc bình minh",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sân thượng chung cư lúc bình minh / Apartment rooftop at dawn (bình minh / dawn)",
+  "description": "Sân thượng chung cư lúc bình minh, bình minh. Long flat rooftop in 3/4 perspective at dawn: laundry line with colourful clothes, white and blue water tanks on stands, AC condenser units, TV antennas, stair hut, potted plant, red plastic chair, low parapet running to the right; dense city skyline with red aircraft lights against a lilac-to-peach sky (dawn). sân thượng, mái nhà, bình minh, dây phơi, bồn nước, rooftop, dawn, skyline",
+  "kind": "rooftop_dawn",
+  "tags": [
+   "sân thượng",
+   "mái nhà",
+   "bình minh",
+   "dây phơi",
+   "bồn nước",
+   "rooftop",
+   "dawn",
+   "skyline"
+  ],
+  "time_variants": [
+   "san_thuong_binh_minh"
+  ],
+  "catalog_id": "san_thuong_binh_minh",
+  "variant": "dawn",
+  "style": "cutout",
+  "layout": "Phối cảnh 3/4 dọc mái bằng dài, lan can thấp chạy về điểm tụ bên phải; dây phơi quần áo màu, bồn nước trắng/xanh trên chân, cục nóng điều hoà, cột ăng-ten, chòi cầu thang, chậu cây, ghế nhựa đỏ; xa là skyline dày đặc (lớp far) trên nền trời tím-cam.",
+  "label_en": "Apartment rooftop at dawn (dawn)",
+  "description_en": "Long flat rooftop in 3/4 perspective at dawn: laundry line with colourful clothes, white and blue water tanks on stands, AC condenser units, TV antennas, stair hut, potted plant, red plastic chair, low parapet running to the right; dense city skyline with red aircraft lights against a lilac-to-peach sky"
+ },
+ "flow_prompt": "Apartment rooftop at dawn in three-quarter perspective, laundry line with colourful hanging clothes, white and blue water tanks on stands, AC condenser units, TV antennas, potted plant, red plastic chair, low parapet running to the vanishing point, dense city skyline under a lilac to peach sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "san_thuong_binh_minh"
+ },
+ "floor_y": 2012,
+ "slots": {
+  "center": {
+   "x": 2125,
+   "y": 2012,
+   "scale": 0.97
+  },
+  "left": {
+   "x": 1518,
+   "y": 1956,
+   "scale": 0.913
+  },
+  "edge": {
+   "x": 3175,
+   "y": 1750,
+   "scale": 0.706
+  },
+  "laundry": {
+   "x": 2341,
+   "y": 1503,
+   "scale": 0.457
+  },
+  "far": {
+   "x": 2160,
+   "y": 1358,
+   "scale": 0.31
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 900,
+   "y": 1240,
+   "color": "#ffd9a0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "dawn": "Apartment rooftop at dawn in three-quarter perspective, laundry line with colourful hanging clothes, white and blue water tanks on stands, AC condenser units, TV antennas, potted plant, red plastic chair, low parapet running to the vanishing point, dense city skyline under a lilac to peach sky, dawn, lilac sky fading to peach horizon, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

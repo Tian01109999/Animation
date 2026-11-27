@@ -1,0 +1,35 @@
+{
+ "id": "locker_open",
+ "label": "Tủ locker mở",
+ "label_en": "Open locker",
+ "tags": [
+  "tủ locker",
+  "tủ đồ",
+  "phòng nhân viên",
+  "locker",
+  "staff room"
+ ],
+ "props": [
+  "locker",
+  "locker_open",
+  "staff_locker"
+ ],
+ "style": "cutout",
+ "image": "locker_open.png",
+ "kind": "locker_open",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "items": [
+   "tote_bag_olive",
+   "phone_dark_blue",
+   "black_box"
+  ],
+  "bg": "dark_vignette"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

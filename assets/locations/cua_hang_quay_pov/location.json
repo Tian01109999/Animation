@@ -1,0 +1,81 @@
+{
+ "id": "cua_hang_quay_pov",
+ "name": "Quầy thu ngân – góc nhìn của nhân viên",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Quầy thu ngân – góc nhìn của nhân viên (ban đêm)",
+  "description": "Quầy thu ngân – góc nhìn của nhân viên, ban đêm, quầy thu ngân, góc nhìn nhân viên, pov, counter, cửa hàng, ló đầu, tạp hoá, cửa hàng tiện lợi, 24h, shop, quầy, thu ngân, ban đêm, night",
+  "kind": "store_counter_pov",
+  "tags": [
+   "quầy thu ngân",
+   "góc nhìn nhân viên",
+   "pov",
+   "counter",
+   "cửa hàng",
+   "ló đầu",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "quầy",
+   "thu ngân",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "cua_hang_quay_pov"
+  ],
+  "catalog_id": "cua_hang_quay_pov",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "40% dưới: mặt quầy trắng viền đỏ sẫm, tấm lót cao su đen hình thang ở giữa, màn hiển thị giá LED xanh ngọc bên trái, giá thẻ cào/kẹo nhiều ô màu bên phải. 60% trên: cửa kính đêm đen blur mạnh, đèn vàng mờ, biển lối ra xanh. Đầu khách/ma ló lên giữa quầy và kính."
+ },
+ "flow_prompt": "Point of view from behind a convenience store counter at night, white counter top with black rubber mat in the center, small teal LED price display on the left, rack of colorful small cards on the right, blurred dark glass doors behind with a dim yellow lamp glow and a green exit light, shallow depth of field, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_quay_pov"
+ },
+ "floor_y": 1555,
+ "slots": {
+  "peek": {
+   "x": 1920,
+   "y": 1555,
+   "scale": 1.6,
+   "clip_bottom": 1306
+  },
+  "center": {
+   "x": 1920,
+   "y": 1555,
+   "scale": 1.6,
+   "clip_bottom": 1306
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2950,
+   "y": 520,
+   "color": "#ffd98a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Point of view from behind a convenience store counter at night, white counter top with black rubber mat in the center, small teal LED price display on the left, rack of colorful small cards on the right, blurred dark glass doors behind with a dim yellow lamp glow and a green exit light, shallow depth of field, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

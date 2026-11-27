@@ -1,0 +1,34 @@
+{
+ "id": "cleaver_honing",
+ "label": "Dao phay chạm thanh liếc thép (tia lửa)",
+ "label_en": "Cleaver vs steel rod clash",
+ "tags": [
+  "dao phay",
+  "mài dao",
+  "đồ tể",
+  "hình xăm",
+  "cleaver",
+  "honing steel",
+  "butcher"
+ ],
+ "props": [
+  "cleaver",
+  "honing_steel",
+  "butcher_knife"
+ ],
+ "style": "cutout",
+ "image": "cleaver_honing.png",
+ "kind": "cleaver_honing",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "skin": "#c08a62",
+  "tattoo_color": "#2f4a4a",
+  "sparks": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

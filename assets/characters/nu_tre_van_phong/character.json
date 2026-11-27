@@ -1,0 +1,729 @@
+{
+ "id": "nu_tre_van_phong",
+ "height_px": 1000,
+ "image_scale": 3,
+ "canvas": [
+  600,
+  1012
+ ],
+ "head_box": [
+  200.6,
+  69.0,
+  399.4,
+  306.5
+ ],
+ "bones": {
+  "root": {
+   "parent": null,
+   "pivot": [
+    300.0,
+    1000
+   ]
+  },
+  "hip": {
+   "parent": "root",
+   "pivot": [
+    300.0,
+    584.75
+   ]
+  },
+  "torso": {
+   "parent": "hip",
+   "pivot": [
+    300.0,
+    553.83
+   ]
+  },
+  "neck": {
+   "parent": "torso",
+   "pivot": [
+    300.0,
+    350.63
+   ]
+  },
+  "head": {
+   "parent": "neck",
+   "pivot": [
+    300.0,
+    295.06
+   ]
+  },
+  "arm_l_up": {
+   "parent": "torso",
+   "pivot": [
+    232.77,
+    369.71
+   ]
+  },
+  "arm_l_low": {
+   "parent": "arm_l_up",
+   "pivot": [
+    223.93,
+    502.24
+   ]
+  },
+  "hand_l": {
+   "parent": "arm_l_low",
+   "pivot": [
+    218.63,
+    621.51
+   ]
+  },
+  "leg_l_up": {
+   "parent": "hip",
+   "pivot": [
+    260.24,
+    584.75
+   ]
+  },
+  "leg_l_low": {
+   "parent": "leg_l_up",
+   "pivot": [
+    259.45,
+    774.71
+   ]
+  },
+  "arm_r_up": {
+   "parent": "torso",
+   "pivot": [
+    367.23,
+    369.71
+   ]
+  },
+  "arm_r_low": {
+   "parent": "arm_r_up",
+   "pivot": [
+    376.07,
+    502.24
+   ]
+  },
+  "hand_r": {
+   "parent": "arm_r_low",
+   "pivot": [
+    381.37,
+    621.51
+   ]
+  },
+  "leg_r_up": {
+   "parent": "hip",
+   "pivot": [
+    339.76,
+    584.75
+   ]
+  },
+  "leg_r_low": {
+   "parent": "leg_r_up",
+   "pivot": [
+    340.55,
+    774.71
+   ]
+  }
+ },
+ "parts": [
+  {
+   "name": "leg_r_up",
+   "bone": "leg_r_up",
+   "image": "parts/leg_r_up.png",
+   "offset": [
+    310.333,
+    541.333
+   ]
+  },
+  {
+   "name": "leg_r_low",
+   "bone": "leg_r_low",
+   "image": "parts/leg_r_low.png",
+   "offset": [
+    316.333,
+    752.667
+   ]
+  },
+  {
+   "name": "leg_l_up",
+   "bone": "leg_l_up",
+   "image": "parts/leg_l_up.png",
+   "offset": [
+    231.0,
+    541.333
+   ]
+  },
+  {
+   "name": "leg_l_low",
+   "bone": "leg_l_low",
+   "image": "parts/leg_l_low.png",
+   "offset": [
+    204.667,
+    752.667
+   ]
+  },
+  {
+   "name": "pelvis",
+   "bone": "hip",
+   "image": "parts/pelvis.png",
+   "offset": [
+    212.333,
+    533.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "pelvis_back",
+   "bone": "hip",
+   "image": "parts/pelvis_back.png",
+   "offset": [
+    212.333,
+    533.0
+   ],
+   "view": "back"
+  },
+  {
+   "name": "neck",
+   "bone": "neck",
+   "image": "parts/neck.png",
+   "offset": [
+    282.667,
+    248.667
+   ]
+  },
+  {
+   "name": "torso",
+   "bone": "torso",
+   "image": "parts/torso.png",
+   "offset": [
+    215.333,
+    334.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "torso_back",
+   "bone": "torso",
+   "image": "parts/torso_back.png",
+   "offset": [
+    215.333,
+    338.333
+   ],
+   "view": "back"
+  },
+  {
+   "name": "head",
+   "bone": "head",
+   "image": "parts/head.png",
+   "offset": [
+    195.333,
+    115.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "face",
+   "bone": "head",
+   "image": "parts/face.png",
+   "offset": [
+    232.667,
+    233.333
+   ],
+   "view": "front"
+  },
+  {
+   "name": "eyes",
+   "bone": "head",
+   "slot": "eyes",
+   "images": {
+    "open": "parts/eyes_open.png",
+    "half": "parts/eyes_half.png",
+    "closed": "parts/eyes_closed.png",
+    "wide": "parts/eyes_wide.png",
+    "shock": "parts/eyes_shock.png",
+    "teary": "parts/eyes_teary.png",
+    "happy": "parts/eyes_happy.png",
+    "droop": "parts/eyes_droop.png",
+    "big": "parts/eyes_big.png"
+   },
+   "offset": [
+    255.0,
+    199.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "mouth",
+   "bone": "head",
+   "slot": "mouth",
+   "images": {
+    "A": "parts/mouth_A.png",
+    "B": "parts/mouth_B.png",
+    "C": "parts/mouth_C.png",
+    "D": "parts/mouth_D.png",
+    "E": "parts/mouth_E.png",
+    "F": "parts/mouth_F.png",
+    "G": "parts/mouth_G.png",
+    "H": "parts/mouth_H.png",
+    "X": "parts/mouth_X.png",
+    "flat": "parts/mouth_flat.png",
+    "smile": "parts/mouth_smile.png",
+    "frown": "parts/mouth_frown.png",
+    "wavy": "parts/mouth_wavy.png",
+    "wavy_small": "parts/mouth_wavy_small.png",
+    "o_small": "parts/mouth_o_small.png",
+    "sob": "parts/mouth_sob.png",
+    "smirk": "parts/mouth_smirk.png",
+    "grin": "parts/mouth_grin.png",
+    "shout": "parts/mouth_shout.png"
+   },
+   "offset": [
+    284.0,
+    252.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "hair_front",
+   "bone": "head",
+   "image": "parts/hair_front.png",
+   "offset": [
+    205.667,
+    73.333
+   ],
+   "view": "front"
+  },
+  {
+   "name": "brows",
+   "bone": "head",
+   "slot": "brows",
+   "images": {
+    "neutral": "parts/brows_neutral.png",
+    "angry": "parts/brows_angry.png",
+    "sad": "parts/brows_sad.png",
+    "evil": "parts/brows_evil.png",
+    "surprised": "parts/brows_surprised.png",
+    "worried_asym": "parts/brows_worried_asym.png",
+    "smirk": "parts/brows_smirk.png",
+    "low": "parts/brows_low.png"
+   },
+   "offset": [
+    256.667,
+    168.333
+   ],
+   "view": "front"
+  },
+  {
+   "name": "fx_sweat",
+   "bone": "head",
+   "slot": "fx_sweat",
+   "images": {
+    "on": "parts/fx_sweat_on.png"
+   },
+   "offset": [
+    377.0,
+    162.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_dashes",
+   "bone": "head",
+   "slot": "fx_dashes",
+   "images": {
+    "on": "parts/fx_dashes_on.png"
+   },
+   "offset": [
+    336.0,
+    75.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_tears",
+   "bone": "head",
+   "slot": "fx_tears",
+   "images": {
+    "on": "parts/fx_tears_on.png"
+   },
+   "offset": [
+    260.667,
+    231.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_vein",
+   "bone": "head",
+   "slot": "fx_vein",
+   "images": {
+    "on": "parts/fx_vein_on.png"
+   },
+   "offset": [
+    341.667,
+    154.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_flush",
+   "bone": "head",
+   "slot": "fx_flush",
+   "images": {
+    "on": "parts/fx_flush_on.png"
+   },
+   "offset": [
+    232.333,
+    234.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_eyebags_heavy",
+   "bone": "head",
+   "slot": "fx_eyebags_heavy",
+   "images": {
+    "on": "parts/fx_eyebags_heavy_on.png"
+   },
+   "offset": [
+    252.667,
+    234.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_shade",
+   "bone": "head",
+   "slot": "fx_shade",
+   "images": {
+    "on": "parts/fx_shade_on.png"
+   },
+   "offset": [
+    212.0,
+    115.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "head_back",
+   "bone": "head",
+   "image": "parts/head_back.png",
+   "offset": [
+    195.333,
+    115.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "hair_back_view",
+   "bone": "head",
+   "image": "parts/hair_back_view.png",
+   "offset": [
+    206.0,
+    86.0
+   ],
+   "view": "back"
+  },
+  {
+   "name": "arm_r_up",
+   "bone": "arm_r_up",
+   "image": "parts/arm_r_up.png",
+   "offset": [
+    337.333,
+    335.333
+   ]
+  },
+  {
+   "name": "arm_r_low",
+   "bone": "arm_r_low",
+   "image": "parts/arm_r_low.png",
+   "offset": [
+    358.0,
+    484.333
+   ]
+  },
+  {
+   "name": "hand_r",
+   "bone": "hand_r",
+   "slot": "hand_r",
+   "images": {
+    "open": "parts/hand_r_open.png",
+    "point": "parts/hand_r_point.png",
+    "fist": "parts/hand_r_fist.png"
+   },
+   "offset": [
+    351.333,
+    614.667
+   ]
+  },
+  {
+   "name": "arm_l_up",
+   "bone": "arm_l_up",
+   "image": "parts/arm_l_up.png",
+   "offset": [
+    201.667,
+    335.333
+   ]
+  },
+  {
+   "name": "arm_l_low",
+   "bone": "arm_l_low",
+   "image": "parts/arm_l_low.png",
+   "offset": [
+    203.333,
+    484.333
+   ]
+  },
+  {
+   "name": "hand_l",
+   "bone": "hand_l",
+   "slot": "hand_l",
+   "images": {
+    "open": "parts/hand_l_open.png",
+    "point": "parts/hand_l_point.png",
+    "fist": "parts/hand_l_fist.png"
+   },
+   "offset": [
+    195.0,
+    614.667
+   ]
+  }
+ ],
+ "expressions": {
+  "neutral": {
+   "eyes": "open",
+   "brows": "neutral",
+   "mouth": "flat",
+   "fx": []
+  },
+  "happy": {
+   "eyes": "happy",
+   "brows": "neutral",
+   "mouth": "smile",
+   "fx": [
+    "flush"
+   ]
+  },
+  "sad": {
+   "eyes": "droop",
+   "brows": "sad",
+   "mouth": "frown",
+   "fx": []
+  },
+  "angry": {
+   "eyes": "half",
+   "brows": "angry",
+   "mouth": "frown",
+   "fx": [
+    "vein"
+   ]
+  },
+  "scared": {
+   "eyes": "wide",
+   "brows": "sad",
+   "mouth": "wavy_small",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "evil": {
+   "eyes": "half",
+   "brows": "evil",
+   "mouth": "grin",
+   "fx": [
+    "shade"
+   ]
+  },
+  "surprised": {
+   "eyes": "big",
+   "brows": "surprised",
+   "mouth": "o_small",
+   "fx": []
+  },
+  "nervous": {
+   "eyes": "open",
+   "brows": "worried_asym",
+   "mouth": "wavy",
+   "fx": [
+    "dashes",
+    "sweat"
+   ]
+  },
+  "shocked": {
+   "eyes": "shock",
+   "brows": "surprised",
+   "mouth": "wavy",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "crying": {
+   "eyes": "teary",
+   "brows": "sad",
+   "mouth": "sob",
+   "fx": [
+    "tears",
+    "eyebags_heavy"
+   ]
+  },
+  "tired": {
+   "eyes": "half",
+   "brows": "low",
+   "mouth": "flat",
+   "fx": [
+    "eyebags_heavy"
+   ]
+  },
+  "smirk": {
+   "eyes": "half",
+   "brows": "smirk",
+   "mouth": "smirk",
+   "fx": []
+  }
+ },
+ "views": [
+  "front",
+  "back"
+ ],
+ "hand_prop_anchor": {
+  "bone": "hand_r",
+  "point": [
+   381.4,
+   651.5
+  ]
+ },
+ "badge_anchor": {
+  "bone": "torso",
+  "rect": [
+   304.4,
+   393.9,
+   379.5,
+   416.9
+  ]
+ },
+ "generator": {
+  "kind": "puppetgen",
+  "version": 2,
+  "params": {
+   "gender": "female",
+   "age": "adult",
+   "build": "normal",
+   "height_scale": 1.0,
+   "skin": "#ecc3a3",
+   "hair_style": "bun",
+   "hair_color": "#2a1d18",
+   "hair_highlight": "#7c6a60",
+   "hair_tie": null,
+   "pigtails": false,
+   "cap_color": null,
+   "brow_color": null,
+   "outfit_type": "office_blouse",
+   "colors": {
+    "blouse": "#efe6d6",
+    "skirt": "#5a5d66",
+    "lanyard": "#2e6db0",
+    "shoes": "#2a2426"
+   },
+   "neck_style": null,
+   "sleeves": null,
+   "accessories": [
+    "lanyard_card",
+    "handbag"
+   ],
+   "eye_bags": false,
+   "blush": 0.45,
+   "wrinkles": false,
+   "facial_hair": "none",
+   "lip_color": "#d77c83",
+   "ghost": null,
+   "wet": false,
+   "face": "normal",
+   "vest_number": "07",
+   "eye_color": "#141016",
+   "shirt_style": null,
+   "shirt_color": null,
+   "pants_color": null,
+   "shorts": false,
+   "shoe_color": null,
+   "sandals": false,
+   "apron_color": null,
+   "dress_color": null,
+   "gold_chain": false,
+   "scar": false,
+   "glasses": false,
+   "outline": null
+  }
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "puppetgen v2",
+  "note": "Nhân vật gốc sinh bằng code; không dùng ảnh tham khảo."
+ },
+ "profile": {
+  "label": "Nữ · người lớn · văn phòng · tóc búi",
+  "gender": "female",
+  "age": "adult",
+  "description": "Nữ trẻ nhân viên văn phòng. sơ mi lụa màu kem, chân váy bút chì xám, dây đeo thẻ xanh, giày búp bê",
+  "tags": [
+   "office",
+   "bun",
+   "blouse",
+   "lanyard",
+   "female",
+   "adult",
+   "office_blouse",
+   "lanyard_card",
+   "handbag"
+  ],
+  "style": "cutout",
+  "coverage": "full_body",
+  "actions": [
+   "idle",
+   "talk",
+   "walk",
+   "sit",
+   "point",
+   "nod",
+   "shake_head",
+   "scared"
+  ],
+  "lipsync": true,
+  "views": [
+   "front",
+   "back"
+  ],
+  "expressions": [
+   "neutral",
+   "happy",
+   "sad",
+   "angry",
+   "scared",
+   "evil",
+   "surprised",
+   "nervous",
+   "shocked",
+   "crying",
+   "tired",
+   "smirk"
+  ],
+  "hair_style": "bun",
+  "outfit": "office_blouse",
+  "archetype": "nu_tre_van_phong",
+  "voice": {
+   "voice": "vi-VN-HoaiMyNeural",
+   "pitch": "+0Hz",
+   "rate": "+0%"
+  },
+  "roles": [
+   "nhân viên văn phòng",
+   "chị gái",
+   "khách thuê nhà trọ",
+   "phóng viên"
+  ],
+  "name_vi": "Nữ trẻ nhân viên văn phòng",
+  "lower": "pencil",
+  "has_back_view": true
+ },
+ "archetype": "nu_tre_van_phong"
+}

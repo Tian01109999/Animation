@@ -1,0 +1,83 @@
+{
+ "id": "duong_que_dem_mua",
+ "name": "Đường quê ven kênh – đêm mưa",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Đường quê ven kênh – đêm mưa (ban đêm)",
+  "description": "Đường quê ven kênh – đêm mưa, ban đêm, đường quê, kênh, mưa, đèn đường, rural road, canal, ban đêm, night",
+  "kind": "rural_road_rain",
+  "tags": [
+   "đường quê",
+   "kênh",
+   "mưa",
+   "đèn đường",
+   "rural road",
+   "canal",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "duong_que_dem_mua"
+  ],
+  "catalog_id": "duong_que_dem_mua",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn ngang: đường 2 làn vạch giữa đứt; đèn đường cao chiếu nón sáng + vũng sáng oval; hàng cây tròn tối và cột điện dây võng phía sau; dải cỏ; kênh nước tối tiền cảnh có lá sen, lau sậy, phản chiếu đèn. Mây thấp, vệt mưa."
+ },
+ "flow_prompt": "Side view of a rural two-lane road beside a dark canal at night in the rain, tall street lamp casting a cone of light and an oval pool on the wet road, row of dark round trees and utility poles with sagging wires, grass strip, canal in foreground with lily pads, reeds and lamp reflection, low smoky clouds, rain streaks, desaturated teal and charcoal, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "duong_que_dem_mua"
+ },
+ "floor_y": 1339,
+ "slots": {
+  "road_left": {
+   "x": 1152,
+   "y": 1339,
+   "scale": 0.45
+  },
+  "road_center": {
+   "x": 1920,
+   "y": 1339,
+   "scale": 0.45
+  },
+  "road_right": {
+   "x": 2688,
+   "y": 1339,
+   "scale": 0.45
+  },
+  "center": {
+   "x": 1920,
+   "y": 1339,
+   "scale": 0.45
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2300,
+   "y": 385,
+   "color": "#ffd98a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Side view of a rural two-lane road beside a dark canal at night in the rain, tall street lamp casting a cone of light and an oval pool on the wet road, row of dark round trees and utility poles with sagging wires, grass strip, canal in foreground with lily pads, reeds and lamp reflection, low smoky clouds, rain streaks, desaturated teal and charcoal, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

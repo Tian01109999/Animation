@@ -1,0 +1,110 @@
+{
+ "id": "cua_hang_cua_kinh_tu_trong",
+ "name": "Cửa kính ra vào nhìn từ trong (sau quầy)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Cửa kính ra vào nhìn từ trong (sau quầy) (ban đêm)",
+  "description": "Cửa kính ra vào nhìn từ trong (sau quầy), ban đêm, cửa hàng, tạp hoá, cửa hàng tiện lợi, 24h, shop, cửa kính, cửa ra vào, ban đêm, night",
+  "kind": "store_entrance_inside",
+  "tags": [
+   "cửa hàng",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "cửa kính",
+   "cửa ra vào",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "cua_hang_cua_kinh_tu_trong",
+   "cua_hang_cua_kinh_tu_trong__day"
+  ],
+  "catalog_id": "cua_hang_cua_kinh_tu_trong",
+  "variant": "night",
+  "style": "cutout"
+ },
+ "flow_prompt": "Inside a small convenience store looking out through a glass storefront at night, central double sliding glass doors with aluminium frames, dark parking lot outside with white lines, street lamp glow, power poles and wires, bus shelter, dark mountains under starry sky, white chest freezer in left foreground, corner of a dark green counter on the right, diagonal glass reflections, symmetrical composition, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_cua_kinh_tu_trong"
+ },
+ "floor_y": 1728,
+ "slots": {
+  "door": {
+   "x": 1920,
+   "y": 1728,
+   "scale": 0.85
+  },
+  "glass_left": {
+   "x": 1152,
+   "y": 1728,
+   "scale": 0.85
+  },
+  "glass_right": {
+   "x": 2688,
+   "y": 1728,
+   "scale": 0.85
+  },
+  "by_freezer": {
+   "x": 845,
+   "y": 1814,
+   "scale": 0.9
+  },
+  "outside_far": {
+   "x": 2380,
+   "y": 1512,
+   "scale": 0.45
+  },
+  "center": {
+   "x": 1920,
+   "y": 1728,
+   "scale": 0.85
+  }
+ },
+ "signs": [
+  {
+   "text": "ICE",
+   "box": [
+    150,
+    1690,
+    610,
+    1850
+   ],
+   "style": "plain"
+  }
+ ],
+ "baked_signs": [
+  {
+   "text": "OPEN 24H",
+   "box": [
+    1530,
+    830,
+    2310,
+    980
+   ],
+   "mirrored": true
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  },
+  "near": {
+   "image": "bg_near.png",
+   "parallax": 1.2
+  }
+ }
+}

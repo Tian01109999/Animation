@@ -1,0 +1,1072 @@
+{
+  "version": 1,
+  "doc": "Ảnh chèn / đạo cụ cận cảnh GỐC (Shot.location = 'insert:<id>'). Mọi chữ/số do insertgen vẽ bằng font thật từ params (KHÔNG chữ AI, KHÔNG thương hiệu/quốc huy/chân dung thật). bg: nền mặc định (dark_vignette | blur_location | wood_dark). camera_default: chuyển động mặc định. hands: có tay puppet POV hay không (màu tay/tay áo theo params.sleeve_color). procedural=true: insertgen v1 phải hỗ trợ. Baked-in image text (params) is ENGLISH ONLY; name_vi/name_en are search metadata. library=true: thư viện mở rộng lô 2 (storytoon.render.insertgen_batch2, provenance 'procedural_library'), không bắt buộc với test procedural.",
+  "inserts": [
+    {
+      "id": "phone_chat",
+      "name_vi": "Điện thoại – màn hình chat",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "time": "03:12",
+        "contact": "Minh",
+        "status": "online",
+        "messages": [
+          {
+            "from": "them",
+            "text": "Open the door for me"
+          },
+          {
+            "from": "me",
+            "text": "Where are you?"
+          }
+        ],
+        "theme": "dark",
+        "sleeve_color": "#1f6f5c",
+        "skin": "#c9926a"
+      },
+      "notes": "Thanh trạng thái, header avatar chữ cái đầu, bong bóng xám (them) / xanh #2e7cf6 (me), thanh nhập + nút gửi. Trùng thiết kế overlay phone_chat.",
+      "name_en": "Phone - chat screen"
+    },
+    {
+      "id": "phone_lock",
+      "name_vi": "Điện thoại – màn khoá có thông báo",
+      "bg": "blur_location",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "time": "06:00",
+        "date": "Monday, March 12",
+        "notification": {
+          "app": "Messages",
+          "sender": "Mom",
+          "text": "Are you home yet?"
+        },
+        "sleeve_color": "#1f6f5c",
+        "skin": "#c9926a"
+      },
+      "name_en": "Phone - lock screen with notification"
+    },
+    {
+      "id": "phone_bank",
+      "name_vi": "Điện thoại – ứng dụng ngân hàng",
+      "bg": "blur_location",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "bank_name": "LOTUS BANK",
+        "balance": "$1,250.00",
+        "account": "CHECKING · ****2731",
+        "transactions": [
+          {
+            "label": "Hospital bill",
+            "amount": "-$350.00"
+          },
+          {
+            "label": "Monthly salary",
+            "amount": "+$620.00"
+          }
+        ]
+      },
+      "notes": "Ngân hàng hư cấu, không logo thật.",
+      "name_en": "Phone - banking app"
+    },
+    {
+      "id": "cash_drawer",
+      "name_vi": "Ngăn kéo tiền (khay thu ngân)",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "note_slots": 4,
+        "note_colors": [
+          "#7d5aa6",
+          "#3a78c2",
+          "#c8504a",
+          "#4fa35a"
+        ],
+        "denominations": [
+          "100",
+          "50",
+          "20",
+          "10"
+        ],
+        "coin_wells": 4,
+        "sleeve_color": "#1f6f5c"
+      },
+      "notes": "Nhìn từ trên: khay xám đậm, kẹp kim loại, tay POV nhón xu từ đáy khung. Tiền giấy là khối màu + số to, không chân dung.",
+      "name_en": "Cash drawer (register tray)"
+    },
+    {
+      "id": "coin_wet",
+      "name_vi": "Đồng xu ướt rêu (cận)",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "value": "50",
+        "unit": "CENTS",
+        "year": "1998",
+        "algae": true,
+        "bubbles": true
+      },
+      "notes": "Xu 2 kim loại (viền bạc, lõi vàng) chung chung, không quốc huy; rêu xanh + bọt khí.",
+      "name_en": "Wet mossy coin (close-up)"
+    },
+    {
+      "id": "banknote_wet",
+      "name_vi": "Tờ tiền ướt bạc màu",
+      "bg": "blur_location",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "value": "20",
+        "color": "#b5734a",
+        "rotation": -8,
+        "faded": 0.55,
+        "drips": true,
+        "caption": "LEGAL TENDER"
+      },
+      "notes": "Ô chân dung mờ tròn (không mặt người thật), số mệnh giá, số sê-ri bịa.",
+      "name_en": "Wet faded banknote"
+    },
+    {
+      "id": "rule_paper",
+      "name_vi": "Tờ nội quy ca đêm (giấy vở)",
+      "bg": "dark_vignette",
+      "camera_default": "pan_down_slow",
+      "hands": "optional",
+      "procedural": true,
+      "params": {
+        "title": "NIGHT SHIFT RULES",
+        "note": "(read carefully before your shift)",
+        "rules": [
+          "Do not open the door after 3 AM.",
+          "Never answer anyone calling your name from outside the glass.",
+          "If the clock runs backwards, *don't look at the door*."
+        ],
+        "red_rule_index": 2,
+        "redact_last": true,
+        "coffee_stain": true,
+        "bleed_through": false,
+        "blurred": false
+      },
+      "notes": "Kem, dòng kẻ xanh, lề đỏ, băng keo be 2 góc, chữ viết tay xanh; 1 luật đỏ; thanh bôi đen. Cùng thiết kế overlay rule_list.",
+      "name_en": "Night shift rules (notebook paper)"
+    },
+    {
+      "id": "missing_poster",
+      "name_vi": "Tờ tìm người mất tích",
+      "bg": "blur_location",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "header": "MISSING PERSON",
+        "name": "BINH TRAN",
+        "age": "Age 22",
+        "desc": "Disappeared during a night shift",
+        "datetime": "03:00 · AUG 14",
+        "phone": "555-0142",
+        "photo": "archetype:nam_tre_toc_xoan_kinh",
+        "variant": "clean"
+      },
+      "notes": "variant: clean | torn | crumpled | blank_photo. Ảnh: chân dung phẳng kiểu ảnh thẻ dựng từ puppet.",
+      "name_en": "Missing person poster"
+    },
+    {
+      "id": "map_card",
+      "name_vi": "Thẻ bản đồ vẽ tay",
+      "bg": "smoke_dark",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "title": "Canal-side road",
+        "subtitle": "SCENE MAP",
+        "road_label": "Route 9",
+        "water_label": "Old canal",
+        "marker": {
+          "x": 0.58,
+          "y": 0.52,
+          "label": "car went in here · 03:00"
+        },
+        "tag": "old canal · 1998"
+      },
+      "name_en": "Hand-drawn map card"
+    },
+    {
+      "id": "wall_clock",
+      "name_vi": "Đồng hồ treo tường",
+      "bg": "wall_grey",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "hour": 3,
+        "minute": 0,
+        "second_hand": true,
+        "mirrored": false,
+        "frozen": false,
+        "band_color": "#1f6f5c"
+      },
+      "notes": "Mặt trắng, viền đen dày, số 1–12, kim giây + tâm đỏ, cung bóng góc trên-trái. mirrored=true cho thế giới đảo ngược.",
+      "name_en": "Wall clock"
+    },
+    {
+      "id": "ledger_book",
+      "name_vi": "Sổ ghi danh nhân viên (sổ đỏ)",
+      "bg": "wood_dark",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "columns": [
+          "Name",
+          "Hired",
+          "Status",
+          "Date"
+        ],
+        "rows": [
+          [
+            "Tam Le",
+            "2009",
+            "MISSING",
+            "02/03"
+          ],
+          [
+            "Hoa Pham",
+            "2013",
+            "MISSING",
+            "06/17"
+          ]
+        ],
+        "highlight_row": 0,
+        "strike_row": null,
+        "title": "STAFF REGISTER"
+      },
+      "notes": "Bìa đỏ, 2 trang kem kẻ dòng, gáy giữa, tên xanh navy, tình trạng đỏ đậm; animate gạch đỏ qua tên.",
+      "name_en": "Staff register (red ledger)"
+    },
+    {
+      "id": "door_panel",
+      "name_vi": "Bảng điều khiển cửa tự động",
+      "bg": "dark_vignette",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "title": "AUTO DOOR",
+        "buttons": [
+          {
+            "label": "UNLOCK",
+            "color": "#3cb44b"
+          },
+          {
+            "label": "LOCK",
+            "color": "#d0302a"
+          }
+        ],
+        "pointing": true
+      },
+      "name_en": "Automatic door control panel"
+    },
+    {
+      "id": "hand_grip_counter",
+      "name_vi": "Tay bám mép quầy",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "sleeve_color": "#1f6f5c",
+        "counter_front": "#1f6f5c"
+      },
+      "name_en": "Hand gripping the counter edge"
+    },
+    {
+      "id": "hand_holding_paper",
+      "name_vi": "Hai tay POV cầm tờ giấy",
+      "bg": "dark_vignette",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "paper_insert": "rule_paper",
+        "sleeve_color": "#1f6f5c",
+        "skin": "#c9926a"
+      },
+      "notes": "Ghép insert giấy bất kỳ + 2 tay ở đáy khung.",
+      "name_en": "POV hands holding a sheet of paper"
+    },
+    {
+      "id": "hand_on_floor",
+      "name_vi": "Bàn tay trên sàn (nhìn từ trên)",
+      "bg": "dark_tiles",
+      "camera_default": "static",
+      "hands": true,
+      "procedural": true,
+      "params": {
+        "sleeve_color": "#3a3d44",
+        "skin": "#c9926a"
+      },
+      "name_en": "Hand on the floor (top view)"
+    },
+    {
+      "id": "ghost_hand_ankle",
+      "name_vi": "Tay ma nắm cổ chân",
+      "bg": "dark_tiles",
+      "camera_default": "shake",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "shoe": "#f2f2f0",
+        "pants": "#3e6aa6",
+        "ghost_skin": "#e4e2dc",
+        "nails": "#4a4a52",
+        "shock_lines": true
+      },
+      "name_en": "Ghost hand grabbing an ankle"
+    },
+    {
+      "id": "ghost_hand_coin",
+      "name_vi": "Tay ma đặt xu lên quầy",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "ghost_skin": "#c9ccd6",
+        "drips": true,
+        "puddle": true
+      },
+      "name_en": "Ghost hand placing a coin on the counter"
+    },
+    {
+      "id": "wet_footprints",
+      "name_vi": "Dấu chân ướt + vũng nước",
+      "bg": "tiles_white",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "steps": 7,
+        "direction": [
+          1,
+          -0.6
+        ],
+        "puddle": true,
+        "cctv": false
+      },
+      "name_en": "Wet footprints + puddle"
+    },
+    {
+      "id": "prayer_beads",
+      "name_vi": "Tràng hạt tua đỏ",
+      "bg": "sidewalk",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "bead_color": "#d9cfae",
+        "tassel": "#c8352e",
+        "count": 18,
+        "ghost_hand": false
+      },
+      "name_en": "Prayer beads with red tassel"
+    },
+    {
+      "id": "taped_notice",
+      "name_vi": "Tờ thông báo dán cửa cuốn",
+      "bg": "shutter",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "headline": "CLOSED PERMANENTLY",
+        "body": "Thank you for your support.",
+        "rotation": -3,
+        "kicker": "NOTICE",
+        "signature": "The Management"
+      },
+      "name_en": "Notice taped to a roller shutter"
+    },
+    {
+      "id": "job_ad_card",
+      "name_vi": "Tin tuyển dụng",
+      "bg": "blur_location",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "shop": "24H MART",
+        "title": "NIGHT SHIFT CLERK WANTED",
+        "hours": "22:00 – 06:00",
+        "salary": "$1,500",
+        "footnote": "*Store rules must be followed strictly",
+        "salary_note": "/ month"
+      },
+      "name_en": "Job ad"
+    },
+    {
+      "id": "door_chime",
+      "name_vi": "Chuông cửa / loa báo khách",
+      "bg": "dark_vignette",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "led": "#d0302a",
+        "waves": 3
+      },
+      "name_en": "Door chime / customer alert speaker"
+    },
+    {
+      "id": "fridge_door_close",
+      "name_vi": "Cửa tủ lạnh mờ sương (cận)",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "handprint": false,
+        "impact_text": null
+      },
+      "name_en": "Frosted fridge door (close-up)"
+    },
+    {
+      "id": "locker_open",
+      "name_vi": "Tủ locker mở",
+      "bg": "dark_vignette",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "items": [
+          "tote_bag_olive",
+          "phone_dark_blue",
+          "black_box"
+        ]
+      },
+      "name_en": "Open locker"
+    },
+    {
+      "id": "snack_bag",
+      "name_vi": "Gói snack",
+      "bg": "counter",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "color": "#d8423a",
+        "name": "CRUNCHY",
+        "price": "$1.50",
+        "flavor": "spicy shrimp"
+      },
+      "name_en": "Snack bag"
+    },
+    {
+      "id": "spirit_shrine",
+      "name_vi": "Miếu nhỏ ven đường",
+      "bg": "dusk_road",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "incense": true,
+        "offerings": [
+          "fruit",
+          "water_cups"
+        ]
+      },
+      "name_en": "Small roadside shrine"
+    },
+    {
+      "id": "black_frame_text",
+      "name_vi": "Khung đen chỉ có chữ",
+      "bg": "dark_gradient",
+      "camera_default": "static",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "text": null
+      },
+      "notes": "Dùng cho nhịp giữ câu; chữ = phụ đề.",
+      "name_en": "Black frame with text only"
+    },
+    {
+      "id": "newspaper",
+      "name_vi": "Trang báo cũ",
+      "name_en": "Old newspaper page",
+      "bg": "wood_dark",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "procedural": true,
+      "params": {
+        "masthead": "THE EVENING LEDGER",
+        "dateline": "VOL. XII · NO. 214 · LATE EDITION",
+        "headline": "NIGHT CLERK VANISHES FROM 24-HOUR STORE",
+        "photo_caption": "Last seen at 3:00 AM",
+        "rotation": -2
+      },
+      "notes": "Tờ báo hư cấu; tít/cột chữ tiếng Anh. Ảnh bao_cu = alias của kind này."
+    },
+    {
+      "id": "phone_sms_hand",
+      "name_vi": "Tay cầm điện thoại – SMS chế độ tối",
+      "name_en": "Hand holding phone - dark SMS chat",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "02:47",
+        "contact": "Sis",
+        "status": "SMS · offline",
+        "messages": [
+          {
+            "from": "me",
+            "text": "Where are you?"
+          },
+          {
+            "from": "me",
+            "text": "Pick up the phone"
+          },
+          {
+            "from": "me",
+            "text": "Mom cried all night"
+          },
+          {
+            "from": "them",
+            "text": "Help me"
+          },
+          {
+            "from": "them",
+            "typing": true
+          }
+        ],
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      },
+      "notes": "messages[].failed=true -> '! Not delivered'; messages[].typing=true -> bong bóng 3 chấm."
+    },
+    {
+      "id": "phone_call_screen",
+      "name_vi": "Điện thoại – màn hình cuộc gọi",
+      "name_en": "Phone - call screen",
+      "bg": "dark_vignette",
+      "camera_default": "static",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "08:12",
+        "contact": "Captain",
+        "call_status": "00:00",
+        "buttons": [
+          "Mute",
+          "Keypad",
+          "Speaker",
+          "Add call",
+          "Video",
+          "Contacts"
+        ],
+        "active_button": 2,
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      }
+    },
+    {
+      "id": "phone_gps_map",
+      "name_vi": "Điện thoại – bản đồ GPS có tuyến + ghim",
+      "name_en": "Phone - GPS map with route and pin",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "07:15",
+        "chip": "Last location: Rider",
+        "bottom_label": "Stopped 2 days",
+        "button": "Start",
+        "card": null,
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      },
+      "notes": "card={label,title,sub} -> thẻ thông tin bên trái (vd GPS / STOPPED AT SHOP 48 HRS / LAST UPDATE 2 DAYS AGO)."
+    },
+    {
+      "id": "phone_draft_cracked",
+      "name_vi": "Điện thoại – tin nháp chưa gửi, màn hình nứt",
+      "name_en": "Phone - unsent draft, cracked glass",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "07:12",
+        "caption": "Draft · not sent · 07:12",
+        "draft": "I know where they are.",
+        "cracked": true,
+        "crack_x": 0.66,
+        "crack_y": 0.3,
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      }
+    },
+    {
+      "id": "receipt_thermal",
+      "name_vi": "Hoá đơn mua hàng (giấy nhiệt) + thẻ số liệu",
+      "name_en": "Shop receipt (thermal) + stat cards",
+      "bg": "wood_dark",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "shop": "GOLDEN STEAM BUNS",
+        "address": "14 Market Lane · Open 4 AM",
+        "customer": "Customer: Mr. K",
+        "datetime": "12/03 · 04:10",
+        "items": [
+          [
+            "Minced pork 5 kg",
+            "750"
+          ],
+          [
+            "Shallots 1 bunch",
+            "20"
+          ],
+          [
+            "Flour 25 kg",
+            "640"
+          ]
+        ],
+        "total": "1,410",
+        "footer": "THANK YOU",
+        "cards": [
+          {
+            "label": "BUNS SOLD PER DAY",
+            "value": "500",
+            "icon": "bun",
+            "color": "#e8b93a",
+            "bar": 0.9
+          },
+          {
+            "label": "PORK BOUGHT PER DAY",
+            "value": "0 kg",
+            "icon": "scale",
+            "color": "#c8352e",
+            "value_color": "#c8352e",
+            "bar": 0.04
+          }
+        ]
+      },
+      "notes": "cards=[] -> chỉ hoá đơn."
+    },
+    {
+      "id": "blueprint_plan",
+      "name_vi": "Bản vẽ kỹ thuật nhà phố (mặt cắt + tầng trệt)",
+      "name_en": "Building blueprint (section + ground floor)",
+      "bg": "wood_dark",
+      "camera_default": "pan_down_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "section_title": "SECTION A-A",
+        "plan_title": "GROUND FLOOR",
+        "rooms": [
+          "SHOP",
+          "KITCHEN",
+          "COLD ROOM"
+        ],
+        "basement_label": "BASEMENT (FILLED)",
+        "depth": "3.00",
+        "plan_note": "basement line (filled)",
+        "length": "16.00 m",
+        "width": "4.00 m",
+        "title_block": [
+          "DISTRICT OFFICE",
+          "4-STOREY SHOPHOUSE",
+          "REQUEST: FILL BASEMENT",
+          "DATE: 1997"
+        ],
+        "stamp": "APPROVED",
+        "stamp_year": "1997"
+      }
+    },
+    {
+      "id": "depth_diagram",
+      "name_vi": "Sơ đồ mặt cắt độ sâu (-3 m dưới đất)",
+      "name_en": "Cross-section depth diagram (-3 m underground)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "ground_label": "STREET LEVEL 0 m",
+        "boxes": [
+          [
+            "STOREFRONT",
+            "#4fc3e8"
+          ],
+          [
+            "KITCHEN",
+            "#f3c94e"
+          ],
+          [
+            "COLD ROOM",
+            "#8fb8ff"
+          ]
+        ],
+        "basement_label": "BASEMENT",
+        "depth": "-3 m",
+        "caption": "Basement 4 x 6 m · \"filled 1997\"",
+        "card": {
+          "label": "ALTITUDE",
+          "value": "-3 m",
+          "sub": "UNDERGROUND"
+        }
+      }
+    },
+    {
+      "id": "notebook_list_hand",
+      "name_vi": "Sổ tay danh sách mất tích viết tay + ngón tay chỉ",
+      "name_en": "Handwritten notebook missing-list",
+      "bg": "wood_dark",
+      "camera_default": "pan_down_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "title": "MISSING · BLOCK 41",
+        "count": 23,
+        "rows": null,
+        "boxed_rows": [
+          0,
+          1
+        ],
+        "card": {
+          "label": "MISSING",
+          "value": "23"
+        },
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      },
+      "notes": "rows=None -> 23 dòng tên/tuổi/ngày/ghi chú bịa; rows=[[name, age, date, note], ...] để thay."
+    },
+    {
+      "id": "missing_poster_numbered",
+      "name_vi": "Tờ tìm người dán tường, đánh số, dải xé",
+      "name_en": "Missing poster, numbered, tear-off tabs",
+      "bg": "wall_grey",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "header": "M I S S I N G",
+        "name": "MAY LIN",
+        "age": "Age 22 · 1.58 m",
+        "desc": "Last seen near the bun shop",
+        "datetime": "11:40 PM · OCT 3",
+        "phone": "555-0193",
+        "number": 7,
+        "rotation": -4,
+        "photo": "archetype:nu_tre_van_phong"
+      }
+    },
+    {
+      "id": "cold_room_alarm",
+      "name_vi": "Bảng nhiệt độ kho lạnh báo động",
+      "name_en": "Cold-room temperature alarm panel",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "label": "COLD ROOM",
+        "value": "-16.1",
+        "unit": "°C",
+        "alarm": "ALARM",
+        "setpoint": "SET -18.0"
+      }
+    },
+    {
+      "id": "wristwatch_digital",
+      "name_vi": "Đồng hồ điện tử trên cổ tay băng gạc",
+      "name_en": "Digital wristwatch on a bandaged arm",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "time": "02:45",
+        "ampm": "PM",
+        "date": "SAT 14",
+        "top_label": "LIGHT",
+        "top_label_right": "MODE",
+        "bandage": true,
+        "skin": "#c9926a"
+      },
+      "notes": "Không thương hiệu."
+    },
+    {
+      "id": "price_tags_compare",
+      "name_vi": "Hai thẻ giá – cùng nét chữ",
+      "name_en": "Pair of price tags - same handwriting",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {
+        "left": {
+          "word": "SPECIAL",
+          "number": "1990",
+          "caption": "basement wall"
+        },
+        "right": {
+          "word": "SPECIAL",
+          "number": "10.-",
+          "caption": "shop sign"
+        },
+        "label": "SAME HANDWRITING"
+      }
+    },
+    {
+      "id": "cork_board",
+      "name_vi": "Bảng ghim điều tra dây đỏ",
+      "name_en": "Cork investigation board with red string",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "names": [
+          "ANNA K.",
+          "DINA P.",
+          "JADE C.",
+          "ROSA Y."
+        ],
+        "photo_caption": "the shop?",
+        "notes": [
+          "4 AM?",
+          "same\nshop",
+          "who?"
+        ]
+      }
+    },
+    {
+      "id": "evidence_markers",
+      "name_vi": "Tang vật trang sức + biển số đánh dấu",
+      "name_en": "Evidence items with numbered markers",
+      "bg": "none",
+      "camera_default": "pan_down_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "items": [
+          "pendant",
+          "hair_clip",
+          "bangle",
+          "ring",
+          "watch",
+          "beads",
+          "necklace"
+        ],
+        "pendant_letter": "M",
+        "card": {
+          "pill": "VICTIMS",
+          "title": "UNDER 25",
+          "sub": "SILVER JEWELLERY"
+        }
+      }
+    },
+    {
+      "id": "cleaver_honing",
+      "name_vi": "Dao phay chạm thanh liếc thép (tia lửa)",
+      "name_en": "Cleaver vs steel rod clash",
+      "bg": "none",
+      "camera_default": "shake",
+      "hands": false,
+      "library": true,
+      "params": {
+        "skin": "#c08a62",
+        "tattoo_color": "#2f4a4a",
+        "sparks": true
+      },
+      "notes": "Không máu."
+    },
+    {
+      "id": "flashlight_mop",
+      "name_vi": "Đèn pin + cán chổi gãy trên sàn",
+      "name_en": "Flashlight + broken mop handle on the floor",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": true,
+      "library": true,
+      "params": {
+        "title": "ON HAND",
+        "items": [
+          [
+            "ok",
+            "FLASHLIGHT x1"
+          ],
+          [
+            "hl",
+            "MOP HANDLE x1"
+          ],
+          [
+            "no",
+            "PHONE · NO SIGNAL"
+          ]
+        ],
+        "footer": "NO BACKUP · A TORCH · A BROKEN MOP HANDLE",
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      },
+      "notes": "items[][0]: ok | hl (tô vàng) | no (dấu X đỏ)."
+    },
+    {
+      "id": "blue_drums_cart",
+      "name_vi": "Thùng phuy xanh trên xe đẩy",
+      "name_en": "Blue drums on a hand cart",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "count": 3,
+        "drum_color": "#2a6fd0",
+        "chip": null
+      },
+      "notes": "chip={label,value} -> thẻ đếm (vd BLUE DRUMS / 0 drums)."
+    },
+    {
+      "id": "framed_old_photo",
+      "name_vi": "Ảnh cũ đóng khung – em bé cười",
+      "name_en": "Framed old photo of a laughing child",
+      "bg": "wall_grey",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "fade": 0.6,
+        "date_stamp": "'90 7 14"
+      }
+    },
+    {
+      "id": "dropped_phone_floor",
+      "name_vi": "Điện thoại rơi vỡ màn hình trên sàn gạch",
+      "name_en": "Dropped cracked phone on floor tiles",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {
+        "floor": "tiles",
+        "tile_color": "#b9b4a8",
+        "case_color": "#f2a2b8",
+        "stamp": [
+          "STEAM",
+          "HOUSE"
+        ]
+      },
+      "notes": "floor: tiles | concrete."
+    },
+    {
+      "id": "bun_broken_hands",
+      "name_vi": "Hai tay bẻ đôi bánh bao",
+      "name_en": "Steamed bun broken open in two hands",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "gap": 170,
+        "steam": true,
+        "sleeve_color": "#2b3550",
+        "skin": "#c9926a"
+      }
+    },
+    {
+      "id": "rule_note_torn",
+      "name_vi": "Hai tay xé tờ nội quy",
+      "name_en": "Hands tearing a rule note",
+      "bg": "dark_vignette",
+      "camera_default": "shake",
+      "hands": true,
+      "library": true,
+      "params": {
+        "title": "RULE #1",
+        "rules": [
+          "DON'T EAT THE SPECIAL FILLING!"
+        ],
+        "note": "at Uncle's shop",
+        "red_rule_index": 0,
+        "gap": 70,
+        "tilt": 5,
+        "sleeve_color": "#1f2a4a",
+        "skin": "#c9926a"
+      }
+    },
+    {
+      "id": "id_wallet_desk",
+      "name_vi": "Ví thẻ ngành đẩy qua bàn",
+      "name_en": "ID wallet pushed across a desk",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "card_title": "ID CARD",
+        "sheet_title": "CASE REPORT",
+        "rows": [
+          [
+            "NAME",
+            "K. MORAN"
+          ],
+          [
+            "RANK",
+            "DETECTIVE"
+          ],
+          [
+            "UNIT",
+            "INVESTIGATIONS"
+          ],
+          [
+            "NO.",
+            "0417"
+          ]
+        ],
+        "photo": null,
+        "rotation": -6,
+        "felt": "#2f6a4a",
+        "motion_lines": false,
+        "sleeve_color": "#a08a5a",
+        "skin": "#b9825a"
+      },
+      "notes": "Huy hiệu lục giác chung chung, không quốc huy; photo='archetype:<id>' để dùng chân dung puppet."
+    },
+    {
+      "id": "soup_bowl_spoon",
+      "name_vi": "Bát canh thịt viên + tay cầm thìa",
+      "name_en": "Bowl of soup with spoon",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "meatballs": 6,
+        "steam": true,
+        "table": "#c4956a",
+        "rim_color": "#3a78c2",
+        "sleeve_color": "#1f6f5c",
+        "skin": "#c9926a"
+      }
+    }
+  ]
+}

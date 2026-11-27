@@ -1,0 +1,35 @@
+{
+ "id": "bun_broken_hands",
+ "label": "Hai tay bẻ đôi bánh bao",
+ "label_en": "Steamed bun broken open in two hands",
+ "tags": [
+  "bánh bao",
+  "bẻ đôi",
+  "nhân thịt",
+  "steamed bun",
+  "filling",
+  "food"
+ ],
+ "props": [
+  "steamed_bun",
+  "bun",
+  "bun_filling"
+ ],
+ "style": "cutout",
+ "image": "bun_broken_hands.png",
+ "kind": "bun_broken_hands",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "gap": 170,
+  "steam": true,
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

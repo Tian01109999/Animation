@@ -1,0 +1,46 @@
+{
+ "id": "door_panel",
+ "label": "Bảng điều khiển cửa tự động",
+ "label_en": "Automatic door control panel",
+ "tags": [
+  "bảng điều khiển",
+  "cửa tự động",
+  "nút bấm",
+  "khoá cửa",
+  "door panel",
+  "button",
+  "lock"
+ ],
+ "props": [
+  "door_panel",
+  "door_button",
+  "control_panel",
+  "lock_button"
+ ],
+ "style": "cutout",
+ "image": "door_panel.png",
+ "kind": "door_panel",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "title": "AUTO DOOR",
+  "buttons": [
+   {
+    "label": "UNLOCK",
+    "color": "#3cb44b"
+   },
+   {
+    "label": "LOCK",
+    "color": "#d0302a"
+   }
+  ],
+  "pointing": true,
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

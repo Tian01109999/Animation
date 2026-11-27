@@ -1,0 +1,77 @@
+{
+ "id": "don_cong_an",
+ "name": "Phòng làm việc đồn công an",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng làm việc đồn công an (trong nhà đèn sáng)",
+  "description": "Phòng làm việc đồn công an, trong nhà đèn sáng, đồn công an, công an, văn phòng, police, khai báo, bàn làm việc, trong nhà đèn sáng, indoor",
+  "kind": "police_station",
+  "tags": [
+   "đồn công an",
+   "công an",
+   "văn phòng",
+   "police",
+   "khai báo",
+   "bàn làm việc",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "don_cong_an"
+  ],
+  "catalog_id": "don_cong_an",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Bàn làm việc gỗ, máy tính cũ, tủ hồ sơ, ghế nhựa cho người khai, bảng thông báo ghim giấy, quạt treo tường. Không quốc huy/biểu tượng thật."
+ },
+ "flow_prompt": "Plain local police office interior, wooden desk with an old computer monitor, metal filing cabinets, plastic chair for visitor, cork board with pinned papers, wall fan, cream walls, neutral daylight, no emblems, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "don_cong_an"
+ },
+ "floor_y": 1944,
+ "slots": {
+  "officer": {
+   "x": 2380,
+   "y": 1858,
+   "scale": 0.95,
+   "clip_bottom": 1500
+  },
+  "visitor": {
+   "x": 1306,
+   "y": 1944,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 1944,
+   "scale": 1.0
+  }
+ },
+ "signs": [
+  {
+   "text": "RECEPTION",
+   "box": [
+    2130,
+    1560,
+    2630,
+    1650
+   ],
+   "style": "white_board"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Plain local police office interior, wooden desk with an old computer monitor, metal filing cabinets, plastic chair for visitor, cork board with pinned papers, wall fan, cream walls, neutral daylight, no emblems, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "day": "Plain local police office interior, wooden desk with an old computer monitor, metal filing cabinets, plastic chair for visitor, cork board with pinned papers, wall fan, cream walls, neutral daylight, no emblems, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "night": "Plain local police office interior, wooden desk with an old computer monitor, metal filing cabinets, plastic chair for visitor, cork board with pinned papers, wall fan, cream walls, neutral daylight, no emblems, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "RECEPTION"
+ ]
+}

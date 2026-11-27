@@ -1,0 +1,73 @@
+{
+ "id": "hem_toi_pho",
+ "name": "Hẻm tối thành phố",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hẻm tối thành phố (ban đêm)",
+  "description": "Hẻm tối thành phố, ban đêm, hẻm, ngõ, hẻm tối, alley, nhà ống, dây điện, ban đêm, night",
+  "kind": "dark_alley",
+  "tags": [
+   "hẻm",
+   "ngõ",
+   "hẻm tối",
+   "alley",
+   "nhà ống",
+   "dây điện",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hem_toi_pho"
+  ],
+  "catalog_id": "hem_toi_pho",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Hẻm hẹp 1 điểm tụ: tường nhà ống loang lổ hai bên, cửa sắt kéo, dây điện chằng chịt, 1 bóng đèn vàng treo, bậc thềm, xe máy dựng, vũng nước phản chiếu."
+ },
+ "flow_prompt": "Narrow Vietnamese city alley at night in one-point perspective, stained tube-house walls on both sides, folding iron gates, tangled overhead electric wires, a single warm hanging bulb, parked motorbike, puddles reflecting light, deep shadows, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hem_toi_pho"
+ },
+ "floor_y": 1870,
+ "slots": {
+  "left": {
+   "x": 1695,
+   "y": 1870,
+   "scale": 1.109
+  },
+  "center": {
+   "x": 1920,
+   "y": 1870,
+   "scale": 1.109
+  },
+  "right": {
+   "x": 2145,
+   "y": 1870,
+   "scale": 1.109
+  },
+  "far": {
+   "x": 1920,
+   "y": 1420,
+   "scale": 0.444
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 1945.0,
+   "y": 745.0,
+   "color": "#ffcf7a"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Narrow Vietnamese city alley at night in one-point perspective, stained tube-house walls on both sides, folding iron gates, tangled overhead electric wires, a single warm hanging bulb, parked motorbike, puddles reflecting light, deep shadows, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

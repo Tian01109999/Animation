@@ -1,0 +1,61 @@
+{
+ "id": "phone_sms_hand",
+ "label": "Tay cầm điện thoại – SMS chế độ tối",
+ "label_en": "Hand holding phone - dark SMS chat",
+ "tags": [
+  "điện thoại",
+  "tin nhắn",
+  "sms",
+  "cầm tay",
+  "phone",
+  "sms",
+  "text message",
+  "dark mode"
+ ],
+ "props": [
+  "phone_sms",
+  "sms_chat",
+  "phone_in_hand"
+ ],
+ "style": "cutout",
+ "image": "phone_sms_hand.png",
+ "kind": "phone_sms_hand",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "02:47",
+  "contact": "Sis",
+  "status": "SMS · offline",
+  "messages": [
+   {
+    "from": "me",
+    "text": "Where are you?"
+   },
+   {
+    "from": "me",
+    "text": "Pick up the phone"
+   },
+   {
+    "from": "me",
+    "text": "Mom cried all night"
+   },
+   {
+    "from": "them",
+    "text": "Help me"
+   },
+   {
+    "from": "them",
+    "typing": true
+   }
+  ],
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

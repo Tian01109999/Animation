@@ -1,0 +1,71 @@
+{
+ "id": "cua_hang_cua_cuon_dong__dusk",
+ "name": "Mặt tiền cửa cuốn đóng (ngày/hoàng hôn/đêm)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Mặt tiền cửa cuốn đóng (ngày/hoàng hôn/đêm) (hoàng hôn)",
+  "description": "Mặt tiền cửa cuốn đóng (ngày/hoàng hôn/đêm), hoàng hôn, cửa hàng, tạp hoá, cửa hàng tiện lợi, 24h, shop, cửa cuốn, đóng cửa, mặt tiền, hoàng hôn, dusk",
+  "kind": "store_shutter_facade",
+  "tags": [
+   "cửa hàng",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "cửa cuốn",
+   "đóng cửa",
+   "mặt tiền",
+   "hoàng hôn",
+   "dusk"
+  ],
+  "time_variants": [
+   "cua_hang_cua_cuon_dong",
+   "cua_hang_cua_cuon_dong__dusk",
+   "cua_hang_cua_cuon_dong__night"
+  ],
+  "catalog_id": "cua_hang_cua_cuon_dong",
+  "variant": "dusk",
+  "style": "cutout"
+ },
+ "flow_prompt": "Flat frontal elevation of a closed shop with a full-width corrugated metal roller shutter, horizontal grey stripes, rust spots, thick dark green signboard band above with an orange thin stripe, grey shutter housing, concrete sidewalk with puddles, overcast dusk sky, orthographic view, grain, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_cua_cuon_dong"
+ },
+ "floor_y": 1987,
+ "slots": {
+  "left": {
+   "x": 1152,
+   "y": 1987,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 1987,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2688,
+   "y": 1987,
+   "scale": 1.0
+  }
+ },
+ "signs": [
+  {
+   "text": "MINI MART 24H",
+   "box": [
+    900,
+    200,
+    2940,
+    430
+   ],
+   "style": "plain"
+  }
+ ]
+}

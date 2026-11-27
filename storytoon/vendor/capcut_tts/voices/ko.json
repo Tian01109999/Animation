@@ -1,0 +1,38 @@
+[
+  {
+    "id": "kr_003",
+    "resourceId": "7102355709945188865",
+    "lang": "ko",
+    "tenCapcut": "서연 (Seoyeon - Nữ)",
+    "ten": "서연 (Seoyeon - Nữ)",
+    "moTa": "Giọng nữ tiếng Hàn, sáng rõ, tự nhiên",
+    "gioi": "nu",
+    "mau": "/audio/giong-capcut/kr_003.mp3",
+    "tuMoiGiay": 2.83,
+    "trungBinhTuMoiGiay": 3.117
+  },
+  {
+    "id": "kr_004",
+    "resourceId": "7102355709945188865",
+    "lang": "ko",
+    "tenCapcut": "민준 (Minjun - Nam trẻ)",
+    "ten": "민준 (Minjun - Nam trẻ)",
+    "moTa": "Giọng nam trẻ tiếng Hàn, nhanh nhẹn, sáng rõ",
+    "gioi": "nam",
+    "mau": "/audio/giong-capcut/kr_004.mp3",
+    "tuMoiGiay": 2.87,
+    "trungBinhTuMoiGiay": 3.259
+  },
+  {
+    "id": "kr_002",
+    "resourceId": "7102355709945188865",
+    "lang": "ko",
+    "tenCapcut": "준호 (Junho - Nam trầm)",
+    "ten": "준호 (Junho - Nam trầm)",
+    "moTa": "Giọng nam trầm tiếng Hàn, trầm ấm, chững chạc",
+    "gioi": "nam",
+    "mau": "/audio/giong-capcut/kr_002.mp3",
+    "tuMoiGiay": 2.23,
+    "trungBinhTuMoiGiay": 2.5
+  }
+]

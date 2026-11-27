@@ -1,0 +1,33 @@
+{
+ "id": "hand_holding_paper",
+ "label": "Hai tay POV cầm tờ giấy",
+ "label_en": "POV hands holding a sheet of paper",
+ "tags": [
+  "tay",
+  "cầm giấy",
+  "nội quy",
+  "hands",
+  "paper"
+ ],
+ "props": [
+  "hand_holding_paper",
+  "paper_in_hands"
+ ],
+ "style": "cutout",
+ "image": "hand_holding_paper.png",
+ "kind": "hand_holding_paper",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "paper_insert": "rule_paper",
+  "sleeve_color": "#1f6f5c",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

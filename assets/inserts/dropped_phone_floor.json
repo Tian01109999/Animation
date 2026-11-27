@@ -1,0 +1,38 @@
+{
+ "id": "dropped_phone_floor",
+ "label": "Điện thoại rơi vỡ màn hình trên sàn gạch",
+ "label_en": "Dropped cracked phone on floor tiles",
+ "tags": [
+  "điện thoại rơi",
+  "vỡ màn hình",
+  "vỉa hè",
+  "hiện trường",
+  "dropped phone",
+  "evidence"
+ ],
+ "props": [
+  "dropped_phone",
+  "phone_on_floor",
+  "takeout_box",
+  "sneaker"
+ ],
+ "style": "cutout",
+ "image": "dropped_phone_floor.png",
+ "kind": "dropped_phone_floor",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "floor": "tiles",
+  "tile_color": "#b9b4a8",
+  "case_color": "#f2a2b8",
+  "stamp": [
+   "STEAM",
+   "HOUSE"
+  ]
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

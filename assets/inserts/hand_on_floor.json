@@ -1,0 +1,33 @@
+{
+ "id": "hand_on_floor",
+ "label": "Bàn tay trên sàn (nhìn từ trên)",
+ "label_en": "Hand on the floor (top view)",
+ "tags": [
+  "bàn tay",
+  "trên sàn",
+  "bất tỉnh",
+  "hand",
+  "floor",
+  "unconscious"
+ ],
+ "props": [
+  "hand_on_floor",
+  "body_on_floor"
+ ],
+ "style": "cutout",
+ "image": "hand_on_floor.png",
+ "kind": "hand_on_floor",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "sleeve_color": "#3a3d44",
+  "skin": "#c9926a",
+  "bg": "dark_tiles",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

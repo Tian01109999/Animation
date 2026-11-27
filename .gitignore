@@ -1,0 +1,25 @@
+# Machine state, accounts and generated work
+/runtime/
+/dist/
+/cache/
+/logs/
+/projects/
+/.vscode/
+/.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*session*.dat
+auth.json
+credentials.json
+*service*account*.json
+*.log
+*.sqlite*
+*.exe
+*.dll
+*.zip
+*.png.bak
+config.yaml
+!config.example.yaml

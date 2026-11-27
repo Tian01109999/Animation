@@ -1,0 +1,36 @@
+{
+ "id": "cold_room_alarm",
+ "label": "Bảng nhiệt độ kho lạnh báo động",
+ "label_en": "Cold-room temperature alarm panel",
+ "tags": [
+  "kho lạnh",
+  "nhiệt độ",
+  "báo động",
+  "cold room",
+  "freezer",
+  "temperature",
+  "alarm"
+ ],
+ "props": [
+  "cold_room_panel",
+  "thermometer",
+  "temperature_alarm"
+ ],
+ "style": "cutout",
+ "image": "cold_room_alarm.png",
+ "kind": "cold_room_alarm",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "COLD ROOM",
+  "value": "-16.1",
+  "unit": "°C",
+  "alarm": "ALARM",
+  "setpoint": "SET -18.0"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

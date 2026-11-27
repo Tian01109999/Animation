@@ -1,0 +1,727 @@
+{
+ "id": "chu_tu",
+ "height_px": 1000,
+ "image_scale": 3,
+ "canvas": [
+  600,
+  1012
+ ],
+ "head_box": [
+  195.6,
+  105.1,
+  404.4,
+  306.5
+ ],
+ "bones": {
+  "root": {
+   "parent": null,
+   "pivot": [
+    300.0,
+    1000
+   ]
+  },
+  "hip": {
+   "parent": "root",
+   "pivot": [
+    300.0,
+    584.75
+   ]
+  },
+  "torso": {
+   "parent": "hip",
+   "pivot": [
+    300.0,
+    553.83
+   ]
+  },
+  "neck": {
+   "parent": "torso",
+   "pivot": [
+    300.0,
+    350.63
+   ]
+  },
+  "head": {
+   "parent": "neck",
+   "pivot": [
+    300.0,
+    295.06
+   ]
+  },
+  "arm_l_up": {
+   "parent": "torso",
+   "pivot": [
+    202.46,
+    376.07
+   ]
+  },
+  "arm_l_low": {
+   "parent": "arm_l_up",
+   "pivot": [
+    193.63,
+    508.6
+   ]
+  },
+  "hand_l": {
+   "parent": "arm_l_low",
+   "pivot": [
+    188.33,
+    627.87
+   ]
+  },
+  "leg_l_up": {
+   "parent": "hip",
+   "pivot": [
+    252.29,
+    584.75
+   ]
+  },
+  "leg_l_low": {
+   "parent": "leg_l_up",
+   "pivot": [
+    251.34,
+    774.71
+   ]
+  },
+  "arm_r_up": {
+   "parent": "torso",
+   "pivot": [
+    397.54,
+    376.07
+   ]
+  },
+  "arm_r_low": {
+   "parent": "arm_r_up",
+   "pivot": [
+    406.37,
+    508.6
+   ]
+  },
+  "hand_r": {
+   "parent": "arm_r_low",
+   "pivot": [
+    411.67,
+    627.87
+   ]
+  },
+  "leg_r_up": {
+   "parent": "hip",
+   "pivot": [
+    347.71,
+    584.75
+   ]
+  },
+  "leg_r_low": {
+   "parent": "leg_r_up",
+   "pivot": [
+    348.66,
+    774.71
+   ]
+  }
+ },
+ "parts": [
+  {
+   "name": "leg_r_up",
+   "bone": "leg_r_up",
+   "image": "parts/leg_r_up.png",
+   "offset": [
+    309.0,
+    527.667
+   ]
+  },
+  {
+   "name": "leg_r_low",
+   "bone": "leg_r_low",
+   "image": "parts/leg_r_low.png",
+   "offset": [
+    317.0,
+    745.667
+   ]
+  },
+  {
+   "name": "leg_l_up",
+   "bone": "leg_l_up",
+   "image": "parts/leg_l_up.png",
+   "offset": [
+    213.667,
+    527.667
+   ]
+  },
+  {
+   "name": "leg_l_low",
+   "bone": "leg_l_low",
+   "image": "parts/leg_l_low.png",
+   "offset": [
+    180.333,
+    745.667
+   ]
+  },
+  {
+   "name": "pelvis",
+   "bone": "hip",
+   "image": "parts/pelvis.png",
+   "offset": [
+    197.667,
+    538.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "pelvis_back",
+   "bone": "hip",
+   "image": "parts/pelvis_back.png",
+   "offset": [
+    197.667,
+    538.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "neck",
+   "bone": "neck",
+   "image": "parts/neck.png",
+   "offset": [
+    275.667,
+    248.667
+   ]
+  },
+  {
+   "name": "torso",
+   "bone": "torso",
+   "image": "parts/torso.png",
+   "offset": [
+    179.667,
+    328.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "torso_back",
+   "bone": "torso",
+   "image": "parts/torso_back.png",
+   "offset": [
+    179.667,
+    332.0
+   ],
+   "view": "back"
+  },
+  {
+   "name": "head",
+   "bone": "head",
+   "image": "parts/head.png",
+   "offset": [
+    190.333,
+    115.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "face",
+   "bone": "head",
+   "image": "parts/face.png",
+   "offset": [
+    230.0,
+    150.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "eyes",
+   "bone": "head",
+   "slot": "eyes",
+   "images": {
+    "open": "parts/eyes_open.png",
+    "half": "parts/eyes_half.png",
+    "closed": "parts/eyes_closed.png",
+    "wide": "parts/eyes_wide.png",
+    "shock": "parts/eyes_shock.png",
+    "teary": "parts/eyes_teary.png",
+    "happy": "parts/eyes_happy.png",
+    "droop": "parts/eyes_droop.png",
+    "big": "parts/eyes_big.png"
+   },
+   "offset": [
+    252.667,
+    199.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "mouth",
+   "bone": "head",
+   "slot": "mouth",
+   "images": {
+    "A": "parts/mouth_A.png",
+    "B": "parts/mouth_B.png",
+    "C": "parts/mouth_C.png",
+    "D": "parts/mouth_D.png",
+    "E": "parts/mouth_E.png",
+    "F": "parts/mouth_F.png",
+    "G": "parts/mouth_G.png",
+    "H": "parts/mouth_H.png",
+    "X": "parts/mouth_X.png",
+    "flat": "parts/mouth_flat.png",
+    "smile": "parts/mouth_smile.png",
+    "frown": "parts/mouth_frown.png",
+    "wavy": "parts/mouth_wavy.png",
+    "wavy_small": "parts/mouth_wavy_small.png",
+    "o_small": "parts/mouth_o_small.png",
+    "sob": "parts/mouth_sob.png",
+    "smirk": "parts/mouth_smirk.png",
+    "grin": "parts/mouth_grin.png",
+    "shout": "parts/mouth_shout.png"
+   },
+   "offset": [
+    283.0,
+    254.333
+   ],
+   "view": "front"
+  },
+  {
+   "name": "hair_front",
+   "bone": "head",
+   "image": "parts/hair_front.png",
+   "offset": [
+    200.333,
+    128.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "brows",
+   "bone": "head",
+   "slot": "brows",
+   "images": {
+    "neutral": "parts/brows_neutral.png",
+    "angry": "parts/brows_angry.png",
+    "sad": "parts/brows_sad.png",
+    "evil": "parts/brows_evil.png",
+    "surprised": "parts/brows_surprised.png",
+    "worried_asym": "parts/brows_worried_asym.png",
+    "smirk": "parts/brows_smirk.png",
+    "low": "parts/brows_low.png"
+   },
+   "offset": [
+    253.0,
+    166.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "fx_sweat",
+   "bone": "head",
+   "slot": "fx_sweat",
+   "images": {
+    "on": "parts/fx_sweat_on.png"
+   },
+   "offset": [
+    381.0,
+    162.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_dashes",
+   "bone": "head",
+   "slot": "fx_dashes",
+   "images": {
+    "on": "parts/fx_dashes_on.png"
+   },
+   "offset": [
+    338.0,
+    75.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_tears",
+   "bone": "head",
+   "slot": "fx_tears",
+   "images": {
+    "on": "parts/fx_tears_on.png"
+   },
+   "offset": [
+    258.667,
+    231.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_vein",
+   "bone": "head",
+   "slot": "fx_vein",
+   "images": {
+    "on": "parts/fx_vein_on.png"
+   },
+   "offset": [
+    344.0,
+    153.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_flush",
+   "bone": "head",
+   "slot": "fx_flush",
+   "images": {
+    "on": "parts/fx_flush_on.png"
+   },
+   "offset": [
+    228.667,
+    233.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_eyebags_heavy",
+   "bone": "head",
+   "slot": "fx_eyebags_heavy",
+   "images": {
+    "on": "parts/fx_eyebags_heavy_on.png"
+   },
+   "offset": [
+    250.0,
+    233.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_shade",
+   "bone": "head",
+   "slot": "fx_shade",
+   "images": {
+    "on": "parts/fx_shade_on.png"
+   },
+   "offset": [
+    207.667,
+    115.667
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "head_back",
+   "bone": "head",
+   "image": "parts/head_back.png",
+   "offset": [
+    190.333,
+    115.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "hair_back_view",
+   "bone": "head",
+   "image": "parts/hair_back_view.png",
+   "offset": [
+    207.667,
+    134.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "arm_r_up",
+   "bone": "arm_r_up",
+   "image": "parts/arm_r_up.png",
+   "offset": [
+    358.333,
+    330.667
+   ]
+  },
+  {
+   "name": "arm_r_low",
+   "bone": "arm_r_low",
+   "image": "parts/arm_r_low.png",
+   "offset": [
+    382.667,
+    485.0
+   ]
+  },
+  {
+   "name": "hand_r",
+   "bone": "hand_r",
+   "slot": "hand_r",
+   "images": {
+    "open": "parts/hand_r_open.png",
+    "point": "parts/hand_r_point.png",
+    "fist": "parts/hand_r_fist.png"
+   },
+   "offset": [
+    372.0,
+    621.0
+   ]
+  },
+  {
+   "name": "arm_l_up",
+   "bone": "arm_l_up",
+   "image": "parts/arm_l_up.png",
+   "offset": [
+    162.667,
+    330.667
+   ]
+  },
+  {
+   "name": "arm_l_low",
+   "bone": "arm_l_low",
+   "image": "parts/arm_l_low.png",
+   "offset": [
+    168.333,
+    485.0
+   ]
+  },
+  {
+   "name": "hand_l",
+   "bone": "hand_l",
+   "slot": "hand_l",
+   "images": {
+    "open": "parts/hand_l_open.png",
+    "point": "parts/hand_l_point.png",
+    "fist": "parts/hand_l_fist.png"
+   },
+   "offset": [
+    157.0,
+    621.0
+   ]
+  }
+ ],
+ "expressions": {
+  "neutral": {
+   "eyes": "open",
+   "brows": "neutral",
+   "mouth": "flat",
+   "fx": []
+  },
+  "happy": {
+   "eyes": "happy",
+   "brows": "neutral",
+   "mouth": "smile",
+   "fx": [
+    "flush"
+   ]
+  },
+  "sad": {
+   "eyes": "droop",
+   "brows": "sad",
+   "mouth": "frown",
+   "fx": []
+  },
+  "angry": {
+   "eyes": "half",
+   "brows": "angry",
+   "mouth": "frown",
+   "fx": [
+    "vein"
+   ]
+  },
+  "scared": {
+   "eyes": "wide",
+   "brows": "sad",
+   "mouth": "wavy_small",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "evil": {
+   "eyes": "half",
+   "brows": "evil",
+   "mouth": "grin",
+   "fx": [
+    "shade"
+   ]
+  },
+  "surprised": {
+   "eyes": "big",
+   "brows": "surprised",
+   "mouth": "o_small",
+   "fx": []
+  },
+  "nervous": {
+   "eyes": "open",
+   "brows": "worried_asym",
+   "mouth": "wavy",
+   "fx": [
+    "dashes",
+    "sweat"
+   ]
+  },
+  "shocked": {
+   "eyes": "shock",
+   "brows": "surprised",
+   "mouth": "wavy",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "crying": {
+   "eyes": "teary",
+   "brows": "sad",
+   "mouth": "sob",
+   "fx": [
+    "tears",
+    "eyebags_heavy"
+   ]
+  },
+  "tired": {
+   "eyes": "half",
+   "brows": "low",
+   "mouth": "flat",
+   "fx": [
+    "eyebags_heavy"
+   ]
+  },
+  "smirk": {
+   "eyes": "half",
+   "brows": "smirk",
+   "mouth": "smirk",
+   "fx": []
+  }
+ },
+ "views": [
+  "front",
+  "back"
+ ],
+ "hand_prop_anchor": {
+  "bone": "hand_r",
+  "point": [
+   411.7,
+   657.9
+  ]
+ },
+ "badge_anchor": {
+  "bone": "torso",
+  "rect": [
+   322.4,
+   393.9,
+   397.5,
+   416.9
+  ]
+ },
+ "generator": {
+  "kind": "puppetgen",
+  "version": 2,
+  "params": {
+   "gender": "male",
+   "age": "old",
+   "build": "heavy",
+   "height_scale": 1.0,
+   "skin": "#e3ad86",
+   "hair_style": "bald",
+   "hair_color": "#bdb7ab",
+   "hair_highlight": null,
+   "hair_tie": null,
+   "pigtails": false,
+   "cap_color": null,
+   "brow_color": "#8f887d",
+   "outfit_type": "shirt_button",
+   "colors": {
+    "shirt": "#eeebe2",
+    "pants": "#3d3631",
+    "shoes": "#2a1f1a"
+   },
+   "neck_style": null,
+   "sleeves": null,
+   "accessories": [
+    "gold_chain_square_pendant",
+    "scar",
+    "towel_on_neck"
+   ],
+   "eye_bags": true,
+   "blush": 0.3,
+   "wrinkles": true,
+   "facial_hair": "none",
+   "lip_color": null,
+   "ghost": null,
+   "wet": false,
+   "face": "normal",
+   "vest_number": "07",
+   "eye_color": "#141016",
+   "shirt_style": null,
+   "shirt_color": null,
+   "pants_color": null,
+   "shorts": false,
+   "shoe_color": null,
+   "sandals": false,
+   "apron_color": null,
+   "dress_color": null,
+   "gold_chain": false,
+   "scar": false,
+   "glasses": false,
+   "outline": null
+  }
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "puppetgen v2",
+  "note": "Nhân vật gốc sinh bằng code; không dùng ảnh tham khảo."
+ },
+ "profile": {
+  "label": "Nam · lớn tuổi · chủ tiệm · hói · béo",
+  "gender": "male",
+  "age": "old",
+  "description": "bald, heavy, white shirt, gold chain, scar, hói, vết sẹo, chủ tiệm, old, male, shirt_button, gold_chain_square_pendant, towel_on_neck",
+  "tags": [
+   "bald",
+   "heavy",
+   "white shirt",
+   "gold chain",
+   "scar",
+   "hói",
+   "vết sẹo",
+   "chủ tiệm",
+   "old",
+   "male",
+   "shirt_button",
+   "gold_chain_square_pendant",
+   "towel_on_neck",
+   "shop_owner",
+   "gold_necklace"
+  ],
+  "style": "cutout",
+  "coverage": "full_body",
+  "actions": [
+   "idle",
+   "talk",
+   "walk",
+   "sit",
+   "point",
+   "nod",
+   "shake_head",
+   "scared"
+  ],
+  "lipsync": true,
+  "views": [
+   "front",
+   "back"
+  ],
+  "expressions": [
+   "neutral",
+   "happy",
+   "sad",
+   "angry",
+   "scared",
+   "evil",
+   "surprised",
+   "nervous",
+   "shocked",
+   "crying",
+   "tired",
+   "smirk"
+  ],
+  "hair_style": "bald",
+  "outfit": "shirt_button",
+  "name_vi": "Chú Tư (ông chủ hói, dây chuyền vàng)",
+  "roles": [
+   "chủ xe bánh bao",
+   "ông chủ quán",
+   "kẻ phản diện lớn tuổi",
+   "shop owner"
+  ],
+  "has_back_view": true
+ }
+}

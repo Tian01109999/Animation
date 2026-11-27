@@ -1,0 +1,69 @@
+{
+ "id": "phong_ngu_tro",
+ "name": "Phòng ngủ / phòng trọ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng ngủ / phòng trọ (ban đêm)",
+  "description": "Phòng ngủ / phòng trọ, ban đêm, phòng ngủ, phòng trọ, giường, màn, bedroom, ánh trăng, ban đêm, night",
+  "kind": "bedroom",
+  "tags": [
+   "phòng ngủ",
+   "phòng trọ",
+   "giường",
+   "màn",
+   "bedroom",
+   "ánh trăng",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "phong_ngu_tro"
+  ],
+  "catalog_id": "phong_ngu_tro",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Phòng trọ hẹp: giường sắt + màn, quạt đứng, tủ nhựa, cửa sổ nhỏ ánh trăng, móc quần áo, bóng đèn tuýp; tường loang."
+ },
+ "flow_prompt": "Small cramped rented room at night, iron bed with mosquito net, standing fan, plastic wardrobe, small window with moonlight, clothes hanging on hooks, fluorescent tube light off, stained walls, cool blue moonlit mood, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_ngu_tro"
+ },
+ "floor_y": 1944,
+ "slots": {
+  "bed": {
+   "x": 1536,
+   "y": 1728,
+   "scale": 0.95
+  },
+  "center": {
+   "x": 2112,
+   "y": 1944,
+   "scale": 1.0
+  },
+  "door": {
+   "x": 3149,
+   "y": 1944,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 1820,
+   "y": 600,
+   "color": "#bcd2ff"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Small cramped rented room at night, iron bed with mosquito net, standing fan, plastic wardrobe, small window with moonlight, clothes hanging on hooks, fluorescent tube light off, stained walls, cool blue moonlit mood, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "indoor": "Small cramped rented room at night, iron bed with mosquito net, standing fan, plastic wardrobe, small window with moonlight, clothes hanging on hooks, fluorescent tube light off, stained walls, cool blue moonlit mood, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

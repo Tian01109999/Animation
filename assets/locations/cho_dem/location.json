@@ -1,0 +1,97 @@
+{
+ "name": "Chợ đêm",
+ "floor_y": 1880,
+ "time_of_day": "night",
+ "slots": {
+  "far_left": {
+   "x": 380,
+   "y": 1795,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 980,
+   "y": 1820,
+   "scale": 1.06
+  },
+  "center": {
+   "x": 1640,
+   "y": 1825,
+   "scale": 1.06
+  },
+  "right": {
+   "x": 3050,
+   "y": 1820,
+   "scale": 1.06
+  },
+  "far_right": {
+   "x": 3480,
+   "y": 1795,
+   "scale": 1.0
+  },
+  "counter": {
+   "x": 2420,
+   "y": 1700,
+   "scale": 0.95,
+   "clip_bottom": 1450
+  }
+ },
+ "signs": [
+  {
+   "text": "STEAMED BUNS",
+   "box": [
+    1470,
+    435,
+    2680,
+    605
+   ],
+   "style": "red_board"
+  },
+  {
+   "text": "HOT BUNS",
+   "box": [
+    2110,
+    1655,
+    2690,
+    1735
+   ],
+   "style": "cabinet"
+  },
+  {
+   "text": "GOLD SHOP",
+   "box": [
+    335,
+    905,
+    925,
+    950
+   ],
+   "style": "gold_board"
+  }
+ ],
+ "lights": [
+  {
+   "x": 2100,
+   "y": 1100,
+   "color": "#ffae4a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  },
+  "near": {
+   "image": "bg_near.png",
+   "parallax": 1.15
+  }
+ },
+ "id": "cho_dem",
+ "bg": "bg.png",
+ "size": [
+  3840,
+  2160
+ ]
+}

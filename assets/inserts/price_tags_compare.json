@@ -1,0 +1,41 @@
+{
+ "id": "price_tags_compare",
+ "label": "Hai thẻ giá – cùng nét chữ",
+ "label_en": "Pair of price tags - same handwriting",
+ "tags": [
+  "thẻ giá",
+  "chữ viết tay",
+  "so sánh",
+  "price tag",
+  "handwriting",
+  "compare"
+ ],
+ "props": [
+  "price_tag",
+  "price_tags",
+  "handwriting_compare"
+ ],
+ "style": "cutout",
+ "image": "price_tags_compare.png",
+ "kind": "price_tags_compare",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "left": {
+   "word": "SPECIAL",
+   "number": "1990",
+   "caption": "basement wall"
+  },
+  "right": {
+   "word": "SPECIAL",
+   "number": "10.-",
+   "caption": "shop sign"
+  },
+  "label": "SAME HANDWRITING"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

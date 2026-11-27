@@ -1,0 +1,45 @@
+{
+ "id": "rule_paper",
+ "label": "Tờ nội quy ca đêm (giấy vở)",
+ "label_en": "Night shift rules (notebook paper)",
+ "tags": [
+  "nội quy",
+  "luật",
+  "giấy",
+  "ca đêm",
+  "rules",
+  "paper",
+  "night shift"
+ ],
+ "props": [
+  "rule_paper",
+  "rules",
+  "paper",
+  "notebook_paper"
+ ],
+ "style": "cutout",
+ "image": "rule_paper.png",
+ "kind": "rule_paper",
+ "camera_default": "pan_down_slow",
+ "text_language": "en",
+ "params": {
+  "title": "NIGHT SHIFT RULES",
+  "note": "(read carefully before your shift)",
+  "rules": [
+   "Do not open the door after 3 AM.",
+   "Never answer anyone calling your name from outside the glass.",
+   "If the clock runs backwards, *don't look at the door*."
+  ],
+  "red_rule_index": 2,
+  "redact_last": true,
+  "coffee_stain": true,
+  "bleed_through": false,
+  "blurred": false,
+  "bg": "dark_vignette"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

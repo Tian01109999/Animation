@@ -1,0 +1,47 @@
+{
+ "id": "cash_drawer",
+ "label": "Ngăn kéo tiền (khay thu ngân)",
+ "label_en": "Cash drawer (register tray)",
+ "tags": [
+  "ngăn kéo tiền",
+  "thu ngân",
+  "tiền",
+  "xu",
+  "cash",
+  "register",
+  "money"
+ ],
+ "props": [
+  "cash_drawer",
+  "cash_register",
+  "money"
+ ],
+ "style": "cutout",
+ "image": "cash_drawer.png",
+ "kind": "cash_drawer",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "note_slots": 4,
+  "note_colors": [
+   "#7d5aa6",
+   "#3a78c2",
+   "#c8504a",
+   "#4fa35a"
+  ],
+  "denominations": [
+   "100",
+   "50",
+   "20",
+   "10"
+  ],
+  "coin_wells": 4,
+  "sleeve_color": "#1f6f5c",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

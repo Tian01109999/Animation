@@ -1,0 +1,40 @@
+{
+ "id": "soup_bowl_spoon",
+ "label": "Bát canh thịt viên + tay cầm thìa",
+ "label_en": "Bowl of soup with spoon",
+ "tags": [
+  "bát canh",
+  "thịt viên",
+  "cái thìa",
+  "bữa ăn",
+  "soup",
+  "bowl",
+  "spoon",
+  "meatballs"
+ ],
+ "props": [
+  "soup_bowl",
+  "soup",
+  "spoon",
+  "meatball_soup"
+ ],
+ "style": "cutout",
+ "image": "soup_bowl_spoon.png",
+ "kind": "soup_bowl_spoon",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "meatballs": 6,
+  "steam": true,
+  "table": "#c4956a",
+  "rim_color": "#3a78c2",
+  "sleeve_color": "#1f6f5c",
+  "skin": "#c9926a",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

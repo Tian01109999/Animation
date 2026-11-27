@@ -1,0 +1,60 @@
+{
+ "id": "id_wallet_desk",
+ "label": "Ví thẻ ngành đẩy qua bàn",
+ "label_en": "ID wallet pushed across a desk",
+ "tags": [
+  "thẻ ngành",
+  "huy hiệu",
+  "cảnh sát",
+  "đẩy qua bàn",
+  "id wallet",
+  "badge",
+  "detective",
+  "police"
+ ],
+ "props": [
+  "id_wallet",
+  "police_badge",
+  "badge",
+  "id_card"
+ ],
+ "style": "cutout",
+ "image": "id_wallet_desk.png",
+ "kind": "id_wallet_desk",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "card_title": "ID CARD",
+  "sheet_title": "CASE REPORT",
+  "rows": [
+   [
+    "NAME",
+    "K. MORAN"
+   ],
+   [
+    "RANK",
+    "DETECTIVE"
+   ],
+   [
+    "UNIT",
+    "INVESTIGATIONS"
+   ],
+   [
+    "NO.",
+    "0417"
+   ]
+  ],
+  "photo": null,
+  "rotation": -6,
+  "felt": "#2f6a4a",
+  "motion_lines": false,
+  "sleeve_color": "#a08a5a",
+  "skin": "#b9825a",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

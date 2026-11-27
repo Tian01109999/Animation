@@ -1,0 +1,55 @@
+{
+ "id": "depth_diagram",
+ "label": "Sơ đồ mặt cắt độ sâu (-3 m dưới đất)",
+ "label_en": "Cross-section depth diagram (-3 m underground)",
+ "tags": [
+  "sơ đồ",
+  "mặt cắt",
+  "độ sâu",
+  "tầng hầm",
+  "diagram",
+  "cross section",
+  "depth",
+  "underground"
+ ],
+ "props": [
+  "depth_diagram",
+  "cross_section",
+  "basement_diagram"
+ ],
+ "style": "cutout",
+ "image": "depth_diagram.png",
+ "kind": "depth_diagram",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "ground_label": "STREET LEVEL 0 m",
+  "boxes": [
+   [
+    "STOREFRONT",
+    "#4fc3e8"
+   ],
+   [
+    "KITCHEN",
+    "#f3c94e"
+   ],
+   [
+    "COLD ROOM",
+    "#8fb8ff"
+   ]
+  ],
+  "basement_label": "BASEMENT",
+  "depth": "-3 m",
+  "caption": "Basement 4 x 6 m · \"filled 1997\"",
+  "card": {
+   "label": "ALTITUDE",
+   "value": "-3 m",
+   "sub": "UNDERGROUND"
+  }
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

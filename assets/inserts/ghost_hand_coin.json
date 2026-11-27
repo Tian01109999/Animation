@@ -1,0 +1,33 @@
+{
+ "id": "ghost_hand_coin",
+ "label": "Tay ma đặt xu lên quầy",
+ "label_en": "Ghost hand placing a coin on the counter",
+ "tags": [
+  "tay ma",
+  "đồng xu",
+  "quầy",
+  "ướt",
+  "ghost hand",
+  "coin",
+  "counter"
+ ],
+ "props": [
+  "ghost_hand_coin",
+  "ghost_coin"
+ ],
+ "style": "cutout",
+ "image": "ghost_hand_coin.png",
+ "kind": "ghost_hand_coin",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "ghost_skin": "#c9ccd6",
+  "drips": true,
+  "puddle": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "id": "snack_bag",
+ "label": "Gói snack",
+ "label_en": "Snack bag",
+ "tags": [
+  "snack",
+  "bim bim",
+  "đồ ăn vặt",
+  "chips"
+ ],
+ "props": [
+  "snack",
+  "snack_bag",
+  "chips"
+ ],
+ "style": "cutout",
+ "image": "snack_bag.png",
+ "kind": "snack_bag",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "color": "#d8423a",
+  "name": "CRUNCHY",
+  "price": "$1.50",
+  "flavor": "spicy shrimp",
+  "bg": "counter"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

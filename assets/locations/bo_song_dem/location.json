@@ -1,0 +1,80 @@
+{
+ "id": "bo_song_dem",
+ "name": "Bờ sông / bến nước ban đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Bờ sông / bến nước ban đêm (ban đêm)",
+  "description": "Bờ sông / bến nước ban đêm, ban đêm, bờ sông, bến nước, sông, xuồng, river, dừa nước, trăng, ban đêm, night",
+  "kind": "riverside",
+  "tags": [
+   "bờ sông",
+   "bến nước",
+   "sông",
+   "xuồng",
+   "river",
+   "dừa nước",
+   "trăng",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "bo_song_dem"
+  ],
+  "catalog_id": "bo_song_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Bến gỗ nhô ra sông, xuồng buộc, bụi dừa nước, trăng phản chiếu, sương mặt nước, lục bình trôi."
+ },
+ "flow_prompt": "Wooden riverside pier at night in the Mekong delta, small boat tied up, nipa palms, full moon reflected on dark water, mist over the river, floating water hyacinth, quiet and eerie, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "bo_song_dem"
+ },
+ "floor_y": 1685,
+ "slots": {
+  "dock": {
+   "x": 1728,
+   "y": 1685,
+   "scale": 0.7
+  },
+  "left": {
+   "x": 1152,
+   "y": 1728,
+   "scale": 0.7
+  },
+  "center": {
+   "x": 1728,
+   "y": 1685,
+   "scale": 0.7
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2700,
+   "y": 300,
+   "color": "#f1ead2"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Wooden riverside pier at night in the Mekong delta, small boat tied up, nipa palms, full moon reflected on dark water, mist over the river, floating water hyacinth, quiet and eerie, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "dusk": "Wooden riverside pier at night in the Mekong delta, small boat tied up, nipa palms, full moon reflected on dark water, mist over the river, floating water hyacinth, quiet and eerie, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

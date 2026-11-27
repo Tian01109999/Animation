@@ -1,0 +1,94 @@
+{
+ "id": "toa_an",
+ "name": "Mặt tiền toà án",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Mặt tiền toà án / Courthouse facade (ban ngày / day)",
+  "description": "Mặt tiền toà án, ban ngày. Low frontal view of a courthouse: huge orange tiled pediment roof, a navy band with the word COURT, a long colonnade of cream columns with dark arched windows, wide front steps, lamp posts, trees at the edges, blue sky with soft clouds; no flag (day). toà án, mặt tiền, hàng cột, bậc thềm, court, courthouse, government building, toàn cảnh, bãi đỗ, ban ngày, day",
+  "kind": "courthouse_exterior",
+  "tags": [
+   "toà án",
+   "mặt tiền",
+   "hàng cột",
+   "bậc thềm",
+   "court",
+   "courthouse",
+   "government building",
+   "toàn cảnh",
+   "bãi đỗ",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "toa_an"
+  ],
+  "catalog_id": "toa_an",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Nhìn thẳng thấp: mái ngói cam lớn có đầu hồi, dải navy chữ COURT (signs), hàng cột kem + cửa vòm tối, bậc thềm rộng, cột đèn 2 bên, cây hai mép, trời xanh mây nhẹ (far). KHÔNG cờ.",
+  "label_en": "Courthouse facade (day)",
+  "description_en": "Low frontal view of a courthouse: huge orange tiled pediment roof, a navy band with the word COURT, a long colonnade of cream columns with dark arched windows, wide front steps, lamp posts, trees at the edges, blue sky with soft clouds; no flag"
+ },
+ "flow_prompt": "Courthouse facade, low frontal view, huge orange tiled pediment roof, dark navy blank sign band, long colonnade of cream columns with dark arched windows, wide front steps, trees at the edges, blue sky with soft clouds, no flag, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "toa_an"
+ },
+ "floor_y": 2010,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2010,
+   "scale": 0.88
+  },
+  "left": {
+   "x": 1150,
+   "y": 2010,
+   "scale": 0.88
+  },
+  "right": {
+   "x": 2690,
+   "y": 2010,
+   "scale": 0.88
+  },
+  "top_steps": {
+   "x": 1920,
+   "y": 1550,
+   "scale": 0.55
+  }
+ },
+ "signs": [
+  {
+   "text": "COURT",
+   "box": [
+    1520,
+    552,
+    2320,
+    648
+   ],
+   "style": "gold_board"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "day": "Courthouse facade, low frontal view, huge orange tiled pediment roof, dark navy blank sign band, long colonnade of cream columns with dark arched windows, wide front steps, trees at the edges, blue sky with soft clouds, no flag, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "COURT"
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "id": "job_ad_card",
+ "label": "Tin tuyển dụng",
+ "label_en": "Job ad",
+ "tags": [
+  "tuyển dụng",
+  "việc làm",
+  "ca đêm",
+  "job ad",
+  "hiring"
+ ],
+ "props": [
+  "job_ad",
+  "job_ad_card",
+  "flyer_job"
+ ],
+ "style": "cutout",
+ "image": "job_ad_card.png",
+ "kind": "job_ad_card",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "shop": "24H MART",
+  "title": "NIGHT SHIFT CLERK WANTED",
+  "hours": "22:00 – 06:00",
+  "salary": "$1,500",
+  "footnote": "*Store rules must be followed strictly",
+  "salary_note": "/ month",
+  "bg": "blur_location"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

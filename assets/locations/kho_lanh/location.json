@@ -1,0 +1,91 @@
+{
+ "id": "kho_lanh",
+ "name": "Bên trong kho lạnh",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Bên trong kho lạnh / Walk-in cold room interior (trong nhà đèn sáng / interior)",
+  "description": "Bên trong kho lạnh, trong nhà đèn sáng. One-point view down a frosty steel walk-in freezer: wire shelving on both sides with abandoned bags, backpacks, helmets and shoes, empty meat hooks on ceiling rails, a fluorescent tube, an evaporator unit with icicles, a -18°C panel, floor drain, frost and snow specks (interior). kho lạnh, kho đông, tủ đông, băng giá, đồ thất lạc, cold room, walk-in freezer, frost, trong nhà đèn sáng, indoor",
+  "kind": "cold_room_interior",
+  "tags": [
+   "kho lạnh",
+   "kho đông",
+   "tủ đông",
+   "băng giá",
+   "đồ thất lạc",
+   "cold room",
+   "walk-in freezer",
+   "frost",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "kho_lanh"
+  ],
+  "catalog_id": "kho_lanh",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Phối cảnh 1 điểm tụ: vách inox phủ băng, kệ lưới 2 bên chứa túi xách/ba lô/mũ bảo hiểm/giày (đồ cá nhân chung chung), ray móc treo trống trên trần, đèn tuýp, dàn lạnh có băng rủ, bảng -18°C (chữ nướng), rãnh thoát nước, đốm sương giá.",
+  "label_en": "Walk-in cold room interior (interior)",
+  "description_en": "One-point view down a frosty steel walk-in freezer: wire shelving on both sides with abandoned bags, backpacks, helmets and shoes, empty meat hooks on ceiling rails, a fluorescent tube, an evaporator unit with icicles, a -18°C panel, floor drain, frost and snow specks",
+  "baked_text": [
+   "-18°C"
+  ]
+ },
+ "flow_prompt": "Inside a frosty walk-in freezer in one-point perspective, icy steel wall panels, wire shelving on both sides holding abandoned handbags, backpacks, a helmet and shoes, empty meat hooks on ceiling rails, fluorescent tube, evaporator fan unit with icicles, floor drain, frost specks, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "kho_lanh"
+ },
+ "floor_y": 1780,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1780,
+   "scale": 1.109
+  },
+  "left": {
+   "x": 1645,
+   "y": 1780,
+   "scale": 1.109
+  },
+  "right": {
+   "x": 2195,
+   "y": 1780,
+   "scale": 1.109
+  },
+  "far": {
+   "x": 1920,
+   "y": 1416,
+   "scale": 0.605
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "-18°C",
+   "box": [
+    2132,
+    979,
+    2228,
+    1015
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920.0,
+   "y": 429.9999999999999,
+   "color": "#eef8ff"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Inside a frosty walk-in freezer in one-point perspective, icy steel wall panels, wire shelving on both sides holding abandoned handbags, backpacks, a helmet and shoes, empty meat hooks on ceiling rails, fluorescent tube, evaporator fan unit with icicles, floor drain, frost specks, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,129 @@
+{
+ "id": "phong_icu",
+ "name": "Phòng hồi sức ICU",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng hồi sức ICU / ICU hospital room (ban đêm / night)",
+  "description": "Phòng hồi sức ICU, ban đêm. Hospital ICU room: bed facing the camera with a striped blanket, wall vital-signs monitor (HR 72, SpO2 97, BP 118/76), ventilator with a waveform, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door marked ICU 4, visitor chair (night). bệnh viện, hồi sức, icu, giường bệnh, máy thở, monitor, hospital room, ban đêm, night",
+  "kind": "hospital_icu",
+  "tags": [
+   "bệnh viện",
+   "hồi sức",
+   "icu",
+   "giường bệnh",
+   "máy thở",
+   "monitor",
+   "hospital room",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "phong_icu"
+  ],
+  "catalog_id": "phong_icu",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: giường quay về camera, chăn sọc xanh, monitor trên tường (HR 72 / SpO2 97 / BP 118/76 nướng tiếng Anh), máy thở có sóng sin, thanh khí y tế ổ màu, cột truyền dịch, cửa sổ đêm thấy phố, cửa kính ICU 4 (signs), ghế thăm bệnh.",
+  "label_en": "ICU hospital room (night)",
+  "description_en": "Hospital ICU room: bed facing the camera with a striped blanket, wall vital-signs monitor (HR 72, SpO2 97, BP 118/76), ventilator with a waveform, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door marked ICU 4, visitor chair",
+  "baked_text": [
+   "HR 72",
+   "SpO2 97",
+   "BP 118/76"
+  ]
+ },
+ "flow_prompt": "ICU hospital room at night, hospital bed facing the camera with a striped blanket, vital signs monitor on the wall with ECG traces, ventilator unit, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door, visitor chair, pale mint walls, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_icu"
+ },
+ "floor_y": 2052,
+ "slots": {
+  "bed": {
+   "x": 1920,
+   "y": 1600,
+   "scale": 0.8,
+   "clip_bottom": 1400
+  },
+  "bedside_left": {
+   "x": 845,
+   "y": 1987,
+   "scale": 1.0
+  },
+  "bedside_right": {
+   "x": 2726,
+   "y": 1987,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 2052,
+   "scale": 1.05
+  },
+  "door": {
+   "x": 499,
+   "y": 1512,
+   "scale": 0.82
+  }
+ },
+ "signs": [
+  {
+   "text": "ICU 4",
+   "box": [
+    270,
+    470,
+    700,
+    580
+   ],
+   "style": "white_board"
+  }
+ ],
+ "baked_signs": [
+  {
+   "text": "HR 72",
+   "box": [
+    1451,
+    437,
+    1599,
+    493
+   ]
+  },
+  {
+   "text": "SpO2 97",
+   "box": [
+    1440,
+    537,
+    1610,
+    583
+   ]
+  },
+  {
+   "text": "BP 118/76",
+   "box": [
+    1433,
+    631,
+    1617,
+    669
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1350.0,
+   "y": 560.0,
+   "color": "#3ad86a"
+  }
+ ],
+ "flow_prompts": {
+  "night": "ICU hospital room at night, hospital bed facing the camera with a striped blanket, vital signs monitor on the wall with ECG traces, ventilator unit, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door, visitor chair, pale mint walls, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "ICU 4"
+ ]
+}

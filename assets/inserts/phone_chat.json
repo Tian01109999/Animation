@@ -1,0 +1,49 @@
+{
+ "id": "phone_chat",
+ "label": "Điện thoại – màn hình chat",
+ "label_en": "Phone - chat screen",
+ "tags": [
+  "điện thoại",
+  "tin nhắn",
+  "chat",
+  "phone",
+  "message",
+  "text"
+ ],
+ "props": [
+  "phone",
+  "smartphone",
+  "phone_chat",
+  "text_message"
+ ],
+ "style": "cutout",
+ "image": "phone_chat.png",
+ "kind": "phone_chat",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "03:12",
+  "contact": "Minh",
+  "status": "online",
+  "messages": [
+   {
+    "from": "them",
+    "text": "Open the door for me"
+   },
+   {
+    "from": "me",
+    "text": "Where are you?"
+   }
+  ],
+  "theme": "dark",
+  "sleeve_color": "#1f6f5c",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

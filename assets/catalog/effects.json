@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "doc": "Hiệu ứng theo shot (Shot.effects), chuyển cảnh (Shot.transition) và hiệu ứng cục bộ gắn tài sản. Tham số mặc định theo khung 1920x1080 (px nhân theo tỉ lệ khi khác). stage: nơi áp trong compositor — 'pre_chars' (lên nền), 'post_chars' (sau nhân vật, trước vignette), 'post_grade' (cả khung, trước overlay chữ), 'frame' (biến đổi toàn khung). Xem docs/STYLE_GUIDE.md §10.",
+  "shot_effects": {
+    "rain": {"stage": "post_chars", "params": {"streaks": 300, "angle_deg": 78, "length_px": [18, 42], "alpha": 0.25, "speed_px_s": 1400, "drops": 60, "darken": 0.08, "seed_by": "shot_id"}},
+    "fog": {"stage": "post_chars", "params": {"layers": 3, "alpha": [0.15, 0.35], "speed_px_s": [10, 20], "height": "bottom_heavy", "color": "#dfe6ee", "seed_by": "shot_id"}},
+    "cctv": {"stage": "post_grade", "params": {"desaturate": 0.9, "tint": "#9aa8a4", "tint_amount": 0.25, "scanline_px": 2, "scanline_alpha": 0.08, "noise": 0.06, "fisheye_k": 0.08, "vignette": 0.9, "chars_low_detail": true}},
+    "flash": {"stage": "post_grade", "params": {"at": 0.0, "dur": 0.25, "peak_alpha": 0.9, "color": "#ffffff"}, "notes": "at = giây tính từ đầu shot"},
+    "fade_white": {"stage": "post_grade", "params": {"dur": 0.6, "where": "end", "bloom": true, "color": "#ffffff"}},
+    "fade_black": {"stage": "post_grade", "params": {"dur": 0.5, "where": "end", "color": "#000000"}},
+    "blur_in": {"stage": "frame", "params": {"dur": 0.8, "sigma_from": 18, "sigma_to": 0}},
+    "glow": {"stage": "post_grade", "params": {"threshold": 0.8, "sigma": 12, "alpha": 0.5, "mode": "screen"}},
+    "shake_light": {"stage": "frame", "params": {"amp_px": 4, "freq_hz": 12, "seed_by": "shot_id"}}
+  },
+  "transitions": {
+    "cut": {"dur": 0.0},
+    "fade": {"dur": 0.4, "via": "#000000", "notes": "nửa cuối shot trước tối dần + nửa đầu shot này sáng dần; v1 có thể chỉ fade-in đầu shot này"},
+    "blur": {"dur": 0.5, "sigma": 18, "notes": "v1: blur-in đầu shot này"},
+    "white": {"dur": 0.3, "via": "#ffffff"}
+  },
+  "always_on": {
+    "vignette": {"strength": 0.78, "night_strength": 0.86},
+    "grain": {"amount": 0.035, "frames": 6}
+  },
+  "local_fx": {
+    "sweat_drop": {"owner": "puppet", "color": "#a9c4dc", "size_head": 0.06},
+    "stress_dashes": {"owner": "puppet", "color": "#b9d3e6", "count": 3},
+    "tears": {"owner": "puppet", "color": "#cfe6f5", "alpha": 0.8, "animate_drops": true},
+    "vein": {"owner": "puppet", "color": "#d0302a"},
+    "ghost_drips": {"owner": "puppet", "color": "#9fc3dd", "rate_per_s": 3},
+    "frost": {"owner": "puppet", "color": "#e6f1f8", "sparkles": true},
+    "shock_lines": {"owner": "insert", "color": "#ffffff", "count": 14},
+    "ice_shatter": {"owner": "effects", "shards": 24, "alpha": 0.6, "dur": 0.6},
+    "handprint_glass": {"owner": "insert", "color": "#ffffff", "alpha": 0.35, "drips": true},
+    "sound_waves": {"owner": "insert", "arcs": 3, "period_s": 0.8},
+    "impact_star_sfx_text": {"owner": "overlays", "text_color": "#ffffff", "shadow": "#7a7a7a", "rotation_deg": -8},
+    "strike_through": {"owner": "insert", "color": "#c8352e", "dur": 0.6},
+    "stars_twinkle": {"owner": "location", "count": 120},
+    "light_cone": {"owner": "location", "alpha": 0.18},
+    "glass_streaks": {"owner": "location", "alpha": [0.12, 0.2], "count": 3}
+  }
+}

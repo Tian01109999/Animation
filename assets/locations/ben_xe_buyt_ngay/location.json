@@ -1,0 +1,99 @@
+{
+ "id": "ben_xe_buyt_ngay",
+ "name": "Trạm xe buýt phố (ban ngày)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Trạm xe buýt phố (ban ngày) (ban ngày)",
+  "description": "Trạm xe buýt phố (ban ngày), ban ngày, trạm xe buýt, bus stop, phố, vỉa hè, nhà phố, ban ngày, day",
+  "kind": "bus_stop_day",
+  "tags": [
+   "trạm xe buýt",
+   "bus stop",
+   "phố",
+   "vỉa hè",
+   "nhà phố",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "ben_xe_buyt_ngay"
+  ],
+  "catalog_id": "ben_xe_buyt_ngay",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Lớp ngang: dãy nhà phố pastel có mái hiên sọc, cây tròn, cột điện; đường nhựa vạch giữa vàng; bó vỉa sơn đen trắng; vỉa hè gạch be có lá rụng; mái chờ xanh cong, bảng 'TRẠM XE BUÝT', ô số tuyến xanh, ghế kim loại, hộp quảng cáo; thùng rác xanh."
+ },
+ "flow_prompt": "Flat side view of a city bus stop on a hazy day, blue curved shelter roof, metal bench, empty advertising lightbox, row of pastel Vietnamese shophouses with striped awnings behind, round green trees, utility poles with sagging wires, asphalt road with yellow dashed line, beige tiled sidewalk with fallen leaves, green trash bin, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "ben_xe_buyt_ngay"
+ },
+ "floor_y": 1944,
+ "slots": {
+  "left": {
+   "x": 960,
+   "y": 1944,
+   "scale": 0.8
+  },
+  "center": {
+   "x": 1920,
+   "y": 1944,
+   "scale": 0.8
+  },
+  "right": {
+   "x": 2765,
+   "y": 1944,
+   "scale": 0.8
+  },
+  "bench": {
+   "x": 2381,
+   "y": 1901,
+   "scale": 0.8
+  }
+ },
+ "signs": [
+  {
+   "text": "BUS STOP",
+   "box": [
+    2310,
+    956,
+    2970,
+    1012
+   ],
+   "style": "plain"
+  },
+  {
+   "text": "12",
+   "box": [
+    1710,
+    895,
+    1906,
+    985
+   ],
+   "style": "plain"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.8
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "day": "Flat side view of a city bus stop on a hazy day, blue curved shelter roof, metal bench, empty advertising lightbox, row of pastel Vietnamese shophouses with striped awnings behind, round green trees, utility poles with sagging wires, asphalt road with yellow dashed line, beige tiled sidewalk with fallen leaves, green trash bin, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "BUS STOP",
+  "12"
+ ]
+}

@@ -1,0 +1,7 @@
+image_provider: library
+tts: {engine: capcut, narrator_voice: BV075_streaming, default_male: BV075_streaming,
+  default_female: BV075_streaming, rate: +20%, language: vi, use_character_voices: false}
+render: {width: 1920, height: 1080, fps: 30, encoder: h264_nvenc, watermark: StoryToon}
+script: {provider: chatgpt}
+library: {style: cutout}
+app: {default_project: demo_portable}

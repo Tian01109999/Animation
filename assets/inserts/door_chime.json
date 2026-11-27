@@ -1,0 +1,32 @@
+{
+ "id": "door_chime",
+ "label": "Chuông cửa / loa báo khách",
+ "label_en": "Door chime / customer alert speaker",
+ "tags": [
+  "chuông cửa",
+  "báo khách",
+  "tiếng chuông",
+  "door chime",
+  "bell"
+ ],
+ "props": [
+  "door_chime",
+  "doorbell",
+  "bell"
+ ],
+ "style": "cutout",
+ "image": "door_chime.png",
+ "kind": "door_chime",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "led": "#d0302a",
+  "waves": 3,
+  "bg": "dark_vignette"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

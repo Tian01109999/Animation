@@ -1,0 +1,38 @@
+{
+ "id": "missing_poster",
+ "label": "Tờ tìm người mất tích",
+ "label_en": "Missing person poster",
+ "tags": [
+  "tìm người",
+  "mất tích",
+  "tờ rơi",
+  "poster",
+  "missing"
+ ],
+ "props": [
+  "missing_poster",
+  "poster",
+  "flyer"
+ ],
+ "style": "cutout",
+ "image": "missing_poster.png",
+ "kind": "missing_poster",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "header": "MISSING PERSON",
+  "name": "BINH TRAN",
+  "age": "Age 22",
+  "desc": "Disappeared during a night shift",
+  "datetime": "03:00 · AUG 14",
+  "phone": "555-0142",
+  "photo": "archetype:nam_tre_toc_xoan_kinh",
+  "variant": "clean",
+  "bg": "blur_location"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "id": "cua_hang_quay_thu_ngan__day",
+ "name": "Quầy thu ngân (nhìn từ phía khách)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Quầy thu ngân (nhìn từ phía khách) (ban ngày)",
+  "description": "Quầy thu ngân (nhìn từ phía khách), ban ngày, cửa hàng, tạp hoá, cửa hàng tiện lợi, 24h, shop, quầy, thu ngân, ban ngày, day",
+  "kind": "store_counter",
+  "tags": [
+   "cửa hàng",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "quầy",
+   "thu ngân",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "cua_hang_quay_thu_ngan",
+   "cua_hang_quay_thu_ngan__day"
+  ],
+  "catalog_id": "cua_hang_quay_thu_ngan",
+  "variant": "day",
+  "style": "cutout"
+ },
+ "flow_prompt": "Front view of a convenience store checkout counter at night, long white countertop with dark green front panel, glass hot-dog warmer with orange heating rods, small POS terminal, steamed bun warmer cabinet, small CCTV monitor, large glass windows behind showing dark night sky with stars and mountain silhouettes, diagonal glass reflections, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_quay_thu_ngan"
+ },
+ "floor_y": 1728,
+ "slots": {
+  "counter": {
+   "x": 1920,
+   "y": 1728,
+   "scale": 1.0,
+   "clip_bottom": 1340
+  },
+  "counter_left": {
+   "x": 1382,
+   "y": 1728,
+   "scale": 1.0,
+   "clip_bottom": 1340
+  },
+  "center": {
+   "x": 1920,
+   "y": 1728,
+   "scale": 1.0,
+   "clip_bottom": 1340
+  },
+  "customer_left": {
+   "x": 461,
+   "y": 2117,
+   "scale": 1.15
+  },
+  "customer_right": {
+   "x": 3302,
+   "y": 2117,
+   "scale": 1.15
+  }
+ },
+ "signs": [
+  {
+   "text": "MINI MART 24H",
+   "box": [
+    630,
+    1510,
+    1450,
+    1690
+   ],
+   "style": "white_board"
+  },
+  {
+   "text": "LOTTERY",
+   "box": [
+    2770,
+    1532,
+    3230,
+    1668
+   ],
+   "style": "plain"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ }
+}

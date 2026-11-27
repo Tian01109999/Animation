@@ -1,0 +1,90 @@
+{
+ "id": "tiem_tap_hoa_dem",
+ "name": "Tiệm tạp hoá nhỏ + cửa cuốn (đêm)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Tiệm tạp hoá nhỏ + cửa cuốn (đêm) / Small snack shop front with shutters (night) (ban đêm / night)",
+  "description": "Tiệm tạp hoá nhỏ + cửa cuốn (đêm), ban đêm. Frontal view of a small open snack and grocery shop at night between two closed roll-down shutters: cream signboard SNACKS & DRINKS, slatted awning, shelves packed with boxes and jars, a small counter with a monitor, an upright drinks fridge, hanging bulbs, tiled sidewalk and dark road (night). tiệm tạp hoá, cửa cuốn, quầy, đồ ăn vặt, snack shop, grocery, shop front, ban đêm, night",
+  "kind": "snack_shop_front",
+  "tags": [
+   "tiệm tạp hoá",
+   "cửa cuốn",
+   "quầy",
+   "đồ ăn vặt",
+   "snack shop",
+   "grocery",
+   "shop front",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "tiem_tap_hoa_dem"
+  ],
+  "catalog_id": "tiem_tap_hoa_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Mặt đứng: biển kem SNACKS & DRINKS (signs), mái lá sách sọc kem-ô liu, lòng tiệm sáng ấm: kệ đầy hộp/lọ, quầy nhỏ có màn hình, tủ nước đứng, dây snack treo, bóng đèn treo; cửa cuốn đóng 2 bên; vỉa hè gạch + đường tối. Hợp làm hồi tưởng (thêm effect sepia).",
+  "label_en": "Small snack shop front with shutters (night) (night)",
+  "description_en": "Frontal view of a small open snack and grocery shop at night between two closed roll-down shutters: cream signboard SNACKS & DRINKS, slatted awning, shelves packed with boxes and jars, a small counter with a monitor, an upright drinks fridge, hanging bulbs, tiled sidewalk and dark road"
+ },
+ "flow_prompt": "Small grocery and snack shop front at night, frontal view, blank cream signboard, slatted awning, shelves packed with boxes and jars, small counter with a monitor, upright drinks fridge, hanging bulbs, closed roll-down shutters on both sides, tiled sidewalk, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tiem_tap_hoa_dem"
+ },
+ "floor_y": 2030,
+ "slots": {
+  "shopkeeper": {
+   "x": 1260,
+   "y": 1790,
+   "scale": 0.92,
+   "clip_bottom": 1420
+  },
+  "left": {
+   "x": 614,
+   "y": 2030,
+   "scale": 1.05
+  },
+  "center": {
+   "x": 1920,
+   "y": 2030,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 3226,
+   "y": 2030,
+   "scale": 1.05
+  }
+ },
+ "signs": [
+  {
+   "text": "SNACKS & DRINKS",
+   "box": [
+    900,
+    480,
+    2940,
+    690
+   ],
+   "style": "white_board"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920,
+   "y": 980,
+   "color": "#ffe0a0"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Small grocery and snack shop front at night, frontal view, blank cream signboard, slatted awning, shelves packed with boxes and jars, small counter with a monitor, upright drinks fridge, hanging bulbs, closed roll-down shutters on both sides, tiled sidewalk, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "SNACKS & DRINKS"
+ ]
+}

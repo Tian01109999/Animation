@@ -1,0 +1,41 @@
+{
+ "id": "phone_draft_cracked",
+ "label": "Điện thoại – tin nháp chưa gửi, màn hình nứt",
+ "label_en": "Phone - unsent draft, cracked glass",
+ "tags": [
+  "điện thoại",
+  "tin nháp",
+  "chưa gửi",
+  "màn hình vỡ",
+  "draft",
+  "unsent",
+  "cracked screen"
+ ],
+ "props": [
+  "phone_draft",
+  "unsent_message",
+  "cracked_phone_screen"
+ ],
+ "style": "cutout",
+ "image": "phone_draft_cracked.png",
+ "kind": "phone_draft_cracked",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "07:12",
+  "caption": "Draft · not sent · 07:12",
+  "draft": "I know where they are.",
+  "cracked": true,
+  "crack_x": 0.66,
+  "crack_y": 0.3,
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

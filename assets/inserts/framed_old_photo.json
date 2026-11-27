@@ -1,0 +1,34 @@
+{
+ "id": "framed_old_photo",
+ "label": "Ảnh cũ đóng khung – em bé cười",
+ "label_en": "Framed old photo of a laughing child",
+ "tags": [
+  "ảnh cũ",
+  "khung ảnh",
+  "kỷ niệm",
+  "trẻ con",
+  "old photo",
+  "framed photo",
+  "memory"
+ ],
+ "props": [
+  "old_photo",
+  "framed_photo",
+  "photo_frame"
+ ],
+ "style": "cutout",
+ "image": "framed_old_photo.png",
+ "kind": "framed_old_photo",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "fade": 0.6,
+  "date_stamp": "'90 7 14",
+  "bg": "wall_grey"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "id": "bep_nha_hang",
+ "name": "Bếp nhà hàng + cửa kho đông",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Bếp nhà hàng + cửa kho đông / Restaurant kitchen with walk-in freezer door (ban đêm / night)",
+  "description": "Bếp nhà hàng + cửa kho đông, ban đêm. Commercial kitchen side view: white tiled wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave shelf, steel table, chopping-block stump, blue drum, steel walk-in freezer door with a red -18°C readout, dark tiled floor with a drain (night). bếp, bếp nhà hàng, kho đông, cửa kho lạnh, dao thớt, kitchen, restaurant kitchen, freezer door, ban đêm, night",
+  "kind": "restaurant_kitchen",
+  "tags": [
+   "bếp",
+   "bếp nhà hàng",
+   "kho đông",
+   "cửa kho lạnh",
+   "dao thớt",
+   "kitchen",
+   "restaurant kitchen",
+   "freezer door",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "bep_nha_hang"
+  ],
+  "catalog_id": "bep_nha_hang",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn ngang: tường gạch men trắng dưới, tường xám xanh trên, quạt hút, tờ thông báo, kệ lò vi sóng, thanh nam châm treo dao, quầy inox dài có chén bát, bàn inox trái, khúc gỗ thớt, thùng xanh; cửa kho đông bên phải + đồng hồ -18°C (chữ nướng) + biển COLD ROOM (signs).",
+  "label_en": "Restaurant kitchen with walk-in freezer door (night)",
+  "description_en": "Commercial kitchen side view: white tiled wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave shelf, steel table, chopping-block stump, blue drum, steel walk-in freezer door with a red -18°C readout, dark tiled floor with a drain",
+  "baked_text": [
+   "-18°C"
+  ]
+ },
+ "flow_prompt": "Commercial restaurant kitchen at night, side view, white tiled lower wall, grey-green upper wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave on a shelf, steel walk-in freezer door on the right with a red temperature display, dark tiled floor with a drain, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "bep_nha_hang"
+ },
+ "floor_y": 1990,
+ "slots": {
+  "counter": {
+   "x": 1800,
+   "y": 1660,
+   "scale": 0.95,
+   "clip_bottom": 1250
+  },
+  "left": {
+   "x": 1150,
+   "y": 1990,
+   "scale": 1.08
+  },
+  "center": {
+   "x": 1920,
+   "y": 1990,
+   "scale": 1.08
+  },
+  "freezer_door": {
+   "x": 3300,
+   "y": 1960,
+   "scale": 1.05
+  }
+ },
+ "signs": [
+  {
+   "text": "COLD ROOM",
+   "box": [
+    3120,
+    820,
+    3480,
+    920
+   ],
+   "style": "white_board"
+  }
+ ],
+ "baked_signs": [
+  {
+   "text": "-18°C",
+   "box": [
+    3191,
+    559,
+    3409,
+    641
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1900,
+   "y": 170,
+   "color": "#e8f4ea"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Commercial restaurant kitchen at night, side view, white tiled lower wall, grey-green upper wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave on a shelf, steel walk-in freezer door on the right with a red temperature display, dark tiled floor with a drain, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "COLD ROOM"
+ ]
+}

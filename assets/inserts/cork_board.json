@@ -1,0 +1,42 @@
+{
+ "id": "cork_board",
+ "label": "Bảng ghim điều tra dây đỏ",
+ "label_en": "Cork investigation board with red string",
+ "tags": [
+  "bảng ghim",
+  "điều tra",
+  "dây đỏ",
+  "cork board",
+  "investigation",
+  "red string"
+ ],
+ "props": [
+  "cork_board",
+  "investigation_board",
+  "evidence_board"
+ ],
+ "style": "cutout",
+ "image": "cork_board.png",
+ "kind": "cork_board",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "names": [
+   "ANNA K.",
+   "DINA P.",
+   "JADE C.",
+   "ROSA Y."
+  ],
+  "photo_caption": "the shop?",
+  "notes": [
+   "4 AM?",
+   "same\nshop",
+   "who?"
+  ]
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

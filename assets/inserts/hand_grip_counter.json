@@ -1,0 +1,33 @@
+{
+ "id": "hand_grip_counter",
+ "label": "Tay bám mép quầy",
+ "label_en": "Hand gripping the counter edge",
+ "tags": [
+  "tay",
+  "bám quầy",
+  "căng thẳng",
+  "sợ hãi",
+  "hands",
+  "grip",
+  "counter"
+ ],
+ "props": [
+  "hand_grip_counter",
+  "gripping_counter"
+ ],
+ "style": "cutout",
+ "image": "hand_grip_counter.png",
+ "kind": "hand_grip_counter",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "sleeve_color": "#1f6f5c",
+  "counter_front": "#1f6f5c",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

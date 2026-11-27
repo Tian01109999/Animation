@@ -1,0 +1,37 @@
+{
+ "id": "banknote_wet",
+ "label": "Tờ tiền ướt bạc màu",
+ "label_en": "Wet faded banknote",
+ "tags": [
+  "tờ tiền",
+  "ướt",
+  "bạc màu",
+  "banknote",
+  "money",
+  "wet"
+ ],
+ "props": [
+  "banknote",
+  "wet_banknote",
+  "cash"
+ ],
+ "style": "cutout",
+ "image": "banknote_wet.png",
+ "kind": "banknote_wet",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "value": "20",
+  "color": "#b5734a",
+  "rotation": -8,
+  "faded": 0.55,
+  "drips": true,
+  "caption": "LEGAL TENDER",
+  "bg": "blur_location"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

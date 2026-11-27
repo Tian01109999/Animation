@@ -1,0 +1,76 @@
+{
+ "id": "phong_dieu_tra",
+ "name": "Phòng điều tra tại nhà (bảng ghim)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng điều tra tại nhà (bảng ghim) / Home investigation room with cork board (ban đêm / night)",
+  "description": "Phòng điều tra tại nhà (bảng ghim), ban đêm. Beige room at night: large cork board covered in missing-person cards with red header bands, a pinned map with a dotted red circle, sticky notes and photos connected by red string; trestle desk with a glowing laptop and an architect lamp, red stool, cardboard box, floor mattress (night). điều tra, bảng ghim, dây đỏ, người mất tích, bàn laptop, investigation, cork board, ban đêm, night",
+  "kind": "investigation_room",
+  "tags": [
+   "điều tra",
+   "bảng ghim",
+   "dây đỏ",
+   "người mất tích",
+   "bàn laptop",
+   "investigation",
+   "cork board",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "phong_dieu_tra"
+  ],
+  "catalog_id": "phong_dieu_tra",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Tường be, bảng lie lớn: thẻ người mất tích dải đỏ (không chữ), bản đồ vòng đỏ chấm, giấy note vàng/hồng/xanh, ảnh, dây đỏ nối đinh ghim; bàn chân chữ A + laptop sáng + đèn kỹ thuật; ghế nhựa đỏ, thùng giấy, nệm sàn. Sàn gỗ.",
+  "label_en": "Home investigation room with cork board (night)",
+  "description_en": "Beige room at night: large cork board covered in missing-person cards with red header bands, a pinned map with a dotted red circle, sticky notes and photos connected by red string; trestle desk with a glowing laptop and an architect lamp, red stool, cardboard box, floor mattress"
+ },
+ "flow_prompt": "Home investigation room at night, beige wall with a large cork board covered in blank missing person cards, a map with a red circle, sticky notes and red string between pins, trestle desk with a glowing laptop and an architect lamp, red plastic stool, cardboard box, floor mattress, wooden floor, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_dieu_tra"
+ },
+ "floor_y": 2009,
+ "slots": {
+  "board": {
+   "x": 1536,
+   "y": 1987,
+   "scale": 1.02
+  },
+  "desk": {
+   "x": 3020,
+   "y": 1930,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 2112,
+   "y": 2009,
+   "scale": 1.04
+  },
+  "left": {
+   "x": 768,
+   "y": 1987,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 3220,
+   "y": 1050,
+   "color": "#ffcf7a"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Home investigation room at night, beige wall with a large cork board covered in blank missing person cards, a map with a red circle, sticky notes and red string between pins, trestle desk with a glowing laptop and an architect lamp, red plastic stool, cardboard box, floor mattress, wooden floor, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

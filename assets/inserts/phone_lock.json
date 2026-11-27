@@ -1,0 +1,41 @@
+{
+ "id": "phone_lock",
+ "label": "Điện thoại – màn khoá có thông báo",
+ "label_en": "Phone - lock screen with notification",
+ "tags": [
+  "điện thoại",
+  "màn khoá",
+  "thông báo",
+  "phone",
+  "lock screen",
+  "notification"
+ ],
+ "props": [
+  "phone",
+  "phone_lock",
+  "phone_notification"
+ ],
+ "style": "cutout",
+ "image": "phone_lock.png",
+ "kind": "phone_lock",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "time": "06:00",
+  "date": "Monday, March 12",
+  "notification": {
+   "app": "Messages",
+   "sender": "Mom",
+   "text": "Are you home yet?"
+  },
+  "sleeve_color": "#1f6f5c",
+  "skin": "#c9926a",
+  "bg": "blur_location",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

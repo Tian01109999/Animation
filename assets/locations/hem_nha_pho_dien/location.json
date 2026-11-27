@@ -1,0 +1,120 @@
+{
+ "id": "hem_nha_pho_dien",
+ "name": "Hẻm nhà phố, dây điện, miếu nhỏ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hẻm nhà phố, dây điện, miếu nhỏ / Shophouse alley with power lines and spirit-house shrine (ban đêm / night)",
+  "description": "Hẻm nhà phố, dây điện, miếu nhỏ, ban đêm. One-point view down a narrow shophouse street: dashed centre line, rows of 3-4 storey shophouses with roll-down shutters, awnings, projecting signboards and banners, a tangle of overhead power cables between poles, a small spirit-house shrine on a post at front left, parked blue scooters on the right, a red plastic stool, a streetlight (night). hẻm, phố, dây điện, miếu nhỏ, xe máy, sương mù, alley, shophouse, spirit house, fog, ban đêm, night",
+  "kind": "shophouse_alley",
+  "tags": [
+   "hẻm",
+   "phố",
+   "dây điện",
+   "miếu nhỏ",
+   "xe máy",
+   "sương mù",
+   "alley",
+   "shophouse",
+   "spirit house",
+   "fog",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hem_nha_pho_dien",
+   "hem_nha_pho_dien__fog"
+  ],
+  "catalog_id": "hem_nha_pho_dien",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Phối cảnh 1 điểm tụ: đường giữa có vạch đứt, 2 dãy nhà phố 3-4 tầng có cửa cuốn, mái hiên, biển nhô ra (NOODLES/ROOMS = signs), băng rôn dọc trơn, cột điện + dây chằng chịt, miếu nhỏ trên cột góc trái trước, xe tay ga xanh bên phải, ghế nhựa đỏ, đèn đường. Biến thể: đêm xanh tím; sáng sớm sương mù be-xám.",
+  "label_en": "Shophouse alley with power lines and spirit-house shrine (night)",
+  "description_en": "One-point view down a narrow shophouse street: dashed centre line, rows of 3-4 storey shophouses with roll-down shutters, awnings, projecting signboards and banners, a tangle of overhead power cables between poles, a small spirit-house shrine on a post at front left, parked blue scooters on the right, a red plastic stool, a streetlight"
+ },
+ "flow_prompt": "Narrow Southeast Asian shophouse street in one-point perspective, dashed centre line, rows of three and four storey shophouses with roll-down shutters and awnings, tangle of overhead power cables between poles, small spirit house shrine on a post in the front left, parked blue scooters on the right, red plastic stool, streetlight, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hem_nha_pho_dien"
+ },
+ "floor_y": 1756,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1756,
+   "scale": 0.978
+  },
+  "left": {
+   "x": 1258,
+   "y": 1756,
+   "scale": 0.978
+  },
+  "right": {
+   "x": 2494,
+   "y": 1756,
+   "scale": 0.978
+  },
+  "shrine": {
+   "x": 704,
+   "y": 1699,
+   "scale": 0.899
+  },
+  "far": {
+   "x": 1965,
+   "y": 1290,
+   "scale": 0.333
+  }
+ },
+ "signs": [
+  {
+   "text": "NOODLES",
+   "box": [
+    532,
+    188,
+    883,
+    476
+   ],
+   "style": "red_board"
+  },
+  {
+   "text": "ROOMS",
+   "box": [
+    2480,
+    584,
+    2670,
+    740
+   ],
+   "style": "gold_board"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1655,
+   "y": 415,
+   "color": "#ffcf7a"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.9
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Narrow Southeast Asian shophouse street in one-point perspective, dashed centre line, rows of three and four storey shophouses with roll-down shutters and awnings, tangle of overhead power cables between poles, small spirit house shrine on a post in the front left, parked blue scooters on the right, red plastic stool, streetlight, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "fog": "Narrow Southeast Asian shophouse street in one-point perspective, dashed centre line, rows of three and four storey shophouses with roll-down shutters and awnings, tangle of overhead power cables between poles, small spirit house shrine on a post in the front left, parked blue scooters on the right, red plastic stool, streetlight, hazy early morning, thick beige-grey fog, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "NOODLES",
+  "ROOMS"
+ ]
+}

@@ -1,0 +1,590 @@
+{
+  "version": 1,
+  "doc": "Nguyên mẫu địa điểm GỐC (bối cảnh Việt Nam). size = 3840x2160. slots: x,y là PHÂN SỐ của 3840x2160 (chân nhân vật), scale theo SPEC (1.0 = cỡ chuẩn ~ đứng gần trung cảnh). clip_bottom = cắt phần dưới (đứng sau quầy). flow_prompt: prompt tiếng Anh cho Google Flow, KHÔNG người, KHÔNG chữ. procedural=true: locgen v1 phải tự vẽ được. Thương hiệu cửa hàng hư cấu dùng palette brand_store (xanh lục bảo/kem/cam), biển hiệu là lớp chữ thật (signs).",
+  "style_suffix": "flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "locations": [
+    {
+      "id": "cua_hang_loi_ke",
+      "name_vi": "Cửa hàng tiện lợi – lối giữa hai kệ",
+      "kind": "store_aisle",
+      "time_variants": ["indoor", "night"],
+      "layout": "Phối cảnh 1 điểm tụ: 2 kệ gondola trắng hai bên hội tụ về tường tủ lạnh đồ uống cửa kính (4 khoang) có dải đầu xanh lục bảo + đồng hồ tròn ở giữa phía trên; trần lưới ô trắng với đèn huỳnh quang dài; sàn gạch vuông xám nhạt. Kệ chất hộp chữ nhật màu bão hoà có nhãn sáng, thẻ giá nhỏ đỏ/vàng thò ra. Biển treo số lối kệ. Tuỳ chọn: biển 'sàn ướt' vàng, thùng nhựa xanh.",
+      "palette": {"wall": "#eef0f2", "floor": "#d9dde2", "ceiling": "#f4f6f8", "header": "#1f6f5c", "products": ["#d8423a", "#f08a2c", "#f3c94e", "#4fa35a", "#3a78c2", "#c74a9a", "#ffffff"], "shelf": "#e3e6ea"},
+      "slots": {
+        "far_left": {"x": 0.30, "y": 0.86, "scale": 0.9},
+        "left": {"x": 0.40, "y": 0.88, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.88, "scale": 1.0},
+        "right": {"x": 0.60, "y": 0.88, "scale": 1.0},
+        "far_right": {"x": 0.70, "y": 0.86, "scale": 0.9},
+        "vanishing": {"x": 0.50, "y": 0.62, "scale": 0.35}
+      },
+      "signs": [{"text": "COLD DRINKS", "anchor": [0.50, 0.30], "style": "white_board"}],
+      "flow_prompt": "Convenience store interior at night, one-point perspective down a central aisle, two white gondola shelves packed with simple colorful rectangular product boxes, back wall of glass-door drink fridges with colorful bottles under a dark green header strip, round wall clock above, white grid ceiling with fluorescent panels, light grey square floor tiles, clean bright fluorescent light, slight haze",
+      "procedural": true
+    },
+    {
+      "id": "cua_hang_quay_thu_ngan",
+      "name_vi": "Quầy thu ngân (nhìn từ phía khách)",
+      "kind": "store_counter",
+      "time_variants": ["night", "day"],
+      "layout": "Quầy dài ngang khung: mặt trắng, mặt trước xanh lục bảo có huy hiệu lá gốc + bảng 'vé số' kem. Trên quầy: tủ hâm xúc xích kính (thanh nhiệt cam), máy POS màn xanh, tủ hấp bánh bao 6 cái, màn CCTV 4 ô góc phải. Phía sau: vách kính lớn nhìn ra trời đêm sao + núi tối (ngày: đồi xanh, trời nhạt), vệt phản chiếu chéo. Nhân viên đứng sau quầy (clip_bottom).",
+      "palette": {"counter_front": "#1f6f5c", "counter_top": "#f4f4f2", "showcase": "#efe4cf", "night_glass": "#141b2e", "day_glass": "#c9d8e2", "accent": "#e8833a"},
+      "slots": {
+        "counter": {"x": 0.50, "y": 0.80, "scale": 1.0, "clip_bottom": 0.62},
+        "counter_left": {"x": 0.36, "y": 0.80, "scale": 1.0, "clip_bottom": 0.62},
+        "customer_left": {"x": 0.12, "y": 0.98, "scale": 1.15},
+        "customer_right": {"x": 0.86, "y": 0.98, "scale": 1.15},
+        "center": {"x": 0.50, "y": 0.80, "scale": 1.0, "clip_bottom": 0.62}
+      },
+      "signs": [{"text": "MINI MART 24H", "anchor": [0.30, 0.74], "style": "white_board"}, {"text": "LOTTERY", "anchor": [0.78, 0.74], "style": "plain"}],
+      "flow_prompt": "Front view of a convenience store checkout counter at night, long white countertop with dark green front panel, glass hot-dog warmer with orange heating rods, small POS terminal, steamed bun warmer cabinet, small CCTV monitor, large glass windows behind showing dark night sky with stars and mountain silhouettes, diagonal glass reflections",
+      "procedural": true
+    },
+    {
+      "id": "cua_hang_quay_pov",
+      "name_vi": "Quầy thu ngân – góc nhìn của nhân viên",
+      "kind": "store_counter_pov",
+      "time_variants": ["night"],
+      "layout": "40% dưới: mặt quầy trắng viền đỏ sẫm, tấm lót cao su đen hình thang ở giữa, màn hiển thị giá LED xanh ngọc bên trái, giá thẻ cào/kẹo nhiều ô màu bên phải. 60% trên: cửa kính đêm đen blur mạnh, đèn vàng mờ, biển lối ra xanh. Đầu khách/ma ló lên giữa quầy và kính.",
+      "palette": {"counter": "#f2f2f0", "trim": "#7a2a2a", "mat": "#151517", "glass": "#0d1018", "led": "#3fd6c2"},
+      "slots": {
+        "peek": {"x": 0.50, "y": 0.72, "scale": 1.6, "clip_bottom": 0.70},
+        "center": {"x": 0.50, "y": 0.72, "scale": 1.6, "clip_bottom": 0.70}
+      },
+      "signs": [],
+      "flow_prompt": "Point of view from behind a convenience store counter at night, white counter top with black rubber mat in the center, small teal LED price display on the left, rack of colorful small cards on the right, blurred dark glass doors behind with a dim yellow lamp glow and a green exit light, shallow depth of field",
+      "procedural": false
+    },
+    {
+      "id": "cua_hang_tu_lanh",
+      "name_vi": "Tường tủ lạnh đồ uống / cửa kính mờ sương",
+      "kind": "store_fridge_wall",
+      "time_variants": ["indoor", "night"],
+      "layout": "Hàng 7 cửa tủ kính khung đen, mỗi cửa 5 tầng chai màu mảnh; một cửa hé mở để lộ hành lang sương mù. Biến thể cận: 1 cửa kính mờ sương (frost noise), tay nắm chrome dọc có thẻ đỏ, lon đỏ nổi bật ở tầng dưới.",
+      "palette": {"frame": "#2b2d33", "glass": "#dfe8ee", "frost": "#eef5fa", "bottles": ["#3aa3a0", "#4fa35a", "#d8423a", "#f08a2c", "#3a78c2"]},
+      "slots": {
+        "left": {"x": 0.32, "y": 0.92, "scale": 1.1},
+        "center": {"x": 0.50, "y": 0.92, "scale": 1.1},
+        "right": {"x": 0.68, "y": 0.92, "scale": 1.1}
+      },
+      "signs": [],
+      "flow_prompt": "Row of glass-door drink refrigerators in a store, black frames, shelves of simple stylized colorful bottles, frosted misty glass with condensation, chrome vertical handles, cold blue-white light, soft fog, frontal view",
+      "procedural": false
+    },
+    {
+      "id": "cua_hang_cua_kinh_tu_trong",
+      "name_vi": "Cửa kính ra vào nhìn từ trong (sau quầy)",
+      "kind": "store_entrance_inside",
+      "time_variants": ["night", "day"],
+      "layout": "Nhìn thẳng đối xứng: vách kính khung nhôm, cửa lùa đôi ở giữa (cảm biến đen đèn đỏ phía trên), decal chữ '24H' ngược (lớp chữ thật). Ngoài: bãi đỗ vạch trắng, đèn đường, cột điện dây võng, mái chờ xe buýt, núi tối. Tiền cảnh trái: tủ đá trắng nhãn xanh 'ĐÁ'; tiền cảnh phải: góc quầy + tủ hâm. Trần xám. Sân khấu kinh dị chính: trống / ma đứng cạnh tủ đá / ma xuyên cửa / người áp tay lên kính.",
+      "palette": {"interior": "#cfd5da", "frame": "#a9b0b6", "outside_night": "#141b2e", "ice_label": "#2e6db0", "counter": "#1f6f5c"},
+      "slots": {
+        "door": {"x": 0.50, "y": 0.80, "scale": 0.85},
+        "glass_left": {"x": 0.30, "y": 0.80, "scale": 0.85},
+        "glass_right": {"x": 0.70, "y": 0.80, "scale": 0.85},
+        "by_freezer": {"x": 0.22, "y": 0.84, "scale": 0.9},
+        "outside_far": {"x": 0.62, "y": 0.70, "scale": 0.45}
+      },
+      "signs": [{"text": "OPEN 24H", "anchor": [0.50, 0.42], "style": "plain", "mirrored": true}, {"text": "ICE", "anchor": [0.12, 0.82], "style": "white_board"}],
+      "flow_prompt": "Inside a small convenience store looking out through a glass storefront at night, central double sliding glass doors with aluminium frames, dark parking lot outside with white lines, street lamp glow, power poles and wires, bus shelter, dark mountains under starry sky, white chest freezer in left foreground, corner of a dark green counter on the right, diagonal glass reflections, symmetrical composition",
+      "procedural": true
+    },
+    {
+      "id": "cua_hang_mat_tien_dem",
+      "name_vi": "Cửa hàng tiện lợi ven đường quê – toàn cảnh đêm",
+      "kind": "store_exterior_night",
+      "time_variants": ["night", "dusk"],
+      "layout": "Toàn cảnh rộng: khối nhà 1 tầng mặt kính sáng rực ở trung cảnh (nhìn thấy kệ, quầy), dải mái màu xanh lục bảo viền cam; sân đỗ vạch trắng; đường 2 làn vạch đứt tiền cảnh; trái: miếu nhỏ ven đường trên cột; phải: đèn đường halo, cây trơ cành, mái chờ xe buýt có ghế; xa: núi tối, mặt hồ, trăng tròn, trời sao navy.",
+      "palette": {"sky": "#141a2e", "mountains": "#0f1424", "ground": "#1a1f2b", "interior_glow": "#fff6dc", "fascia": "#1f6f5c", "accent": "#e8833a", "moon": "#f1ead2"},
+      "slots": {
+        "inside_counter": {"x": 0.44, "y": 0.58, "scale": 0.22},
+        "forecourt": {"x": 0.55, "y": 0.70, "scale": 0.3},
+        "bus_stop": {"x": 0.86, "y": 0.68, "scale": 0.28},
+        "roadside_left": {"x": 0.15, "y": 0.72, "scale": 0.3},
+        "center": {"x": 0.55, "y": 0.70, "scale": 0.3}
+      },
+      "signs": [{"text": "MINI MART 24H", "anchor": [0.48, 0.44], "style": "neon"}],
+      "flow_prompt": "Wide night establishing shot of an isolated small 24-hour convenience store beside a rural two-lane road, brightly lit glass front showing shelves inside, dark green and orange fascia band, empty parking lot with white lines, small roadside shrine on a pole on the left, tall street lamp with glowing halo and bare dead tree on the right, bus shelter, dark mountain silhouettes, lake, full moon, starry navy sky, simple low-poly shapes with flat shading, light bloom",
+      "procedural": true
+    },
+    {
+      "id": "cua_hang_cua_cuon_dong",
+      "name_vi": "Mặt tiền cửa cuốn đóng (ngày/hoàng hôn/đêm)",
+      "kind": "store_shutter_facade",
+      "time_variants": ["day", "dusk", "night"],
+      "layout": "Mặt đứng trực giao: dải trời trên, bảng hiệu dày (lớp chữ thật), sọc màu mảnh, hộp cuốn xám, cửa cuốn tôn sóng ngang kín bề rộng (3 đường nối đứt, khe tay nắm giữa đáy, vết gỉ), vỉa hè bê tông vũng nước. Tuỳ chọn tờ giấy thông báo dán. Đêm: cửa cuốn gần như đen, chỉ 1 hộp đèn đỏ nhỏ.",
+      "palette": {"sky": "#8d9aab", "fascia": "#1f6f5c", "stripe": "#e8833a", "band": "#e3dccb", "shutter": ["#8a8d93", "#b8babf"], "sidewalk": "#5e5850"},
+      "slots": {
+        "left": {"x": 0.30, "y": 0.92, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.92, "scale": 1.0},
+        "right": {"x": 0.70, "y": 0.92, "scale": 1.0}
+      },
+      "signs": [{"text": "MINI MART 24H", "anchor": [0.50, 0.14], "style": "white_board"}],
+      "flow_prompt": "Flat frontal elevation of a closed shop with a full-width corrugated metal roller shutter, horizontal grey stripes, rust spots, thick dark green signboard band above with an orange thin stripe, grey shutter housing, concrete sidewalk with puddles, overcast dusk sky, orthographic view, grain",
+      "procedural": true
+    },
+    {
+      "id": "phong_nhan_vien",
+      "name_vi": "Phòng nhân viên / văn phòng sau",
+      "kind": "staff_room",
+      "time_variants": ["indoor", "night"],
+      "layout": "Phòng hộp 1 điểm tụ: tường xám ấm có vệt nước loang chảy dọc; 1 bóng đèn trần; lịch treo tường đầu đỏ; tờ nội quy dán; hộp cầu dao có 1 công tắc đỏ + dây điện lủng lẳng; tủ locker đôi xanh thép bên phải; bàn gỗ nâu với sổ đỏ, đèn bàn, ghế đen tiền cảnh.",
+      "palette": {"wall": "#8e877c", "side_wall": "#6f695f", "floor": "#4a4642", "locker": "#4d6278", "desk": "#6b4a32", "red": "#b5332b"},
+      "slots": {
+        "left": {"x": 0.32, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0},
+        "right": {"x": 0.66, "y": 0.90, "scale": 1.0},
+        "desk": {"x": 0.24, "y": 0.86, "scale": 0.95, "clip_bottom": 0.55}
+      },
+      "signs": [],
+      "flow_prompt": "Small dim staff back room of a shop seen in one-point perspective, warm grey concrete walls with a long water stain, single ceiling bulb glow, wall calendar with red header, a pinned paper, electrical breaker box with one red switch and dangling wire, blue steel double locker on the right, brown wooden desk with a red ledger book and desk lamp, black office chair in foreground, heavy vignette",
+      "procedural": true
+    },
+    {
+      "id": "cho_xe_om_ven_duong",
+      "name_vi": "Chòi xe ôm / trạm chờ cạnh cửa hàng (hoàng hôn)",
+      "kind": "roadside_shelter",
+      "time_variants": ["dusk", "night", "day"],
+      "layout": "Bố cục ngang nhiều lớp: trái 40% mặt tiền cửa hàng (kính sáng, tờ tìm người dán kính); giữa chòi mái tôn nghiêng 2 cột xám, bảng tên cam, 2 đèn chụp treo, bảng thông báo, ghế gỗ; phải cột điện gỗ dây võng, cây chết; đường 2 làn vạch giữa vàng; bụi cây xanh thẫm; vỉa hè nứt, cỏ.",
+      "palette": {"sky_top": "#3a3f7a", "sky_bottom": "#8a6a9a", "clouds": "#d9a7b5", "road": "#4a4a50", "bush": "#2f4a3a", "sign": "#e8833a", "glass": "#dfeaf3"},
+      "slots": {
+        "bench": {"x": 0.55, "y": 0.80, "scale": 0.55},
+        "store_door": {"x": 0.22, "y": 0.82, "scale": 0.55},
+        "roadside": {"x": 0.78, "y": 0.82, "scale": 0.55},
+        "center": {"x": 0.55, "y": 0.80, "scale": 0.55}
+      },
+      "signs": [{"text": "MOTO TAXI", "anchor": [0.55, 0.38], "style": "plain"}],
+      "flow_prompt": "Side-scrolling flat composition at dusk: small glowing convenience store glass front on the left, a simple motorbike taxi shelter with slanted grey roof, two hanging cone lamps and a wooden bench in the center, wooden power pole with sagging wires and a bare dead tree on the right, two-lane road with yellow dashed center line, dark green bushes, indigo to mauve sky with pink elongated clouds, ground fog",
+      "procedural": true
+    },
+    {
+      "id": "ben_xe_buyt_ngay",
+      "name_vi": "Trạm xe buýt phố (ban ngày)",
+      "kind": "bus_stop_day",
+      "time_variants": ["day"],
+      "layout": "Lớp ngang: dãy nhà phố pastel có mái hiên sọc, cây tròn, cột điện; đường nhựa vạch giữa vàng; bó vỉa sơn đen trắng; vỉa hè gạch be có lá rụng; mái chờ xanh cong, bảng 'TRẠM XE BUÝT', ô số tuyến xanh, ghế kim loại, hộp quảng cáo; thùng rác xanh.",
+      "palette": {"sky": "#bcd3e4", "buildings": ["#e6dccb", "#c9cfd6", "#9fb4c8"], "trees": "#6f9a5a", "pavement": "#d9cdb8", "shelter": "#2e6db0", "road": "#7d7d82"},
+      "slots": {
+        "left": {"x": 0.25, "y": 0.90, "scale": 0.8},
+        "center": {"x": 0.50, "y": 0.90, "scale": 0.8},
+        "right": {"x": 0.72, "y": 0.90, "scale": 0.8},
+        "bench": {"x": 0.62, "y": 0.88, "scale": 0.8}
+      },
+      "signs": [{"text": "BUS STOP", "anchor": [0.62, 0.40], "style": "white_board"}],
+      "flow_prompt": "Flat side view of a city bus stop on a hazy day, blue curved shelter roof, metal bench, empty advertising lightbox, row of pastel Vietnamese shophouses with striped awnings behind, round green trees, utility poles with sagging wires, asphalt road with yellow dashed line, beige tiled sidewalk with fallen leaves, green trash bin",
+      "procedural": false
+    },
+    {
+      "id": "duong_que_dem_mua",
+      "name_vi": "Đường quê ven kênh – đêm mưa",
+      "kind": "rural_road_rain",
+      "time_variants": ["night"],
+      "layout": "Nhìn ngang: đường 2 làn vạch giữa đứt; đèn đường cao chiếu nón sáng + vũng sáng oval; hàng cây tròn tối và cột điện dây võng phía sau; dải cỏ; kênh nước tối tiền cảnh có lá sen, lau sậy, phản chiếu đèn. Mây thấp, vệt mưa.",
+      "palette": {"sky": "#1c2526", "trees": "#16201d", "road": "#2b2f31", "water": "#101a1c", "lamp": "#f2dc9a", "grass": "#2d3a2c"},
+      "slots": {
+        "road_left": {"x": 0.30, "y": 0.62, "scale": 0.45},
+        "road_center": {"x": 0.50, "y": 0.62, "scale": 0.45},
+        "road_right": {"x": 0.70, "y": 0.62, "scale": 0.45},
+        "center": {"x": 0.50, "y": 0.62, "scale": 0.45}
+      },
+      "signs": [],
+      "flow_prompt": "Side view of a rural two-lane road beside a dark canal at night in the rain, tall street lamp casting a cone of light and an oval pool on the wet road, row of dark round trees and utility poles with sagging wires, grass strip, canal in foreground with lily pads, reeds and lamp reflection, low smoky clouds, rain streaks, desaturated teal and charcoal",
+      "procedural": false
+    },
+    {
+      "id": "xe_khach_tren_duong",
+      "name_vi": "Xe khách 16 chỗ chạy trên đường (đêm)",
+      "kind": "vehicle_on_road",
+      "time_variants": ["night", "dusk"],
+      "layout": "Giống duong_que_dem_mua nhưng có lớp xe khách trắng nhìn ngang (cửa sổ tối thấy đầu hành khách, bánh xe, chùm đèn pha) là sprite riêng chạy trái→phải.",
+      "palette": {"van": "#eef0f2", "windows": "#1c2430", "headlight": "#fff3c4", "road": "#2b2f31"},
+      "slots": {"in_van": {"x": 0.50, "y": 0.58, "scale": 0.3}},
+      "signs": [],
+      "flow_prompt": "Flat side-view of a white passenger minivan driving on a dark rural road at night, headlight beam, street lamp light cone, dark trees and utility poles behind, wet asphalt reflections, rain streaks, film grain",
+      "procedural": false
+    },
+    {
+      "id": "hem_toi_pho",
+      "name_vi": "Hẻm tối thành phố",
+      "kind": "dark_alley",
+      "time_variants": ["night"],
+      "layout": "Hẻm hẹp 1 điểm tụ: tường nhà ống loang lổ hai bên, cửa sắt kéo, dây điện chằng chịt, 1 bóng đèn vàng treo, bậc thềm, xe máy dựng, vũng nước phản chiếu.",
+      "palette": {"walls": "#3a3d45", "light": "#f2c46b", "sky": "#0f1320", "puddle": "#1a2230"},
+      "slots": {
+        "left": {"x": 0.38, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0},
+        "right": {"x": 0.62, "y": 0.90, "scale": 1.0},
+        "far": {"x": 0.50, "y": 0.66, "scale": 0.45}
+      },
+      "signs": [],
+      "flow_prompt": "Narrow Vietnamese city alley at night in one-point perspective, stained tube-house walls on both sides, folding iron gates, tangled overhead electric wires, a single warm hanging bulb, parked motorbike, puddles reflecting light, deep shadows",
+      "procedural": false
+    },
+    {
+      "id": "cho_dem_viet",
+      "name_vi": "Chợ đêm",
+      "kind": "night_market",
+      "time_variants": ["night"],
+      "layout": "Dãy sạp bạt xanh đỏ, dây đèn bóng tròn võng, xe đẩy, ghế nhựa đỏ, khói bốc từ nồi; xa: nhà phố tối.",
+      "palette": {"tarp": ["#2e6db0", "#c33a2e"], "bulbs": "#ffd98a", "sky": "#141a2e", "stools": "#c33a2e"},
+      "slots": {
+        "left": {"x": 0.25, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0},
+        "right": {"x": 0.75, "y": 0.90, "scale": 1.0},
+        "behind_cart": {"x": 0.55, "y": 0.82, "scale": 0.95, "clip_bottom": 0.6}
+      },
+      "signs": [],
+      "flow_prompt": "Vietnamese night market street, rows of stalls with blue and red tarps, sagging strings of round warm bulbs, food cart with steam, red plastic stools, dark shophouses behind, flat 2D",
+      "procedural": false,
+      "note": "Đã có placeholder cho_dem trong assets/locations (locgen.draw_cho_dem)."
+    },
+    {
+      "id": "nha_phong_khach",
+      "name_vi": "Phòng khách nhà phố",
+      "kind": "house_living_room",
+      "time_variants": ["indoor", "night", "day"],
+      "layout": "Nhìn thẳng: bộ ghế gỗ + bàn trà, bàn thờ treo tường đèn đỏ, tivi cũ, cửa sổ song sắt, quạt trần, lịch treo, gạch bông.",
+      "palette": {"wall": "#d9cdb3", "wood": "#6b4a32", "altar_light": "#d0302a", "tiles": "#b8a58a"},
+      "slots": {
+        "left": {"x": 0.28, "y": 0.88, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.88, "scale": 1.0},
+        "right": {"x": 0.72, "y": 0.88, "scale": 1.0},
+        "sofa": {"x": 0.42, "y": 0.84, "scale": 0.95}
+      },
+      "signs": [],
+      "flow_prompt": "Vietnamese townhouse living room, wooden sofa set and tea table, small wall-mounted ancestor altar with red light, old television, window with iron bars, ceiling fan, patterned cement tiles, warm dim light, frontal view",
+      "procedural": false
+    },
+    {
+      "id": "phong_ngu_tro",
+      "name_vi": "Phòng ngủ / phòng trọ",
+      "kind": "bedroom",
+      "time_variants": ["night", "indoor"],
+      "layout": "Phòng trọ hẹp: giường sắt + màn, quạt đứng, tủ nhựa, cửa sổ nhỏ ánh trăng, móc quần áo, bóng đèn tuýp; tường loang.",
+      "palette": {"wall": "#9aa0a8", "bed": "#5a6b7d", "moonlight": "#bcd0e6", "floor": "#6e6a64"},
+      "slots": {
+        "bed": {"x": 0.40, "y": 0.80, "scale": 0.95},
+        "center": {"x": 0.55, "y": 0.90, "scale": 1.0},
+        "door": {"x": 0.82, "y": 0.90, "scale": 1.0}
+      },
+      "signs": [],
+      "flow_prompt": "Small cramped rented room at night, iron bed with mosquito net, standing fan, plastic wardrobe, small window with moonlight, clothes hanging on hooks, fluorescent tube light off, stained walls, cool blue moonlit mood",
+      "procedural": false
+    },
+    {
+      "id": "hanh_lang_benh_vien",
+      "name_vi": "Hành lang bệnh viện",
+      "kind": "hospital_corridor",
+      "time_variants": ["night", "indoor"],
+      "layout": "1 điểm tụ: tường xanh nhạt nửa dưới, nửa trên trắng, hàng ghế chờ inox, cửa phòng đánh số, đèn trần chập chờn, xe lăn bỏ trống, biển lối thoát xanh.",
+      "palette": {"wall_low": "#9fc4bb", "wall_up": "#e9ecea", "floor": "#c9ccc8", "exit": "#3cb44b"},
+      "slots": {
+        "left": {"x": 0.40, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0},
+        "right": {"x": 0.60, "y": 0.90, "scale": 1.0},
+        "far": {"x": 0.50, "y": 0.64, "scale": 0.4}
+      },
+      "signs": [],
+      "flow_prompt": "Empty hospital corridor at night in one-point perspective, pale green lower walls and white upper walls, row of steel waiting chairs, numbered doors, flickering ceiling lights, an empty wheelchair, green exit light glow, eerie",
+      "procedural": false
+    },
+    {
+      "id": "lop_hoc",
+      "name_vi": "Lớp học",
+      "kind": "school_classroom",
+      "time_variants": ["day", "night"],
+      "layout": "Bảng đen xanh ở giữa, bàn ghế gỗ xếp hàng, cửa sổ chớp xanh, quạt trần, ảnh treo trên bảng (khung trống).",
+      "palette": {"board": "#2f4a3a", "wall": "#efe3b8", "desks": "#8a6a48", "shutters": "#4f8a7a"},
+      "slots": {
+        "teacher": {"x": 0.50, "y": 0.86, "scale": 0.95},
+        "left": {"x": 0.25, "y": 0.92, "scale": 1.05},
+        "right": {"x": 0.75, "y": 0.92, "scale": 1.05},
+        "center": {"x": 0.50, "y": 0.86, "scale": 0.95}
+      },
+      "signs": [],
+      "flow_prompt": "Vietnamese school classroom, green chalkboard in the center, rows of wooden desks and benches, pale yellow walls, green louvered window shutters, ceiling fans, empty frames above the board",
+      "procedural": false
+    },
+    {
+      "id": "don_cong_an",
+      "name_vi": "Phòng làm việc đồn công an",
+      "kind": "police_station",
+      "time_variants": ["indoor", "day", "night"],
+      "layout": "Bàn làm việc gỗ, máy tính cũ, tủ hồ sơ, ghế nhựa cho người khai, bảng thông báo ghim giấy, quạt treo tường. Không quốc huy/biểu tượng thật.",
+      "palette": {"wall": "#e8e2cf", "desk": "#7a5a3c", "cabinet": "#8a9096", "accent": "#3d5a3a"},
+      "slots": {
+        "officer": {"x": 0.62, "y": 0.86, "scale": 0.95, "clip_bottom": 0.55},
+        "visitor": {"x": 0.34, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0}
+      },
+      "signs": [],
+      "flow_prompt": "Plain local police office interior, wooden desk with an old computer monitor, metal filing cabinets, plastic chair for visitor, cork board with pinned papers, wall fan, cream walls, neutral daylight, no emblems",
+      "procedural": false
+    },
+    {
+      "id": "san_chua",
+      "name_vi": "Sân chùa / miếu làng",
+      "kind": "temple_yard",
+      "time_variants": ["day", "dusk", "night"],
+      "layout": "Cổng tam quan mái cong, sân gạch, lư hương lớn khói nhang, cây đa/bồ đề to, đèn lồng đỏ, tượng nhỏ.",
+      "palette": {"roof": "#7a3a2a", "wall": "#e2c88a", "tree": "#3a5a3a", "lantern": "#d0302a", "smoke": "#d8d8d8"},
+      "slots": {
+        "left": {"x": 0.30, "y": 0.90, "scale": 0.9},
+        "center": {"x": 0.50, "y": 0.90, "scale": 0.9},
+        "right": {"x": 0.70, "y": 0.90, "scale": 0.9}
+      },
+      "signs": [],
+      "flow_prompt": "Vietnamese village pagoda courtyard, curved tiled roof gate, brick yard, large incense burner with smoke, big old banyan tree, red lanterns, dusk light, peaceful but eerie",
+      "procedural": false
+    },
+    {
+      "id": "bo_song_dem",
+      "name_vi": "Bờ sông / bến nước ban đêm",
+      "kind": "riverside",
+      "time_variants": ["night", "dusk"],
+      "layout": "Bến gỗ nhô ra sông, xuồng buộc, bụi dừa nước, trăng phản chiếu, sương mặt nước, lục bình trôi.",
+      "palette": {"water": "#0f1a22", "sky": "#141a2e", "dock": "#4a3a2c", "moon": "#f1ead2", "plants": "#1f3a2a"},
+      "slots": {
+        "dock": {"x": 0.45, "y": 0.78, "scale": 0.7},
+        "left": {"x": 0.30, "y": 0.80, "scale": 0.7},
+        "center": {"x": 0.45, "y": 0.78, "scale": 0.7}
+      },
+      "signs": [],
+      "flow_prompt": "Wooden riverside pier at night in the Mekong delta, small boat tied up, nipa palms, full moon reflected on dark water, mist over the river, floating water hyacinth, quiet and eerie",
+      "procedural": false
+    },
+    {
+      "id": "hanh_lang_chung_cu",
+      "name_vi": "Hành lang chung cư cũ / nhà trọ",
+      "kind": "apartment_hallway",
+      "time_variants": ["night", "indoor"],
+      "layout": "1 điểm tụ: dãy cửa phòng sắt sơn xanh, lan can bên hông, đèn tuýp chập chờn, dép trước cửa, giấy quảng cáo dán tường.",
+      "palette": {"walls": "#b6b9a8", "doors": "#4f7a6a", "floor": "#7c7a74", "light": "#e9f0e4"},
+      "slots": {
+        "left": {"x": 0.40, "y": 0.90, "scale": 1.0},
+        "center": {"x": 0.50, "y": 0.90, "scale": 1.0},
+        "right": {"x": 0.60, "y": 0.90, "scale": 1.0},
+        "far": {"x": 0.50, "y": 0.64, "scale": 0.4}
+      },
+      "signs": [],
+      "flow_prompt": "Old apartment building corridor at night in one-point perspective, row of green-painted iron doors, side railing, flickering fluorescent tube, slippers in front of doors, stained walls, eerie",
+      "procedural": false
+    },
+    {
+      "id": "cua_hang_cctv_tren_cao",
+      "name_vi": "Cửa hàng – góc camera an ninh trên cao",
+      "kind": "store_cctv_high_angle",
+      "time_variants": ["night"],
+      "layout": "Góc trên-trần ống kính rộng: sàn gạch trắng lưới xám, quầy đỏ/xanh góc dưới trái, tủ đá kính phải, kệ giữa có biển đầu kệ đánh số, biển sàn ướt vàng, bảng ghim, cửa nhân viên. Tuỳ chọn vũng nước + vệt dấu chân ướt. Luôn render qua effect 'cctv' (khử màu, scanline, fisheye).",
+      "palette": {"floor": "#e9ecee", "grid": "#b9bec4", "counter": "#1f6f5c", "products": ["#c8504a", "#d9b24a", "#4f8ab8"]},
+      "slots": {
+        "counter": {"x": 0.28, "y": 0.70, "scale": 0.35},
+        "floor_center": {"x": 0.52, "y": 0.66, "scale": 0.32},
+        "aisle": {"x": 0.70, "y": 0.52, "scale": 0.26},
+        "door": {"x": 0.12, "y": 0.50, "scale": 0.26},
+        "center": {"x": 0.52, "y": 0.66, "scale": 0.32}
+      },
+      "signs": [],
+      "flow_prompt": "High-angle security camera view of a small convenience store interior at night, wide-angle lens, white square floor tiles, checkout counter in the lower left, chest freezer on the right, freestanding shelves with simple colored boxes, yellow wet floor sign, cork board, staff door, simple flat-shaded geometry, clinical lighting",
+      "procedural": false,
+      "note": "v1: có thể giả lập bằng cua_hang_loi_ke / cua_hang_quay_thu_ngan + effect 'cctv' + overlay 'cctv'."
+    },
+    {
+      "id": "nen_toi_truu_tuong",
+      "name_vi": "Nền tối trừu tượng (sân khấu chèn/thoại)",
+      "kind": "abstract_dark",
+      "time_variants": ["night", "indoor"],
+      "layout": "Gradient xuyên tâm navy-than, tâm sáng hơn; tuỳ chọn lưới gạch sàn mờ (α 0.06). Dùng cho bán thân, chèn đạo cụ, khung chỉ phụ đề, nhìn từ trên xuống.",
+      "palette": {"center": "#2c3a52", "edge": "#0c1220", "grid": "#ffffff"},
+      "slots": {
+        "center": {"x": 0.50, "y": 0.98, "scale": 1.6},
+        "left": {"x": 0.36, "y": 0.98, "scale": 1.6},
+        "right": {"x": 0.64, "y": 0.98, "scale": 1.6}
+      },
+      "signs": [],
+      "flow_prompt": "Plain dark navy radial gradient background with a slightly lighter center, faint low-opacity floor tile grid, heavy vignette, film grain",
+      "procedural": true
+    },
+    {
+      "id": "bep_nha_hang",
+      "name_vi": "Bếp nhà hàng + cửa kho đông",
+      "name_en": "Restaurant kitchen with walk-in freezer door",
+      "description_en": "Commercial kitchen side view: white tiled wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave shelf, steel table, chopping-block stump, blue drum, steel walk-in freezer door with a red -18°C readout, dark tiled floor with a drain",
+      "kind": "restaurant_kitchen",
+      "time_variants": ["night"],
+      "layout": "Nhìn ngang: tường gạch men trắng dưới, tường xám xanh trên, quạt hút, tờ thông báo, kệ lò vi sóng, thanh nam châm treo dao, quầy inox dài có chén bát, bàn inox trái, khúc gỗ thớt, thùng xanh; cửa kho đông bên phải + đồng hồ -18°C (chữ nướng) + biển COLD ROOM (signs).",
+      "palette": {"wall": "#8a9488", "tile": "#e4e9e4", "steel": "#bcc5cb", "floor": "#3e4440", "readout": "#ff4a3a"},
+      "slots": {"counter": {"x": 0.47, "y": 0.77, "scale": 0.95, "clip_bottom": 0.58}, "left": {"x": 0.30, "y": 0.92, "scale": 1.08},
+                "center": {"x": 0.50, "y": 0.92, "scale": 1.08}, "freezer_door": {"x": 0.86, "y": 0.91, "scale": 1.05}},
+      "signs": [],
+      "flow_prompt": "Commercial restaurant kitchen at night, side view, white tiled lower wall, grey-green upper wall, long stainless prep counter with stacked bowls, magnetic knife rack, exhaust fan, microwave on a shelf, steel walk-in freezer door on the right with a red temperature display, dark tiled floor with a drain",
+      "procedural": false
+    },
+    {
+      "id": "kho_lanh",
+      "name_vi": "Bên trong kho lạnh",
+      "name_en": "Walk-in cold room interior",
+      "description_en": "One-point view down a frosty steel walk-in freezer: wire shelving on both sides with abandoned bags, backpacks, helmets and shoes, empty meat hooks on ceiling rails, a fluorescent tube, an evaporator unit with icicles, a -18°C panel, floor drain, frost and snow specks",
+      "kind": "cold_room_interior",
+      "time_variants": ["indoor"],
+      "layout": "Phối cảnh 1 điểm tụ: vách inox phủ băng, kệ lưới 2 bên chứa túi xách/ba lô/mũ bảo hiểm/giày (đồ cá nhân chung chung), ray móc treo trống trên trần, đèn tuýp, dàn lạnh có băng rủ, bảng -18°C (chữ nướng), rãnh thoát nước, đốm sương giá.",
+      "palette": {"wall": "#b9c8d8", "frost": "#ffffff", "shelf": "#7d8a96", "accent": ["#c74a9a", "#f3c94e", "#4fa35a"]},
+      "slots": {"center": {"x": 0.50, "y": 0.82, "scale": 1.1}, "left": {"x": 0.36, "y": 0.82, "scale": 1.1},
+                "right": {"x": 0.64, "y": 0.82, "scale": 1.1}, "far": {"x": 0.50, "y": 0.64, "scale": 0.6}},
+      "signs": [],
+      "flow_prompt": "Inside a frosty walk-in freezer in one-point perspective, icy steel wall panels, wire shelving on both sides holding abandoned handbags, backpacks, a helmet and shoes, empty meat hooks on ceiling rails, fluorescent tube, evaporator fan unit with icicles, floor drain, frost specks",
+      "procedural": false
+    },
+    {
+      "id": "san_thuong_binh_minh",
+      "name_vi": "Sân thượng chung cư lúc bình minh",
+      "name_en": "Apartment rooftop at dawn",
+      "description_en": "Long flat rooftop in 3/4 perspective at dawn: laundry line with colourful clothes, white and blue water tanks on stands, AC condenser units, TV antennas, stair hut, potted plant, red plastic chair, low parapet running to the right; dense city skyline with red aircraft lights against a lilac-to-peach sky",
+      "kind": "rooftop_dawn",
+      "time_variants": ["dawn"],
+      "layout": "Phối cảnh 3/4 dọc mái bằng dài, lan can thấp chạy về điểm tụ bên phải; dây phơi quần áo màu, bồn nước trắng/xanh trên chân, cục nóng điều hoà, cột ăng-ten, chòi cầu thang, chậu cây, ghế nhựa đỏ; xa là skyline dày đặc (lớp far) trên nền trời tím-cam.",
+      "palette": {"sky": ["#6b5a8c", "#f2b884"], "roof": "#a69cb4", "skyline": "#6a5a86"},
+      "slots": {"center": {"x": 0.53, "y": 0.93, "scale": 0.97}, "left": {"x": 0.42, "y": 0.91, "scale": 0.92},
+                "edge": {"x": 0.83, "y": 0.80, "scale": 0.7}},
+      "signs": [],
+      "flow_prompt": "Apartment rooftop at dawn in three-quarter perspective, laundry line with colourful hanging clothes, white and blue water tanks on stands, AC condenser units, TV antennas, potted plant, red plastic chair, low parapet running to the vanishing point, dense city skyline under a lilac to peach sky",
+      "procedural": false
+    },
+    {
+      "id": "hem_nha_pho_dien",
+      "name_vi": "Hẻm nhà phố, dây điện, miếu nhỏ",
+      "name_en": "Shophouse alley with power lines and spirit-house shrine",
+      "description_en": "One-point view down a narrow shophouse street: dashed centre line, rows of 3-4 storey shophouses with roll-down shutters, awnings, projecting signboards and banners, a tangle of overhead power cables between poles, a small spirit-house shrine on a post at front left, parked blue scooters on the right, a red plastic stool, a streetlight",
+      "kind": "shophouse_alley",
+      "time_variants": ["night", "fog"],
+      "library_variants": true,
+      "layout": "Phối cảnh 1 điểm tụ: đường giữa có vạch đứt, 2 dãy nhà phố 3-4 tầng có cửa cuốn, mái hiên, biển nhô ra (NOODLES/ROOMS = signs), băng rôn dọc trơn, cột điện + dây chằng chịt, miếu nhỏ trên cột góc trái trước, xe tay ga xanh bên phải, ghế nhựa đỏ, đèn đường. Biến thể: đêm xanh tím; sáng sớm sương mù be-xám.",
+      "palette": {"night": "#3c4470", "lamp": "#ffcf7a", "fog": "#e8e2d6"},
+      "slots": {"center": {"x": 0.50, "y": 0.81, "scale": 0.98}, "left": {"x": 0.32, "y": 0.81, "scale": 0.98},
+                "right": {"x": 0.66, "y": 0.81, "scale": 0.98}, "shrine": {"x": 0.17, "y": 0.80, "scale": 0.9}},
+      "signs": [],
+      "flow_prompt": "Narrow Southeast Asian shophouse street in one-point perspective, dashed centre line, rows of three and four storey shophouses with roll-down shutters and awnings, tangle of overhead power cables between poles, small spirit house shrine on a post in the front left, parked blue scooters on the right, red plastic stool, streetlight",
+      "procedural": false
+    },
+    {
+      "id": "phong_truong_cong_an",
+      "name_vi": "Phòng trưởng công an",
+      "name_en": "Police chief office",
+      "description_en": "Frontal office: big wooden desk with a CHIEF nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, an invented shield-and-star emblem, grey filing cabinet with trophies, ceiling fluorescent lights and smoke detector, window blinds",
+      "kind": "police_chief_office",
+      "time_variants": ["day"],
+      "layout": "Nhìn thẳng: bàn gỗ lớn giữa (bảng tên CHIEF = signs), đèn bàn xanh, điện thoại bàn, hộp cơm mang về chồng, ghế da, giấy khen khung, huy hiệu khiên-sao BỊA (không quốc huy thật), tủ hồ sơ xám + cúp, đèn tuýp + đầu báo khói, rèm lá cửa sổ phải.",
+      "palette": {"wall": "#c4d2d2", "desk": "#6b4a32", "gold": "#c99a3c", "emblem": "#1e2a4a"},
+      "slots": {"chief": {"x": 0.50, "y": 0.70, "scale": 0.8, "clip_bottom": 0.58}, "visitor": {"x": 0.30, "y": 0.92, "scale": 1.0},
+                "center": {"x": 0.50, "y": 0.93, "scale": 1.02}},
+      "signs": [],
+      "flow_prompt": "Police chief office interior, frontal view, big wooden desk with a nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, generic shield emblem on the wall, grey filing cabinet with trophies, fluorescent ceiling lights, window blinds, pale teal-grey walls, no real insignia",
+      "procedural": false
+    },
+    {
+      "id": "phong_icu",
+      "name_vi": "Phòng hồi sức ICU",
+      "name_en": "ICU hospital room",
+      "description_en": "Hospital ICU room: bed facing the camera with a striped blanket, wall vital-signs monitor (HR 72, SpO2 97, BP 118/76), ventilator with a waveform, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door marked ICU 4, visitor chair",
+      "kind": "hospital_icu",
+      "time_variants": ["night"],
+      "layout": "Nhìn thẳng: giường quay về camera, chăn sọc xanh, monitor trên tường (HR 72 / SpO2 97 / BP 118/76 nướng tiếng Anh), máy thở có sóng sin, thanh khí y tế ổ màu, cột truyền dịch, cửa sổ đêm thấy phố, cửa kính ICU 4 (signs), ghế thăm bệnh.",
+      "palette": {"wall": "#c9d6d2", "screen": "#0c1214", "ecg": "#3ad86a", "spo2": "#3ac8e0", "bp": "#f3d04e"},
+      "slots": {"bed": {"x": 0.50, "y": 0.74, "scale": 0.8, "clip_bottom": 0.65}, "bedside_left": {"x": 0.22, "y": 0.92, "scale": 1.0},
+                "bedside_right": {"x": 0.71, "y": 0.92, "scale": 1.0}, "center": {"x": 0.50, "y": 0.95, "scale": 1.05}},
+      "signs": [],
+      "flow_prompt": "ICU hospital room at night, hospital bed facing the camera with a striped blanket, vital signs monitor on the wall with ECG traces, ventilator unit, medical gas rail with coloured outlets, IV pole, night window with a city skyline, glass door, visitor chair, pale mint walls",
+      "procedural": false
+    },
+    {
+      "id": "cho_co_mai",
+      "name_vi": "Chợ có mái che (sáng sớm)",
+      "name_en": "Covered wet market (early morning)",
+      "description_en": "Covered market under a corrugated metal roof with trusses: fruit and vegetable stall with a striped awning and hanging bananas, butcher counter with a white tiled base, hanging rail, scale and chopping block, fish stall with styrofoam boxes on a blue counter, pharmacy cabinet with a green cross, blurred umbrellas and shoppers behind, wet concrete floor",
+      "kind": "wet_market",
+      "time_variants": ["day"],
+      "layout": "Mái tôn + vì kèo chiếm 1/3 trên; hàng sạp: tủ thuốc chữ thập xanh (trái), sạp rau quả mái sọc + nải chuối, quầy thịt ốp gạch trắng + ray treo + cân + thớt, sạp cá quầy xanh + thùng xốp; nền sau (far) ô dù + người mua mờ; sàn ướt. Biển BUTCHER / FISH / FRUIT & VEG = signs.",
+      "palette": {"roof": "#4a5250", "tile": "#f2f4f4", "fish": "#3a78c2", "awning": "#2f8a5a", "sign": "#b4221b"},
+      "slots": {"butcher": {"x": 0.56, "y": 0.75, "scale": 0.92, "clip_bottom": 0.62}, "fruit_vendor": {"x": 0.25, "y": 0.75, "scale": 0.92, "clip_bottom": 0.61},
+                "center": {"x": 0.50, "y": 0.93, "scale": 1.05}},
+      "signs": [],
+      "flow_prompt": "Covered wet market in the early morning, corrugated metal roof with trusses, fruit and vegetable stall with striped awning and hanging bananas, butcher counter with a white tiled base, hanging scale and chopping block, fish stall with styrofoam boxes on a blue counter, blurred umbrellas behind, wet concrete floor, overcast grey-green light",
+      "procedural": false
+    },
+    {
+      "id": "phong_dieu_tra",
+      "name_vi": "Phòng điều tra tại nhà (bảng ghim)",
+      "name_en": "Home investigation room with cork board",
+      "description_en": "Beige room at night: large cork board covered in missing-person cards with red header bands, a pinned map with a dotted red circle, sticky notes and photos connected by red string; trestle desk with a glowing laptop and an architect lamp, red stool, cardboard box, floor mattress",
+      "kind": "investigation_room",
+      "time_variants": ["night"],
+      "layout": "Tường be, bảng lie lớn: thẻ người mất tích dải đỏ (không chữ), bản đồ vòng đỏ chấm, giấy note vàng/hồng/xanh, ảnh, dây đỏ nối đinh ghim; bàn chân chữ A + laptop sáng + đèn kỹ thuật; ghế nhựa đỏ, thùng giấy, nệm sàn. Sàn gỗ.",
+      "palette": {"wall": "#d9c9a8", "cork": "#c49a6a", "string": "#c8202a", "lamp": "#ffcf7a"},
+      "slots": {"board": {"x": 0.40, "y": 0.92, "scale": 1.02}, "desk": {"x": 0.79, "y": 0.89, "scale": 1.0},
+                "center": {"x": 0.55, "y": 0.93, "scale": 1.04}},
+      "signs": [],
+      "flow_prompt": "Home investigation room at night, beige wall with a large cork board covered in blank missing person cards, a map with a red circle, sticky notes and red string between pins, trestle desk with a glowing laptop and an architect lamp, red plastic stool, cardboard box, floor mattress, wooden floor",
+      "procedural": false
+    },
+    {
+      "id": "ben_go_nha_san",
+      "name_vi": "Bến gỗ + nhà sàn ven sông (đêm)",
+      "name_en": "Riverside wooden pier and stilt houses at night",
+      "description_en": "Wide side view at night: rickety wooden pier in the foreground with a broken plank, rope coil and bucket; dark river with lamp reflections; a row of stilt houses with a few lit windows, palm and big round tree silhouettes; an elevated walkway on the right with a sodium lamp and halo; indigo-violet starry sky",
+      "kind": "riverside_pier_night",
+      "time_variants": ["night"],
+      "layout": "Nhìn ngang rộng: bến gỗ ọp ẹp tiền cảnh (ván gãy, cuộn dây, xô), sông tối phản chiếu đèn thành vệt ngang; dãy nhà sàn (far) vài cửa sổ sáng, bóng dừa + cây tán tròn; cầu đi bộ trên cao bên phải + đèn natri vầng cam; trời chàm-tím có sao.",
+      "palette": {"sky": ["#2a2440", "#4a3a5a"], "lamp": "#f0b860", "wood": "#5a4230", "silhouette": "#141022"},
+      "slots": {"center": {"x": 0.35, "y": 0.80, "scale": 0.95}, "left": {"x": 0.15, "y": 0.80, "scale": 0.95},
+                "right": {"x": 0.56, "y": 0.80, "scale": 0.95}},
+      "signs": [],
+      "flow_prompt": "Riverside stilt house village at night, rickety wooden pier in the foreground, dark river with streetlight reflections, row of dark stilt houses with a few lit windows, palm silhouettes, big round tree silhouette, elevated walkway on the right with a sodium lamp halo, indigo violet starry sky",
+      "procedural": false
+    },
+    {
+      "id": "tiem_tap_hoa_dem",
+      "name_vi": "Tiệm tạp hoá nhỏ + cửa cuốn (đêm)",
+      "name_en": "Small snack shop front with shutters (night)",
+      "description_en": "Frontal view of a small open snack and grocery shop at night between two closed roll-down shutters: cream signboard SNACKS & DRINKS, slatted awning, shelves packed with boxes and jars, a small counter with a monitor, an upright drinks fridge, hanging bulbs, tiled sidewalk and dark road",
+      "kind": "snack_shop_front",
+      "time_variants": ["night"],
+      "layout": "Mặt đứng: biển kem SNACKS & DRINKS (signs), mái lá sách sọc kem-ô liu, lòng tiệm sáng ấm: kệ đầy hộp/lọ, quầy nhỏ có màn hình, tủ nước đứng, dây snack treo, bóng đèn treo; cửa cuốn đóng 2 bên; vỉa hè gạch + đường tối. Hợp làm hồi tưởng (thêm effect sepia).",
+      "palette": {"wall": "#cbbf9e", "awning": ["#e8dcb8", "#8a8a5a"], "inside": "#f3e2b8", "shutter": "#7a7e86"},
+      "slots": {"shopkeeper": {"x": 0.33, "y": 0.83, "scale": 0.92, "clip_bottom": 0.66}, "center": {"x": 0.50, "y": 0.94, "scale": 1.05},
+                "right": {"x": 0.84, "y": 0.94, "scale": 1.05}},
+      "signs": [],
+      "flow_prompt": "Small grocery and snack shop front at night, frontal view, blank cream signboard, slatted awning, shelves packed with boxes and jars, small counter with a monitor, upright drinks fridge, hanging bulbs, closed roll-down shutters on both sides, tiled sidewalk",
+      "procedural": false
+    },
+    {
+      "id": "toa_an",
+      "name_vi": "Mặt tiền toà án",
+      "name_en": "Courthouse facade",
+      "description_en": "Low frontal view of a courthouse: huge orange tiled pediment roof, a navy band with the word COURT, a long colonnade of cream columns with dark arched windows, wide front steps, lamp posts, trees at the edges, blue sky with soft clouds; no flag",
+      "kind": "courthouse_exterior",
+      "time_variants": ["day"],
+      "layout": "Nhìn thẳng thấp: mái ngói cam lớn có đầu hồi, dải navy chữ COURT (signs), hàng cột kem + cửa vòm tối, bậc thềm rộng, cột đèn 2 bên, cây hai mép, trời xanh mây nhẹ (far). KHÔNG cờ.",
+      "palette": {"roof": "#d0703a", "band": "#1e2a4a", "column": "#efe4c8", "sky": "#6f9ed4"},
+      "slots": {"center": {"x": 0.50, "y": 0.93, "scale": 0.88}, "left": {"x": 0.30, "y": 0.93, "scale": 0.88},
+                "right": {"x": 0.70, "y": 0.93, "scale": 0.88}, "top_steps": {"x": 0.50, "y": 0.72, "scale": 0.55}},
+      "signs": [],
+      "flow_prompt": "Courthouse facade, low frontal view, huge orange tiled pediment roof, dark navy blank sign band, long colonnade of cream columns with dark arched windows, wide front steps, trees at the edges, blue sky with soft clouds, no flag",
+      "procedural": false
+    },
+    {
+      "id": "phong_ky_tuc_xa",
+      "name_vi": "Phòng ký túc xá + vali",
+      "name_en": "Dorm room with suitcases",
+      "description_en": "Bare dusty-beige dorm or rental room by day: hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table with a kettle, standing fan, rolling suitcases (pink, blue, yellow), cardboard boxes, floor mattress, wooden door on the left",
+      "kind": "dorm_room",
+      "time_variants": ["day"],
+      "layout": "Nhìn thẳng: tường be bụi, bóng đèn treo, giấy ghim tường, cửa sổ mở thấy nhà đối diện, bàn gấp + ấm nước, quạt đứng, vali hồng/xanh/vàng có thẻ hành lý, thùng giấy chồng, nệm sàn, cửa gỗ bên trái.",
+      "palette": {"wall": "#b8ab98", "suitcases": ["#e88aa8", "#5a96d8", "#f3c94e"], "box": "#b8864a"},
+      "slots": {"center": {"x": 0.52, "y": 0.94, "scale": 1.05}, "left": {"x": 0.26, "y": 0.94, "scale": 1.05},
+                "right": {"x": 0.76, "y": 0.94, "scale": 1.05}},
+      "signs": [],
+      "flow_prompt": "Bare dorm room by day, dusty beige walls, hanging bulb, papers pinned on the wall, open window showing the building opposite, folding table, standing fan, rolling suitcases in pink blue and yellow, cardboard boxes, floor mattress, wooden door on the left",
+      "procedural": false
+    }
+  ]
+}

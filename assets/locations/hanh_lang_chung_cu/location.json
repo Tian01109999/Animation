@@ -1,0 +1,67 @@
+{
+ "id": "hanh_lang_chung_cu",
+ "name": "Hành lang chung cư cũ / nhà trọ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hành lang chung cư cũ / nhà trọ (ban đêm)",
+  "description": "Hành lang chung cư cũ / nhà trọ, ban đêm, chung cư, hành lang, nhà trọ, apartment, cửa sắt, lan can, ban đêm, night",
+  "kind": "apartment_hallway",
+  "tags": [
+   "chung cư",
+   "hành lang",
+   "nhà trọ",
+   "apartment",
+   "cửa sắt",
+   "lan can",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hanh_lang_chung_cu"
+  ],
+  "catalog_id": "hanh_lang_chung_cu",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "1 điểm tụ: dãy cửa phòng sắt sơn xanh, lan can bên hông, đèn tuýp chập chờn, dép trước cửa, giấy quảng cáo dán tường."
+ },
+ "flow_prompt": "Old apartment building corridor at night in one-point perspective, row of green-painted iron doors, side railing, flickering fluorescent tube, slippers in front of doors, stained walls, eerie, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hanh_lang_chung_cu"
+ },
+ "floor_y": 1827,
+ "slots": {
+  "left": {
+   "x": 1709,
+   "y": 1827,
+   "scale": 1.04
+  },
+  "center": {
+   "x": 1920,
+   "y": 1827,
+   "scale": 1.04
+  },
+  "right": {
+   "x": 2131,
+   "y": 1827,
+   "scale": 1.04
+  },
+  "far": {
+   "x": 1920,
+   "y": 1374,
+   "scale": 0.391
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "night": "Old apartment building corridor at night in one-point perspective, row of green-painted iron doors, side railing, flickering fluorescent tube, slippers in front of doors, stained walls, eerie, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "indoor": "Old apartment building corridor at night in one-point perspective, row of green-painted iron doors, side railing, flickering fluorescent tube, slippers in front of doors, stained walls, eerie, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

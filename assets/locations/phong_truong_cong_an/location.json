@@ -1,0 +1,90 @@
+{
+ "id": "phong_truong_cong_an",
+ "name": "Phòng trưởng công an",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng trưởng công an / Police chief office (ban ngày / day)",
+  "description": "Phòng trưởng công an, ban ngày. Frontal office: big wooden desk with a CHIEF nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, an invented shield-and-star emblem, grey filing cabinet with trophies, ceiling fluorescent lights and smoke detector, window blinds (day). công an, trưởng đồn, văn phòng, bàn làm việc, giấy khen, police chief, office, ban ngày, day",
+  "kind": "police_chief_office",
+  "tags": [
+   "công an",
+   "trưởng đồn",
+   "văn phòng",
+   "bàn làm việc",
+   "giấy khen",
+   "police chief",
+   "office",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "phong_truong_cong_an"
+  ],
+  "catalog_id": "phong_truong_cong_an",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: bàn gỗ lớn giữa (bảng tên CHIEF = signs), đèn bàn xanh, điện thoại bàn, hộp cơm mang về chồng, ghế da, giấy khen khung, huy hiệu khiên-sao BỊA (không quốc huy thật), tủ hồ sơ xám + cúp, đèn tuýp + đầu báo khói, rèm lá cửa sổ phải.",
+  "label_en": "Police chief office (day)",
+  "description_en": "Frontal office: big wooden desk with a CHIEF nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, an invented shield-and-star emblem, grey filing cabinet with trophies, ceiling fluorescent lights and smoke detector, window blinds"
+ },
+ "flow_prompt": "Police chief office interior, frontal view, big wooden desk with a nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, generic shield emblem on the wall, grey filing cabinet with trophies, fluorescent ceiling lights, window blinds, pale teal-grey walls, no real insignia, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_truong_cong_an"
+ },
+ "floor_y": 2009,
+ "slots": {
+  "chief": {
+   "x": 1920,
+   "y": 1520,
+   "scale": 0.8,
+   "clip_bottom": 1250
+  },
+  "visitor": {
+   "x": 1152,
+   "y": 1987,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 1920,
+   "y": 2009,
+   "scale": 1.02
+  },
+  "right": {
+   "x": 2918,
+   "y": 1987,
+   "scale": 1.0
+  }
+ },
+ "signs": [
+  {
+   "text": "CHIEF",
+   "box": [
+    1760,
+    1170,
+    2080,
+    1246
+   ],
+   "style": "gold_board"
+  }
+ ],
+ "lights": [
+  {
+   "x": 1250,
+   "y": 1090,
+   "color": "#fff1c8"
+  }
+ ],
+ "flow_prompts": {
+  "day": "Police chief office interior, frontal view, big wooden desk with a nameplate, green banker lamp, desk phone, stacked takeout boxes, leather chair, framed certificates, generic shield emblem on the wall, grey filing cabinet with trophies, fluorescent ceiling lights, window blinds, pale teal-grey walls, no real insignia, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "CHIEF"
+ ]
+}

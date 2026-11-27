@@ -1,0 +1,35 @@
+{
+ "id": "taped_notice",
+ "label": "Tờ thông báo dán cửa cuốn",
+ "label_en": "Notice taped to a roller shutter",
+ "tags": [
+  "thông báo",
+  "đóng cửa",
+  "cửa cuốn",
+  "notice",
+  "closed"
+ ],
+ "props": [
+  "notice",
+  "taped_notice",
+  "closed_sign"
+ ],
+ "style": "cutout",
+ "image": "taped_notice.png",
+ "kind": "taped_notice",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "headline": "CLOSED PERMANENTLY",
+  "body": "Thank you for your support.",
+  "rotation": -3,
+  "kicker": "NOTICE",
+  "signature": "The Management",
+  "bg": "shutter"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

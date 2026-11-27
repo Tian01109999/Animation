@@ -1,0 +1,38 @@
+{
+ "id": "wet_footprints",
+ "label": "Dấu chân ướt + vũng nước",
+ "label_en": "Wet footprints + puddle",
+ "tags": [
+  "dấu chân",
+  "ướt",
+  "vũng nước",
+  "ma nước",
+  "footprints",
+  "puddle"
+ ],
+ "props": [
+  "footprints",
+  "wet_footprints",
+  "puddle"
+ ],
+ "style": "cutout",
+ "image": "wet_footprints.png",
+ "kind": "wet_footprints",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "steps": 7,
+  "direction": [
+   1,
+   -0.6
+  ],
+  "puddle": true,
+  "cctv": false,
+  "bg": "tiles_white"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

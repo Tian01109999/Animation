@@ -1,0 +1,38 @@
+{
+ "id": "wristwatch_digital",
+ "label": "Đồng hồ điện tử trên cổ tay băng gạc",
+ "label_en": "Digital wristwatch on a bandaged arm",
+ "tags": [
+  "đồng hồ đeo tay",
+  "điện tử",
+  "giờ",
+  "băng gạc",
+  "wristwatch",
+  "digital watch",
+  "time"
+ ],
+ "props": [
+  "wristwatch",
+  "digital_watch",
+  "watch"
+ ],
+ "style": "cutout",
+ "image": "wristwatch_digital.png",
+ "kind": "wristwatch_digital",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "02:45",
+  "ampm": "PM",
+  "date": "SAT 14",
+  "top_label": "LIGHT",
+  "top_label_right": "MODE",
+  "bandage": true,
+  "skin": "#c9926a"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

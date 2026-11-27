@@ -1,0 +1,35 @@
+{
+ "id": "newspaper",
+ "label": "Trang báo cũ",
+ "label_en": "Old newspaper page",
+ "tags": [
+  "báo cũ",
+  "tờ báo",
+  "tin tức",
+  "newspaper",
+  "news",
+  "headline"
+ ],
+ "props": [
+  "newspaper",
+  "old_newspaper"
+ ],
+ "style": "cutout",
+ "image": "newspaper.png",
+ "kind": "newspaper",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "masthead": "THE EVENING LEDGER",
+  "dateline": "VOL. XII · NO. 214 · LATE EDITION",
+  "headline": "NIGHT CLERK VANISHES FROM 24-HOUR STORE",
+  "photo_caption": "Last seen at 3:00 AM",
+  "rotation": -2,
+  "bg": "wood_dark"
+ },
+ "provenance": {
+  "kind": "procedural",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

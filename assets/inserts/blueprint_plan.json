@@ -1,0 +1,52 @@
+{
+ "id": "blueprint_plan",
+ "label": "Bản vẽ kỹ thuật nhà phố (mặt cắt + tầng trệt)",
+ "label_en": "Building blueprint (section + ground floor)",
+ "tags": [
+  "bản vẽ",
+  "thiết kế",
+  "tầng hầm",
+  "nhà phố",
+  "blueprint",
+  "floor plan",
+  "basement"
+ ],
+ "props": [
+  "blueprint",
+  "floor_plan",
+  "building_plan"
+ ],
+ "style": "cutout",
+ "image": "blueprint_plan.png",
+ "kind": "blueprint_plan",
+ "camera_default": "pan_down_slow",
+ "text_language": "en",
+ "params": {
+  "section_title": "SECTION A-A",
+  "plan_title": "GROUND FLOOR",
+  "rooms": [
+   "SHOP",
+   "KITCHEN",
+   "COLD ROOM"
+  ],
+  "basement_label": "BASEMENT (FILLED)",
+  "depth": "3.00",
+  "plan_note": "basement line (filled)",
+  "length": "16.00 m",
+  "width": "4.00 m",
+  "title_block": [
+   "DISTRICT OFFICE",
+   "4-STOREY SHOPHOUSE",
+   "REQUEST: FILL BASEMENT",
+   "DATE: 1997"
+  ],
+  "stamp": "APPROVED",
+  "stamp_year": "1997",
+  "bg": "wood_dark"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

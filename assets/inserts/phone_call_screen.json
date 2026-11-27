@@ -1,0 +1,46 @@
+{
+ "id": "phone_call_screen",
+ "label": "Điện thoại – màn hình cuộc gọi",
+ "label_en": "Phone - call screen",
+ "tags": [
+  "điện thoại",
+  "cuộc gọi",
+  "gọi điện",
+  "phone",
+  "call",
+  "calling"
+ ],
+ "props": [
+  "phone_call",
+  "call_screen",
+  "calling"
+ ],
+ "style": "cutout",
+ "image": "phone_call_screen.png",
+ "kind": "phone_call_screen",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "time": "08:12",
+  "contact": "Captain",
+  "call_status": "00:00",
+  "buttons": [
+   "Mute",
+   "Keypad",
+   "Speaker",
+   "Add call",
+   "Video",
+   "Contacts"
+  ],
+  "active_button": 2,
+  "sleeve_color": "#2b3550",
+  "skin": "#c9926a",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ }
+}

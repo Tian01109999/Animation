@@ -1,0 +1,111 @@
+{
+ "id": "cua_hang_cctv_tren_cao",
+ "name": "Cửa hàng – góc camera an ninh trên cao",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Cửa hàng – góc camera an ninh trên cao (ban đêm)",
+  "description": "Cửa hàng – góc camera an ninh trên cao, ban đêm, camera an ninh, cctv, góc trên cao, cửa hàng, giám sát, security camera, tạp hoá, cửa hàng tiện lợi, 24h, shop, ban đêm, night",
+  "kind": "store_cctv_high_angle",
+  "tags": [
+   "camera an ninh",
+   "cctv",
+   "góc trên cao",
+   "cửa hàng",
+   "giám sát",
+   "security camera",
+   "tạp hoá",
+   "cửa hàng tiện lợi",
+   "24h",
+   "shop",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "cua_hang_cctv_tren_cao"
+  ],
+  "catalog_id": "cua_hang_cctv_tren_cao",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Góc trên-trần ống kính rộng: sàn gạch trắng lưới xám, quầy đỏ/xanh góc dưới trái, tủ đá kính phải, kệ giữa có biển đầu kệ đánh số, biển sàn ướt vàng, bảng ghim, cửa nhân viên. Tuỳ chọn vũng nước + vệt dấu chân ướt. Luôn render qua effect 'cctv' (khử màu, scanline, fisheye)."
+ },
+ "flow_prompt": "High-angle security camera view of a small convenience store interior at night, wide-angle lens, white square floor tiles, checkout counter in the lower left, chest freezer on the right, freestanding shelves with simple colored boxes, yellow wet floor sign, cork board, staff door, simple flat-shaded geometry, clinical lighting, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cua_hang_cctv_tren_cao"
+ },
+ "floor_y": 1268,
+ "slots": {
+  "counter": {
+   "x": 982,
+   "y": 1424,
+   "scale": 0.498,
+   "clip_bottom": 1339
+  },
+  "floor_center": {
+   "x": 1883,
+   "y": 1268,
+   "scale": 0.452
+  },
+  "aisle": {
+   "x": 1865,
+   "y": 771,
+   "scale": 0.305
+  },
+  "door": {
+   "x": 1270,
+   "y": 526,
+   "scale": 0.232
+  },
+  "center": {
+   "x": 1883,
+   "y": 1268,
+   "scale": 0.452
+  }
+ },
+ "signs": [
+  {
+   "text": "AISLE 1",
+   "box": [
+    1618,
+    910,
+    1782,
+    1001
+   ],
+   "style": "plain"
+  },
+  {
+   "text": "AISLE 2",
+   "box": [
+    2146,
+    910,
+    2310,
+    1001
+   ],
+   "style": "plain"
+  },
+  {
+   "text": "STAFF ONLY",
+   "box": [
+    1254,
+    248,
+    1326,
+    267
+   ],
+   "style": "plain"
+  }
+ ],
+ "flow_prompts": {
+  "night": "High-angle security camera view of a small convenience store interior at night, wide-angle lens, white square floor tiles, checkout counter in the lower left, chest freezer on the right, freestanding shelves with simple colored boxes, yellow wet floor sign, cork board, staff door, simple flat-shaded geometry, clinical lighting, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "AISLE 1",
+  "AISLE 2",
+  "STAFF ONLY"
+ ]
+}
