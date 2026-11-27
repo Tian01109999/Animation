@@ -18,7 +18,7 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: System.Reflection.AssemblyTitle("StoryToon Desktop")]
 [assembly: System.Reflection.AssemblyProduct("StoryToon")]
 [assembly: System.Reflection.AssemblyDescription("StoryToon - ứng dụng dựng phim hoạt hình 2D")]
-[assembly: System.Reflection.AssemblyVersion("0.2.0.0")]
+[assembly: System.Reflection.AssemblyVersion("0.2.1.0")]
 
 static class Program {
     [STAThread] static void Main(string[] args) {
@@ -55,7 +55,7 @@ sealed class StudioWindow : Form {
         var data = new Button { Text = "Thư mục dữ liệu", Dock = DockStyle.Right, Width = 145, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
         data.FlatAppearance.BorderSize = 0; data.Click += delegate { Process.Start(new ProcessStartInfo("explorer.exe", Quote(root)) { UseShellExecute = true }); };
         bar.Controls.Add(brand); bar.Controls.Add(status); bar.Controls.Add(data);
-        var updates = new Button { Text = "Cập nhật · v0.2.0", Dock = DockStyle.Right, Width = 150, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
+        var updates = new Button { Text = "Cập nhật assets", Dock = DockStyle.Right, Width = 150, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
         updates.FlatAppearance.BorderSize = 0;
         updates.Click += delegate { if (view != null && ready) view.CoreWebView2.Navigate(address + "/updates"); };
         bar.Controls.Add(updates);
@@ -135,7 +135,7 @@ sealed class StudioWindow : Form {
             string version = Convert.ToString(result["version"]);
             if (shuttingDown || !Convert.ToBoolean(result["available"]) || version == notifiedVersion) return;
             notifiedVersion = version;
-            if (MessageBox.Show(this, "Đã có StoryToon " + version + ". Mở trang GitHub để tải bản Portable mới?", "Cập nhật StoryToon", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            if (MessageBox.Show(this, "Có kho assets mới " + version + ". Mở trang tải gói assets? Đóng app trước khi giải nén gói vào thư mục chứa EXE.", "Cập nhật assets", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                 OpenExternal(Convert.ToString(result["url"]));
         } catch { /* Updates must never prevent opening the studio. */ }
     }

@@ -1,5 +1,8 @@
 """Authentication boundary and private-release notification contracts."""
 import sys
+import json
+import tempfile
+import zipfile
 from pathlib import Path
 import unittest
 from unittest.mock import patch, MagicMock
@@ -61,13 +64,51 @@ class UpdatesTests(unittest.TestCase):
 
     def test_private_request_and_new_release(self):
         response = MagicMock()
-        response.__enter__.return_value.read.return_value = b'{"tag_name":"v0.3.0"}'
-        with patch('storytoon.secure_store.read', return_value={'token': 'test-token'}), patch.object(updater, 'urlopen', return_value=response) as call:
+        response.__enter__.return_value.read.return_value = json.dumps([
+            {'tag_name': 'assets-v1.1.0', 'assets': [
+                {'name': 'StoryToon-Assets-1.1.0.zip', 'state': 'uploaded'},
+                {'name': 'StoryToon-Assets-1.1.0.zip.sha256', 'state': 'uploaded'}]}
+        ]).encode()
+        with patch('storytoon.secure_store.read', return_value={'token': 'test-token'}), patch.object(updater, 'assets_version', return_value='1.0.0'), patch.object(updater, 'urlopen', return_value=response) as call:
             result = updater.check_release()
             self.assertTrue(result['available'])
-            self.assertEqual(result['url'], 'https://github.com/Tian01109999/Animation/releases/tag/v0.3.0')
+            self.assertEqual(result['url'], 'https://github.com/Tian01109999/Animation/releases/tag/assets-v1.1.0')
+            self.assertEqual(result['kind'], 'assets')
             self.assertEqual(call.call_args.args[0].get_header('Authorization'), 'Bearer test-token')
             self.assertNotIn('test-token', str(result))
+
+    def test_assets_versions_ignore_app_releases_and_incomplete_packages(self):
+        def release(version, **kwargs):
+            return dict(tag_name='assets-v' + version, assets=[
+                {'name': f'StoryToon-Assets-{version}.zip', 'state': 'uploaded'},
+                {'name': f'StoryToon-Assets-{version}.zip.sha256', 'state': 'uploaded'}], **kwargs)
+        metadata = [release('2.0.0', draft=True), release('3.0.0', prerelease=True),
+                    {'tag_name': 'v99.0.0'}, {'tag_name': 'assets-v5.0.0', 'assets': []},
+                    release('1.2.0'), release('1.10.0')]
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = json.dumps(metadata).encode()
+        with patch('storytoon.secure_store.read', return_value={'token': 'test'}), patch.object(updater, 'urlopen', return_value=response), patch.object(updater, 'assets_version', return_value='1.10.0'):
+            result = updater.check_release()
+            self.assertEqual(result['version'], '1.10.0')
+            self.assertFalse(result['available'])
+
+    def test_assets_pack_contains_only_assets_and_installed_version_marker(self):
+        from tools.prepare_assets_release import build
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / 'assets').mkdir()
+            (root / 'assets' / 'picture.png').write_bytes(b'asset')
+            (root / 'personal.txt').write_text('private')
+            output = build('1.0.0', root)
+            with zipfile.ZipFile(output) as archive:
+                self.assertTrue(all(name.startswith('assets/') for name in archive.namelist()))
+                self.assertNotIn('personal.txt', archive.namelist())
+                self.assertEqual(json.loads(archive.read('assets/' + updater.ASSETS_VERSION_FILE))['version'], '1.0.0')
+            with patch.object(updater.paths, 'ASSETS', root / 'assets'):
+                self.assertEqual(updater.assets_version(), '1.0.0')
+                (root / 'assets' / updater.ASSETS_VERSION_FILE).unlink()
+                self.assertEqual(updater.assets_version(), '0.0.0')
+            self.assertTrue(output.with_suffix('.zip.sha256').exists())
 
     def test_no_token_or_network_failure_does_not_offer_update(self):
         with patch('storytoon.secure_store.read', return_value={}):

@@ -43,8 +43,14 @@ Giao diện và API yêu cầu đăng nhập. Phiên ghi nhớ được mã hóa
 
 ## Cập nhật từ GitHub riêng tư
 
-Repository: [Tian01109999/Animation](https://github.com/Tian01109999/Animation). Nhấn **Cập nhật · v0.2.0** và lưu fine-grained GitHub token có quyền **Contents: Read-only** cho repository này. Tài khoản GitHub phải được cấp quyền đọc repo. Token được mã hóa trên từng máy bằng Windows DPAPI, không đi kèm bản portable.
+Repository: [Tian01109999/Animation](https://github.com/Tian01109999/Animation). Nhấn **Cập nhật assets** và lưu fine-grained GitHub token có quyền **Contents: Read-only** cho repository này. Tài khoản GitHub phải được cấp quyền đọc repo. Token được mã hóa trên từng máy bằng Windows DPAPI, không đi kèm bản portable.
 
-App kiểm tra GitHub Releases lúc mở và mỗi 4 giờ. Khi có bản ổn định mới hơn, thông báo cho phép mở trang tải. Có thể kiểm tra ngay hoặc xóa token trong màn hình Cập nhật. App không tự ghi đè cài đặt đang chạy. Tải ZIP từ Releases, giải nén vào thư mục riêng và chuyển dữ liệu dự án/cấu hình cần giữ sang bản mới.
+Từ app 0.2.1, phiên bản kho assets độc lập với phiên bản app. App kiểm tra các Release `assets-vX.Y.Z` lúc mở và mỗi 4 giờ; chỉ thông báo khi có kho assets mới hơn. Release app thông thường không kích hoạt thông báo này. Có thể kiểm tra ngay hoặc xóa token trong màn hình Cập nhật.
 
-Để phát hành: cập nhật phiên bản Python và desktop đồng bộ, build EXE, chạy `runtime/python/python.exe -X utf8 tests/auth_updates_test.py`, rồi `runtime/python/python.exe -X utf8 tools/prepare_release.py`. Tải ZIP và SHA256 trong `dist/` lên một GitHub Release với tag `vX.Y.Z` tương ứng. Commit hoặc tag đơn thuần chưa tạo thông báo cập nhật; phải có Release ổn định đã publish. Gói chỉ chứa runtime được chọn, assets, mã app và cấu hình mẫu; loại dự án cá nhân, cache, logs, thông tin đăng nhập và công cụ phát triển.
+Người dùng tải **StoryToon-Assets-X.Y.Z.zip**, đóng app, giải nén vào thư mục chứa EXE và đồng ý ghi đè file trùng trong `assets/`, rồi mở lại. ZIP có sẵn thư mục `assets/`; không giải nén vào bên trong thư mục assets lần nữa. Gói không chứa EXE, runtime, dự án, cấu hình hoặc tài khoản. File riêng không trùng tên được giữ lại; file có sẵn đã chỉnh sửa có thể bị thay thế. Sao lưu kho nếu cần giữ các chỉnh sửa này. App chưa tự cài gói; người dùng giải nén thủ công. Marker `assets/.storytoon-assets-version.json` đi kèm gói giúp app biết đã cập nhật.
+
+Máy đang dùng app 0.2.0 chỉ cần nâng cấp một lần: tải **StoryToon-App-Patch-0.2.1.zip**, đóng app, giải nén ngay vào thư mục chứa EXE và ghi đè. Bản vá yêu cầu đã có bản Portable 0.2.0 đầy đủ. Sau đó dùng các gói assets cho những lần cập nhật kho tiếp theo.
+
+Để phát hành kho mới: sửa/thêm nội dung trong `assets/`, chạy `runtime/python/python.exe -X utf8 tools/prepare_assets_release.py --version 1.1.0` (tăng phiên bản mỗi lần phát hành). Commit assets và marker phiên bản, push lên main; tạo Release ổn định với tag **assets-v1.1.0**, tải ZIP và SHA256 từ `dist/` lên và đặt `--latest=false`. App chỉ nhận gói khi cả ZIP lẫn SHA256 đã upload xong và Release đã publish. Giữ các kho đã phát hành bất biến; sửa nội dung thì tăng phiên bản. Không cần build EXE hoặc đóng gói Python/runtime khi chỉ thay assets.
+
+Nếu thay mã app, cập nhật phiên bản Python và desktop đồng bộ, build EXE bằng `tools/build_root_desktop.py`; tạo bản vá nhỏ bằng `tools/prepare_app_patch.py` hoặc bản Portable đầy đủ bằng `tools/prepare_release.py`. Các công cụ này chạy qua Python portable đi kèm. Với bản vá nhỏ, chỉ giải nén lên app có đủ runtime tương thích.
