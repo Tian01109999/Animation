@@ -18,7 +18,7 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: System.Reflection.AssemblyTitle("StoryToon Desktop")]
 [assembly: System.Reflection.AssemblyProduct("StoryToon")]
 [assembly: System.Reflection.AssemblyDescription("StoryToon - ứng dụng dựng phim hoạt hình 2D")]
-[assembly: System.Reflection.AssemblyVersion("0.2.1.0")]
+[assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
 
 static class Program {
     [STAThread] static void Main(string[] args) {
@@ -46,7 +46,7 @@ sealed class StudioWindow : Form {
     string notifiedVersion = "";
     public StudioWindow(string root, string smoke) {
         this.root = root; this.smoke = smoke;
-        Text = "StoryToon · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
+        Text = "StoryToon v1.0.0 · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
         StartPosition = FormStartPosition.CenterScreen; BackColor = Color.FromArgb(20, 25, 34);
         try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
         var bar = new Panel { Dock = DockStyle.Top, Height = 58, BackColor = Color.FromArgb(24, 31, 43) };

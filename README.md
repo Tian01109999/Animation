@@ -1,5 +1,7 @@
 # StoryToon Desktop
 
+Bản chính thức đầu tiên: **v1.0.0** dành cho Windows x64. Tải gói **StoryToon-1.0.0-Windows-x64.zip** từ [Releases](https://github.com/Tian01109999/Animation/releases/tag/v1.0.0), giải nén toàn bộ rồi mở `StoryToon-Desktop-Portable.exe`. Gói có sẵn Python, Node, FFmpeg, Rhubarb và kho assets; máy cần Microsoft Edge WebView2 Runtime. Không cần cài Python hay Node riêng.
+
 Ứng dụng Windows portable chuyển kịch bản người dùng nhập thành phim hoạt hình 2D.
 
 1. Mở `StoryToon-Desktop-Portable.exe`, đăng nhập tài khoản 24Media đã được cấp quyền trong Account Manager. Sau đó đăng nhập ChatGPT tại **Tài khoản & Cài đặt** để AI phân tích kịch bản.
@@ -41,15 +43,15 @@ App dùng cùng Firebase project `media-srt-translator` với 24Media SRT Transl
 
 Giao diện và API yêu cầu đăng nhập. Phiên ghi nhớ được mã hóa bằng Windows DPAPI trong LocalAppData của người dùng, kiểm tra lại quyền khi khôi phục và định kỳ khi sử dụng; mật khẩu không được lưu. Đăng nhập 24Media độc lập với đăng nhập ChatGPT.
 
-## Cập nhật từ GitHub riêng tư
+## Cập nhật assets tự động thông báo
 
-Repository: [Tian01109999/Animation](https://github.com/Tian01109999/Animation). Nhấn **Cập nhật assets** và lưu fine-grained GitHub token có quyền **Contents: Read-only** cho repository này. Tài khoản GitHub phải được cấp quyền đọc repo. Token được mã hóa trên từng máy bằng Windows DPAPI, không đi kèm bản portable.
+Repository công khai: [Tian01109999/Animation](https://github.com/Tian01109999/Animation). Không cần token, tài khoản GitHub hoặc cấu hình trước để kiểm tra và tải cập nhật. Đăng nhập 24Media vẫn dùng để mở giao diện làm phim.
 
-Từ app 0.2.1, phiên bản kho assets độc lập với phiên bản app. App kiểm tra các Release `assets-vX.Y.Z` lúc mở và mỗi 4 giờ; chỉ thông báo khi có kho assets mới hơn. Release app thông thường không kích hoạt thông báo này. Có thể kiểm tra ngay hoặc xóa token trong màn hình Cập nhật.
+Phiên bản kho assets độc lập với phiên bản app. App kiểm tra các Release `assets-vX.Y.Z` lúc mở và mỗi 4 giờ; cửa sổ cập nhật tự xuất hiện khi có kho mới hơn. Chọn Có để mở trang tải, chọn Không để tiếp tục làm việc; cùng một phiên bản chỉ nhắc một lần trong mỗi lần chạy. Nhấn **Cập nhật assets → Kiểm tra ngay** nếu muốn kiểm tra thủ công. Khi mất mạng hoặc GitHub giới hạn lượt truy cập, app vẫn mở bình thường và kiểm tra lại ở lần sau. Release app thông thường không kích hoạt thông báo assets.
 
 Người dùng tải **StoryToon-Assets-X.Y.Z.zip**, đóng app, giải nén vào thư mục chứa EXE và đồng ý ghi đè file trùng trong `assets/`, rồi mở lại. ZIP có sẵn thư mục `assets/`; không giải nén vào bên trong thư mục assets lần nữa. Gói không chứa EXE, runtime, dự án, cấu hình hoặc tài khoản. File riêng không trùng tên được giữ lại; file có sẵn đã chỉnh sửa có thể bị thay thế. Sao lưu kho nếu cần giữ các chỉnh sửa này. App chưa tự cài gói; người dùng giải nén thủ công. Marker `assets/.storytoon-assets-version.json` đi kèm gói giúp app biết đã cập nhật.
 
-Máy đang dùng app 0.2.0 chỉ cần nâng cấp một lần: tải **StoryToon-App-Patch-0.2.1.zip**, đóng app, giải nén ngay vào thư mục chứa EXE và ghi đè. Bản vá yêu cầu đã có bản Portable 0.2.0 đầy đủ. Sau đó dùng các gói assets cho những lần cập nhật kho tiếp theo.
+Người dùng các bản thử nghiệm 0.2.x nên tải bản chính thức 1.0.0 đầy đủ, giải nén vào thư mục riêng và chuyển dự án/cấu hình cần giữ. Bản 1.0.0 bỏ hoàn toàn yêu cầu nhập token của các bản thử nghiệm.
 
 Để phát hành kho mới: sửa/thêm nội dung trong `assets/`, chạy `runtime/python/python.exe -X utf8 tools/prepare_assets_release.py --version 1.1.0` (tăng phiên bản mỗi lần phát hành). Commit assets và marker phiên bản, push lên main; tạo Release ổn định với tag **assets-v1.1.0**, tải ZIP và SHA256 từ `dist/` lên và đặt `--latest=false`. App chỉ nhận gói khi cả ZIP lẫn SHA256 đã upload xong và Release đã publish. Giữ các kho đã phát hành bất biến; sửa nội dung thì tăng phiên bản. Không cần build EXE hoặc đóng gói Python/runtime khi chỉ thay assets.
 

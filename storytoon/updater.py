@@ -1,4 +1,4 @@
-"""Read private GitHub Releases using a per-Windows-user encrypted credential."""
+"""Check public assets releases without GitHub credentials."""
 from __future__ import annotations
 
 import json
@@ -6,10 +6,9 @@ import re
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from . import __version__, secure_store, paths
+from . import __version__, paths
 
 REPOSITORY = 'Tian01109999/Animation'
-STORE = 'github-updates.dat'
 ASSETS_VERSION_FILE = '.storytoon-assets-version.json'
 
 
@@ -29,23 +28,12 @@ def version_tuple(value: str) -> tuple[int, ...]:
     return parts + (0,) * (4 - len(parts))
 
 
-def save_token(token: str) -> None:
-    token = token.strip()
-    if not token or len(token) > 1024 or any(c.isspace() for c in token):
-        raise ValueError('GitHub token không hợp lệ.')
-    secure_store.write(STORE, {'token': token})
-
-
 def check_release() -> dict:
     result = {'current': assets_version(), 'app_version': __version__, 'kind': 'assets',
               'available': False, 'version': '', 'url': '', 'error': ''}
     try:
-        token = secure_store.read(STORE).get('token', '')
-        if not isinstance(token, str) or not token:
-            result['error'] = 'Chưa cấu hình quyền đọc GitHub. Mở Cập nhật để thêm token.'
-            return result
         request = Request(f'https://api.github.com/repos/{REPOSITORY}/releases?per_page=100', headers={
-            'Accept': 'application/vnd.github+json', 'Authorization': f'Bearer {token}',
+            'Accept': 'application/vnd.github+json',
             'User-Agent': 'StoryToon-Portable', 'X-GitHub-Api-Version': '2022-11-28',
         })
         with urlopen(request, timeout=15) as response:
@@ -78,10 +66,9 @@ def check_release() -> dict:
         if result['available']:
             result['url'] = f'https://github.com/{REPOSITORY}/releases/tag/{tag}'
     except HTTPError as exc:
-        result['error'] = ({401: 'GitHub token hết hạn hoặc không hợp lệ.',
-                            403: 'GitHub từ chối truy cập hoặc giới hạn lượt kiểm tra.',
-                            404: 'Chưa có bản phát hành hoặc token chưa có quyền đọc repository.'}
+        result['error'] = ({403: 'GitHub đang giới hạn lượt kiểm tra. Vui lòng thử lại sau.',
+                            404: 'Chưa tìm thấy repository công khai hoặc bản phát hành.'}
                            .get(exc.code, 'Không thể kiểm tra bản phát hành GitHub.'))
     except (OSError, URLError, ValueError, TypeError, AttributeError):
-        result['error'] = 'Không kiểm tra được cập nhật. Kiểm tra Internet và quyền đọc GitHub.'
+        result['error'] = 'Không kiểm tra được cập nhật. Kiểm tra kết nối Internet và thử lại sau.'
     return result

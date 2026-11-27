@@ -1,4 +1,4 @@
-"""Authentication boundary and private-release notification contracts."""
+"""Authentication boundary and public assets notification contracts."""
 import sys
 import json
 import tempfile
@@ -62,20 +62,19 @@ class UpdatesTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 updater.version_tuple(value)
 
-    def test_private_request_and_new_release(self):
+    def test_public_request_and_new_release_needs_no_credentials(self):
         response = MagicMock()
         response.__enter__.return_value.read.return_value = json.dumps([
             {'tag_name': 'assets-v1.1.0', 'assets': [
                 {'name': 'StoryToon-Assets-1.1.0.zip', 'state': 'uploaded'},
                 {'name': 'StoryToon-Assets-1.1.0.zip.sha256', 'state': 'uploaded'}]}
         ]).encode()
-        with patch('storytoon.secure_store.read', return_value={'token': 'test-token'}), patch.object(updater, 'assets_version', return_value='1.0.0'), patch.object(updater, 'urlopen', return_value=response) as call:
+        with patch('storytoon.secure_store.read', side_effect=AssertionError('Must not read credentials')), patch.object(updater, 'assets_version', return_value='1.0.0'), patch.object(updater, 'urlopen', return_value=response) as call:
             result = updater.check_release()
             self.assertTrue(result['available'])
             self.assertEqual(result['url'], 'https://github.com/Tian01109999/Animation/releases/tag/assets-v1.1.0')
             self.assertEqual(result['kind'], 'assets')
-            self.assertEqual(call.call_args.args[0].get_header('Authorization'), 'Bearer test-token')
-            self.assertNotIn('test-token', str(result))
+            self.assertIsNone(call.call_args.args[0].get_header('Authorization'))
 
     def test_assets_versions_ignore_app_releases_and_incomplete_packages(self):
         def release(version, **kwargs):
@@ -87,7 +86,7 @@ class UpdatesTests(unittest.TestCase):
                     release('1.2.0'), release('1.10.0')]
         response = MagicMock()
         response.__enter__.return_value.read.return_value = json.dumps(metadata).encode()
-        with patch('storytoon.secure_store.read', return_value={'token': 'test'}), patch.object(updater, 'urlopen', return_value=response), patch.object(updater, 'assets_version', return_value='1.10.0'):
+        with patch.object(updater, 'urlopen', return_value=response), patch.object(updater, 'assets_version', return_value='1.10.0'):
             result = updater.check_release()
             self.assertEqual(result['version'], '1.10.0')
             self.assertFalse(result['available'])
@@ -110,10 +109,8 @@ class UpdatesTests(unittest.TestCase):
                 self.assertEqual(updater.assets_version(), '0.0.0')
             self.assertTrue(output.with_suffix('.zip.sha256').exists())
 
-    def test_no_token_or_network_failure_does_not_offer_update(self):
-        with patch('storytoon.secure_store.read', return_value={}):
-            self.assertFalse(updater.check_release()['available'])
-        with patch('storytoon.secure_store.read', return_value={'token': 'test'}), patch.object(updater, 'urlopen', side_effect=OSError):
+    def test_network_failure_does_not_offer_update(self):
+        with patch.object(updater, 'urlopen', side_effect=OSError):
             self.assertTrue(updater.check_release()['error'])
 
 
