@@ -1,0 +1,31 @@
+{
+ "id": "laundry_basket_disguise",
+ "label": "Tóc giả + nón rơm trong giỏ giặt",
+ "label_en": "Wig and straw hat in a laundry basket",
+ "tags": [
+  "laundry basket",
+  "wig",
+  "straw hat",
+  "disguise",
+  "laundromat",
+  "glasses"
+ ],
+ "props": [
+  "laundry_basket",
+  "wig",
+  "straw_hat",
+  "disguise"
+ ],
+ "style": "cutout",
+ "image": "laundry_basket_disguise.png",
+ "kind": "laundry_basket_disguise",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

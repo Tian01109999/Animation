@@ -1,0 +1,45 @@
+{
+ "id": "vending_pair",
+ "label": "Cặp máy bán hàng tự động (lạnh / nóng)",
+ "label_en": "Pair of vending machines close-up (cold / hot)",
+ "tags": [
+  "máy bán hàng tự động",
+  "nóng lạnh",
+  "đồ uống",
+  "ban đêm",
+  "vending machine",
+  "drinks",
+  "hot",
+  "cold"
+ ],
+ "props": [
+  "vending_machine",
+  "vending_machines",
+  "drink_machine"
+ ],
+ "style": "cutout",
+ "image": "vending_pair.png",
+ "kind": "vending_pair",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "cold_label": "COLD",
+  "hot_label": "HOT",
+  "display": "000",
+  "prices": [
+   "100",
+   "120",
+   "150"
+  ],
+  "cold_body": "#eef1f4",
+  "cold_accent": "#2f6fd0",
+  "hot_body": "#c8352e",
+  "hot_accent": "#8a1d18"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

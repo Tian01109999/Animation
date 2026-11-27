@@ -1,0 +1,106 @@
+{
+ "id": "quan_mi_xe_day_dem",
+ "name": "Góc chợ đêm – xe mì + ghế nhựa",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Góc chợ đêm – xe mì + ghế nhựa / Night market noodle-cart corner (ban đêm / night)",
+  "description": "Góc chợ đêm – xe mì + ghế nhựa, ban đêm. Night market lane eating corner: boat-style noodle cart with red-and-white striped awning, steaming pots, glass food case and a NOODLES board, hanging bulb; fruit cart with red umbrella; shuttered shophouses with striped awnings and lit windows behind; strings of round bulbs overhead; folding steel tables with bowls, chopstick cups and sauce bottles; red and blue plastic stools; wet asphalt. (Complements cho_dem_viet, which is a wide stall row.) (night). chợ đêm, xe mì, xe đẩy, ghế nhựa, bàn gấp, đèn dây, xe trái cây, night market, noodle cart, street food, plastic stools, ban đêm, night",
+  "kind": "night_market_cart",
+  "tags": [
+   "chợ đêm",
+   "xe mì",
+   "xe đẩy",
+   "ghế nhựa",
+   "bàn gấp",
+   "đèn dây",
+   "xe trái cây",
+   "night market",
+   "noodle cart",
+   "street food",
+   "plastic stools",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "quan_mi_xe_day_dem"
+  ],
+  "catalog_id": "quan_mi_xe_day_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: xe mì kiểu thuyền bên trái (mái sọc đỏ-trắng, nồi bốc hơi, tủ kính, bảng NOODLES nướng, bóng đèn treo), xe trái cây + dù đỏ bên phải xa, nền dãy nhà phố cửa cuốn + mái hiên sọc, dây đèn bóng tròn; tiền cảnh 2 bàn gấp inox có bát, ống đũa, chai sốt + ghế nhựa đỏ/xanh; mặt đường ướt.",
+  "label_en": "Night market noodle-cart corner (night)",
+  "description_en": "Night market lane eating corner: boat-style noodle cart with red-and-white striped awning, steaming pots, glass food case and a NOODLES board, hanging bulb; fruit cart with red umbrella; shuttered shophouses with striped awnings and lit windows behind; strings of round bulbs overhead; folding steel tables with bowls, chopstick cups and sauce bottles; red and blue plastic stools; wet asphalt. (Complements cho_dem_viet, which is a wide stall row.)",
+  "baked_text": [
+   "NOODLES"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Night market lane, noodle cart with red and white striped awning and steaming pots, fruit cart, shuttered shophouses, string lights, folding tables with red and blue plastic stools, wet asphalt, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "quan_mi_xe_day_dem"
+ },
+ "floor_y": 2100,
+ "slots": {
+  "vendor": {
+   "x": 1150,
+   "y": 1520,
+   "scale": 0.8,
+   "clip_bottom": 1020
+  },
+  "seat_left": {
+   "x": 1590,
+   "y": 2000,
+   "scale": 0.95
+  },
+  "seat_right": {
+   "x": 2610,
+   "y": 2000,
+   "scale": 0.95
+  },
+  "center": {
+   "x": 2100,
+   "y": 2100,
+   "scale": 1.05
+  },
+  "left": {
+   "x": 700,
+   "y": 2100,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 3300,
+   "y": 2100,
+   "scale": 1.05
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "NOODLES",
+   "box": [
+    904,
+    1114,
+    1396,
+    1246
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1150,
+   "y": 570,
+   "color": "#ffd890"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Night market lane, noodle cart with red and white striped awning and steaming pots, fruit cart, shuttered shophouses, string lights, folding tables with red and blue plastic stools, wet asphalt, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

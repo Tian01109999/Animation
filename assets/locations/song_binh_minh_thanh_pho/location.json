@@ -1,0 +1,90 @@
+{
+ "id": "song_binh_minh_thanh_pho",
+ "name": "Sông lúc bình minh + thành phố",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sông lúc bình minh + thành phố / City river at dawn (bình minh / dawn)",
+  "description": "Sông lúc bình minh + thành phố, bình minh. Wide river at dawn: lilac-to-peach sky with low sun, distant city skyline with a few lit windows and red beacons, cable-stayed bridge on the left, mirrored sky and skyline on the water with a shimmering sun path, long-tail boats (a big one with red canopy and long-shaft engine, small ones far away), wooden pier with railing in the right foreground (dawn). sông, bình minh, thành phố, thuyền đuôi dài, cầu dây văng, bến gỗ, river, dawn, skyline, long-tail boat, pier",
+  "kind": "river_dawn",
+  "tags": [
+   "sông",
+   "bình minh",
+   "thành phố",
+   "thuyền đuôi dài",
+   "cầu dây văng",
+   "bến gỗ",
+   "river",
+   "dawn",
+   "skyline",
+   "long-tail boat",
+   "pier"
+  ],
+  "time_variants": [
+   "song_binh_minh_thanh_pho"
+  ],
+  "catalog_id": "song_binh_minh_thanh_pho",
+  "variant": "dawn",
+  "style": "cutout",
+  "layout": "Nhìn ngang: trời bình minh, đường chân trời thành phố + cầu dây văng trái, mặt nước phản chiếu + vệt nắng, thuyền đuôi dài lớn bên trái (mái đỏ, máy + trục dài), 2 thuyền nhỏ xa, bến gỗ + lan can tiền cảnh phải (slot đứng trên bến).",
+  "label_en": "City river at dawn (dawn)",
+  "description_en": "Wide river at dawn: lilac-to-peach sky with low sun, distant city skyline with a few lit windows and red beacons, cable-stayed bridge on the left, mirrored sky and skyline on the water with a shimmering sun path, long-tail boats (a big one with red canopy and long-shaft engine, small ones far away), wooden pier with railing in the right foreground",
+  "time_of_day": "dusk"
+ },
+ "flow_prompt": "Wide river at dawn with distant city skyline and cable stayed bridge, long tail boats, sun reflection on the water, wooden pier in the foreground, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "song_binh_minh_thanh_pho"
+ },
+ "floor_y": 1900,
+ "slots": {
+  "pier_left": {
+   "x": 2600,
+   "y": 1900,
+   "scale": 1.0
+  },
+  "pier_right": {
+   "x": 3300,
+   "y": 1900,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 2950,
+   "y": 1900,
+   "scale": 1.0
+  },
+  "boat": {
+   "x": 1100,
+   "y": 1470,
+   "scale": 0.62,
+   "clip_bottom": 1430
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2400,
+   "y": 940,
+   "color": "#ffd8a0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "dawn": "Wide river at dawn with distant city skyline and cable stayed bridge, long tail boats, sun reflection on the water, wooden pier in the foreground, dawn, lilac sky fading to peach horizon, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

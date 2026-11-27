@@ -1,0 +1,110 @@
+{
+ "id": "truong_hoc_dem",
+ "name": "Trường tiểu học ban đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Trường tiểu học ban đêm / Elementary school at night (ban đêm / night)",
+  "description": "Trường tiểu học ban đêm, ban đêm. Three-storey elementary school building at night with a central clock tower, rows of dark windows (two dimly lit), chain-link fence, sliding gate between concrete pillars, dark name board with CITY ELEMENTARY SCHOOL, full moon and stars, curved streetlamp with light cone, wet road with puddles (night). trường học, trường tiểu học, tháp đồng hồ, hàng rào, cổng trường, school exterior, elementary school, clock tower, school gate, mặt tiền, toàn cảnh, bãi đỗ, ban đêm, night",
+  "kind": "school_exterior",
+  "tags": [
+   "trường học",
+   "trường tiểu học",
+   "tháp đồng hồ",
+   "hàng rào",
+   "cổng trường",
+   "school exterior",
+   "elementary school",
+   "clock tower",
+   "school gate",
+   "mặt tiền",
+   "toàn cảnh",
+   "bãi đỗ",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "truong_hoc_dem"
+  ],
+  "catalog_id": "truong_hoc_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Mặt đứng: toà 3 tầng + tháp đồng hồ giữa, cửa sổ tối (2 ô sáng), hàng rào lưới, cổng trượt giữa 2 trụ, bảng tên CITY ELEMENTARY SCHOOL (signs), trăng tròn + sao (far), đèn đường nón sáng, đường ướt có vũng nước.",
+  "label_en": "Elementary school at night (night)",
+  "description_en": "Three-storey elementary school building at night with a central clock tower, rows of dark windows (two dimly lit), chain-link fence, sliding gate between concrete pillars, dark name board with CITY ELEMENTARY SCHOOL, full moon and stars, curved streetlamp with light cone, wet road with puddles",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Three storey elementary school at night with central clock tower, dark windows, chain-link fence and sliding gate, blank name board, full moon, curved streetlamp with light cone, wet road with puddles, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "truong_hoc_dem"
+ },
+ "floor_y": 1950,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1950,
+   "scale": 0.9
+  },
+  "left": {
+   "x": 1040,
+   "y": 1950,
+   "scale": 0.9
+  },
+  "right": {
+   "x": 2700,
+   "y": 1950,
+   "scale": 0.9
+  },
+  "gate": {
+   "x": 1040,
+   "y": 1680,
+   "scale": 0.7
+  }
+ },
+ "signs": [
+  {
+   "text": "CITY ELEMENTARY SCHOOL",
+   "box": [
+    1470,
+    1110,
+    2490,
+    1220
+   ],
+   "style": "gold_board"
+  }
+ ],
+ "lights": [
+  {
+   "x": 2850,
+   "y": 588,
+   "color": "#ffe2a0"
+  },
+  {
+   "x": 3180,
+   "y": 360,
+   "color": "#f1ead2"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Three storey elementary school at night with central clock tower, dark windows, chain-link fence and sliding gate, blank name board, full moon, curved streetlamp with light cone, wet road with puddles, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "CITY ELEMENTARY SCHOOL"
+ ]
+}

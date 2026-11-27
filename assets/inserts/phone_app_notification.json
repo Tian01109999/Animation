@@ -1,0 +1,58 @@
+{
+ "id": "phone_app_notification",
+ "label": "Điện thoại cầm tay + thẻ thông báo ứng dụng",
+ "label_en": "Phone in hand with an app notification card",
+ "tags": [
+  "điện thoại",
+  "thông báo",
+  "ứng dụng",
+  "giao hàng",
+  "phone",
+  "notification",
+  "app",
+  "delivery"
+ ],
+ "props": [
+  "app_notification",
+  "phone_notification_app",
+  "delivery_app",
+  "order_notification"
+ ],
+ "style": "cutout",
+ "image": "phone_app_notification.png",
+ "kind": "phone_app_notification",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "02:38",
+  "app_name": "DELIVERY",
+  "app_color": "#1f9a8a",
+  "card": true,
+  "notification": {
+   "app": "DELIVERY",
+   "when": "now",
+   "title": "New order",
+   "text": "Pickup at the old school gate. Bonus x3 after midnight."
+  },
+  "orders": [
+   [
+    "Order #2041",
+    "Noodle shop"
+   ],
+   [
+    "Order #2040",
+    "Station exit"
+   ]
+  ],
+  "sleeve_color": "#e8b830",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

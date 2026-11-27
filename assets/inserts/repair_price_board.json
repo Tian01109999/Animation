@@ -1,0 +1,59 @@
+{
+ "id": "repair_price_board",
+ "label": "Bảng giá sửa điện thoại",
+ "label_en": "Phone repair price board",
+ "tags": [
+  "price board",
+  "phone repair",
+  "repair shop",
+  "price list",
+  "mall"
+ ],
+ "props": [
+  "price_board",
+  "repair_price_board",
+  "repair_prices"
+ ],
+ "style": "cutout",
+ "image": "repair_price_board.png",
+ "kind": "repair_price_board",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {
+  "title": "REPAIR PRICES",
+  "rows": [
+   [
+    "SCREEN",
+    "900"
+   ],
+   [
+    "BATTERY",
+    "450"
+   ],
+   [
+    "CHARGE PORT",
+    "300"
+   ],
+   [
+    "DATA RECOVERY",
+    "500"
+   ],
+   [
+    "BACK GLASS",
+    "350"
+   ],
+   [
+    "WATER DAMAGE",
+    "ASK"
+   ]
+  ],
+  "currency": "",
+  "footer": "30-DAY WARRANTY  |  FAST SERVICE"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

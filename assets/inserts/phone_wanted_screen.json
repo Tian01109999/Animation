@@ -1,0 +1,47 @@
+{
+ "id": "phone_wanted_screen",
+ "label": "Điện thoại – màn hình truy tìm, tiền thưởng",
+ "label_en": "Phone in hand - FIND THIS MAN reward alert",
+ "tags": [
+  "phone",
+  "wanted",
+  "reward",
+  "find this man",
+  "report",
+  "alert",
+  "manhunt"
+ ],
+ "props": [
+  "phone_wanted",
+  "wanted_screen",
+  "reward_alert"
+ ],
+ "style": "cutout",
+ "image": "phone_wanted_screen.png",
+ "kind": "phone_wanted_screen",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "21:12",
+  "header": "ALERT",
+  "header_sub": "2 min ago",
+  "title": "FIND THIS MAN",
+  "reward_label": "REWARD",
+  "reward": "50,000",
+  "lines": [
+   "Last seen: ZONE C",
+   "Black jacket, glasses"
+  ],
+  "button": "REPORT",
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

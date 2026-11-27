@@ -1,0 +1,84 @@
+{
+ "id": "phong_ngu_tv_cu",
+ "name": "Phòng ngủ tối + TV cũ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng ngủ tối + TV cũ / Dark bedroom with old CRT TV (ban đêm / night)",
+  "description": "Phòng ngủ tối + TV cũ, ban đêm. Dark bedroom at night lit by an old CRT TV showing static on a low cabinet, window with half-drawn blue curtains and the moon, stack of folded futons in the corner, low table with a cup and remote, wooden floor; cold blue TV glow (night). phòng ngủ, phòng tối, tivi cũ, nhiễu sóng, chăn nệm gấp, dark bedroom, crt tv, tv static, futons, ban đêm, night",
+  "kind": "dark_bedroom",
+  "tags": [
+   "phòng ngủ",
+   "phòng tối",
+   "tivi cũ",
+   "nhiễu sóng",
+   "chăn nệm gấp",
+   "dark bedroom",
+   "crt tv",
+   "tv static",
+   "futons",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "phong_ngu_tv_cu"
+  ],
+  "catalog_id": "phong_ngu_tv_cu",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: phòng tối, TV CRT ăng-ten tai thỏ trên tủ thấp (màn nhiễu sáng xanh), cửa sổ rèm khép hờ + trăng, chồng nệm futon gấp góc phải, bàn thấp + cốc + điều khiển, sàn gỗ; ánh xanh lạnh từ TV.",
+  "label_en": "Dark bedroom with old CRT TV (night)",
+  "description_en": "Dark bedroom at night lit by an old CRT TV showing static on a low cabinet, window with half-drawn blue curtains and the moon, stack of folded futons in the corner, low table with a cup and remote, wooden floor; cold blue TV glow",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Dark bedroom at night lit by an old CRT television showing static on a low cabinet, window with half drawn curtains and moon, stack of folded futons, low table with a cup, wooden floor, cold blue glow, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_ngu_tv_cu"
+ },
+ "floor_y": 2040,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "left": {
+   "x": 900,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "right": {
+   "x": 2700,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "tv": {
+   "x": 2400,
+   "y": 1980,
+   "scale": 1.05
+  },
+  "futon": {
+   "x": 3300,
+   "y": 2020,
+   "scale": 1.1
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 2575,
+   "y": 980,
+   "color": "#bcd4ff"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Dark bedroom at night lit by an old CRT television showing static on a low cabinet, window with half drawn curtains and moon, stack of folded futons, low table with a cup, wooden floor, cold blue glow, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,152 @@
+{
+ "id": "bep_quan_mi",
+ "name": "Bếp quán mì nhỏ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Bếp quán mì nhỏ / Small ramen-shop kitchen (ban đêm / night)",
+  "description": "Bếp quán mì nhỏ, ban đêm. Small noodle-shop kitchen: white tiled wall, wooden beam with hanging menu tags in English (RAMEN ¥800, MISO ¥900, GYOZA ¥400, BEER), navy noren curtain reading NOODLES over the back door, steel hood over a big steaming stock pot and a second pot, ladle, shelf of red-rim bowls, stack of red-rim plates, sauce bottles, steel counter with sink, warm pendant lamps, dark tiled floor (night). bếp, quán mì, nồi nước dùng, thực đơn, rèm cửa, chồng bát, ramen kitchen, noodle shop, stock pot, menu tags, noren, ban đêm, night",
+  "kind": "ramen_kitchen",
+  "tags": [
+   "bếp",
+   "quán mì",
+   "nồi nước dùng",
+   "thực đơn",
+   "rèm cửa",
+   "chồng bát",
+   "ramen kitchen",
+   "noodle shop",
+   "stock pot",
+   "menu tags",
+   "noren",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "bep_quan_mi"
+  ],
+  "catalog_id": "bep_quan_mi",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: tường gạch men trắng, dầm gỗ treo thẻ thực đơn tiếng Anh (nướng), rèm noren NOODLES (nướng), chụp hút khói inox + nồi nước dùng bốc hơi, kệ bát viền đỏ, chồng đĩa, chai sốt, quầy inox + bồn rửa, đèn treo ấm, sàn gạch tối.",
+  "label_en": "Small ramen-shop kitchen (night)",
+  "description_en": "Small noodle-shop kitchen: white tiled wall, wooden beam with hanging menu tags in English (RAMEN ¥800, MISO ¥900, GYOZA ¥400, BEER), navy noren curtain reading NOODLES over the back door, steel hood over a big steaming stock pot and a second pot, ladle, shelf of red-rim bowls, stack of red-rim plates, sauce bottles, steel counter with sink, warm pendant lamps, dark tiled floor",
+  "baked_text": [
+   "RAMEN ¥800",
+   "MISO ¥900",
+   "GYOZA ¥400",
+   "BEER",
+   "NOODLES"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Small noodle shop kitchen, white tiled wall, blank hanging wooden menu tags, plain navy curtain over back door, steel hood over steaming stock pot, red-rim bowls on a shelf, steel counter with sink, warm pendant lamps, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "bep_quan_mi"
+ },
+ "floor_y": 2010,
+ "slots": {
+  "cook": {
+   "x": 2050,
+   "y": 1640,
+   "scale": 0.98,
+   "clip_bottom": 1270
+  },
+  "center": {
+   "x": 1920,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "left": {
+   "x": 900,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "right": {
+   "x": 3000,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "sink": {
+   "x": 3280,
+   "y": 1640,
+   "scale": 0.98,
+   "clip_bottom": 1270
+  },
+  "door": {
+   "x": 470,
+   "y": 1880,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "RAMEN ¥800",
+   "box": [
+    1855,
+    337,
+    2265,
+    413
+   ]
+  },
+  {
+   "text": "MISO ¥900",
+   "box": [
+    2356,
+    337,
+    2724,
+    413
+   ]
+  },
+  {
+   "text": "GYOZA ¥400",
+   "box": [
+    2815,
+    337,
+    3225,
+    413
+   ]
+  },
+  {
+   "text": "BEER",
+   "box": [
+    3418,
+    337,
+    3582,
+    413
+   ]
+  },
+  {
+   "text": "NOODLES",
+   "box": [
+    237,
+    698,
+    703,
+    822
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1150,
+   "y": 612,
+   "color": "#ffe2a0"
+  },
+  {
+   "x": 2300,
+   "y": 612,
+   "color": "#ffe2a0"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Small noodle shop kitchen, white tiled wall, blank hanging wooden menu tags, plain navy curtain over back door, steel hood over steaming stock pot, red-rim bowls on a shelf, steel counter with sink, warm pendant lamps, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,121 @@
+{
+ "id": "phong_dieu_khien_bao_dong",
+ "name": "Phòng điều khiển – báo động đỏ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng điều khiển – báo động đỏ / Control room on red alert (ban đêm / night)",
+  "description": "Phòng điều khiển – báo động đỏ, ban đêm. Dark control room during an alarm: big wall display with a red ALERT / SYSTEM STATUS header and a status list with red, amber and green rows, side graph screens, red rotating beacon lights sweeping beams, red pipes with valves, two long consoles with multiple monitors (two flagged red), red-tinted floor reflections (night). phòng điều khiển, báo động, đèn đỏ, màn hình, ống đỏ, control room, alarm, red alert, monitors, status wall, ban đêm, night",
+  "kind": "control_room",
+  "tags": [
+   "phòng điều khiển",
+   "báo động",
+   "đèn đỏ",
+   "màn hình",
+   "ống đỏ",
+   "control room",
+   "alarm",
+   "red alert",
+   "monitors",
+   "status wall",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "phong_dieu_khien_bao_dong"
+  ],
+  "catalog_id": "phong_dieu_khien_bao_dong",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: màn hình tường lớn (thanh đỏ ALERT / SYSTEM STATUS nướng, danh sách trạng thái), 2 màn phụ đồ thị, 3 đèn xoay đỏ trên cao có chùm sáng, ống đỏ + van, 2 dãy bàn điều khiển nhiều màn hình (nhân vật ngồi sau bàn: clip_bottom), sàn tối ánh đỏ.",
+  "label_en": "Control room on red alert (night)",
+  "description_en": "Dark control room during an alarm: big wall display with a red ALERT / SYSTEM STATUS header and a status list with red, amber and green rows, side graph screens, red rotating beacon lights sweeping beams, red pipes with valves, two long consoles with multiple monitors (two flagged red), red-tinted floor reflections",
+  "baked_text": [
+   "ALERT",
+   "SYSTEM STATUS"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Dark control room with a big wall display of status rows, red rotating alarm lights, red pipes, long consoles with monitors, red tint, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_dieu_khien_bao_dong"
+ },
+ "floor_y": 2080,
+ "slots": {
+  "operator_left": {
+   "x": 1060,
+   "y": 1640,
+   "scale": 0.9,
+   "clip_bottom": 1480
+  },
+  "operator_right": {
+   "x": 2780,
+   "y": 1640,
+   "scale": 0.9,
+   "clip_bottom": 1480
+  },
+  "center": {
+   "x": 1920,
+   "y": 2080,
+   "scale": 1.1
+  },
+  "left": {
+   "x": 800,
+   "y": 2080,
+   "scale": 1.1
+  },
+  "right": {
+   "x": 3050,
+   "y": 2080,
+   "scale": 1.1
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "ALERT",
+   "box": [
+    845,
+    272,
+    1075,
+    358
+   ]
+  },
+  {
+   "text": "SYSTEM STATUS",
+   "box": [
+    2504,
+    284,
+    2936,
+    346
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 520,
+   "y": 70,
+   "color": "#ff2a1a"
+  },
+  {
+   "x": 1920,
+   "y": 70,
+   "color": "#ff2a1a"
+  },
+  {
+   "x": 3320,
+   "y": 70,
+   "color": "#ff2a1a"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Dark control room with a big wall display of status rows, red rotating alarm lights, red pipes, long consoles with monitors, red tint, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

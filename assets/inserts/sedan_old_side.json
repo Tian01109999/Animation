@@ -1,0 +1,30 @@
+{
+ "id": "sedan_old_side",
+ "label": "Xe sedan cũ màu be (nhìn ngang)",
+ "label_en": "Old beige sedan (side view)",
+ "tags": [
+  "car",
+  "sedan",
+  "old car",
+  "vehicle",
+  "side view",
+  "beige car"
+ ],
+ "props": [
+  "old_car",
+  "sedan",
+  "beige_sedan"
+ ],
+ "style": "cutout",
+ "image": "sedan_old_side.png",
+ "kind": "sedan_old_side",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

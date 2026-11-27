@@ -1,0 +1,38 @@
+{
+ "id": "wristwatch_windup",
+ "label": "Đồng hồ cơ đeo tay cận cảnh",
+ "label_en": "Wind-up wristwatch close-up",
+ "tags": [
+  "wristwatch",
+  "watch",
+  "analog watch",
+  "automatic",
+  "time",
+  "wrist"
+ ],
+ "props": [
+  "analog_watch",
+  "windup_watch",
+  "automatic_watch"
+ ],
+ "style": "cutout",
+ "image": "wristwatch_windup.png",
+ "kind": "wristwatch_windup",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "hour": 9,
+  "minute": 13,
+  "second": 40,
+  "date": "17",
+  "label": "AUTOMATIC",
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

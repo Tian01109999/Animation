@@ -1,0 +1,39 @@
+{
+ "id": "phone_ai_speaking",
+ "label": "Điện thoại – trợ lý AI đang nói (vòng sáng)",
+ "label_en": "Phone in hand - AI assistant speaking ring",
+ "tags": [
+  "phone",
+  "assistant",
+  "ai",
+  "speaking",
+  "voice",
+  "glowing ring"
+ ],
+ "props": [
+  "phone_assistant",
+  "ai_assistant_phone",
+  "speaking_ring"
+ ],
+ "style": "cutout",
+ "image": "phone_ai_speaking.png",
+ "kind": "phone_ai_speaking",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "21:12",
+  "app_name": "ASSISTANT",
+  "caption": "speaking...",
+  "subcaption": "",
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

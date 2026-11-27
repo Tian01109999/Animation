@@ -1,0 +1,100 @@
+{
+ "id": "sanh_tu_giay_truong",
+ "name": "Sảnh tủ giày trường học",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sảnh tủ giày trường học / School shoe-locker entrance hall (ban đêm / night)",
+  "description": "Sảnh tủ giày trường học, ban đêm. School entrance hall at night: two wooden shoe-cubby units full of indoor slippers and shoes, wooden step board, cork notice board with a NOTICE header and pinned papers, umbrella stand, glass double doors to the dark yard, fluorescent light, grey stone floor (night). tủ giày, sảnh trường, lối vào, dép đi trong nhà, bảng thông báo, shoe lockers, school entrance, notice board, glass doors, cửa kính, cửa ra vào, ban đêm, night",
+  "kind": "school_entrance",
+  "tags": [
+   "tủ giày",
+   "sảnh trường",
+   "lối vào",
+   "dép đi trong nhà",
+   "bảng thông báo",
+   "shoe lockers",
+   "school entrance",
+   "notice board",
+   "glass doors",
+   "cửa kính",
+   "cửa ra vào",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "sanh_tu_giay_truong"
+  ],
+  "catalog_id": "sanh_tu_giay_truong",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: 2 dãy tủ giày gỗ (dép trắng mũi màu, giày nâu), bậc gỗ phía trước, bảng ghim NOTICE (nướng) + giấy ghim, ống cắm dù, cửa kính đôi ra sân tối, đèn huỳnh quang, sàn đá xám.",
+  "label_en": "School shoe-locker entrance hall (night)",
+  "description_en": "School entrance hall at night: two wooden shoe-cubby units full of indoor slippers and shoes, wooden step board, cork notice board with a NOTICE header and pinned papers, umbrella stand, glass double doors to the dark yard, fluorescent light, grey stone floor",
+  "baked_text": [
+   "NOTICE"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "School entrance hall at night, rows of wooden shoe cubbies with slippers, cork notice board with pinned papers, umbrella stand, glass double doors to dark yard, fluorescent light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "sanh_tu_giay_truong"
+ },
+ "floor_y": 2010,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "left": {
+   "x": 900,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "right": {
+   "x": 2950,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "door": {
+   "x": 3560,
+   "y": 1960,
+   "scale": 1.0
+  },
+  "lockers": {
+   "x": 1350,
+   "y": 1900,
+   "scale": 1.05
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "NOTICE",
+   "box": [
+    2851,
+    533,
+    3089,
+    607
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1400,
+   "y": 130,
+   "color": "#eef6ff"
+  }
+ ],
+ "flow_prompts": {
+  "night": "School entrance hall at night, rows of wooden shoe cubbies with slippers, cork notice board with pinned papers, umbrella stand, glass double doors to dark yard, fluorescent light, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

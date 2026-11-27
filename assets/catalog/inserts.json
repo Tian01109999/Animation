@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "doc": "Ảnh chèn / đạo cụ cận cảnh GỐC (Shot.location = 'insert:<id>'). Mọi chữ/số do insertgen vẽ bằng font thật từ params (KHÔNG chữ AI, KHÔNG thương hiệu/quốc huy/chân dung thật). bg: nền mặc định (dark_vignette | blur_location | wood_dark). camera_default: chuyển động mặc định. hands: có tay puppet POV hay không (màu tay/tay áo theo params.sleeve_color). procedural=true: insertgen v1 phải hỗ trợ. Baked-in image text (params) is ENGLISH ONLY; name_vi/name_en are search metadata. library=true: thư viện mở rộng lô 2 (storytoon.render.insertgen_batch2, provenance 'procedural_library'), không bắt buộc với test procedural.",
+  "doc": "Ảnh chèn / đạo cụ cận cảnh GỐC (Shot.location = 'insert:<id>'). Mọi chữ/số do insertgen vẽ bằng font thật từ params (KHÔNG chữ AI, KHÔNG thương hiệu/quốc huy/chân dung thật). bg: nền mặc định (dark_vignette | blur_location | wood_dark). camera_default: chuyển động mặc định. hands: có tay puppet POV hay không (màu tay/tay áo theo params.sleeve_color). procedural=true: insertgen v1 phải hỗ trợ. Baked-in image text (params) is ENGLISH ONLY; name_vi/name_en are search metadata. library=true: thư viện mở rộng lô 2 (storytoon.render.insertgen_batch2, provenance 'procedural_library'), không bắt buộc với test procedural; lô 3 ở storytoon.render.insertgen_batch3 (cùng quy ước). Lô 4 ở storytoon.render.insertgen_batch4 (cùng quy ước).",
   "inserts": [
     {
       "id": "phone_chat",
@@ -1066,6 +1066,721 @@
         "rim_color": "#3a78c2",
         "sleeve_color": "#1f6f5c",
         "skin": "#c9926a"
+      }
+    },
+    {
+      "id": "charm_pouch",
+      "name_vi": "Túi bùa hộ mệnh + chuỗi hạt thắt nút",
+      "name_en": "Protective charm pouch with knotted-bead string",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "label": "CHARM",
+        "beads": 5,
+        "spent": 0,
+        "pouch_color": "#c8352e",
+        "bead_color": "#c8352e",
+        "gold": "#e2b34a",
+        "cord": "#e8d9b0",
+        "cloth": "#2c2a36"
+      },
+      "notes": "label='' -> nhãn trống; spent=N: N hạt cuối nứt xám (nút đã dùng)."
+    },
+    {
+      "id": "charm_pouch_hand",
+      "name_vi": "Tay cầm túi bùa hộ mệnh",
+      "name_en": "Hand holding a charm pouch",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "label": "CHARM",
+        "beads": 5,
+        "spent": 0,
+        "pouch_color": "#c8352e",
+        "bead_color": "#c8352e",
+        "sleeve_color": "#e8b830",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "charm_pouch_pass",
+      "name_vi": "Hai bàn tay trao túi bùa",
+      "name_en": "Charm pouch passed between two hands",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "label": "CHARM",
+        "beads": 5,
+        "spent": 0,
+        "pouch_color": "#c8352e",
+        "bead_color": "#c8352e",
+        "giver_sleeve": "#7a4a8a",
+        "giver_skin": "#d9a77f",
+        "receiver_sleeve": "#e8b830",
+        "receiver_skin": "#e9b994",
+        "glow": true
+      }
+    },
+    {
+      "id": "vending_pair",
+      "name_vi": "Cặp máy bán hàng tự động (lạnh / nóng)",
+      "name_en": "Pair of vending machines close-up (cold / hot)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "cold_label": "COLD",
+        "hot_label": "HOT",
+        "display": "000",
+        "prices": [
+          "100",
+          "120",
+          "150"
+        ],
+        "cold_body": "#eef1f4",
+        "cold_accent": "#2f6fd0",
+        "hot_body": "#c8352e",
+        "hot_accent": "#8a1d18"
+      }
+    },
+    {
+      "id": "candy_pack_asphalt",
+      "name_vi": "Gói kẹo 'FREE' + kẹo rơi trên mặt đường",
+      "name_en": "Free candy pack and scattered candies on asphalt",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "label": "FREE",
+        "sub": "TAKE ONE",
+        "candies": 16,
+        "pack_color": "#f6a7c1",
+        "burst": "#f3c94e",
+        "asphalt": "#3a3b3f",
+        "pack_angle": -10,
+        "seed": 12
+      }
+    },
+    {
+      "id": "class_photo_table",
+      "name_vi": "Ảnh lớp cũ trên bàn gỗ",
+      "name_en": "Old class photo on a wooden table",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "caption": "CLASS 4-B  ·  1998",
+        "fade": 0.85,
+        "circled": null,
+        "angle": 3,
+        "table": "#8a5a36",
+        "seed": 4
+      },
+      "notes": "circled=<chỉ số học sinh 0..25> -> vòng bút đỏ quanh 1 khuôn mặt."
+    },
+    {
+      "id": "painting_streetlamp",
+      "name_vi": "Bức tranh: bóng người đứng dưới đèn đường",
+      "name_en": "Framed painting of a lone figure under a streetlamp",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "plaque": "UNTITLED",
+        "wall": "#3a2f2a"
+      }
+    },
+    {
+      "id": "rail_map_pin",
+      "name_vi": "Bản đồ tuyến tàu + ghim đỏ",
+      "name_en": "Rail map card with a red pin",
+      "bg": "smoke_dark",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "title": "CITY",
+        "subtitle": "RAIL MAP",
+        "tag": "LINE 1 · 4 STOPS",
+        "pin": {
+          "x": 2400,
+          "y": 1000,
+          "label": "LAST SEEN · 02:40"
+        }
+      },
+      "notes": "lines=[{color, pts:[[x,y]...]}] / station_labels=[[x,y,text]] trên hệ 3840×2160 để vẽ mạng tuyến khác."
+    },
+    {
+      "id": "hand_knock_stall",
+      "name_vi": "Tay gõ cửa buồng vệ sinh",
+      "name_en": "Hand knocking on a toilet stall door",
+      "bg": "none",
+      "camera_default": "shake",
+      "hands": true,
+      "library": true,
+      "params": {
+        "stall_number": "3",
+        "occupied": true,
+        "indicator_text": "IN USE",
+        "sfx": "",
+        "door_color": "#e6b9b4",
+        "sleeve_color": "#e8b830",
+        "skin": "#e9b994"
+      },
+      "notes": "sfx='KNOCK KNOCK' -> chữ tượng thanh (tiếng Anh)."
+    },
+    {
+      "id": "ghost_glove_wrist",
+      "name_vi": "Tay ma đeo găng trắng nắm cổ tay",
+      "name_en": "Gloved ghost hand gripping a wrist",
+      "bg": "none",
+      "camera_default": "shake",
+      "hands": true,
+      "library": true,
+      "params": {
+        "glove": "#f4f2ee",
+        "ghost_sleeve": "#c9b48e",
+        "bg0": "#3a2030",
+        "sleeve_color": "#e8b830",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_app_notification",
+      "name_vi": "Điện thoại cầm tay + thẻ thông báo ứng dụng",
+      "name_en": "Phone in hand with an app notification card",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "02:38",
+        "app_name": "DELIVERY",
+        "app_color": "#1f9a8a",
+        "card": true,
+        "notification": {
+          "app": "DELIVERY",
+          "when": "now",
+          "title": "New order",
+          "text": "Pickup at the old school gate. Bonus x3 after midnight."
+        },
+        "orders": [
+          [
+            "Order #2041",
+            "Noodle shop"
+          ],
+          [
+            "Order #2040",
+            "Station exit"
+          ]
+        ],
+        "sleeve_color": "#e8b830",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "streetlight_moon",
+      "name_vi": "Đèn đường và trăng tròn",
+      "name_en": "Streetlight and full moon close-up",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "moon_x": 2700,
+        "moon_y": 760,
+        "moths": true
+      }
+    },
+    {
+      "id": "phone_countdown_app",
+      "name_vi": "Điện thoại cầm tay – app đếm ngược (vòng sáng, đồng hồ đỏ)",
+      "name_en": "Phone in hand - countdown app (glowing ring, red timer)",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "app_name": "COUNTDOWN",
+        "label": "TIME LEFT",
+        "timer": "23:41:07",
+        "date": "TOMORROW 09:13",
+        "place": "ZONE A - LEVEL 2",
+        "share_label": "SHARE",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_countdown_cracked",
+      "name_vi": "Điện thoại app đếm ngược – màn hình vỡ",
+      "name_en": "Phone countdown app - cracked screen",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "app_name": "COUNTDOWN",
+        "label": "TIME LEFT",
+        "timer": "23:41:07",
+        "date": "TOMORROW 09:13",
+        "place": "ZONE A - LEVEL 2",
+        "cracked": true,
+        "crack_x": 0.62,
+        "crack_y": 0.42,
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_countdown_matched",
+      "name_vi": "Điện thoại app đếm ngược – 00:00:00 MATCHED",
+      "name_en": "Phone countdown app - 00:00:00 MATCHED",
+      "bg": "dark_vignette",
+      "camera_default": "shake",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "09:13",
+        "app_name": "COUNTDOWN",
+        "label": "TIME LEFT",
+        "timer": "00:00:00",
+        "matched": true,
+        "status": "MATCHED",
+        "date": "TODAY 09:13",
+        "place": "ZONE A - LEVEL 2",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_countdown_years",
+      "name_vi": "Điện thoại app đếm ngược – còn 61 năm 4 tháng",
+      "name_en": "Phone countdown app - years left",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "app_name": "COUNTDOWN",
+        "label": "TIME LEFT",
+        "timer": "61 YEARS",
+        "timer_sub": "4 MONTHS",
+        "date": "",
+        "place": "ZONE B - HOME",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_home_grid",
+      "name_vi": "Điện thoại – màn hình chính lưới ứng dụng",
+      "name_en": "Phone in hand - home screen app grid",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "clock": "21:12",
+        "date": "Friday, June 14",
+        "highlight": "Timer",
+        "badges": {
+          "News": 3,
+          "Chat": 5
+        },
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_wanted_screen",
+      "name_vi": "Điện thoại – màn hình truy tìm, tiền thưởng",
+      "name_en": "Phone in hand - FIND THIS MAN reward alert",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "header": "ALERT",
+        "header_sub": "2 min ago",
+        "title": "FIND THIS MAN",
+        "reward_label": "REWARD",
+        "reward": "50,000",
+        "lines": [
+          "Last seen: ZONE C",
+          "Black jacket, glasses"
+        ],
+        "button": "REPORT",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_live_stream",
+      "name_vi": "Điện thoại – màn hình phát trực tiếp",
+      "name_en": "Phone in hand - live-stream screen",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "handle": "@night_cam",
+        "live_label": "LIVE",
+        "viewers": "12.4K",
+        "comments": [
+          [
+            "J.P.",
+            "where is this?"
+          ],
+          [
+            "S.K.",
+            "is this real??"
+          ],
+          [
+            "T.N.",
+            "look behind him"
+          ]
+        ],
+        "hearts": 9,
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "phone_ai_speaking",
+      "name_vi": "Điện thoại – trợ lý AI đang nói (vòng sáng)",
+      "name_en": "Phone in hand - AI assistant speaking ring",
+      "bg": "dark_vignette",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "time": "21:12",
+        "app_name": "ASSISTANT",
+        "caption": "speaking...",
+        "subcaption": "",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "ai_ring_glow",
+      "name_vi": "Vòng sáng AI phát quang (đứng riêng)",
+      "name_en": "Glowing AI ring (standalone)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "radius": 600,
+        "caption": "",
+        "seed": 8
+      }
+    },
+    {
+      "id": "repair_price_board",
+      "name_vi": "Bảng giá sửa điện thoại",
+      "name_en": "Phone repair price board",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {
+        "title": "REPAIR PRICES",
+        "rows": [
+          [
+            "SCREEN",
+            "900"
+          ],
+          [
+            "BATTERY",
+            "450"
+          ],
+          [
+            "CHARGE PORT",
+            "300"
+          ],
+          [
+            "DATA RECOVERY",
+            "500"
+          ],
+          [
+            "BACK GLASS",
+            "350"
+          ],
+          [
+            "WATER DAMAGE",
+            "ASK"
+          ]
+        ],
+        "currency": "",
+        "footer": "30-DAY WARRANTY  |  FAST SERVICE"
+      }
+    },
+    {
+      "id": "billboard_accuracy",
+      "name_vi": "Billboard vòng sáng \"100% ACCURATE\"",
+      "name_en": "Billboard - glowing ring \"100% ACCURATE\"",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "headline": "100%",
+        "title": "ACCURATE",
+        "sub": "KNOW YOUR TIME"
+      }
+    },
+    {
+      "id": "billboard_years_left",
+      "name_vi": "Billboard dọc chân dung \"43 YEARS LEFT\"",
+      "name_en": "Portrait billboard \"43 YEARS LEFT\"",
+      "bg": "none",
+      "camera_default": "pan_down_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "number": "43",
+        "title": "YEARS LEFT"
+      }
+    },
+    {
+      "id": "queue_table_screen",
+      "name_vi": "Màn hình bảng hàng đợi (tên viết tắt, khu vực)",
+      "name_en": "Queue table screen (initials, zones, status)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "title": "QUEUE",
+        "subtitle": "6 ACTIVE",
+        "clock": "21:12:50",
+        "highlight": 0,
+        "rows": [
+          [
+            "01",
+            "J.K.",
+            "09:13",
+            "ZONE A",
+            "IN PROGRESS"
+          ],
+          [
+            "02",
+            "M.T.",
+            "10:40",
+            "ZONE C",
+            "PENDING"
+          ],
+          [
+            "03",
+            "S.P.",
+            "11:05",
+            "ZONE B",
+            "PENDING"
+          ],
+          [
+            "04",
+            "A.N.",
+            "13:22",
+            "ZONE A",
+            "PENDING"
+          ],
+          [
+            "05",
+            "R.W.",
+            "15:47",
+            "ZONE D",
+            "PENDING"
+          ],
+          [
+            "06",
+            "L.C.",
+            "18:30",
+            "ZONE E",
+            "PENDING"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "laptop_list",
+      "name_vi": "Laptop hiển thị danh sách",
+      "name_en": "Laptop showing a records list",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "title": "RECORDS",
+        "highlight": 2
+      }
+    },
+    {
+      "id": "upload_dialog",
+      "name_vi": "Hộp thoại tải tệp lên (records.zip 4.7 GB)",
+      "name_en": "File upload dialog (records.zip 4.7 GB)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "title": "UPLOAD FILE",
+        "file_name": "records.zip",
+        "file_size": "4.7 GB",
+        "destination": "To: SECURE DRIVE",
+        "progress": 0.67,
+        "eta": "about 2 min left"
+      }
+    },
+    {
+      "id": "staff_badge_lanyard",
+      "name_vi": "Thẻ nhân viên đeo dây (DATA CENTER, bảo vệ)",
+      "name_en": "Staff ID badge on a lanyard",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "org": "DATA CENTER",
+        "name": "S. K.",
+        "id": "ID 0417",
+        "role": "SECURITY OFFICER",
+        "angle": 4
+      }
+    },
+    {
+      "id": "wristwatch_windup",
+      "name_vi": "Đồng hồ cơ đeo tay cận cảnh",
+      "name_en": "Wind-up wristwatch close-up",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "hour": 9,
+        "minute": 13,
+        "second": 40,
+        "date": "17",
+        "label": "AUTOMATIC",
+        "sleeve_color": "#4a6a9a",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "boat_noodle_bowl",
+      "name_vi": "Bát mì thuyền với đũa",
+      "name_en": "Boat-noodle bowl with chopsticks",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "pocket_glow",
+      "name_vi": "Túi quần phát sáng (điện thoại bên trong)",
+      "name_en": "Glowing trouser pocket (phone inside)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "glow": "#7ad8ff"
+      }
+    },
+    {
+      "id": "cctv_cameras_wall",
+      "name_vi": "Ba camera an ninh trên tường",
+      "name_en": "Three CCTV cameras on a wall",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "laundry_basket_disguise",
+      "name_vi": "Tóc giả + nón rơm trong giỏ giặt",
+      "name_en": "Wig and straw hat in a laundry basket",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "usb_server_plug",
+      "name_vi": "Cắm USB vào máy chủ",
+      "name_en": "USB stick plugged into a server",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": true,
+      "library": true,
+      "params": {
+        "sleeve_color": "#2a2d33",
+        "skin": "#e9b994"
+      }
+    },
+    {
+      "id": "payphone_public",
+      "name_vi": "Điện thoại công cộng ven đường lúc bình minh",
+      "name_en": "Public payphone at dawn",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "label": "PHONE",
+        "display": "INSERT COIN"
+      }
+    },
+    {
+      "id": "sedan_old_side",
+      "name_vi": "Xe sedan cũ màu be (nhìn ngang)",
+      "name_en": "Old beige sedan (side view)",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "motorbike_side",
+      "name_vi": "Xe máy (nhìn ngang)",
+      "name_en": "Motorbike (side view)",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "water_jug_trolley",
+      "name_vi": "Xe đẩy bình nước",
+      "name_en": "Water-jug hand trolley",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {
+        "jugs": 3
       }
     }
   ]

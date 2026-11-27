@@ -1,0 +1,43 @@
+{
+ "id": "phone_home_grid",
+ "label": "Điện thoại – màn hình chính lưới ứng dụng",
+ "label_en": "Phone in hand - home screen app grid",
+ "tags": [
+  "phone",
+  "home screen",
+  "app grid",
+  "apps",
+  "smartphone",
+  "icons"
+ ],
+ "props": [
+  "phone_home_screen",
+  "home_screen",
+  "app_grid"
+ ],
+ "style": "cutout",
+ "image": "phone_home_grid.png",
+ "kind": "phone_home_grid",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "21:12",
+  "clock": "21:12",
+  "date": "Friday, June 14",
+  "highlight": "Timer",
+  "badges": {
+   "News": 3,
+   "Chat": 5
+  },
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

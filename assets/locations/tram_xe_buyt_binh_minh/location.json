@@ -1,0 +1,120 @@
+{
+ "id": "tram_xe_buyt_binh_minh",
+ "name": "Trạm xe buýt ven đường lúc bình minh",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Trạm xe buýt ven đường lúc bình minh / Roadside bus stop at dawn (bình minh / dawn)",
+  "description": "Trạm xe buýt ven đường lúc bình minh, bình minh. Quiet roadside at dawn: pink-purple sky with low sun and soft clouds, hills and a dark treeline, power poles with sagging wires, two-lane road with yellow dashes, bus shelter with glass back panel, bench and blank poster, blue BUS STOP sign, public payphone with blue hood labelled PHONE, grassy verge in the foreground (dawn). trạm xe buýt, bốt điện thoại, ven đường, bình minh, đồng cỏ, bus stop, payphone, roadside, dawn, countryside, xe ôm, trạm chờ, đường quê",
+  "kind": "roadside_dawn",
+  "tags": [
+   "trạm xe buýt",
+   "bốt điện thoại",
+   "ven đường",
+   "bình minh",
+   "đồng cỏ",
+   "bus stop",
+   "payphone",
+   "roadside",
+   "dawn",
+   "countryside",
+   "xe ôm",
+   "trạm chờ",
+   "đường quê"
+  ],
+  "time_variants": [
+   "tram_xe_buyt_binh_minh"
+  ],
+  "catalog_id": "tram_xe_buyt_binh_minh",
+  "variant": "dawn",
+  "style": "cutout",
+  "layout": "Lớp ngang: trời bình minh hồng-tím + mặt trời thấp bên phải, đồi + hàng cây tối, cột điện + dây võng, đường 2 làn vạch vàng, mái chờ xe buýt (kính, ghế, poster trống), biển BUS STOP, bốt điện thoại công cộng PHONE (nướng), cỏ tiền cảnh.",
+  "label_en": "Roadside bus stop at dawn (dawn)",
+  "description_en": "Quiet roadside at dawn: pink-purple sky with low sun and soft clouds, hills and a dark treeline, power poles with sagging wires, two-lane road with yellow dashes, bus shelter with glass back panel, bench and blank poster, blue BUS STOP sign, public payphone with blue hood labelled PHONE, grassy verge in the foreground",
+  "baked_text": [
+   "BUS STOP",
+   "PHONE"
+  ],
+  "time_of_day": "dusk"
+ },
+ "flow_prompt": "Quiet roadside at dawn, pink purple sky, bus shelter with bench, public payphone on a post, power poles and wires, two lane road, grassy verge, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tram_xe_buyt_binh_minh"
+ },
+ "floor_y": 2060,
+ "slots": {
+  "center": {
+   "x": 2000,
+   "y": 2060,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 900,
+   "y": 2060,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 3300,
+   "y": 2060,
+   "scale": 1.0
+  },
+  "bench": {
+   "x": 1010,
+   "y": 1660,
+   "scale": 0.8
+  },
+  "phone": {
+   "x": 2580,
+   "y": 1730,
+   "scale": 0.85
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "BUS STOP",
+   "box": [
+    1611,
+    674,
+    1849,
+    738
+   ]
+  },
+  {
+   "text": "PHONE",
+   "box": [
+    2671,
+    873,
+    2829,
+    933
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 3000,
+   "y": 1140,
+   "color": "#ffd8a0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "dawn": "Quiet roadside at dawn, pink purple sky, bus shelter with bench, public payphone on a post, power poles and wires, two lane road, grassy verge, dawn, lilac sky fading to peach horizon, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

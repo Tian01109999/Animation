@@ -1,0 +1,43 @@
+{
+ "id": "phone_countdown_cracked",
+ "label": "Điện thoại app đếm ngược – màn hình vỡ",
+ "label_en": "Phone countdown app - cracked screen",
+ "tags": [
+  "phone",
+  "countdown",
+  "cracked screen",
+  "broken phone",
+  "timer",
+  "time left"
+ ],
+ "props": [
+  "cracked_countdown_phone",
+  "phone_countdown_cracked"
+ ],
+ "style": "cutout",
+ "image": "phone_countdown_cracked.png",
+ "kind": "phone_countdown_cracked",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "21:12",
+  "app_name": "COUNTDOWN",
+  "label": "TIME LEFT",
+  "timer": "23:41:07",
+  "date": "TOMORROW 09:13",
+  "place": "ZONE A - LEVEL 2",
+  "cracked": true,
+  "crack_x": 0.62,
+  "crack_y": 0.42,
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

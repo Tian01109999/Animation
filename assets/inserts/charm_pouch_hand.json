@@ -1,0 +1,41 @@
+{
+ "id": "charm_pouch_hand",
+ "label": "Tay cầm túi bùa hộ mệnh",
+ "label_en": "Hand holding a charm pouch",
+ "tags": [
+  "bùa hộ mệnh",
+  "cầm bùa",
+  "tay",
+  "chuỗi hạt",
+  "charm",
+  "amulet",
+  "hand",
+  "holding"
+ ],
+ "props": [
+  "charm_in_hand",
+  "holding_charm",
+  "amulet_in_hand"
+ ],
+ "style": "cutout",
+ "image": "charm_pouch_hand.png",
+ "kind": "charm_pouch_hand",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "CHARM",
+  "beads": 5,
+  "spent": 0,
+  "pouch_color": "#c8352e",
+  "bead_color": "#c8352e",
+  "sleeve_color": "#e8b830",
+  "skin": "#e9b994",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

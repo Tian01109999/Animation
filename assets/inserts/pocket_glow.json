@@ -1,0 +1,32 @@
+{
+ "id": "pocket_glow",
+ "label": "Túi quần phát sáng (điện thoại bên trong)",
+ "label_en": "Glowing trouser pocket (phone inside)",
+ "tags": [
+  "pocket",
+  "trousers",
+  "glowing phone",
+  "light",
+  "jeans",
+  "glow"
+ ],
+ "props": [
+  "glowing_pocket",
+  "pocket_glow",
+  "phone_in_pocket"
+ ],
+ "style": "cutout",
+ "image": "pocket_glow.png",
+ "kind": "pocket_glow",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "glow": "#7ad8ff"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

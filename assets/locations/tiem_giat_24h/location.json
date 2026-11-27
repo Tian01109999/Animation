@@ -1,0 +1,130 @@
+{
+ "id": "tiem_giat_24h",
+ "name": "Tiệm giặt tự động 24h",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Tiệm giặt tự động 24h / 24-hour laundromat (trong nhà đèn sáng / interior)",
+  "description": "Tiệm giặt tự động 24h, trong nhà đèn sáng. 24-hour self-service laundromat interior: mint tiled wall with two tiers of front-load dryers over washers, LAUNDRY 24H wall banner, WASH 40 DRY 30 price card, red DETERGENT vending machine, glass door to the night street, folding table with laundry basket and folded clothes, blue plastic chairs, yellow mop bucket, fluorescent tubes, grey tiled floor. Exterior variant: night storefront with neon LAUNDRY 24H sign band, bright glass front showing washers and the detergent machine, shuttered neighbors, sidewalk, street lamp, parked scooter (interior). tiệm giặt, máy giặt, máy sấy, giặt tự động, máy bán bột giặt, laundromat, laundry, washing machines, storefront, 24h, trong nhà đèn sáng, indoor",
+  "kind": "laundromat",
+  "tags": [
+   "tiệm giặt",
+   "máy giặt",
+   "máy sấy",
+   "giặt tự động",
+   "máy bán bột giặt",
+   "laundromat",
+   "laundry",
+   "washing machines",
+   "storefront",
+   "24h",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "tiem_giat_24h",
+   "tiem_giat_24h__exterior"
+  ],
+  "catalog_id": "tiem_giat_24h",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Trong: tường gạch men xanh bạc hà, 2 tầng máy (sấy trên, giặt dưới), băng rôn LAUNDRY 24H (signs), thẻ giá WASH 40 DRY 30 + máy bán DETERGENT đỏ (nướng), cửa kính trái ra phố đêm, bàn gấp đồ + giỏ + quần áo gấp, ghế nhựa xanh, xô lau vàng. exterior: mặt tiền đêm, bảng neon LAUNDRY 24H (nướng), mặt kính sáng thấy máy giặt, hàng xóm cửa cuốn, vỉa hè, cột đèn, xe máy.",
+  "label_en": "24-hour laundromat (interior)",
+  "description_en": "24-hour self-service laundromat interior: mint tiled wall with two tiers of front-load dryers over washers, LAUNDRY 24H wall banner, WASH 40 DRY 30 price card, red DETERGENT vending machine, glass door to the night street, folding table with laundry basket and folded clothes, blue plastic chairs, yellow mop bucket, fluorescent tubes, grey tiled floor. Exterior variant: night storefront with neon LAUNDRY 24H sign band, bright glass front showing washers and the detergent machine, shuttered neighbors, sidewalk, street lamp, parked scooter",
+  "baked_text": [
+   "DETERGENT",
+   "WASH 40  DRY 30"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Self-service laundromat interior, mint tiled wall, stacked front load washers and dryers, red vending machine, folding table with laundry basket, blue plastic chairs, fluorescent light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tiem_giat_24h"
+ },
+ "floor_y": 2070,
+ "slots": {
+  "center": {
+   "x": 1700,
+   "y": 2070,
+   "scale": 1.1
+  },
+  "left": {
+   "x": 1000,
+   "y": 2070,
+   "scale": 1.1
+  },
+  "right": {
+   "x": 3300,
+   "y": 2070,
+   "scale": 1.1
+  },
+  "machines": {
+   "x": 1400,
+   "y": 1850,
+   "scale": 1.0
+  },
+  "table": {
+   "x": 2550,
+   "y": 2000,
+   "scale": 1.05,
+   "clip_bottom": 1740
+  }
+ },
+ "signs": [
+  {
+   "text": "LAUNDRY 24H",
+   "box": [
+    860,
+    330,
+    2560,
+    570
+   ],
+   "style": "plain"
+  }
+ ],
+ "baked_signs": [
+  {
+   "text": "DETERGENT",
+   "box": [
+    3055,
+    810,
+    3343,
+    870
+   ]
+  },
+  {
+   "text": "WASH 40  DRY 30",
+   "box": [
+    1655,
+    676,
+    1965,
+    724
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1100,
+   "y": 160,
+   "color": "#eef6ff"
+  },
+  {
+   "x": 2700,
+   "y": 160,
+   "color": "#eef6ff"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Self-service laundromat interior, mint tiled wall, stacked front load washers and dryers, red vending machine, folding table with laundry basket, blue plastic chairs, fluorescent light, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "exterior": "Self-service laundromat interior, mint tiled wall, stacked front load washers and dryers, red vending machine, folding table with laundry basket, blue plastic chairs, fluorescent light, night, storefront exterior, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": [
+  "LAUNDRY 24H"
+ ]
+}

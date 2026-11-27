@@ -1,0 +1,88 @@
+{
+ "id": "lop_hoc_cu_dem__side",
+ "name": "Lớp học cũ ban đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Lớp học cũ ban đêm / Old classroom at night (ban đêm, góc bên / night, side angle)",
+  "description": "Lớp học cũ ban đêm, ban đêm, góc bên. Old school classroom at night seen from the back in one-point perspective: rows of wooden desks and chairs, chalkboard with smudges, wall clock, blank framed motto, lectern, left windows with taped X and dark curtains, moonlight patches on the wooden floor. Side variant: wall of cubby lockers with bags, pinned notice board, taped window with moon, two desks in profile (night, side angle). lớp học, lớp học cũ, trường học, bàn ghế, bảng đen, đồng hồ, tủ cá nhân, classroom, old classroom, lockers, school at night, ban đêm, góc bên, side",
+  "kind": "school_classroom",
+  "tags": [
+   "lớp học",
+   "lớp học cũ",
+   "trường học",
+   "bàn ghế",
+   "bảng đen",
+   "đồng hồ",
+   "tủ cá nhân",
+   "classroom",
+   "old classroom",
+   "lockers",
+   "school at night",
+   "ban đêm, góc bên",
+   "side"
+  ],
+  "time_variants": [
+   "lop_hoc_cu_dem",
+   "lop_hoc_cu_dem__side"
+  ],
+  "catalog_id": "lop_hoc_cu_dem",
+  "variant": "side",
+  "style": "cutout",
+  "layout": "Phối cảnh 1 điểm tụ từ cuối lớp: 6 cột bàn ghế gỗ, bảng đen, đồng hồ (không số), khung khẩu hiệu trống, bục giảng, cửa sổ trái dán băng keo chữ X + rèm tối, vệt trăng trên sàn. Biến thể side: tủ cubby có cặp sách, bảng ghim, cửa sổ có trăng, 2 bộ bàn ghế nhìn ngang.",
+  "label_en": "Old classroom at night (night, side angle)",
+  "description_en": "Old school classroom at night seen from the back in one-point perspective: rows of wooden desks and chairs, chalkboard with smudges, wall clock, blank framed motto, lectern, left windows with taped X and dark curtains, moonlight patches on the wooden floor. Side variant: wall of cubby lockers with bags, pinned notice board, taped window with moon, two desks in profile",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Old school classroom at night from the back, one-point perspective rows of wooden desks and chairs, chalkboard, round wall clock, blank framed motto, windows with taped X and dark curtains, moonlight on wooden floor, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "lop_hoc_cu_dem"
+ },
+ "floor_y": 1990,
+ "slots": {
+  "center": {
+   "x": 2250,
+   "y": 1990,
+   "scale": 1.15
+  },
+  "left": {
+   "x": 1150,
+   "y": 1990,
+   "scale": 1.15
+  },
+  "right": {
+   "x": 3350,
+   "y": 1990,
+   "scale": 1.15
+  },
+  "seat_1": {
+   "x": 1350,
+   "y": 1890,
+   "scale": 1.0
+  },
+  "seat_2": {
+   "x": 2450,
+   "y": 1890,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 820,
+   "y": 500,
+   "color": "#dfe8ff"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Old school classroom at night from the back, one-point perspective rows of wooden desks and chairs, chalkboard, round wall clock, blank framed motto, windows with taped X and dark curtains, moonlight on wooden floor, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "side": "Old school classroom at night from the back, one-point perspective rows of wooden desks and chairs, chalkboard, round wall clock, blank framed motto, windows with taped X and dark curtains, moonlight on wooden floor, night, side view, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

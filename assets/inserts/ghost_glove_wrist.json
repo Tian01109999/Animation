@@ -1,0 +1,40 @@
+{
+ "id": "ghost_glove_wrist",
+ "label": "Tay ma đeo găng trắng nắm cổ tay",
+ "label_en": "Gloved ghost hand gripping a wrist",
+ "tags": [
+  "tay ma",
+  "găng tay",
+  "nắm cổ tay",
+  "kinh dị",
+  "ghost hand",
+  "glove",
+  "wrist",
+  "grab"
+ ],
+ "props": [
+  "ghost_glove",
+  "gloved_hand",
+  "grabbed_wrist",
+  "wrist_grab"
+ ],
+ "style": "cutout",
+ "image": "ghost_glove_wrist.png",
+ "kind": "ghost_glove_wrist",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "glove": "#f4f2ee",
+  "ghost_sleeve": "#c9b48e",
+  "bg0": "#3a2030",
+  "sleeve_color": "#e8b830",
+  "skin": "#e9b994",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

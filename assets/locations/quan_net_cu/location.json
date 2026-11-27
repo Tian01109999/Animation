@@ -1,0 +1,109 @@
+{
+ "id": "quan_net_cu",
+ "name": "Quán net cũ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Quán net cũ / Old internet cafe (ban đêm / night)",
+  "description": "Quán net cũ, ban đêm. Old internet cafe at night in one-point perspective: long rows of beige PCs with glowing screens on wooden desks along both walls, red office chairs, pale green walls with game-art posters, NET CAFE 24H sign over the cashier counter at the back, ceiling fans and fluorescent tubes, stained tiled floor, dim blue light (night). quán net, tiệm internet, máy tính, ghế đỏ, quạt trần, internet cafe, pc cafe, computers, gaming, ban đêm, night",
+  "kind": "internet_cafe",
+  "tags": [
+   "quán net",
+   "tiệm internet",
+   "máy tính",
+   "ghế đỏ",
+   "quạt trần",
+   "internet cafe",
+   "pc cafe",
+   "computers",
+   "gaming",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "quan_net_cu"
+  ],
+  "catalog_id": "quan_net_cu",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "1 điểm tụ: dãy bàn gỗ + máy tính màn hình sáng hai bên tường, ghế đỏ quay lưng ra lối đi, tường xanh nhạt có poster hình khối, bảng NET CAFE / 24H (nướng) trên quầy thu ngân cuối phòng, quạt trần + đèn tuýp, sàn gạch ố.",
+  "label_en": "Old internet cafe (night)",
+  "description_en": "Old internet cafe at night in one-point perspective: long rows of beige PCs with glowing screens on wooden desks along both walls, red office chairs, pale green walls with game-art posters, NET CAFE 24H sign over the cashier counter at the back, ceiling fans and fluorescent tubes, stained tiled floor, dim blue light",
+  "baked_text": [
+   "NET CAFE",
+   "24H"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Old internet cafe at night, rows of beige computers with glowing screens on wooden desks, red chairs, pale green walls with posters, cashier counter, ceiling fans, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "quan_net_cu"
+ },
+ "floor_y": 1777,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1777,
+   "scale": 1.188
+  },
+  "left": {
+   "x": 1523,
+   "y": 1640,
+   "scale": 0.978
+  },
+  "right": {
+   "x": 2317,
+   "y": 1640,
+   "scale": 0.978
+  },
+  "far": {
+   "x": 1920,
+   "y": 1242,
+   "scale": 0.37
+  },
+  "counter": {
+   "x": 1948,
+   "y": 1200,
+   "scale": 0.305,
+   "clip_bottom": 1051
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "NET CAFE",
+   "box": [
+    1852,
+    849,
+    2012,
+    887
+   ]
+  },
+  {
+   "text": "24H",
+   "box": [
+    1909,
+    907,
+    1955,
+    936
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1932,
+   "y": 868,
+   "color": "#2fc4ff"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Old internet cafe at night, rows of beige computers with glowing screens on wooden desks, red chairs, pale green walls with posters, cashier counter, ceiling fans, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

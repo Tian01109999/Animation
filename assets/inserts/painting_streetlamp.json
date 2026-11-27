@@ -1,0 +1,35 @@
+{
+ "id": "painting_streetlamp",
+ "label": "Bức tranh: bóng người đứng dưới đèn đường",
+ "label_en": "Framed painting of a lone figure under a streetlamp",
+ "tags": [
+  "bức tranh",
+  "khung tranh",
+  "đèn đường",
+  "bóng người",
+  "painting",
+  "framed painting",
+  "streetlamp",
+  "lone figure"
+ ],
+ "props": [
+  "painting",
+  "framed_painting",
+  "streetlamp_painting"
+ ],
+ "style": "cutout",
+ "image": "painting_streetlamp.png",
+ "kind": "painting_streetlamp",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "plaque": "UNTITLED",
+  "wall": "#3a2f2a"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

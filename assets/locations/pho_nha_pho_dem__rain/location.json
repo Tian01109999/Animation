@@ -1,0 +1,209 @@
+{
+ "id": "pho_nha_pho_dem__rain",
+ "name": "Phố nhà phố về đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phố nhà phố về đêm / City shophouse street at night (ban đêm, mưa / night, rain)",
+  "description": "Phố nhà phố về đêm, ban đêm, mưa. Wide city street at night: row of 2-3 storey shophouses with colored ground-floor sign bands in English (CAFE, HOTEL, PHARMACY, NOODLES, BARBER, CLOTHES, GOLD, MINIMART, MASSAGE), vertical HOTEL blade sign, balconies, AC units, lit and dark windows, striped awnings, two shops shuttered; elevated expressway with car lights behind the roofs, rooftop billboards with glowing rings, distant towers; tiled sidewalk with parked scooters and street lamps, asphalt road with lane dashes and sign reflections. Rain variant: heavy rain streaks, puddles, stronger wet reflections (night, rain). phố, nhà phố, biển hiệu, đường trên cao, xe máy, mưa, city street, shophouses, neon signs, elevated road, rain, ban đêm, mưa",
+  "kind": "city_street_night",
+  "tags": [
+   "phố",
+   "nhà phố",
+   "biển hiệu",
+   "đường trên cao",
+   "xe máy",
+   "mưa",
+   "city street",
+   "shophouses",
+   "neon signs",
+   "elevated road",
+   "rain",
+   "ban đêm, mưa"
+  ],
+  "time_variants": [
+   "pho_nha_pho_dem",
+   "pho_nha_pho_dem__rain"
+  ],
+  "catalog_id": "pho_nha_pho_dem",
+  "variant": "rain",
+  "style": "cutout",
+  "layout": "Nhìn ngang: 9 căn nhà phố 2-3 tầng, dải bảng hiệu tiếng Anh nướng ở tầng trệt, biển dọc HOTEL, ban công + cục nóng, đường trên cao + đèn xe phía sau mái, billboard vòng sáng, vỉa hè lát gạch + xe máy + 2 cột đèn, đường nhựa vạch đứt + phản chiếu biển hiệu. Biến thể rain: mưa (lớp near), vũng nước.",
+  "label_en": "City shophouse street at night (night, rain)",
+  "description_en": "Wide city street at night: row of 2-3 storey shophouses with colored ground-floor sign bands in English (CAFE, HOTEL, PHARMACY, NOODLES, BARBER, CLOTHES, GOLD, MINIMART, MASSAGE), vertical HOTEL blade sign, balconies, AC units, lit and dark windows, striped awnings, two shops shuttered; elevated expressway with car lights behind the roofs, rooftop billboards with glowing rings, distant towers; tiled sidewalk with parked scooters and street lamps, asphalt road with lane dashes and sign reflections. Rain variant: heavy rain streaks, puddles, stronger wet reflections",
+  "baked_text": [
+   "CAFE",
+   "HOTEL",
+   "PHARMACY",
+   "NOODLES",
+   "BARBER",
+   "CLOTHES",
+   "GOLD",
+   "MINIMART",
+   "MASSAGE"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "City street at night, row of three storey shophouses with blank colored sign bands, balconies and AC units, elevated expressway behind, rooftop billboards, parked scooters on the sidewalk, street lamps, wet asphalt road reflections, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "pho_nha_pho_dem"
+ },
+ "floor_y": 2090,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 900,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2950,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "sidewalk": {
+   "x": 2200,
+   "y": 1660,
+   "scale": 0.3
+  },
+  "sidewalk_left": {
+   "x": 1000,
+   "y": 1660,
+   "scale": 0.3
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "CAFE",
+   "box": [
+    142,
+    1109,
+    285,
+    1177
+   ]
+  },
+  {
+   "text": "HOTEL",
+   "box": [
+    550,
+    1109,
+    730,
+    1177
+   ]
+  },
+  {
+   "text": "PHARMACY",
+   "box": [
+    923,
+    1109,
+    1210,
+    1177
+   ]
+  },
+  {
+   "text": "NOODLES",
+   "box": [
+    1368,
+    1109,
+    1619,
+    1177
+   ]
+  },
+  {
+   "text": "BARBER",
+   "box": [
+    1812,
+    1109,
+    2028,
+    1177
+   ]
+  },
+  {
+   "text": "CLOTHES",
+   "box": [
+    2221,
+    1109,
+    2472,
+    1177
+   ]
+  },
+  {
+   "text": "GOLD",
+   "box": [
+    2702,
+    1109,
+    2845,
+    1177
+   ]
+  },
+  {
+   "text": "MINIMART",
+   "box": [
+    3057,
+    1109,
+    3343,
+    1177
+   ]
+  },
+  {
+   "text": "MASSAGE",
+   "box": [
+    3501,
+    1109,
+    3752,
+    1177
+   ]
+  },
+  {
+   "text": "HOTEL",
+   "box": [
+    733,
+    330,
+    833,
+    900
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1422,
+   "y": 695,
+   "color": "#ffe2a0"
+  },
+  {
+   "x": 3129,
+   "y": 695,
+   "color": "#ffe2a0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  },
+  "near": {
+   "image": "bg_near.png",
+   "parallax": 1.1
+  }
+ },
+ "flow_prompts": {
+  "night": "City street at night, row of three storey shophouses with blank colored sign bands, balconies and AC units, elevated expressway behind, rooftop billboards, parked scooters on the sidewalk, street lamps, wet asphalt road reflections, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "rain": "City street at night, row of three storey shophouses with blank colored sign bands, balconies and AC units, elevated expressway behind, rooftop billboards, parked scooters on the sidewalk, street lamps, wet asphalt road reflections, night, heavy rain, wet reflections, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

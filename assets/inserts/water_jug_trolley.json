@@ -1,0 +1,33 @@
+{
+ "id": "water_jug_trolley",
+ "label": "Xe đẩy bình nước",
+ "label_en": "Water-jug hand trolley",
+ "tags": [
+  "water jugs",
+  "trolley",
+  "hand truck",
+  "delivery",
+  "water bottles",
+  "cart"
+ ],
+ "props": [
+  "water_jug",
+  "water_jugs",
+  "hand_truck",
+  "jug_trolley"
+ ],
+ "style": "cutout",
+ "image": "water_jug_trolley.png",
+ "kind": "water_jug_trolley",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "jugs": 3
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

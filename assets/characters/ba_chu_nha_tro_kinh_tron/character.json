@@ -1,0 +1,927 @@
+{
+ "id": "ba_chu_nha_tro_kinh_tron",
+ "height_px": 1000,
+ "image_scale": 3,
+ "canvas": [
+  600,
+  1012
+ ],
+ "head_box": [
+  205.6,
+  115.6,
+  394.4,
+  341.1
+ ],
+ "bones": {
+  "root": {
+   "parent": null,
+   "pivot": [
+    300.0,
+    1000
+   ]
+  },
+  "hip": {
+   "parent": "root",
+   "pivot": [
+    300.0,
+    605.52
+   ]
+  },
+  "torso": {
+   "parent": "hip",
+   "pivot": [
+    300.0,
+    576.14
+   ]
+  },
+  "neck": {
+   "parent": "torso",
+   "pivot": [
+    300.0,
+    383.1
+   ]
+  },
+  "head": {
+   "parent": "neck",
+   "pivot": [
+    300.0,
+    330.3
+   ]
+  },
+  "arm_l_up": {
+   "parent": "torso",
+   "pivot": [
+    236.13,
+    401.23
+   ]
+  },
+  "arm_l_low": {
+   "parent": "arm_l_up",
+   "pivot": [
+    227.73,
+    527.12
+   ]
+  },
+  "hand_l": {
+   "parent": "arm_l_low",
+   "pivot": [
+    222.7,
+    640.43
+   ]
+  },
+  "leg_l_up": {
+   "parent": "hip",
+   "pivot": [
+    262.23,
+    605.52
+   ]
+  },
+  "leg_l_low": {
+   "parent": "leg_l_up",
+   "pivot": [
+    261.47,
+    785.97
+   ]
+  },
+  "arm_r_up": {
+   "parent": "torso",
+   "pivot": [
+    363.87,
+    401.23
+   ]
+  },
+  "arm_r_low": {
+   "parent": "arm_r_up",
+   "pivot": [
+    372.27,
+    527.12
+   ]
+  },
+  "hand_r": {
+   "parent": "arm_r_low",
+   "pivot": [
+    377.3,
+    640.43
+   ]
+  },
+  "leg_r_up": {
+   "parent": "hip",
+   "pivot": [
+    337.77,
+    605.52
+   ]
+  },
+  "leg_r_low": {
+   "parent": "leg_r_up",
+   "pivot": [
+    338.53,
+    785.97
+   ]
+  }
+ },
+ "parts": [
+  {
+   "name": "leg_r_up",
+   "bone": "leg_r_up",
+   "image": "parts/leg_r_up.png",
+   "offset": [
+    310.0,
+    564.333
+   ]
+  },
+  {
+   "name": "leg_r_low",
+   "bone": "leg_r_low",
+   "image": "parts/leg_r_low.png",
+   "offset": [
+    315.333,
+    765.0
+   ]
+  },
+  {
+   "name": "leg_l_up",
+   "bone": "leg_l_up",
+   "image": "parts/leg_l_up.png",
+   "offset": [
+    234.333,
+    564.333
+   ]
+  },
+  {
+   "name": "leg_l_low",
+   "bone": "leg_l_low",
+   "image": "parts/leg_l_low.png",
+   "offset": [
+    209.333,
+    765.0
+   ]
+  },
+  {
+   "name": "pelvis",
+   "bone": "hip",
+   "image": "parts/pelvis.png",
+   "offset": [
+    196.667,
+    555.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "pelvis_back",
+   "bone": "hip",
+   "image": "parts/pelvis_back.png",
+   "offset": [
+    196.667,
+    555.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "neck",
+   "bone": "neck",
+   "image": "parts/neck.png",
+   "offset": [
+    283.667,
+    286.333
+   ]
+  },
+  {
+   "name": "torso",
+   "bone": "torso",
+   "image": "parts/torso.png",
+   "offset": [
+    214.333,
+    366.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "torso_back",
+   "bone": "torso",
+   "image": "parts/torso_back.png",
+   "offset": [
+    219.333,
+    365.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "head",
+   "bone": "head",
+   "image": "parts/head.png",
+   "offset": [
+    200.667,
+    160.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "face",
+   "bone": "head",
+   "image": "parts/face.png",
+   "offset": [
+    236.333,
+    193.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "eyes",
+   "bone": "head",
+   "slot": "eyes",
+   "images": {
+    "open": "parts/eyes_open.png",
+    "half": "parts/eyes_half.png",
+    "closed": "parts/eyes_closed.png",
+    "wide": "parts/eyes_wide.png",
+    "shock": "parts/eyes_shock.png",
+    "teary": "parts/eyes_teary.png",
+    "happy": "parts/eyes_happy.png",
+    "droop": "parts/eyes_droop.png",
+    "big": "parts/eyes_big.png",
+    "wince": "parts/eyes_wince.png"
+   },
+   "offset": [
+    257.0,
+    244.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "mouth",
+   "bone": "head",
+   "slot": "mouth",
+   "images": {
+    "A": "parts/mouth_A.png",
+    "B": "parts/mouth_B.png",
+    "C": "parts/mouth_C.png",
+    "D": "parts/mouth_D.png",
+    "E": "parts/mouth_E.png",
+    "F": "parts/mouth_F.png",
+    "G": "parts/mouth_G.png",
+    "H": "parts/mouth_H.png",
+    "X": "parts/mouth_X.png",
+    "flat": "parts/mouth_flat.png",
+    "smile": "parts/mouth_smile.png",
+    "frown": "parts/mouth_frown.png",
+    "wavy": "parts/mouth_wavy.png",
+    "wavy_small": "parts/mouth_wavy_small.png",
+    "o_small": "parts/mouth_o_small.png",
+    "sob": "parts/mouth_sob.png",
+    "smirk": "parts/mouth_smirk.png",
+    "grin": "parts/mouth_grin.png",
+    "shout": "parts/mouth_shout.png",
+    "clench": "parts/mouth_clench.png",
+    "laugh": "parts/mouth_laugh.png",
+    "wide_grin": "parts/mouth_wide_grin.png",
+    "slit_smile": "parts/mouth_slit_smile.png"
+   },
+   "offset": [
+    220.333,
+    265.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "glasses",
+   "bone": "head",
+   "image": "parts/glasses.png",
+   "offset": [
+    217.667,
+    241.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "hair_front",
+   "bone": "head",
+   "image": "parts/hair_front.png",
+   "offset": [
+    210.333,
+    119.333
+   ],
+   "view": "front"
+  },
+  {
+   "name": "head_props",
+   "bone": "head",
+   "image": "parts/head_props.png",
+   "offset": [
+    246.333,
+    126.667
+   ],
+   "view": "front"
+  },
+  {
+   "name": "brows",
+   "bone": "head",
+   "slot": "brows",
+   "images": {
+    "neutral": "parts/brows_neutral.png",
+    "angry": "parts/brows_angry.png",
+    "sad": "parts/brows_sad.png",
+    "evil": "parts/brows_evil.png",
+    "surprised": "parts/brows_surprised.png",
+    "worried_asym": "parts/brows_worried_asym.png",
+    "smirk": "parts/brows_smirk.png",
+    "low": "parts/brows_low.png"
+   },
+   "offset": [
+    258.667,
+    210.0
+   ],
+   "view": "front"
+  },
+  {
+   "name": "fx_sweat",
+   "bone": "head",
+   "slot": "fx_sweat",
+   "images": {
+    "on": "parts/fx_sweat_on.png"
+   },
+   "offset": [
+    373.0,
+    204.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_dashes",
+   "bone": "head",
+   "slot": "fx_dashes",
+   "images": {
+    "on": "parts/fx_dashes_on.png"
+   },
+   "offset": [
+    334.333,
+    122.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_tears",
+   "bone": "head",
+   "slot": "fx_tears",
+   "images": {
+    "on": "parts/fx_tears_on.png"
+   },
+   "offset": [
+    262.667,
+    270.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_vein",
+   "bone": "head",
+   "slot": "fx_vein",
+   "images": {
+    "on": "parts/fx_vein_on.png"
+   },
+   "offset": [
+    339.667,
+    196.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_flush",
+   "bone": "head",
+   "slot": "fx_flush",
+   "images": {
+    "on": "parts/fx_flush_on.png"
+   },
+   "offset": [
+    235.333,
+    272.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_eyebags_heavy",
+   "bone": "head",
+   "slot": "fx_eyebags_heavy",
+   "images": {
+    "on": "parts/fx_eyebags_heavy_on.png"
+   },
+   "offset": [
+    255.0,
+    272.333
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "fx_shade",
+   "bone": "head",
+   "slot": "fx_shade",
+   "images": {
+    "on": "parts/fx_shade_on.png"
+   },
+   "offset": [
+    216.333,
+    160.0
+   ],
+   "view": "front",
+   "default": "off"
+  },
+  {
+   "name": "head_back",
+   "bone": "head",
+   "image": "parts/head_back.png",
+   "offset": [
+    200.667,
+    160.0
+   ],
+   "view": "back"
+  },
+  {
+   "name": "hair_back_view",
+   "bone": "head",
+   "image": "parts/hair_back_view.png",
+   "offset": [
+    210.667,
+    131.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "head_props_back",
+   "bone": "head",
+   "image": "parts/head_props_back.png",
+   "offset": [
+    246.333,
+    144.667
+   ],
+   "view": "back"
+  },
+  {
+   "name": "arm_r_up",
+   "bone": "arm_r_up",
+   "image": "parts/arm_r_up.png",
+   "offset": [
+    337.333,
+    370.333
+   ]
+  },
+  {
+   "name": "arm_r_low",
+   "bone": "arm_r_low",
+   "image": "parts/arm_r_low.png",
+   "offset": [
+    352.667,
+    507.667
+   ]
+  },
+  {
+   "name": "hand_r",
+   "bone": "hand_r",
+   "slot": "hand_r",
+   "images": {
+    "open": "parts/hand_r_open.png",
+    "point": "parts/hand_r_point.png",
+    "fist": "parts/hand_r_fist.png"
+   },
+   "offset": [
+    348.667,
+    634.0
+   ]
+  },
+  {
+   "name": "arm_l_up",
+   "bone": "arm_l_up",
+   "image": "parts/arm_l_up.png",
+   "offset": [
+    207.0,
+    370.333
+   ]
+  },
+  {
+   "name": "arm_l_low",
+   "bone": "arm_l_low",
+   "image": "parts/arm_l_low.png",
+   "offset": [
+    202.667,
+    507.667
+   ]
+  },
+  {
+   "name": "hand_l",
+   "bone": "hand_l",
+   "slot": "hand_l",
+   "images": {
+    "open": "parts/hand_l_open.png",
+    "point": "parts/hand_l_point.png",
+    "fist": "parts/hand_l_fist.png"
+   },
+   "offset": [
+    200.333,
+    634.0
+   ]
+  }
+ ],
+ "expressions": {
+  "neutral": {
+   "eyes": "open",
+   "brows": "neutral",
+   "mouth": "flat",
+   "fx": []
+  },
+  "happy": {
+   "eyes": "happy",
+   "brows": "neutral",
+   "mouth": "smile",
+   "fx": [
+    "flush"
+   ]
+  },
+  "sad": {
+   "eyes": "droop",
+   "brows": "sad",
+   "mouth": "frown",
+   "fx": []
+  },
+  "angry": {
+   "eyes": "half",
+   "brows": "angry",
+   "mouth": "frown",
+   "fx": [
+    "vein"
+   ]
+  },
+  "scared": {
+   "eyes": "wide",
+   "brows": "sad",
+   "mouth": "wavy_small",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "evil": {
+   "eyes": "half",
+   "brows": "evil",
+   "mouth": "grin",
+   "fx": [
+    "shade"
+   ]
+  },
+  "surprised": {
+   "eyes": "big",
+   "brows": "surprised",
+   "mouth": "o_small",
+   "fx": []
+  },
+  "nervous": {
+   "eyes": "open",
+   "brows": "worried_asym",
+   "mouth": "wavy",
+   "fx": [
+    "dashes",
+    "sweat"
+   ]
+  },
+  "shocked": {
+   "eyes": "shock",
+   "brows": "surprised",
+   "mouth": "wavy",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "crying": {
+   "eyes": "teary",
+   "brows": "sad",
+   "mouth": "sob",
+   "fx": [
+    "tears",
+    "eyebags_heavy"
+   ]
+  },
+  "tired": {
+   "eyes": "half",
+   "brows": "low",
+   "mouth": "flat",
+   "fx": [
+    "eyebags_heavy"
+   ]
+  },
+  "smirk": {
+   "eyes": "half",
+   "brows": "smirk",
+   "mouth": "smirk",
+   "fx": []
+  },
+  "laughing": {
+   "eyes": "happy",
+   "brows": "surprised",
+   "mouth": "laugh",
+   "fx": [
+    "flush"
+   ]
+  },
+  "pained": {
+   "eyes": "wince",
+   "brows": "sad",
+   "mouth": "clench",
+   "fx": [
+    "sweat"
+   ]
+  },
+  "shout_angry": {
+   "eyes": "open",
+   "brows": "angry",
+   "mouth": "shout",
+   "fx": [
+    "vein",
+    "flush"
+   ]
+  },
+  "wailing": {
+   "eyes": "wince",
+   "brows": "sad",
+   "mouth": "shout",
+   "fx": [
+    "tears"
+   ]
+  },
+  "wide_grin": {
+   "eyes": "shock",
+   "brows": "neutral",
+   "mouth": "wide_grin",
+   "fx": [
+    "shade"
+   ]
+  },
+  "slit_smile": {
+   "eyes": "half",
+   "brows": "evil",
+   "mouth": "slit_smile",
+   "fx": [
+    "shade"
+   ]
+  },
+  "cringe": {
+   "eyes": "wince",
+   "brows": "worried_asym",
+   "mouth": "wavy",
+   "fx": [
+    "dashes",
+    "sweat"
+   ]
+  }
+ },
+ "views": [
+  "front",
+  "back"
+ ],
+ "hand_prop_anchor": {
+  "bone": "hand_r",
+  "point": [
+   377.3,
+   669.0
+  ]
+ },
+ "badge_anchor": {
+  "bone": "torso",
+  "rect": [
+   304.2,
+   424.2,
+   375.5,
+   446.0
+  ]
+ },
+ "generator": {
+  "kind": "puppetgen",
+  "version": 2,
+  "params": {
+   "gender": "female",
+   "age": "old",
+   "build": "normal",
+   "height_scale": 1.0,
+   "skin": "#e8bf9e",
+   "hair_style": "bun",
+   "hair_color": "#e9e7e2",
+   "hair_highlight": "#ffffff",
+   "hair_tie": null,
+   "pigtails": false,
+   "cap_color": null,
+   "brow_color": null,
+   "outfit_type": "cardigan",
+   "colors": {
+    "cardigan": "#6a4a86",
+    "top": "#e6d8bc",
+    "skirt": "#3a3540",
+    "shoes": "#4a3a34",
+    "hairpin": "#a8323a"
+   },
+   "neck_style": "peter_pan",
+   "sleeves": null,
+   "accessories": [
+    "hairpin",
+    "reading_glasses_gold_round"
+   ],
+   "eye_bags": false,
+   "blush": 0.5,
+   "wrinkles": true,
+   "facial_hair": "none",
+   "lip_color": null,
+   "ghost": null,
+   "wet": false,
+   "face": "normal",
+   "vest_number": "07",
+   "eye_color": "#141016",
+   "shirt_style": null,
+   "shirt_color": null,
+   "pants_color": null,
+   "shorts": false,
+   "shoe_color": null,
+   "sandals": false,
+   "apron_color": null,
+   "dress_color": null,
+   "gold_chain": false,
+   "scar": false,
+   "glasses": false,
+   "outline": null
+  }
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "puppetgen v2",
+  "note": "Nhân vật gốc sinh bằng code; không dùng ảnh tham khảo."
+ },
+ "profile": {
+  "label": "Nữ · lớn tuổi · bà chủ nhà trọ · tóc bạc búi + trâm · kính tròn · cardigan tím",
+  "gender": "female",
+  "age": "old",
+  "description": "Bà chủ nhà trọ tóc bạc búi, kính tròn, áo len tím. áo len cardigan tím cài cúc, áo trong be cổ tròn, váy dài tối, giày bệt | EN: old landlady, white hair in a top bun with a red hairpin, round gold-rimmed glasses, purple button cardigan over a beige top, long dark skirt, flat shoes",
+  "tags": [
+   "bà chủ nhà",
+   "tóc bạc",
+   "búi",
+   "kính",
+   "wrinkles",
+   "blush",
+   "female",
+   "old",
+   "landlady",
+   "old woman",
+   "granny",
+   "white hair bun",
+   "hairpin",
+   "round glasses",
+   "purple cardigan",
+   "beige top",
+   "dark skirt",
+   "apartment owner",
+   "bun",
+   "cardigan",
+   "reading_glasses_gold_round"
+  ],
+  "style": "cutout",
+  "coverage": "full_body",
+  "actions": [
+   "idle",
+   "talk",
+   "walk",
+   "sit",
+   "point",
+   "nod",
+   "shake_head",
+   "scared"
+  ],
+  "lipsync": true,
+  "views": [
+   "front",
+   "back"
+  ],
+  "expressions": [
+   "neutral",
+   "happy",
+   "sad",
+   "angry",
+   "scared",
+   "evil",
+   "surprised",
+   "nervous",
+   "shocked",
+   "crying",
+   "tired",
+   "smirk"
+  ],
+  "hair_style": "bun",
+  "outfit": "cardigan",
+  "archetype": "ba_chu_nha_tro_kinh_tron",
+  "voice": {
+   "voice": "vi-VN-HoaiMyNeural",
+   "pitch": "-14Hz",
+   "rate": "-10%"
+  },
+  "roles": [
+   "bà chủ nhà trọ",
+   "bà hàng xóm",
+   "người biết chuyện cũ"
+  ],
+  "name_vi": "Bà chủ nhà trọ tóc bạc búi, kính tròn, áo len tím",
+  "lower": "skirt",
+  "has_back_view": true,
+  "extra_expressions": [
+   "laughing",
+   "pained",
+   "shout_angry",
+   "wailing",
+   "wide_grin",
+   "slit_smile",
+   "cringe"
+  ],
+  "poses": [
+   "hand_over_mouth",
+   "hands_over_mouth",
+   "hand_to_ear",
+   "hands_raised"
+  ],
+  "provenance": "procedural_library",
+  "description_en": "old landlady, white hair in a top bun with a red hairpin, round gold-rimmed glasses, purple button cardigan over a beige top, long dark skirt, flat shoes",
+  "batch": 3,
+  "label_en": "Old woman · landlady · white hair bun with hairpin · round glasses · purple cardigan"
+ },
+ "poses": {
+  "hand_over_mouth": {
+   "bones": {
+    "arm_r_up": {
+     "r": 60.25
+    },
+    "arm_r_low": {
+     "r": 139.25,
+     "sy": 1.12
+    }
+   },
+   "slots": {
+    "hand_r": "open"
+   }
+  },
+  "hands_over_mouth": {
+   "bones": {
+    "arm_r_up": {
+     "r": 64.15
+    },
+    "arm_r_low": {
+     "r": 142.95,
+     "sy": 1.12
+    },
+    "arm_l_up": {
+     "r": -59.41
+    },
+    "arm_l_low": {
+     "r": -143.52,
+     "sy": 1.12
+    }
+   },
+   "slots": {
+    "hand_r": "open",
+    "hand_l": "open"
+   }
+  },
+  "hand_to_ear": {
+   "bones": {
+    "arm_r_up": {
+     "r": -96.76
+    },
+    "arm_r_low": {
+     "r": -125.57,
+     "sy": 1.05
+    }
+   },
+   "slots": {
+    "hand_r": "open"
+   }
+  },
+  "hands_raised": {
+   "bones": {
+    "arm_r_up": {
+     "r": -100.24
+    },
+    "arm_r_low": {
+     "r": -91.23,
+     "sy": 1.0
+    },
+    "arm_l_up": {
+     "r": 100.24
+    },
+    "arm_l_low": {
+     "r": 91.23,
+     "sy": 1.0
+    }
+   },
+   "slots": {
+    "hand_r": "open",
+    "hand_l": "open"
+   }
+  }
+ },
+ "archetype": "ba_chu_nha_tro_kinh_tron"
+}

@@ -1,0 +1,201 @@
+{
+ "id": "pho_dan_cu_may_ban_nuoc__day",
+ "name": "Phố dân cư đêm, máy bán nước",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phố dân cư đêm, máy bán nước / Residential street with vending machines (ban ngày / day)",
+  "description": "Phố dân cư đêm, máy bán nước, ban ngày. Quiet residential street in side elevation: concrete block wall with gable-roof houses behind (lit windows at night), two glowing vending machines with COLD/HOT labels, concrete utility poles with yellow-black guards and blue address plates (2-14, 2-15), lamp on the pole with light cone, orange curved traffic mirror, stone steps up to a small red shrine gate with a SHRINE plaque among dark trees, purple dusk-night sky with moon. Day variant (day). phố dân cư, máy bán nước, cột điện, đèn đường, gương cầu, cổng đền, tường rào, residential street, vending machines, utility pole, curved mirror, shrine gate, ban ngày, day",
+  "kind": "residential_street",
+  "tags": [
+   "phố dân cư",
+   "máy bán nước",
+   "cột điện",
+   "đèn đường",
+   "gương cầu",
+   "cổng đền",
+   "tường rào",
+   "residential street",
+   "vending machines",
+   "utility pole",
+   "curved mirror",
+   "shrine gate",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "pho_dan_cu_may_ban_nuoc",
+   "pho_dan_cu_may_ban_nuoc__day"
+  ],
+  "catalog_id": "pho_dan_cu_may_ban_nuoc",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Mặt đứng ngang phố: tường gạch block, nhà mái dốc phía sau, 2 máy bán nước (COLD/HOT, 000 nướng), cột điện ống sọc vàng-đen + biển địa chỉ, đèn gắn cột, gương cầu cam, bậc đá + cổng đền đỏ (SHRINE) trái, trời tím có trăng (far). Biến thể ngày.",
+  "label_en": "Residential street with vending machines (day)",
+  "description_en": "Quiet residential street in side elevation: concrete block wall with gable-roof houses behind (lit windows at night), two glowing vending machines with COLD/HOT labels, concrete utility poles with yellow-black guards and blue address plates (2-14, 2-15), lamp on the pole with light cone, orange curved traffic mirror, stone steps up to a small red shrine gate with a SHRINE plaque among dark trees, purple dusk-night sky with moon. Day variant",
+  "baked_text": [
+   "SHRINE",
+   "COLD",
+   "HOT",
+   "000",
+   "2-14",
+   "2-15"
+  ],
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Quiet residential street at dusk night, block wall with houses behind, two glowing vending machines, concrete utility poles with yellow and black guards, streetlight cone, orange curved traffic mirror, small red shrine gate up stone steps among trees, purple sky with moon, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "pho_dan_cu_may_ban_nuoc"
+ },
+ "floor_y": 1990,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1990,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 1000,
+   "y": 1990,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 3000,
+   "y": 1990,
+   "scale": 1.0
+  },
+  "vending": {
+   "x": 2360,
+   "y": 1900,
+   "scale": 0.95
+  },
+  "shrine": {
+   "x": 580,
+   "y": 1600,
+   "scale": 0.62
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "SHRINE",
+   "box": [
+    534,
+    787,
+    626,
+    815
+   ]
+  },
+  {
+   "text": "COLD",
+   "box": [
+    1916,
+    967,
+    1972,
+    993
+   ]
+  },
+  {
+   "text": "COLD",
+   "box": [
+    1916,
+    1104,
+    1972,
+    1130
+   ]
+  },
+  {
+   "text": "HOT",
+   "box": [
+    1923,
+    1241,
+    1965,
+    1267
+   ]
+  },
+  {
+   "text": "000",
+   "box": [
+    2224,
+    1320,
+    2272,
+    1350
+   ]
+  },
+  {
+   "text": "COLD",
+   "box": [
+    2416,
+    967,
+    2472,
+    993
+   ]
+  },
+  {
+   "text": "HOT",
+   "box": [
+    2423,
+    1104,
+    2465,
+    1130
+   ]
+  },
+  {
+   "text": "HOT",
+   "box": [
+    2423,
+    1241,
+    2465,
+    1267
+   ]
+  },
+  {
+   "text": "000",
+   "box": [
+    2724,
+    1320,
+    2772,
+    1350
+   ]
+  },
+  {
+   "text": "2-14",
+   "box": [
+    1254,
+    472,
+    1426,
+    553
+   ]
+  },
+  {
+   "text": "2-15",
+   "box": [
+    3474,
+    472,
+    3646,
+    553
+   ]
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Quiet residential street at dusk night, block wall with houses behind, two glowing vending machines, concrete utility poles with yellow and black guards, streetlight cone, orange curved traffic mirror, small red shrine gate up stone steps among trees, purple sky with moon, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "day": "Quiet residential street at dusk night, block wall with houses behind, two glowing vending machines, concrete utility poles with yellow and black guards, streetlight cone, orange curved traffic mirror, small red shrine gate up stone steps among trees, purple sky with moon, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

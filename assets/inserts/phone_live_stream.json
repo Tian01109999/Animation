@@ -1,0 +1,55 @@
+{
+ "id": "phone_live_stream",
+ "label": "Điện thoại – màn hình phát trực tiếp",
+ "label_en": "Phone in hand - live-stream screen",
+ "tags": [
+  "phone",
+  "live stream",
+  "livestream",
+  "viewers",
+  "comments",
+  "hearts",
+  "live"
+ ],
+ "props": [
+  "phone_live",
+  "live_stream",
+  "livestream_phone"
+ ],
+ "style": "cutout",
+ "image": "phone_live_stream.png",
+ "kind": "phone_live_stream",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "time": "21:12",
+  "handle": "@night_cam",
+  "live_label": "LIVE",
+  "viewers": "12.4K",
+  "comments": [
+   [
+    "J.P.",
+    "where is this?"
+   ],
+   [
+    "S.K.",
+    "is this real??"
+   ],
+   [
+    "T.N.",
+    "look behind him"
+   ]
+  ],
+  "hearts": 9,
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,34 @@
+{
+ "id": "billboard_accuracy",
+ "label": "Billboard vòng sáng \"100% ACCURATE\"",
+ "label_en": "Billboard - glowing ring \"100% ACCURATE\"",
+ "tags": [
+  "billboard",
+  "ad",
+  "100% accurate",
+  "glowing ring",
+  "night city",
+  "advertisement"
+ ],
+ "props": [
+  "billboard",
+  "accuracy_billboard",
+  "ring_billboard"
+ ],
+ "style": "cutout",
+ "image": "billboard_accuracy.png",
+ "kind": "billboard_accuracy",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "headline": "100%",
+  "title": "ACCURATE",
+  "sub": "KNOW YOUR TIME"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,175 @@
+{
+ "id": "tang_trung_tam_dien_thoai",
+ "name": "Tầng trung tâm điện thoại",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Tầng trung tâm điện thoại / Phone mall floor (trong nhà đèn sáng / interior)",
+  "description": "Tầng trung tâm điện thoại, trong nhà đèn sáng. Bright phone-mall floor with glass kiosk shops under glowing neon sign bands (PHONE REPAIR, CASE SHOP, SCREEN FILM, LAPTOP REPAIR, TOP-UP): pegboard walls of colorful phone cases, shelves of cracked phones, glass showcase counters, repair counter with green cutting mat, desk lamp and pen cup, English price board (REPAIR PRICES: SCREEN 900 / BATTERY 450 / CHARGE PORT 300 / DATA RECOVERY 500), polished cream tile floor, white bloom. Variants: kiosk front close (default), side angle along the kiosk row with atrium railing, long one-point corridor with green EXIT door and fire extinguisher, night corridor with all shutters down (interior). trung tâm điện thoại, sửa điện thoại, ki-ốt, ốp lưng, dán màn hình, nạp thẻ, trung tâm thương mại, cửa cuốn, phone mall, phone repair, kiosk, case shop, mall corridor, shutters, trong nhà đèn sáng, indoor",
+  "kind": "phone_mall",
+  "tags": [
+   "trung tâm điện thoại",
+   "sửa điện thoại",
+   "ki-ốt",
+   "ốp lưng",
+   "dán màn hình",
+   "nạp thẻ",
+   "trung tâm thương mại",
+   "cửa cuốn",
+   "phone mall",
+   "phone repair",
+   "kiosk",
+   "case shop",
+   "mall corridor",
+   "shutters",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "tang_trung_tam_dien_thoai",
+   "tang_trung_tam_dien_thoai__angle",
+   "tang_trung_tam_dien_thoai__corridor",
+   "tang_trung_tam_dien_thoai__closed"
+  ],
+  "catalog_id": "tang_trung_tam_dien_thoai",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Mặc định: cận mặt tiền ki-ốt PHONE REPAIR (bảng hiệu neon nướng, kệ điện thoại nứt, bảng giá tiếng Anh, quầy kính, thảm cắt xanh, đèn bàn, cốc bút), hai ki-ốt bên cạnh (CASE SHOP, TOP-UP). angle: dãy ki-ốt bên phải chạy về điểm tụ trái, lan can kính thông tầng bên trái. corridor: hành lang 1 điểm tụ, ki-ốt hai bên, cửa thoát hiểm + EXIT + bình chữa cháy cuối hành lang. closed: như corridor nhưng mọi cửa cuốn đã kéo xuống, đèn mờ xanh, EXIT phát sáng.",
+  "label_en": "Phone mall floor (interior)",
+  "description_en": "Bright phone-mall floor with glass kiosk shops under glowing neon sign bands (PHONE REPAIR, CASE SHOP, SCREEN FILM, LAPTOP REPAIR, TOP-UP): pegboard walls of colorful phone cases, shelves of cracked phones, glass showcase counters, repair counter with green cutting mat, desk lamp and pen cup, English price board (REPAIR PRICES: SCREEN 900 / BATTERY 450 / CHARGE PORT 300 / DATA RECOVERY 500), polished cream tile floor, white bloom. Variants: kiosk front close (default), side angle along the kiosk row with atrium railing, long one-point corridor with green EXIT door and fire extinguisher, night corridor with all shutters down",
+  "baked_text": [
+   "REPAIR PRICES",
+   "SCREEN 900",
+   "BATTERY 450",
+   "CHARGE PORT 300",
+   "DATA RECOVERY 500",
+   "PHONE REPAIR",
+   "CASE SHOP",
+   "TOP-UP"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tang_trung_tam_dien_thoai"
+ },
+ "floor_y": 2130,
+ "slots": {
+  "tech": {
+   "x": 1700,
+   "y": 2010,
+   "scale": 1.25,
+   "clip_bottom": 1420
+  },
+  "center": {
+   "x": 1920,
+   "y": 2130,
+   "scale": 1.45
+  },
+  "left": {
+   "x": 700,
+   "y": 2130,
+   "scale": 1.45
+  },
+  "right": {
+   "x": 3150,
+   "y": 2130,
+   "scale": 1.45
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "REPAIR PRICES",
+   "box": [
+    2460,
+    571,
+    2826,
+    625
+   ]
+  },
+  {
+   "text": "SCREEN 900",
+   "box": [
+    2529,
+    691,
+    2757,
+    733
+   ]
+  },
+  {
+   "text": "BATTERY 450",
+   "box": [
+    2517,
+    799,
+    2769,
+    841
+   ]
+  },
+  {
+   "text": "CHARGE PORT 300",
+   "box": [
+    2469,
+    907,
+    2817,
+    949
+   ]
+  },
+  {
+   "text": "DATA RECOVERY 500",
+   "box": [
+    2463,
+    1015,
+    2823,
+    1057
+   ]
+  },
+  {
+   "text": "PHONE REPAIR",
+   "box": [
+    1389,
+    205,
+    2451,
+    373
+   ]
+  },
+  {
+   "text": "CASE SHOP",
+   "box": [
+    -639,
+    205,
+    159,
+    373
+   ]
+  },
+  {
+   "text": "TOP-UP",
+   "box": [
+    3813,
+    205,
+    4347,
+    373
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 2220,
+   "y": 1000,
+   "color": "#fff4d0"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "angle": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright mall interior, side angle, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "corridor": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright mall interior, long one-point corridor, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "closed": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, night, shutters down, dim security lights, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

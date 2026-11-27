@@ -1,0 +1,37 @@
+{
+ "id": "streetlight_moon",
+ "label": "Đèn đường và trăng tròn",
+ "label_en": "Streetlight and full moon close-up",
+ "tags": [
+  "đèn đường",
+  "trăng",
+  "ban đêm",
+  "dây điện",
+  "streetlight",
+  "moon",
+  "night sky",
+  "street lamp"
+ ],
+ "props": [
+  "streetlight",
+  "street_lamp",
+  "moon",
+  "full_moon"
+ ],
+ "style": "cutout",
+ "image": "streetlight_moon.png",
+ "kind": "streetlight_moon",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "moon_x": 2700,
+  "moon_y": 760,
+  "moths": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

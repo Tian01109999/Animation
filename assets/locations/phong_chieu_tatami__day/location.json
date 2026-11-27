@@ -1,0 +1,99 @@
+{
+ "id": "phong_chieu_tatami__day",
+ "name": "Phòng chiếu tatami",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng chiếu tatami / Tatami room (ban ngày / day)",
+  "description": "Phòng chiếu tatami, ban ngày. Traditional tatami room: woven straw mats with dark borders, pair of sliding paper doors with cloud pattern, window half shoji lattice and half glass showing the moon, wooden posts and beam, round paper lantern hanging from the ceiling, wall calendar showing only the number 13, low round table with teapot and cups, two floor cushions, low cabinet with a vase. Night (lantern lit) and day variants (day). phòng chiếu, tatami, cửa trượt, đèn lồng giấy, bàn thấp, lịch treo tường, tatami room, sliding door, paper lantern, low table, ban ngày, day",
+  "kind": "tatami_room",
+  "tags": [
+   "phòng chiếu",
+   "tatami",
+   "cửa trượt",
+   "đèn lồng giấy",
+   "bàn thấp",
+   "lịch treo tường",
+   "tatami room",
+   "sliding door",
+   "paper lantern",
+   "low table",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "phong_chieu_tatami",
+   "phong_chieu_tatami__day"
+  ],
+  "catalog_id": "phong_chieu_tatami",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: chiếu tatami phối cảnh, cửa trượt giấy trái, cửa sổ nửa shoji nửa kính, cột + dầm gỗ, đèn lồng giấy tròn treo, lịch chỉ có số 13 (nướng), bàn tròn thấp + ấm chén, 2 đệm ngồi, kệ thấp + bình hoa. Biến thể ngày.",
+  "label_en": "Tatami room (day)",
+  "description_en": "Traditional tatami room: woven straw mats with dark borders, pair of sliding paper doors with cloud pattern, window half shoji lattice and half glass showing the moon, wooden posts and beam, round paper lantern hanging from the ceiling, wall calendar showing only the number 13, low round table with teapot and cups, two floor cushions, low cabinet with a vase. Night (lantern lit) and day variants",
+  "baked_text": [
+   "13"
+  ],
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Traditional tatami room, straw mats with dark borders, sliding paper doors, shoji window, wooden posts, round paper lantern, wall calendar, low round table with teapot, floor cushions, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_chieu_tatami"
+ },
+ "floor_y": 2040,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "left": {
+   "x": 1000,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "right": {
+   "x": 2850,
+   "y": 2040,
+   "scale": 1.12
+  },
+  "door": {
+   "x": 760,
+   "y": 1700,
+   "scale": 0.95
+  },
+  "seat_left": {
+   "x": 1100,
+   "y": 2000,
+   "scale": 1.1
+  },
+  "seat_right": {
+   "x": 2740,
+   "y": 2000,
+   "scale": 1.1
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "13",
+   "box": [
+    2990,
+    606,
+    3170,
+    774
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Traditional tatami room, straw mats with dark borders, sliding paper doors, shoji window, wooden posts, round paper lantern, wall calendar, low round table with teapot, floor cushions, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "day": "Traditional tatami room, straw mats with dark borders, sliding paper doors, shoji window, wooden posts, round paper lantern, wall calendar, low round table with teapot, floor cushions, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

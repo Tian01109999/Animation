@@ -1,0 +1,138 @@
+{
+ "id": "trung_tam_du_lieu_dem",
+ "name": "Trung tâm dữ liệu về đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Trung tâm dữ liệu về đêm / Data center exterior at night (ban đêm / night)",
+  "description": "Trung tâm dữ liệu về đêm, ban đêm. Large grey data-center building at night with glowing blue LED strips, rooftop cooling units, abstract hourglass ring logo and DATA CENTER lettering, lit glass entrance; floodlights on tall poles; foreground chain-link fence with barbed-wire coils, locked double gate with a RESTRICTED AREA / STAFF ONLY sign and a security camera; asphalt lot and dark grass (night). trung tâm dữ liệu, hàng rào, kẽm gai, cổng, đèn pha, khu vực cấm, data center, fence, barbed wire, restricted area, floodlights, mặt tiền, toàn cảnh, bãi đỗ, ban đêm, night",
+  "kind": "data_center_exterior",
+  "tags": [
+   "trung tâm dữ liệu",
+   "hàng rào",
+   "kẽm gai",
+   "cổng",
+   "đèn pha",
+   "khu vực cấm",
+   "data center",
+   "fence",
+   "barbed wire",
+   "restricted area",
+   "floodlights",
+   "mặt tiền",
+   "toàn cảnh",
+   "bãi đỗ",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "trung_tam_du_lieu_dem"
+  ],
+  "catalog_id": "trung_tam_du_lieu_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: khối nhà xám lớn (mặt bên trái), dải LED xanh ngang, máy làm mát trên mái, logo đồng hồ cát trong vòng tròn + chữ DATA CENTER (nướng), cửa kính sáng; 2 cột đèn pha; tiền cảnh hàng rào lưới B40 + kẽm gai cuộn, cổng đôi khoá có biển RESTRICTED AREA / STAFF ONLY (nướng), camera an ninh.",
+  "label_en": "Data center exterior at night (night)",
+  "description_en": "Large grey data-center building at night with glowing blue LED strips, rooftop cooling units, abstract hourglass ring logo and DATA CENTER lettering, lit glass entrance; floodlights on tall poles; foreground chain-link fence with barbed-wire coils, locked double gate with a RESTRICTED AREA / STAFF ONLY sign and a security camera; asphalt lot and dark grass",
+  "baked_text": [
+   "DATA CENTER",
+   "RESTRICTED AREA",
+   "STAFF ONLY"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Large grey data center building at night with blue light strips, floodlights, chain link fence with barbed wire, locked gate with blank red warning sign, security camera, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "trung_tam_du_lieu_dem"
+ },
+ "floor_y": 2090,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 850,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 3000,
+   "y": 2090,
+   "scale": 1.0
+  },
+  "fence": {
+   "x": 1200,
+   "y": 1970,
+   "scale": 0.95
+  },
+  "inside": {
+   "x": 2600,
+   "y": 1540,
+   "scale": 0.5
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "DATA CENTER",
+   "box": [
+    1782,
+    672,
+    2458,
+    788
+   ]
+  },
+  {
+   "text": "RESTRICTED AREA",
+   "box": [
+    1745,
+    1215,
+    2255,
+    1285
+   ]
+  },
+  {
+   "text": "STAFF ONLY",
+   "box": [
+    1770,
+    1367,
+    2230,
+    1453
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 490,
+   "y": 420,
+   "color": "#fff8e0"
+  },
+  {
+   "x": 3530,
+   "y": 420,
+   "color": "#fff8e0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.9
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Large grey data center building at night with blue light strips, floodlights, chain link fence with barbed wire, locked gate with blank red warning sign, security camera, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

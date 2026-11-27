@@ -1,0 +1,39 @@
+{
+ "id": "class_photo_table",
+ "label": "Ảnh lớp cũ trên bàn gỗ",
+ "label_en": "Old class photo on a wooden table",
+ "tags": [
+  "ảnh lớp",
+  "ảnh cũ",
+  "kỷ yếu",
+  "học sinh",
+  "class photo",
+  "old photo",
+  "school",
+  "yearbook"
+ ],
+ "props": [
+  "class_photo",
+  "school_photo",
+  "group_photo"
+ ],
+ "style": "cutout",
+ "image": "class_photo_table.png",
+ "kind": "class_photo_table",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "caption": "CLASS 4-B  ·  1998",
+  "fade": 0.85,
+  "circled": null,
+  "angle": 3,
+  "table": "#8a5a36",
+  "seed": 4
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

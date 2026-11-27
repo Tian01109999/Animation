@@ -1,0 +1,36 @@
+{
+ "id": "usb_server_plug",
+ "label": "Cắm USB vào máy chủ",
+ "label_en": "USB stick plugged into a server",
+ "tags": [
+  "usb",
+  "server",
+  "hacking",
+  "data center",
+  "flash drive",
+  "rack",
+  "hand"
+ ],
+ "props": [
+  "usb_stick",
+  "usb_drive",
+  "server_usb",
+  "flash_drive"
+ ],
+ "style": "cutout",
+ "image": "usb_server_plug.png",
+ "kind": "usb_server_plug",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "sleeve_color": "#2a2d33",
+  "skin": "#e9b994",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

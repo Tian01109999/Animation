@@ -1,0 +1,29 @@
+{
+ "id": "cctv_cameras_wall",
+ "label": "Ba camera an ninh trên tường",
+ "label_en": "Three CCTV cameras on a wall",
+ "tags": [
+  "cctv",
+  "security cameras",
+  "surveillance",
+  "camera",
+  "wall"
+ ],
+ "props": [
+  "cctv_camera",
+  "cctv_cameras",
+  "security_camera"
+ ],
+ "style": "cutout",
+ "image": "cctv_cameras_wall.png",
+ "kind": "cctv_cameras_wall",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

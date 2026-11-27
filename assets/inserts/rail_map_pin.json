@@ -1,0 +1,43 @@
+{
+ "id": "rail_map_pin",
+ "label": "Bản đồ tuyến tàu + ghim đỏ",
+ "label_en": "Rail map card with a red pin",
+ "tags": [
+  "bản đồ",
+  "tàu điện",
+  "ghim đỏ",
+  "nhà ga",
+  "rail map",
+  "subway",
+  "train",
+  "pin"
+ ],
+ "props": [
+  "rail_map",
+  "subway_map",
+  "train_map",
+  "map_pin"
+ ],
+ "style": "cutout",
+ "image": "rail_map_pin.png",
+ "kind": "rail_map_pin",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "title": "CITY",
+  "subtitle": "RAIL MAP",
+  "tag": "LINE 1 · 4 STOPS",
+  "pin": {
+   "x": 2400,
+   "y": 1000,
+   "label": "LAST SEEN · 02:40"
+  },
+  "bg": "smoke_dark"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,42 @@
+{
+ "id": "hand_knock_stall",
+ "label": "Tay gõ cửa buồng vệ sinh",
+ "label_en": "Hand knocking on a toilet stall door",
+ "tags": [
+  "gõ cửa",
+  "nhà vệ sinh",
+  "buồng vệ sinh",
+  "trường học",
+  "knock",
+  "toilet stall",
+  "door",
+  "school toilet"
+ ],
+ "props": [
+  "knock",
+  "knocking",
+  "stall_door",
+  "toilet_door"
+ ],
+ "style": "cutout",
+ "image": "hand_knock_stall.png",
+ "kind": "hand_knock_stall",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "stall_number": "3",
+  "occupied": true,
+  "indicator_text": "IN USE",
+  "sfx": "",
+  "door_color": "#e6b9b4",
+  "sleeve_color": "#e8b830",
+  "skin": "#e9b994",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,118 @@
+{
+ "id": "sanh_thang_cuon",
+ "name": "Sảnh thang cuốn + thang máy",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sảnh thang cuốn + thang máy / Mall escalator landing and elevator (trong nhà đèn sáng / interior)",
+  "description": "Sảnh thang cuốn + thang máy, trong nhà đèn sáng. Bright mall landing: escalator with glass balustrade and black handrail rising to the upper floor on the left, stainless-steel elevator doors with floor indicator 3 and up arrow, call buttons and 3F label, tall vertical ad lightbox with a glowing ring (no text), potted plants, hanging EXIT sign, downlights, polished tile floor (interior). thang cuốn, thang máy, sảnh, trung tâm thương mại, hộp đèn quảng cáo, escalator, elevator, mall lobby, ad lightbox, trong nhà đèn sáng, indoor",
+  "kind": "mall_lobby",
+  "tags": [
+   "thang cuốn",
+   "thang máy",
+   "sảnh",
+   "trung tâm thương mại",
+   "hộp đèn quảng cáo",
+   "escalator",
+   "elevator",
+   "mall lobby",
+   "ad lightbox",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "sanh_thang_cuon"
+  ],
+  "catalog_id": "sanh_thang_cuon",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: thang cuốn đi lên sang trái (vách kính, tay vịn đen) tới sàn tầng trên; thang máy inox giữa-phải, bảng số tầng '3' + mũi tên, nút gọi, chữ 3F; hộp đèn quảng cáo dọc vòng sáng (không chữ) bên phải; chậu cây, biển EXIT treo, đèn downlight, sàn gạch bóng.",
+  "label_en": "Mall escalator landing and elevator (interior)",
+  "description_en": "Bright mall landing: escalator with glass balustrade and black handrail rising to the upper floor on the left, stainless-steel elevator doors with floor indicator 3 and up arrow, call buttons and 3F label, tall vertical ad lightbox with a glowing ring (no text), potted plants, hanging EXIT sign, downlights, polished tile floor",
+  "baked_text": [
+   "3",
+   "3F",
+   "EXIT"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Bright shopping mall landing with an escalator rising on the left, stainless steel elevator doors, tall vertical ad lightbox with a glowing ring, potted plants, polished floor, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "sanh_thang_cuon"
+ },
+ "floor_y": 2010,
+ "slots": {
+  "center": {
+   "x": 1700,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "left": {
+   "x": 800,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "right": {
+   "x": 3000,
+   "y": 2010,
+   "scale": 1.1
+  },
+  "elevator": {
+   "x": 2430,
+   "y": 1760,
+   "scale": 0.98
+  },
+  "escalator": {
+   "x": 1350,
+   "y": 1240,
+   "scale": 0.9
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "3",
+   "box": [
+    2364,
+    352,
+    2416,
+    448
+   ]
+  },
+  {
+   "text": "3F",
+   "box": [
+    2912,
+    924,
+    2988,
+    996
+   ]
+  },
+  {
+   "text": "EXIT",
+   "box": [
+    1590,
+    312,
+    1710,
+    368
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 3350,
+   "y": 941,
+   "color": "#6be0ff"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Bright shopping mall landing with an escalator rising on the left, stainless steel elevator doors, tall vertical ad lightbox with a glowing ring, potted plants, polished floor, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

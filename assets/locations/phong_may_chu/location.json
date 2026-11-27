@@ -1,0 +1,108 @@
+{
+ "id": "phong_may_chu",
+ "name": "Lối đi phòng máy chủ",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Lối đi phòng máy chủ / Server room aisle (trong nhà đèn sáng / interior)",
+  "description": "Lối đi phòng máy chủ, trong nhà đèn sáng. Server room aisle in one-point perspective: long rows of black server racks on both sides with blinking green/blue LEDs and a few amber/red ones, perforated white raised-floor tiles, yellow ladder cable trays along the ceiling, cold white light strip, hanging ROW B sign, door with EXIT sign at the end, cool blue haze (interior). phòng máy chủ, tủ rack, máy chủ, đèn led, máng cáp, server room, server racks, data hall, cable trays, trong nhà đèn sáng, indoor",
+  "kind": "server_room",
+  "tags": [
+   "phòng máy chủ",
+   "tủ rack",
+   "máy chủ",
+   "đèn led",
+   "máng cáp",
+   "server room",
+   "server racks",
+   "data hall",
+   "cable trays",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "phong_may_chu"
+  ],
+  "catalog_id": "phong_may_chu",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "1 điểm tụ: hai dãy tủ rack đen có đèn LED, sàn nâng trắng + tấm đục lỗ, máng cáp vàng dọc trần, dải đèn trần lạnh, biển treo ROW B, cửa + EXIT cuối lối (nướng).",
+  "label_en": "Server room aisle (interior)",
+  "description_en": "Server room aisle in one-point perspective: long rows of black server racks on both sides with blinking green/blue LEDs and a few amber/red ones, perforated white raised-floor tiles, yellow ladder cable trays along the ceiling, cold white light strip, hanging ROW B sign, door with EXIT sign at the end, cool blue haze",
+  "baked_text": [
+   "EXIT",
+   "ROW B"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Server room aisle, one point perspective, rows of black server racks with blinking LEDs, white raised floor tiles, yellow cable trays on the ceiling, cool blue light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_may_chu"
+ },
+ "floor_y": 1750,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1750,
+   "scale": 1.04
+  },
+  "left": {
+   "x": 1670,
+   "y": 1667,
+   "scale": 0.924
+  },
+  "right": {
+   "x": 2170,
+   "y": 1667,
+   "scale": 0.924
+  },
+  "far": {
+   "x": 1920,
+   "y": 1267,
+   "scale": 0.37
+  },
+  "very_far": {
+   "x": 1937,
+   "y": 1133,
+   "scale": 0.185
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "EXIT",
+   "box": [
+    1911,
+    953,
+    1929,
+    962
+   ]
+  },
+  {
+   "text": "ROW B",
+   "box": [
+    1842,
+    652,
+    1998,
+    711
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920,
+   "y": 575,
+   "color": "#bfe0ff"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Server room aisle, one point perspective, rows of black server racks with blinking LEDs, white raised floor tiles, yellow cable trays on the ceiling, cool blue light, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

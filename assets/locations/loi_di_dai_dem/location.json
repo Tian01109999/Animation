@@ -1,0 +1,103 @@
+{
+ "id": "loi_di_dai_dem",
+ "name": "Lối đi dài ban đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Lối đi dài ban đêm / Long night walkway with lamp posts (ban đêm / night)",
+  "description": "Lối đi dài ban đêm, ban đêm. Long narrow walkway at night in one-point perspective between stained concrete walls, a row of curved lamp posts on the left casting cones and pools of light, dark trees and city silhouette beyond, starry sky and moon, darkness at the vanishing point (night). lối đi, hẻm dài, cột đèn, tường bê tông, một điểm tụ, long walkway, night alley, lamp posts, ban đêm, night",
+  "kind": "night_walkway",
+  "tags": [
+   "lối đi",
+   "hẻm dài",
+   "cột đèn",
+   "tường bê tông",
+   "một điểm tụ",
+   "long walkway",
+   "night alley",
+   "lamp posts",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "loi_di_dai_dem"
+  ],
+  "catalog_id": "loi_di_dai_dem",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Phối cảnh 1 điểm tụ: lối bê tông hẹp giữa 2 tường cao có vệt ố, hàng cột đèn cong bên trái (nón sáng + vũng sáng), cây tối sau tường, trời sao (far), điểm tụ tối đen.",
+  "label_en": "Long night walkway with lamp posts (night)",
+  "description_en": "Long narrow walkway at night in one-point perspective between stained concrete walls, a row of curved lamp posts on the left casting cones and pools of light, dark trees and city silhouette beyond, starry sky and moon, darkness at the vanishing point",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Long narrow walkway at night, one-point perspective between concrete walls, row of curved lamp posts with light cones and pools, dark trees beyond, starry sky, darkness at the vanishing point, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "loi_di_dai_dem"
+ },
+ "floor_y": 1647,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1647,
+   "scale": 0.924
+  },
+  "left": {
+   "x": 1587,
+   "y": 1647,
+   "scale": 0.924
+  },
+  "right": {
+   "x": 2274,
+   "y": 1647,
+   "scale": 0.924
+  },
+  "far": {
+   "x": 1920,
+   "y": 1151,
+   "scale": 0.238
+  },
+  "very_far": {
+   "x": 1925,
+   "y": 1060,
+   "scale": 0.111
+  }
+ },
+ "signs": [],
+ "lights": [
+  {
+   "x": 1882,
+   "y": 774,
+   "color": "#ffe2a0"
+  },
+  {
+   "x": 1860,
+   "y": 650,
+   "color": "#ffe2a0"
+  },
+  {
+   "x": 1805,
+   "y": 345,
+   "color": "#ffe2a0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.9
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Long narrow walkway at night, one-point perspective between concrete walls, row of curved lamp posts with light cones and pools, dark trees beyond, starry sky, darkness at the vanishing point, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

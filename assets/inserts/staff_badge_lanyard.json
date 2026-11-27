@@ -1,0 +1,37 @@
+{
+ "id": "staff_badge_lanyard",
+ "label": "Thẻ nhân viên đeo dây (DATA CENTER, bảo vệ)",
+ "label_en": "Staff ID badge on a lanyard",
+ "tags": [
+  "id badge",
+  "staff card",
+  "lanyard",
+  "security",
+  "access card",
+  "data center"
+ ],
+ "props": [
+  "staff_badge",
+  "id_badge",
+  "lanyard",
+  "access_card"
+ ],
+ "style": "cutout",
+ "image": "staff_badge_lanyard.png",
+ "kind": "staff_badge_lanyard",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "org": "DATA CENTER",
+  "name": "S. K.",
+  "id": "ID 0417",
+  "role": "SECURITY OFFICER",
+  "angle": 4
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

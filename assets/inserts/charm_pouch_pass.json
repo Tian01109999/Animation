@@ -1,0 +1,44 @@
+{
+ "id": "charm_pouch_pass",
+ "label": "Hai bàn tay trao túi bùa",
+ "label_en": "Charm pouch passed between two hands",
+ "tags": [
+  "trao bùa",
+  "đưa bùa",
+  "hai bàn tay",
+  "bùa hộ mệnh",
+  "charm",
+  "passing",
+  "giving",
+  "hands"
+ ],
+ "props": [
+  "charm_pass",
+  "giving_charm",
+  "passing_charm"
+ ],
+ "style": "cutout",
+ "image": "charm_pouch_pass.png",
+ "kind": "charm_pouch_pass",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "CHARM",
+  "beads": 5,
+  "spent": 0,
+  "pouch_color": "#c8352e",
+  "bead_color": "#c8352e",
+  "giver_sleeve": "#7a4a8a",
+  "giver_skin": "#d9a77f",
+  "receiver_sleeve": "#e8b830",
+  "receiver_skin": "#e9b994",
+  "glow": true,
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,31 @@
+{
+ "id": "boat_noodle_bowl",
+ "label": "Bát mì thuyền với đũa",
+ "label_en": "Boat-noodle bowl with chopsticks",
+ "tags": [
+  "noodles",
+  "noodle bowl",
+  "soup",
+  "street food",
+  "chopsticks",
+  "night market"
+ ],
+ "props": [
+  "noodle_bowl",
+  "boat_noodles",
+  "noodles",
+  "chopsticks"
+ ],
+ "style": "cutout",
+ "image": "boat_noodle_bowl.png",
+ "kind": "boat_noodle_bowl",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

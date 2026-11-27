@@ -1,0 +1,91 @@
+{
+ "id": "nha_ve_sinh_nu_truong__closeup",
+ "name": "Nhà vệ sinh nữ trường học",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Nhà vệ sinh nữ trường học / School girls' toilet (ban đêm, cận cảnh / night, close-up)",
+  "description": "Nhà vệ sinh nữ trường học, ban đêm, cận cảnh. Old school girls' toilet at night: pale aqua tiled walls, three numbered stalls (1/2/3) with blue/red occupancy indicators (stall 3 occupied), mirror over two sinks, small high window casting a moonlight shaft, wet tiled floor with puddles, one fluorescent tube on; English sign GIRLS 3F. Close-up variant: stall door 3 filling the frame with the red indicator and water seeping under the door (night, close-up). nhà vệ sinh, toilet nữ, trường học, buồng vệ sinh, gương, sàn ướt, school toilet, girls restroom, toilet stall, ma học đường, ban đêm, cận cảnh, closeup",
+  "kind": "school_toilet",
+  "tags": [
+   "nhà vệ sinh",
+   "toilet nữ",
+   "trường học",
+   "buồng vệ sinh",
+   "gương",
+   "sàn ướt",
+   "school toilet",
+   "girls restroom",
+   "toilet stall",
+   "ma học đường",
+   "ban đêm, cận cảnh",
+   "closeup"
+  ],
+  "time_variants": [
+   "nha_ve_sinh_nu_truong",
+   "nha_ve_sinh_nu_truong__closeup"
+  ],
+  "catalog_id": "nha_ve_sinh_nu_truong",
+  "variant": "closeup",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: tường gạch men xanh nhạt, gương + 2 bồn rửa bên trái, ô cửa sổ nhỏ trên cao (vệt trăng chéo), 3 buồng số 1/2/3 (số nướng), chỉ báo xanh/đỏ (buồng 3 đỏ), sàn gạch ướt có vũng nước, biển GIRLS 3F (signs). Biến thể closeup: cận cửa buồng 3, nước rỉ dưới khe cửa.",
+  "label_en": "School girls' toilet (night, close-up)",
+  "description_en": "Old school girls' toilet at night: pale aqua tiled walls, three numbered stalls (1/2/3) with blue/red occupancy indicators (stall 3 occupied), mirror over two sinks, small high window casting a moonlight shaft, wet tiled floor with puddles, one fluorescent tube on; English sign GIRLS 3F. Close-up variant: stall door 3 filling the frame with the red indicator and water seeping under the door",
+  "baked_text": [
+   "3"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Old school girls' toilet at night, pale aqua tiled walls, three stalls with numbered doors and occupancy indicators, mirror over two sinks, small high window with moonlight shaft, wet tiled floor with puddles, one fluorescent tube, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "nha_ve_sinh_nu_truong"
+ },
+ "floor_y": 2150,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2150,
+   "scale": 1.9
+  },
+  "left": {
+   "x": 700,
+   "y": 2150,
+   "scale": 1.9
+  },
+  "right": {
+   "x": 3150,
+   "y": 2150,
+   "scale": 1.9
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "3",
+   "box": [
+    1861,
+    262,
+    1979,
+    483
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 2540,
+   "y": 1035,
+   "color": "#ff4a3a"
+  }
+ ],
+ "flow_prompts": {
+  "night": "Old school girls' toilet at night, pale aqua tiled walls, three stalls with numbered doors and occupancy indicators, mirror over two sinks, small high window with moonlight shaft, wet tiled floor with puddles, one fluorescent tube, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "closeup": "Old school girls' toilet at night, pale aqua tiled walls, three stalls with numbered doors and occupancy indicators, mirror over two sinks, small high window with moonlight shaft, wet tiled floor with puddles, one fluorescent tube, night, tight close-up framing, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,29 @@
+{
+ "id": "motorbike_side",
+ "label": "Xe máy (nhìn ngang)",
+ "label_en": "Motorbike (side view)",
+ "tags": [
+  "motorbike",
+  "motorcycle",
+  "scooter",
+  "vehicle",
+  "side view"
+ ],
+ "props": [
+  "motorbike",
+  "motorcycle",
+  "scooter"
+ ],
+ "style": "cutout",
+ "image": "motorbike_side.png",
+ "kind": "motorbike_side",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

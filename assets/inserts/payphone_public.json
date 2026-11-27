@@ -1,0 +1,32 @@
+{
+ "id": "payphone_public",
+ "label": "Điện thoại công cộng ven đường lúc bình minh",
+ "label_en": "Public payphone at dawn",
+ "tags": [
+  "payphone",
+  "public phone",
+  "phone booth",
+  "dawn",
+  "roadside"
+ ],
+ "props": [
+  "payphone",
+  "public_phone",
+  "phone_booth"
+ ],
+ "style": "cutout",
+ "image": "payphone_public.png",
+ "kind": "payphone_public",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "PHONE",
+  "display": "INSERT COIN"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

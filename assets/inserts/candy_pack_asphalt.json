@@ -1,0 +1,42 @@
+{
+ "id": "candy_pack_asphalt",
+ "label": "Gói kẹo 'FREE' + kẹo rơi trên mặt đường",
+ "label_en": "Free candy pack and scattered candies on asphalt",
+ "tags": [
+  "gói kẹo",
+  "kẹo miễn phí",
+  "kẹo rơi",
+  "mặt đường",
+  "candy",
+  "free candy",
+  "sweets",
+  "asphalt"
+ ],
+ "props": [
+  "candy",
+  "candy_pack",
+  "free_candy",
+  "sweets"
+ ],
+ "style": "cutout",
+ "image": "candy_pack_asphalt.png",
+ "kind": "candy_pack_asphalt",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "FREE",
+  "sub": "TAKE ONE",
+  "candies": 16,
+  "pack_color": "#f6a7c1",
+  "burst": "#f3c94e",
+  "asphalt": "#3a3b3f",
+  "pack_angle": -10,
+  "seed": 12
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

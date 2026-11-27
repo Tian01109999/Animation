@@ -1,0 +1,80 @@
+{
+ "id": "queue_table_screen",
+ "label": "Màn hình bảng hàng đợi (tên viết tắt, khu vực)",
+ "label_en": "Queue table screen (initials, zones, status)",
+ "tags": [
+  "queue",
+  "table",
+  "monitor",
+  "control room",
+  "list",
+  "schedule",
+  "screen"
+ ],
+ "props": [
+  "queue_screen",
+  "queue_table",
+  "control_screen"
+ ],
+ "style": "cutout",
+ "image": "queue_table_screen.png",
+ "kind": "queue_table_screen",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "title": "QUEUE",
+  "subtitle": "6 ACTIVE",
+  "clock": "21:12:50",
+  "highlight": 0,
+  "rows": [
+   [
+    "01",
+    "J.K.",
+    "09:13",
+    "ZONE A",
+    "IN PROGRESS"
+   ],
+   [
+    "02",
+    "M.T.",
+    "10:40",
+    "ZONE C",
+    "PENDING"
+   ],
+   [
+    "03",
+    "S.P.",
+    "11:05",
+    "ZONE B",
+    "PENDING"
+   ],
+   [
+    "04",
+    "A.N.",
+    "13:22",
+    "ZONE A",
+    "PENDING"
+   ],
+   [
+    "05",
+    "R.W.",
+    "15:47",
+    "ZONE D",
+    "PENDING"
+   ],
+   [
+    "06",
+    "L.C.",
+    "18:30",
+    "ZONE E",
+    "PENDING"
+   ]
+  ]
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

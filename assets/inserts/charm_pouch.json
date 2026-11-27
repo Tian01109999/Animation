@@ -1,0 +1,43 @@
+{
+ "id": "charm_pouch",
+ "label": "Túi bùa hộ mệnh + chuỗi hạt thắt nút",
+ "label_en": "Protective charm pouch with knotted-bead string",
+ "tags": [
+  "bùa hộ mệnh",
+  "túi bùa",
+  "chuỗi hạt",
+  "thắt nút",
+  "charm",
+  "amulet",
+  "talisman",
+  "knotted beads"
+ ],
+ "props": [
+  "charm",
+  "charm_pouch",
+  "amulet",
+  "omamori",
+  "knotted_beads"
+ ],
+ "style": "cutout",
+ "image": "charm_pouch.png",
+ "kind": "charm_pouch",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "label": "CHARM",
+  "beads": 5,
+  "spent": 0,
+  "pouch_color": "#c8352e",
+  "bead_color": "#c8352e",
+  "gold": "#e2b34a",
+  "cord": "#e8d9b0",
+  "cloth": "#2c2a36"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

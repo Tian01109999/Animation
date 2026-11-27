@@ -1,0 +1,33 @@
+{
+ "id": "laptop_list",
+ "label": "Laptop hiển thị danh sách",
+ "label_en": "Laptop showing a records list",
+ "tags": [
+  "laptop",
+  "list",
+  "records",
+  "computer",
+  "desk",
+  "screen"
+ ],
+ "props": [
+  "laptop",
+  "laptop_list",
+  "computer"
+ ],
+ "style": "cutout",
+ "image": "laptop_list.png",
+ "kind": "laptop_list",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "title": "RECORDS",
+  "highlight": 2
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,222 @@
+{
+ "id": "ham_xe_b2",
+ "name": "Hầm gửi xe B2",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hầm gửi xe B2 / Underground parking level B2 (trong nhà đèn sáng / interior)",
+  "description": "Hầm gửi xe B2, trong nhà đèn sáng. Underground car park level B2 in one-point perspective: rows of concrete pillars with yellow-black hazard stripes and painted B2 labels, white parking bays with parked cars seen from behind, yellow lane arrows, oil stains, low ceiling with cross beams, red sprinkler pipes, grey duct and blue conduit, dim fluorescent tubes with sickly green-yellow light, back wall with big B2, exit ramp and green EXIT sign (interior). hầm xe, bãi đỗ xe ngầm, tầng hầm, cột bê tông, ô tô, underground parking, car park, basement, b2, pillars, trong nhà đèn sáng, indoor",
+  "kind": "underground_parking",
+  "tags": [
+   "hầm xe",
+   "bãi đỗ xe ngầm",
+   "tầng hầm",
+   "cột bê tông",
+   "ô tô",
+   "underground parking",
+   "car park",
+   "basement",
+   "b2",
+   "pillars",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "ham_xe_b2"
+  ],
+  "catalog_id": "ham_xe_b2",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "1 điểm tụ: làn giữa có mũi tên vàng, hàng cột bê tông sọc vàng-đen + chữ B2 (nướng), ô đỗ trắng hai bên + ô tô nhìn từ đuôi, trần thấp có dầm, ống đỏ/xám/xanh chạy dọc, đèn tuýp mờ, tường cuối có B2 lớn, dốc lên + EXIT.",
+  "label_en": "Underground parking level B2 (interior)",
+  "description_en": "Underground car park level B2 in one-point perspective: rows of concrete pillars with yellow-black hazard stripes and painted B2 labels, white parking bays with parked cars seen from behind, yellow lane arrows, oil stains, low ceiling with cross beams, red sprinkler pipes, grey duct and blue conduit, dim fluorescent tubes with sickly green-yellow light, back wall with big B2, exit ramp and green EXIT sign",
+  "baked_text": [
+   "B2",
+   "EXIT"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Underground parking garage, one point perspective, concrete pillars with yellow black hazard stripes, parking bays with parked cars, low ceiling with pipes, dim fluorescent lights, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "ham_xe_b2"
+ },
+ "floor_y": 1598,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1598,
+   "scale": 0.913
+  },
+  "left": {
+   "x": 1376,
+   "y": 1563,
+   "scale": 0.862
+  },
+  "right": {
+   "x": 2464,
+   "y": 1563,
+   "scale": 0.862
+  },
+  "far": {
+   "x": 1955,
+   "y": 1155,
+   "scale": 0.259
+  },
+  "car_left": {
+   "x": 1200,
+   "y": 1280,
+   "scale": 0.444
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "B2",
+   "box": [
+    1733,
+    956,
+    1786,
+    1004
+   ]
+  },
+  {
+   "text": "EXIT",
+   "box": [
+    1914,
+    947,
+    1926,
+    952
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    1818,
+    970,
+    1833,
+    984
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2007,
+    970,
+    2022,
+    984
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    1795,
+    967,
+    1814,
+    985
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2026,
+    967,
+    2045,
+    985
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    1760,
+    964,
+    1784,
+    986
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2056,
+    964,
+    2080,
+    986
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    1696,
+    957,
+    1729,
+    988
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2111,
+    957,
+    2144,
+    988
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    1549,
+    943,
+    1603,
+    994
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2237,
+    943,
+    2291,
+    994
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    824,
+    869,
+    986,
+    1021
+   ]
+  },
+  {
+   "text": "B2",
+   "box": [
+    2854,
+    869,
+    3016,
+    1021
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 1920,
+   "y": 499,
+   "color": "#f4ffd8"
+  },
+  {
+   "x": 1920,
+   "y": 846,
+   "color": "#f4ffd8"
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Underground parking garage, one point perspective, concrete pillars with yellow black hazard stripes, parking bays with parked cars, low ceiling with pipes, dim fluorescent lights, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

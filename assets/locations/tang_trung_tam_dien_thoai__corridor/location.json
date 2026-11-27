@@ -1,0 +1,287 @@
+{
+ "id": "tang_trung_tam_dien_thoai__corridor",
+ "name": "Tầng trung tâm điện thoại",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Tầng trung tâm điện thoại / Phone mall floor (trong nhà, hành lang dài / interior, long corridor)",
+  "description": "Tầng trung tâm điện thoại, trong nhà, hành lang dài. Bright phone-mall floor with glass kiosk shops under glowing neon sign bands (PHONE REPAIR, CASE SHOP, SCREEN FILM, LAPTOP REPAIR, TOP-UP): pegboard walls of colorful phone cases, shelves of cracked phones, glass showcase counters, repair counter with green cutting mat, desk lamp and pen cup, English price board (REPAIR PRICES: SCREEN 900 / BATTERY 450 / CHARGE PORT 300 / DATA RECOVERY 500), polished cream tile floor, white bloom. Variants: kiosk front close (default), side angle along the kiosk row with atrium railing, long one-point corridor with green EXIT door and fire extinguisher, night corridor with all shutters down (interior, long corridor). trung tâm điện thoại, sửa điện thoại, ki-ốt, ốp lưng, dán màn hình, nạp thẻ, trung tâm thương mại, cửa cuốn, phone mall, phone repair, kiosk, case shop, mall corridor, shutters, trong nhà, hành lang dài, corridor",
+  "kind": "phone_mall",
+  "tags": [
+   "trung tâm điện thoại",
+   "sửa điện thoại",
+   "ki-ốt",
+   "ốp lưng",
+   "dán màn hình",
+   "nạp thẻ",
+   "trung tâm thương mại",
+   "cửa cuốn",
+   "phone mall",
+   "phone repair",
+   "kiosk",
+   "case shop",
+   "mall corridor",
+   "shutters",
+   "trong nhà, hành lang dài",
+   "corridor"
+  ],
+  "time_variants": [
+   "tang_trung_tam_dien_thoai",
+   "tang_trung_tam_dien_thoai__angle",
+   "tang_trung_tam_dien_thoai__corridor",
+   "tang_trung_tam_dien_thoai__closed"
+  ],
+  "catalog_id": "tang_trung_tam_dien_thoai",
+  "variant": "corridor",
+  "style": "cutout",
+  "layout": "Mặc định: cận mặt tiền ki-ốt PHONE REPAIR (bảng hiệu neon nướng, kệ điện thoại nứt, bảng giá tiếng Anh, quầy kính, thảm cắt xanh, đèn bàn, cốc bút), hai ki-ốt bên cạnh (CASE SHOP, TOP-UP). angle: dãy ki-ốt bên phải chạy về điểm tụ trái, lan can kính thông tầng bên trái. corridor: hành lang 1 điểm tụ, ki-ốt hai bên, cửa thoát hiểm + EXIT + bình chữa cháy cuối hành lang. closed: như corridor nhưng mọi cửa cuốn đã kéo xuống, đèn mờ xanh, EXIT phát sáng.",
+  "label_en": "Phone mall floor (interior, long corridor)",
+  "description_en": "Bright phone-mall floor with glass kiosk shops under glowing neon sign bands (PHONE REPAIR, CASE SHOP, SCREEN FILM, LAPTOP REPAIR, TOP-UP): pegboard walls of colorful phone cases, shelves of cracked phones, glass showcase counters, repair counter with green cutting mat, desk lamp and pen cup, English price board (REPAIR PRICES: SCREEN 900 / BATTERY 450 / CHARGE PORT 300 / DATA RECOVERY 500), polished cream tile floor, white bloom. Variants: kiosk front close (default), side angle along the kiosk row with atrium railing, long one-point corridor with green EXIT door and fire extinguisher, night corridor with all shutters down",
+  "baked_text": [
+   "EXIT",
+   "SCREEN FILM",
+   "LAPTOP REPAIR",
+   "TOP-UP",
+   "PHONE REPAIR",
+   "CASE SHOP"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tang_trung_tam_dien_thoai"
+ },
+ "floor_y": 1750,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1750,
+   "scale": 1.04
+  },
+  "left": {
+   "x": 1378,
+   "y": 1667,
+   "scale": 0.924
+  },
+  "right": {
+   "x": 2462,
+   "y": 1667,
+   "scale": 0.924
+  },
+  "far": {
+   "x": 1950,
+   "y": 1240,
+   "scale": 0.333
+  },
+  "very_far": {
+   "x": 1898,
+   "y": 1120,
+   "scale": 0.166
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "EXIT",
+   "box": [
+    1912,
+    961,
+    1928,
+    968
+   ]
+  },
+  {
+   "text": "SCREEN FILM",
+   "box": [
+    -626,
+    -174,
+    554,
+    490
+   ]
+  },
+  {
+   "text": "LAPTOP REPAIR",
+   "box": [
+    1038,
+    593,
+    1268,
+    756
+   ]
+  },
+  {
+   "text": "TOP-UP",
+   "box": [
+    1423,
+    771,
+    1465,
+    830
+   ]
+  },
+  {
+   "text": "PHONE REPAIR",
+   "box": [
+    1548,
+    829,
+    1593,
+    878
+   ]
+  },
+  {
+   "text": "CASE SHOP",
+   "box": [
+    1635,
+    869,
+    1656,
+    901
+   ]
+  },
+  {
+   "text": "SCREEN FILM",
+   "box": [
+    1685,
+    891,
+    1702,
+    919
+   ]
+  },
+  {
+   "text": "LAPTOP REPAIR",
+   "box": [
+    1719,
+    908,
+    1734,
+    931
+   ]
+  },
+  {
+   "text": "TOP-UP",
+   "box": [
+    1750,
+    921,
+    1755,
+    938
+   ]
+  },
+  {
+   "text": "PHONE REPAIR",
+   "box": [
+    1767,
+    930,
+    1775,
+    946
+   ]
+  },
+  {
+   "text": "CASE SHOP",
+   "box": [
+    1784,
+    937,
+    1789,
+    951
+   ]
+  },
+  {
+   "text": "TOP-UP",
+   "box": [
+    3446,
+    19,
+    4049,
+    430
+   ]
+  },
+  {
+   "text": "PHONE REPAIR",
+   "box": [
+    2579,
+    599,
+    2790,
+    754
+   ]
+  },
+  {
+   "text": "CASE SHOP",
+   "box": [
+    2366,
+    766,
+    2429,
+    833
+   ]
+  },
+  {
+   "text": "SCREEN FILM",
+   "box": [
+    2248,
+    830,
+    2290,
+    877
+   ]
+  },
+  {
+   "text": "LAPTOP REPAIR",
+   "box": [
+    2180,
+    866,
+    2210,
+    903
+   ]
+  },
+  {
+   "text": "TOP-UP",
+   "box": [
+    2142,
+    893,
+    2151,
+    917
+   ]
+  },
+  {
+   "text": "PHONE REPAIR",
+   "box": [
+    2106,
+    908,
+    2120,
+    930
+   ]
+  },
+  {
+   "text": "CASE SHOP",
+   "box": [
+    2084,
+    921,
+    2092,
+    939
+   ]
+  },
+  {
+   "text": "SCREEN FILM",
+   "box": [
+    2065,
+    930,
+    2072,
+    946
+   ]
+  },
+  {
+   "text": "LAPTOP REPAIR",
+   "box": [
+    2050,
+    937,
+    2057,
+    952
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "angle": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright mall interior, side angle, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "corridor": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, bright mall interior, long one-point corridor, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "closed": "Bright shopping mall floor with a row of small glass kiosk shops selling and repairing phones, blank neon sign bands, pegboard of colorful phone cases, glass showcase counters, polished cream tiles, soft white bloom, night, shutters down, dim security lights, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

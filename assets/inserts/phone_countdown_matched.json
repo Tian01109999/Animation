@@ -1,0 +1,44 @@
+{
+ "id": "phone_countdown_matched",
+ "label": "Điện thoại app đếm ngược – 00:00:00 MATCHED",
+ "label_en": "Phone countdown app - 00:00:00 MATCHED",
+ "tags": [
+  "phone",
+  "countdown",
+  "zero",
+  "matched",
+  "time up",
+  "deadline",
+  "00:00:00"
+ ],
+ "props": [
+  "countdown_zero_phone",
+  "matched_phone",
+  "phone_countdown_matched"
+ ],
+ "style": "cutout",
+ "image": "phone_countdown_matched.png",
+ "kind": "phone_countdown_matched",
+ "camera_default": "shake",
+ "text_language": "en",
+ "params": {
+  "time": "09:13",
+  "app_name": "COUNTDOWN",
+  "label": "TIME LEFT",
+  "timer": "00:00:00",
+  "matched": true,
+  "status": "MATCHED",
+  "date": "TODAY 09:13",
+  "place": "ZONE A - LEVEL 2",
+  "sleeve_color": "#4a6a9a",
+  "skin": "#e9b994",
+  "bg": "dark_vignette",
+  "hands": true
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

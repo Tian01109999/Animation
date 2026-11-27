@@ -1,0 +1,32 @@
+{
+ "id": "billboard_years_left",
+ "label": "Billboard dọc chân dung \"43 YEARS LEFT\"",
+ "label_en": "Portrait billboard \"43 YEARS LEFT\"",
+ "tags": [
+  "billboard",
+  "portrait",
+  "years left",
+  "ad",
+  "building",
+  "night"
+ ],
+ "props": [
+  "portrait_billboard",
+  "years_left_billboard"
+ ],
+ "style": "cutout",
+ "image": "billboard_years_left.png",
+ "kind": "billboard_years_left",
+ "camera_default": "pan_down_slow",
+ "text_language": "en",
+ "params": {
+  "number": "43",
+  "title": "YEARS LEFT"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

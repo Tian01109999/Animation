@@ -1,0 +1,38 @@
+{
+ "id": "upload_dialog",
+ "label": "Hộp thoại tải tệp lên (records.zip 4.7 GB)",
+ "label_en": "File upload dialog (records.zip 4.7 GB)",
+ "tags": [
+  "upload",
+  "file",
+  "progress bar",
+  "computer",
+  "zip",
+  "data",
+  "dialog"
+ ],
+ "props": [
+  "upload_dialog",
+  "file_upload",
+  "upload_progress"
+ ],
+ "style": "cutout",
+ "image": "upload_dialog.png",
+ "kind": "upload_dialog",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {
+  "title": "UPLOAD FILE",
+  "file_name": "records.zip",
+  "file_size": "4.7 GB",
+  "destination": "To: SECURE DRIVE",
+  "progress": 0.67,
+  "eta": "about 2 min left"
+ },
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

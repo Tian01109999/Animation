@@ -1,0 +1,164 @@
+{
+ "id": "nha_tro_hai_tang",
+ "name": "Nhà trọ hai tầng",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Nhà trọ hai tầng / Two-storey apartment with external stairs (ban đêm / night)",
+  "description": "Nhà trọ hai tầng, ban đêm. Old two-storey wooden apartment building, frontal: beige siding, four doors numbered 101/102/201/202 with small lamps, barred windows (two lit), open upper walkway with railing, external steel staircase on the right, wall mailboxes, washing machines, three parked bicycles, block wall and trees behind, night sky with moon. Day variant (night). nhà trọ, chung cư cũ, cầu thang sắt, xe đạp, hộp thư, số phòng, apartment exterior, external stairs, bicycles, two-storey, mặt tiền, toàn cảnh, bãi đỗ, ban đêm, night",
+  "kind": "apartment_exterior",
+  "tags": [
+   "nhà trọ",
+   "chung cư cũ",
+   "cầu thang sắt",
+   "xe đạp",
+   "hộp thư",
+   "số phòng",
+   "apartment exterior",
+   "external stairs",
+   "bicycles",
+   "two-storey",
+   "mặt tiền",
+   "toàn cảnh",
+   "bãi đỗ",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "nha_tro_hai_tang",
+   "nha_tro_hai_tang__day"
+  ],
+  "catalog_id": "nha_tro_hai_tang",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Mặt đứng: nhà gỗ 2 tầng ốp ván, 4 cửa số 101/102/201/202 (nướng) + đèn nhỏ, cửa sổ song sắt, hành lang tầng 2 có lan can, cầu thang sắt ngoài bên phải, hộp thư, máy giặt, 3 xe đạp, tường rào + cây phía sau (far). Biến thể ngày.",
+  "label_en": "Two-storey apartment with external stairs (night)",
+  "description_en": "Old two-storey wooden apartment building, frontal: beige siding, four doors numbered 101/102/201/202 with small lamps, barred windows (two lit), open upper walkway with railing, external steel staircase on the right, wall mailboxes, washing machines, three parked bicycles, block wall and trees behind, night sky with moon. Day variant",
+  "baked_text": [
+   "101",
+   "102",
+   "201",
+   "202"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Old two storey wooden apartment building, frontal view, beige siding, four doors with small lamps, barred windows, open upper walkway with railing, external steel staircase, mailboxes, parked bicycles, night sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "nha_tro_hai_tang"
+ },
+ "floor_y": 2000,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2000,
+   "scale": 0.68
+  },
+  "left": {
+   "x": 900,
+   "y": 2000,
+   "scale": 0.68
+  },
+  "right": {
+   "x": 2700,
+   "y": 2000,
+   "scale": 0.68
+  },
+  "door_101": {
+   "x": 800,
+   "y": 1820,
+   "scale": 0.6
+  },
+  "door_201": {
+   "x": 800,
+   "y": 1124,
+   "scale": 0.58
+  },
+  "stairs": {
+   "x": 3500,
+   "y": 1990,
+   "scale": 0.65
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "101",
+   "box": [
+    750,
+    1332,
+    850,
+    1394
+   ]
+  },
+  {
+   "text": "102",
+   "box": [
+    1750,
+    1332,
+    1850,
+    1394
+   ]
+  },
+  {
+   "text": "201",
+   "box": [
+    750,
+    656,
+    850,
+    718
+   ]
+  },
+  {
+   "text": "202",
+   "box": [
+    1750,
+    656,
+    1850,
+    718
+   ]
+  }
+ ],
+ "lights": [
+  {
+   "x": 800,
+   "y": 1232,
+   "color": "#ffe9b0"
+  },
+  {
+   "x": 1800,
+   "y": 1232,
+   "color": "#ffe9b0"
+  },
+  {
+   "x": 800,
+   "y": 556,
+   "color": "#ffe9b0"
+  },
+  {
+   "x": 1800,
+   "y": 556,
+   "color": "#ffe9b0"
+  }
+ ],
+ "layers": {
+  "far": {
+   "image": "bg_far.png",
+   "parallax": 0.85
+  },
+  "mid": {
+   "image": "bg_mid.png",
+   "parallax": 1.0
+  }
+ },
+ "flow_prompts": {
+  "night": "Old two storey wooden apartment building, frontal view, beige siding, four doors with small lamps, barred windows, open upper walkway with railing, external steel staircase, mailboxes, parked bicycles, night sky, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "day": "Old two storey wooden apartment building, frontal view, beige siding, four doors with small lamps, barred windows, open upper walkway with railing, external steel staircase, mailboxes, parked bicycles, night sky, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}
