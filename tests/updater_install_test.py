@@ -69,5 +69,64 @@ class InstallTests(unittest.TestCase):
         self.assertNotIn('github', json.dumps(r).lower())
 
 
+class BackgroundJobTests(unittest.TestCase):
+    def setUp(self):
+        updater._job.update(state='idle', version='', stage='', done=0, total=0, message='')
+
+    def wait(self):
+        import time
+        for _ in range(100):
+            if updater.job_status()['state'] != 'running':
+                return updater.job_status()
+            time.sleep(0.05)
+        self.fail('job did not finish')
+
+    def test_job_reports_progress_then_done_and_blocks_second_start(self):
+        def runner(version, progress):
+            progress('download', 50, 100)
+            progress('install', 3, 10)
+            return {'version': version}
+        self.assertTrue(updater.start_install('9.9.9', runner=runner))
+        state = self.wait()
+        self.assertEqual((state['state'], state['version']), ('done', '9.9.9'))
+        self.assertFalse(updater.start_install('9.9.9', runner=runner))   # chờ khởi động lại
+
+    def test_job_error_allows_retry(self):
+        def broken(version, progress):
+            raise OSError('net down')
+        updater.start_install('9.9.9', runner=broken)
+        state = self.wait()
+        self.assertEqual(state['state'], 'error')
+        self.assertIn('Internet', state['message'])
+        self.assertTrue(updater.start_install('9.9.9', runner=lambda v, progress: {'version': v}))
+        self.wait()
+
+    def test_portal_auto_start_progress_and_desktop_state(self):
+        from fastapi import FastAPI
+        from fastapi.testclient import TestClient
+        from storytoon import update_portal
+        app = FastAPI()
+        token = 'T' * 40
+        update_portal.attach(app, token)
+        client = TestClient(app)
+        available = {'current': '1.0.0', 'app_version': '1.0.0', 'kind': 'app', 'available': True,
+                     'version': '9.9.9', 'notes': 'Thay đổi A', 'error': ''}
+        started = []
+        with patch.object(updater, 'check_release', return_value=available), \
+             patch.object(updater, 'start_install', side_effect=lambda v: started.append(v) or True):
+            page = client.get('/updates?start=1').text
+            self.assertIn('Thay đổi A', page)
+            self.assertIn('.submit()', page)                       # tự bấm Cập nhật ngay
+            self.assertNotIn('github', page.lower())
+            csrf = client.cookies.get('storytoon_update_csrf')
+            page = client.post('/updates', data={'csrf': csrf, 'action': 'install', 'version': '9.9.9'}).text
+            self.assertEqual(started, ['9.9.9'])
+            self.assertIn('restart-after-update', page)
+            self.assertIn('/updates/status', page)
+        self.assertEqual(client.get('/__desktop__/update-state').status_code, 403)
+        state = client.get('/__desktop__/update-state', headers={'X-StoryToon-Desktop': token}).json()
+        self.assertIn('state', state)
+
+
 if __name__ == '__main__':
     unittest.main()

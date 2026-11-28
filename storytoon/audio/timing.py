@@ -26,9 +26,18 @@ from . import voices
 
 log = logging.getLogger(__name__)
 
-FIRST_LINE_START = 0.25   # giây, câu đầu tiên trong shot
+FIRST_LINE_START = 0.25   # giây, câu đầu tiên trong shot (bố cục cũ, dùng khi không có kịch bản)
 LINE_GAP = 0.15           # nghỉ giữa các câu trong shot
 TAIL = 0.45               # đuôi sau câu cuối
+
+# Nghỉ theo nội dung câu chuyện (không theo ranh giới shot)
+PAUSE_SENTENCE = 0.35     # câu nối tiếp trong cùng đoạn văn
+PAUSE_PARAGRAPH = 0.8     # sang đoạn văn mới
+PAUSE_SCENE = 1.2         # đổi bối cảnh hoặc có thẻ chương
+SHOT_LEAD = 0.15          # phần khoảng nghỉ nằm ở đầu shot mới (hình đổi trước tiếng một chút)
+FILM_LEAD = 0.25          # lặng trước câu đầu tiên của phim
+FILM_TAIL = 0.8           # lặng sau câu cuối cùng của phim
+TAIL_BEFORE_SILENT = 0.3  # đuôi khi shot kế tiếp không có lời (shot đó tự tạo khoảng nghỉ)
 MIN_SHOT = 0.5            # thời lượng tối thiểu của 1 shot (giây)
 TTS_CONCURRENCY = 4
 LIPSYNC_WORKERS = 4
@@ -129,7 +138,8 @@ def _visemes_cached(wav: Path, text: str, cache_dir: Path, use_rhubarb: bool) ->
     if use_rhubarb and cache.exists():
         try:
             data = json.loads(cache.read_text(encoding="utf-8"))
-            if data.get("source") == "rhubarb":
+            # khẩu hình tính trên wav chưa cắt lặng sẽ lệch thời điểm → tính lại
+            if data.get("source") == "rhubarb" and data.get("trim") == tts.TRIM_VERSION:
                 return [(float(t), str(s)) for t, s in data["visemes"]]
         except (OSError, ValueError, KeyError):
             pass
@@ -141,7 +151,8 @@ def _visemes_cached(wav: Path, text: str, cache_dir: Path, use_rhubarb: bool) ->
             log.warning("Rhubarb lỗi cho %s (%s) — dùng biên độ.", wav.name, e)
     if vis:
         cache_dir.mkdir(parents=True, exist_ok=True)
-        cache.write_text(json.dumps({"source": "rhubarb", "visemes": vis}), encoding="utf-8")
+        cache.write_text(json.dumps({"source": "rhubarb", "visemes": vis, "trim": tts.TRIM_VERSION}),
+                         encoding="utf-8")
         return vis
     return _lip.amplitude_visemes(wav)
 
@@ -171,6 +182,71 @@ def layout_shot(shot: Shot) -> None:
     shot.duration = round(max(shot.min_duration, end + TAIL if shot.lines else 0.0, MIN_SHOT), 3)
 
 
+def _is_scene_break(prev: Shot, shot: Shot, between: list[Shot]) -> bool:
+    if shot.location != prev.location:
+        return True
+    return any(o.kind == "chapter_card" for s in [*between, shot] for o in s.overlays)
+
+
+def story_pauses(sb: Storyboard, script_text: str | None) -> tuple[list[float], int]:
+    """Khoảng nghỉ trước từng câu (thứ tự phim) và số câu đối chiếu được với kịch bản."""
+    from .paragraphs import line_paragraphs
+
+    order = [(si, ln) for si, s in enumerate(sb.shots) for ln in s.lines]
+    paras = line_paragraphs(script_text or "", [ln.text for _, ln in order])
+    pauses: list[float] = []
+    for k, (si, _ln) in enumerate(order):
+        if k == 0:
+            pauses.append(FILM_LEAD)
+            continue
+        pi = order[k - 1][0]
+        if si != pi and _is_scene_break(sb.shots[pi], sb.shots[si], sb.shots[pi + 1:si]):
+            pauses.append(PAUSE_SCENE)
+            continue
+        a, b = paras[k - 1], paras[k]
+        pauses.append(PAUSE_PARAGRAPH if a and b and b[0] != a[1] else PAUSE_SENTENCE)
+    return pauses, sum(1 for p in paras if p)
+
+
+def layout_story(sb: Storyboard, pauses: list[float]) -> None:
+    """Xếp câu theo khoảng nghỉ câu chuyện; mỗi khoảng nghỉ giữa 2 shot chia thành đuôi shot trước
+    + SHOT_LEAD đầu shot sau. Shot không lời giữ min_duration như cũ."""
+    k = 0
+    starts: dict[int, int] = {}          # shot index -> chỉ số câu đầu tiên (thứ tự phim)
+    for si, s in enumerate(sb.shots):
+        if s.lines:
+            starts[si] = k
+            k += len(s.lines)
+
+    def lead(si: int) -> float:
+        first = starts[si]
+        if first == 0:
+            return pauses[0]
+        if si > 0 and not sb.shots[si - 1].lines:   # sau shot không lời: khoảng nghỉ đã có sẵn
+            return SHOT_LEAD
+        return min(SHOT_LEAD, pauses[first])
+
+    for si, shot in enumerate(sb.shots):
+        if not shot.lines:
+            shot.duration = round(max(shot.min_duration, MIN_SHOT), 3)
+            continue
+        k = starts[si]
+        t = lead(si)
+        end = t
+        for j, ln in enumerate(shot.lines):
+            if j:
+                t = end + pauses[k + j]
+            ln.start = round(t, 3)
+            end = t + (ln.duration or 0.0)
+        if si + 1 >= len(sb.shots):
+            tail = FILM_TAIL
+        elif sb.shots[si + 1].lines:
+            tail = max(0.0, pauses[starts[si + 1]] - lead(si + 1))
+        else:
+            tail = TAIL_BEFORE_SILENT
+        shot.duration = round(max(shot.min_duration, end + tail, MIN_SHOT), 3)
+
+
 def _srt_time(sec: float) -> str:
     ms = int(round(sec * 1000))
     h, ms = divmod(ms, 3_600_000)
@@ -193,8 +269,12 @@ def write_srt(sb: Storyboard, out: Path, *, width: int = 45) -> Path:
 
 
 def fill_timing(storyboard: Storyboard, project_dir: Path, cfg: dict[str, Any] | None = None, *,
-                progress: Progress | None = None, lipsync: bool = True) -> Storyboard:
-    """Điền thời gian/âm thanh/viseme cho storyboard (sửa tại chỗ và trả về chính nó)."""
+                progress: Progress | None = None, lipsync: bool = True,
+                script_text: str | None = None) -> Storyboard:
+    """Điền thời gian/âm thanh/viseme cho storyboard (sửa tại chỗ và trả về chính nó).
+
+    Có `script_text` → khoảng nghỉ theo câu chuyện (câu / đoạn văn / đổi cảnh); không có → bố cục cũ.
+    """
     project_dir = Path(project_dir)
     audio_dir = project_dir / "audio"
     lip_dir = project_dir / "lipsync"
@@ -223,8 +303,16 @@ def fill_timing(storyboard: Storyboard, project_dir: Path, cfg: dict[str, Any] |
     for (ln, _s, _p), vis in zip(jobs, results):
         ln.visemes = vis
 
-    for shot in storyboard.shots:
-        layout_shot(shot)
+    if script_text and script_text.strip():
+        pauses, matched = story_pauses(storyboard, script_text)
+        layout_story(storyboard, pauses)
+        total = len(pauses)
+        log.info("Khoảng nghỉ theo câu chuyện: %d/%d câu đối chiếu được với kịch bản.", matched, total)
+        if progress:
+            progress(f"Xếp khoảng nghỉ theo đoạn văn ({matched}/{total} câu khớp kịch bản)", 0.99)
+    else:
+        for shot in storyboard.shots:
+            layout_shot(shot)
     write_srt(storyboard, project_dir / "subtitles.srt")
     if progress:
         progress("Xong phần âm thanh", 1.0)

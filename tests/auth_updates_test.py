@@ -65,28 +65,29 @@ class UpdatesTests(unittest.TestCase):
     def test_public_request_and_new_release_needs_no_credentials(self):
         response = MagicMock()
         response.__enter__.return_value.read.return_value = json.dumps([
-            {'tag_name': 'assets-v1.1.0', 'assets': [
-                {'name': 'StoryToon-Assets-1.1.0.zip', 'state': 'uploaded'},
-                {'name': 'StoryToon-Assets-1.1.0.zip.sha256', 'state': 'uploaded'}]}
+            {'tag_name': 'v99.1.0', 'assets': [
+                {'name': 'StoryToon-Update-99.1.0.zip', 'state': 'uploaded'},
+                {'name': 'StoryToon-Update-99.1.0.zip.sha256', 'state': 'uploaded'}]}
         ]).encode()
-        with patch('storytoon.secure_store.read', side_effect=AssertionError('Must not read credentials')), patch.object(updater, 'assets_version', return_value='1.0.0'), patch.object(updater, 'urlopen', return_value=response) as call:
+        with patch('storytoon.secure_store.read', side_effect=AssertionError('Must not read credentials')), patch.object(updater, 'urlopen', return_value=response) as call:
             result = updater.check_release()
             self.assertTrue(result['available'])
-            self.assertEqual(result['url'], 'https://github.com/Tian01109999/Animation/releases/tag/assets-v1.1.0')
-            self.assertEqual(result['kind'], 'assets')
+            self.assertEqual(result['version'], '99.1.0')
+            self.assertEqual(result['kind'], 'app')
+            self.assertNotIn('url', result)
             self.assertIsNone(call.call_args.args[0].get_header('Authorization'))
 
-    def test_assets_versions_ignore_app_releases_and_incomplete_packages(self):
+    def test_app_versions_ignore_assets_tags_drafts_and_incomplete_packages(self):
         def release(version, **kwargs):
-            return dict(tag_name='assets-v' + version, assets=[
-                {'name': f'StoryToon-Assets-{version}.zip', 'state': 'uploaded'},
-                {'name': f'StoryToon-Assets-{version}.zip.sha256', 'state': 'uploaded'}], **kwargs)
-        metadata = [release('2.0.0', draft=True), release('3.0.0', prerelease=True),
-                    {'tag_name': 'v99.0.0'}, {'tag_name': 'assets-v5.0.0', 'assets': []},
+            return dict(tag_name='v' + version, assets=[
+                {'name': f'StoryToon-Update-{version}.zip', 'state': 'uploaded'},
+                {'name': f'StoryToon-Update-{version}.zip.sha256', 'state': 'uploaded'}], **kwargs)
+        metadata = [release('92.0.0', draft=True), release('93.0.0', prerelease=True),
+                    {'tag_name': 'assets-v99.0.0'}, {'tag_name': 'v95.0.0', 'assets': []},
                     release('1.2.0'), release('1.10.0')]
         response = MagicMock()
         response.__enter__.return_value.read.return_value = json.dumps(metadata).encode()
-        with patch.object(updater, 'urlopen', return_value=response), patch.object(updater, 'assets_version', return_value='1.10.0'):
+        with patch.object(updater, 'urlopen', return_value=response), patch.object(updater, '__version__', '1.10.0'):
             result = updater.check_release()
             self.assertEqual(result['version'], '1.10.0')
             self.assertFalse(result['available'])

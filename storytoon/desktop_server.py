@@ -43,8 +43,18 @@ def main() -> int:
     token = os.environ.get('STORYTOON_DESKTOP_TOKEN', '')
     if len(token) < 32:
         raise RuntimeError('Desktop session token is missing.')
+    import logging
+    from . import errorlog
+    logging.basicConfig(level=logging.WARNING, format='%(levelname)s %(name)s: %(message)s')
+    errorlog.install()
     import uvicorn
-    uvicorn.run(build_app(token), host='127.0.0.1', port=args.port, access_log=False, log_level='warning')
+    try:
+        app = build_app(token)
+    except Exception as exc:
+        errorlog.record('Khởi động bộ xử lý', exc)
+        raise
+    # log_config=None: logger uvicorn đi qua root logger → lỗi máy chủ cũng vào logs/errors.log
+    uvicorn.run(app, host='127.0.0.1', port=args.port, access_log=False, log_level='warning', log_config=None)
     return 0
 
 

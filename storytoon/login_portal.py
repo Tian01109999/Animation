@@ -126,7 +126,7 @@ button{width:100%;margin-top:22px;border:0;border-radius:8px;padding:13px;backgr
 def attach(app, portal: LoginPortal):
     @app.middleware('http')
     async def gate(request: Request, call_next):
-        if request.url.path in ('/account/login','/__desktop__/status','/__desktop__/updates'):
+        if request.url.path in ('/account/login','/__desktop__/status','/__desktop__/updates','/__desktop__/update-state'):
             return await call_next(request)
         try:
             session=await asyncio.to_thread(portal.validate,request.cookies.get(COOKIE))

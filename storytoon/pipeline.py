@@ -172,9 +172,10 @@ def _sha(*parts: str | bytes) -> str:
 
 def _audio_input_hash(pr: Project) -> str:
     sb = pr.storyboard.read_bytes() if pr.storyboard.exists() else b""
+    script = pr.script.read_bytes() if pr.script.exists() else b""   # khoảng nghỉ theo đoạn văn
     tts = json.dumps(config.get("tts", {}), sort_keys=True, ensure_ascii=False)
     mix = json.dumps(config.get("audio", {}), sort_keys=True, ensure_ascii=False)
-    return _sha(sb, tts, mix, "audio-v1")
+    return _sha(sb, script, tts, mix, "audio-v2")
 
 
 class _FileLogHandler(logging.Handler):
@@ -357,7 +358,8 @@ def step_audio(pr: Project, say: Runner, *, force: bool = False) -> Storyboard:
     t0 = time.monotonic()
     n_lines = sum(len(s.lines) for s in sb.shots)
     say(f"Lồng tiếng {n_lines} câu + khớp khẩu hình…", 0.0)
-    fill_timing(sb, pr.dir, progress=lambda m, f: say(m, 0.85 * f))
+    script_text = pr.script.read_text(encoding="utf-8") if pr.script.exists() else None
+    fill_timing(sb, pr.dir, progress=lambda m, f: say(m, 0.85 * f), script_text=script_text)
     save_storyboard(pr, sb, timed=True)
     say(f"Trộn nhạc + hiệu ứng ({film_duration(sb):.1f} s)…", 0.9)
     build_soundtrack(sb, pr.dir, pr.soundtrack)
@@ -515,6 +517,12 @@ def run(p: str | Path, steps: Iterable[str] | None = None, *, force: bool | Iter
         return result
     except BaseException as e:
         say(f"LỖI: {e}")
+        if isinstance(e, Exception):
+            from . import errorlog
+            errorlog.record(f"Bước {STEP_LABELS.get(say.step, say.step or '-')}", e, project=pr.name,
+                            folder=pr.dir, steps=", ".join(want),
+                            forced=", ".join(sorted(forced)) or None)
+            say(f"Chi tiết lỗi đã ghi vào {errorlog.LOG_FILE}")
         st = _State(pr)
         st.data["last_run"].update(status="failed", finished=_now(), error=str(e)[:2000], step=say.step)
         st.save()

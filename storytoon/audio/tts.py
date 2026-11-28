@@ -34,6 +34,32 @@ log = logging.getLogger(__name__)
 T = TypeVar("T")
 
 RETRIES = 3
+TRIM_VERSION = 1      # tăng khi đổi cách cắt lặng → file cũ được cắt lại (không gọi TTS lại)
+TRIM_KEEP = 0.05      # giây lặng giữ lại ở đầu/cuối mỗi câu
+TRIM_WINDOW = 0.01    # cửa sổ 10 ms để dò tiếng
+
+
+def trim_silence(path: Path, keep: float = TRIM_KEEP) -> float:
+    """Cắt khoảng lặng thừa ở đầu/cuối wav (giữ `keep` giây mỗi đầu), ghi đè file. Trả về thời lượng mới."""
+    import numpy as np
+
+    data, sr = audio_io.read_wav(path)
+    mono = np.abs(data).max(axis=1) if data.ndim > 1 else np.abs(data)
+    win = max(1, int(sr * TRIM_WINDOW))
+    frames = len(mono) // win
+    if frames == 0:
+        return audio_io.wav_duration(path)
+    level = mono[: frames * win].reshape(frames, win).max(axis=1)
+    peak = float(level.max())
+    if peak <= 0:
+        return audio_io.wav_duration(path)
+    loud = np.flatnonzero(level > max(peak * 0.03, 0.004))   # ~-30 dB so với đỉnh
+    pad = int(sr * keep)
+    start = max(0, int(loud[0]) * win - pad)
+    end = min(len(data), (int(loud[-1]) + 1) * win + pad)
+    if start > 0 or end < len(data):
+        audio_io.write_wav(path, data[start:end], sr)
+    return audio_io.wav_duration(path)
 
 
 class TTSError(RuntimeError):
@@ -160,6 +186,17 @@ def _cached_duration(out_path: Path, key: str) -> float | None:
         return None
     if data.get("key") != key:
         return None
+    if data.get("trim") != TRIM_VERSION:
+        # file tạo trước khi có bước cắt lặng: cắt tại chỗ, tạo lại bản 16k, không gọi TTS lại
+        try:
+            duration = trim_silence(out_path)
+            audio_io.to_wav(out_path, wav16_path(out_path), sr=16000, channels=1)
+        except Exception as e:  # noqa: BLE001 - file hỏng → tổng hợp lại
+            log.warning("Không cắt được khoảng lặng %s (%s) — tạo lại giọng.", out_path.name, e)
+            return None
+        data.update(trim=TRIM_VERSION, duration=duration)
+        meta.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+        return duration
     return float(data.get("duration") or audio_io.wav_duration(out_path))
 
 
@@ -177,7 +214,7 @@ async def synth_line_async(text: str, voice: str, out_path: Path, *, rate: str |
     engine = engine or get_engine()
     key = cache_key(text, voice, rate, pitch, engine.name)
 
-    cached = _cached_duration(out_path, key)
+    cached = await asyncio.to_thread(_cached_duration, out_path, key)
     if cached is not None:
         return cached
 
@@ -199,6 +236,7 @@ async def synth_line_async(text: str, voice: str, out_path: Path, *, rate: str |
         raise TTSError(f"Không tổng hợp được giọng sau {RETRIES} lần ({voice}): {last_err}") from last_err
 
     await asyncio.to_thread(audio_io.to_wav, raw, out_path, sr=audio_io.SR, channels=1)
+    await asyncio.to_thread(trim_silence, out_path)          # cùng một mức lặng cho mọi engine
     await asyncio.to_thread(audio_io.to_wav, out_path, wav16_path(out_path), sr=16000, channels=1)
     raw.unlink(missing_ok=True)
     duration = audio_io.wav_duration(out_path)
@@ -206,7 +244,7 @@ async def synth_line_async(text: str, voice: str, out_path: Path, *, rate: str |
         raise TTSError(f"Âm thanh rỗng cho câu: {text[:40]}")
     _meta_path(out_path).write_text(
         json.dumps({"key": key, "engine": engine.name, "voice": voice, "rate": rate, "pitch": pitch,
-                    "text": text, "duration": duration}, ensure_ascii=False, indent=1),
+                    "text": text, "duration": duration, "trim": TRIM_VERSION}, ensure_ascii=False, indent=1),
         encoding="utf-8")
     return duration
 

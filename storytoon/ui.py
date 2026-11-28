@@ -12,7 +12,6 @@ import os
 import queue
 import threading
 import time
-import traceback
 from pathlib import Path
 from typing import Any, Callable, Iterator
 
@@ -24,7 +23,7 @@ os.environ["DO_NOT_TRACK"] = "1"
 
 import gradio as gr  # noqa: E402
 
-from . import account, activity, chatgpt, config, paths, pipeline
+from . import account, activity, chatgpt, config, errorlog, paths, pipeline
 from .schema import Storyboard
 
 log = logging.getLogger("storytoon.ui")
@@ -45,7 +44,8 @@ def _stream(work: Callable[[Callable[[str], None]], Any], *, done: Callable[[Any
                 box["result"] = work(q.put)
         except Exception as e:  # noqa: BLE001
             box["error"] = e
-            log.error("Lỗi:\n%s", traceback.format_exc())
+            errorlog.record("Giao diện — tác vụ chạy nền", e,
+                            task=getattr(work, "__qualname__", None))
 
     th = threading.Thread(target=target, daemon=True)
     th.start()
@@ -61,6 +61,7 @@ def _stream(work: Callable[[Callable[[str], None]], Any], *, done: Callable[[Any
             yield "\n".join(lines[-300:]), None
     if "error" in box:
         lines.append(f"❌ LỖI: {box['error']}")
+        lines.append(f"Chi tiết lỗi đã ghi vào {errorlog.LOG_FILE}")
         yield "\n".join(lines[-300:]), None
         return
     yield "\n".join(lines[-300:]), (done(box.get("result")) if done else box.get("result"))
@@ -541,6 +542,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--no-browser", action="store_true")
     a = ap.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(levelname)s %(name)s: %(message)s")
+    errorlog.install()
     from .tools_bin import add_bundled_to_path
     add_bundled_to_path()  # bản portable: runtime\ffmpeg cho cả thư viện tự gọi `ffmpeg`
     app = build_app()

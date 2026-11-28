@@ -19,14 +19,25 @@ from storytoon.updater import ASSETS_VERSION_FILE, EXE_NAME
 ASSETS_LIBRARY_VERSION = '1.2.0'   # marker so old assets-only clients stop prompting
 
 
-def previous_paths(dist: Path) -> set[str]:
-    """Root-relative paths shipped by earlier packages found in dist/."""
+def previous_paths(dist: Path, skip: str = '') -> set[str]:
+    """Root-relative paths shipped (or already deleted) by earlier packages found in dist/.
+
+    Earlier update packages contribute their files and their own delete lists, so deletions
+    carry forward even when the original full release zip is no longer in dist/.
+    """
     seen: set[str] = set()
     for z in dist.glob('*.zip'):
-        if z.name.startswith('StoryToon-Update-'):
+        if z.name == skip:
             continue
         try:
             with zipfile.ZipFile(z) as archive:
+                if 'update.json' in archive.namelist():
+                    try:
+                        old = json.loads(archive.read('update.json').decode('utf-8'))
+                        seen.update(p for p in old.get('delete', []) if isinstance(p, str)
+                                    and p.startswith(('storytoon/', 'assets/')))
+                    except (ValueError, AttributeError):
+                        pass
                 for name in archive.namelist():
                     if name.endswith('/'):
                         continue
@@ -68,9 +79,10 @@ def main() -> None:
                 raise RuntimeError(f'Account data in package input: {rel}')
             files.append((path, rel))
     current = {rel for _, rel in files}
-    deleted = sorted(p for p in previous_paths(ROOT / 'dist') if p not in current and p != marker)
-    manifest = {'version': version, 'notes': notes, 'delete': deleted}
     output = ROOT / 'dist' / f'StoryToon-Update-{version}.zip'
+    deleted = sorted(p for p in previous_paths(ROOT / 'dist', skip=output.name)
+                     if p not in current and p != marker)
+    manifest = {'version': version, 'notes': notes, 'delete': deleted}
     output.parent.mkdir(exist_ok=True)
     temporary = output.with_suffix('.partial')
     with zipfile.ZipFile(temporary, 'w', zipfile.ZIP_DEFLATED, compresslevel=6) as archive:

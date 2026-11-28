@@ -12,7 +12,9 @@ import json
 import re
 import shutil
 import tempfile
+import threading
 import zipfile
+from typing import Callable
 from pathlib import Path, PurePosixPath
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -102,12 +104,24 @@ def _safe_name(name: str) -> str | None:
     raise ValueError(f'File không được phép trong gói: {name}')
 
 
-def _fetch(url: str, dest: Path) -> None:
+Progress = Callable[[str, int, int], None]   # (stage, done, total)
+
+
+def _fetch(url: str, dest: Path, progress: Progress | None = None) -> None:
     with urlopen(Request(url, headers=_UA), timeout=60) as response, dest.open('wb') as out:
-        shutil.copyfileobj(response, out, 1024 * 1024)
+        total = int(response.headers.get('Content-Length') or 0)
+        done = 0
+        while True:
+            block = response.read(1024 * 1024)
+            if not block:
+                break
+            out.write(block)
+            done += len(block)
+            if progress:
+                progress('download', done, total)
 
 
-def install_package(package: Path, root: Path | None = None) -> dict:
+def install_package(package: Path, root: Path | None = None, progress: Progress | None = None) -> dict:
     """Validate and install an already-verified update zip into the app folder."""
     root = (root or paths.ROOT).resolve()
     with zipfile.ZipFile(package) as archive:
@@ -118,9 +132,12 @@ def install_package(package: Path, root: Path | None = None) -> dict:
         version = manifest['version']
         version_tuple(version)
         written = 0
+        total = sum(1 for _, name in members if name and name != 'update.json')
         for info, name in members:
             if not name or name == 'update.json':
                 continue
+            if progress and written % 25 == 0:
+                progress('install', written, total)
             target = root / name
             target.parent.mkdir(parents=True, exist_ok=True)
             tmp = target.with_name(target.name + '.updating')
@@ -147,7 +164,7 @@ def install_package(package: Path, root: Path | None = None) -> dict:
     return {'version': version, 'written': written, 'removed': removed}
 
 
-def download_and_install(version: str) -> dict:
+def download_and_install(version: str, progress: Progress | None = None) -> dict:
     """Download the package for `version`, verify SHA-256 and install it."""
     version_tuple(version)
     name = _package_name(version)
@@ -158,12 +175,50 @@ def download_and_install(version: str) -> dict:
         expected = sha_path.read_text(encoding='ascii').split()[0].lower()
         if not re.fullmatch(r'[0-9a-f]{64}', expected):
             raise ValueError('Mã kiểm tra của gói không hợp lệ.')
-        _fetch(_download_url(version, name), zip_path)
+        _fetch(_download_url(version, name), zip_path, progress)
+        if progress:
+            progress('verify', 0, 0)
         with zip_path.open('rb') as stream:
             actual = hashlib.file_digest(stream, 'sha256').hexdigest()
         if actual != expected:
             raise ValueError('Gói tải về không khớp mã kiểm tra. Hãy thử lại.')
-        return install_package(zip_path)
+        return install_package(zip_path, progress=progress)
+
+
+# ---------------------------------------------------------------- background job (one at a time)
+_job_lock = threading.Lock()
+_job: dict = {'state': 'idle', 'version': '', 'stage': '', 'done': 0, 'total': 0, 'message': ''}
+
+
+def job_status() -> dict:
+    with _job_lock:
+        return dict(_job)
+
+
+def start_install(version: str, runner: Callable[..., dict] | None = None) -> bool:
+    """Start downloading + installing `version` in the background. False if a job is already running."""
+    version_tuple(version)
+    with _job_lock:
+        if _job['state'] in ('running', 'done'):
+            return False
+        _job.update(state='running', version=version, stage='download', done=0, total=0, message='')
+
+    def report(stage: str, done: int, total: int) -> None:
+        with _job_lock:
+            _job.update(stage=stage, done=done, total=total)
+
+    def work() -> None:
+        try:
+            result = (runner or download_and_install)(version, progress=report)
+            with _job_lock:
+                _job.update(state='done', stage='done', version=result.get('version', version))
+        except Exception as exc:  # noqa: BLE001 - surfaced to the update page
+            message = str(exc) if isinstance(exc, ValueError) else 'Không tải được gói cập nhật. Kiểm tra kết nối Internet và thử lại.'
+            with _job_lock:
+                _job.update(state='error', message=message)
+
+    threading.Thread(target=work, name='storytoon-update', daemon=True).start()
+    return True
 
 
 def cleanup_previous() -> None:

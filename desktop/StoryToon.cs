@@ -18,16 +18,24 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: System.Reflection.AssemblyTitle("StoryToon Desktop")]
 [assembly: System.Reflection.AssemblyProduct("StoryToon")]
 [assembly: System.Reflection.AssemblyDescription("StoryToon - ứng dụng dựng phim hoạt hình 2D")]
-[assembly: System.Reflection.AssemblyVersion("1.1.1.0")]
+[assembly: System.Reflection.AssemblyVersion("1.1.2.0")]
 
 static class Program {
     [STAThread] static void Main(string[] args) {
         Application.EnableVisualStyles(); Application.SetCompatibleTextRenderingDefault(false);
         string root = AppDomain.CurrentDomain.BaseDirectory.TrimEnd(Path.DirectorySeparatorChar);
-        string smoke = null;
-        foreach (string arg in args) if (arg.StartsWith("--smoke-test=")) smoke = Path.GetFullPath(arg.Substring(13));
+        string smoke = null; bool afterUpdate = false;
+        foreach (string arg in args) {
+            if (arg.StartsWith("--smoke-test=")) smoke = Path.GetFullPath(arg.Substring(13));
+            if (arg == "--after-update") afterUpdate = true;
+        }
         string key; using (var hash = SHA256.Create()) key = BitConverter.ToString(hash.ComputeHash(Encoding.UTF8.GetBytes(root.ToLowerInvariant()))).Replace("-", "").Substring(0, 24);
         bool owns; using (var mutex = new Mutex(true, "Local\\StoryToonDesktop-" + key, out owns)) {
+            if (!owns && afterUpdate) {
+                // Restarted by the updater: wait for the previous window to finish closing.
+                try { owns = mutex.WaitOne(60000); } catch (AbandonedMutexException) { owns = true; }
+                if (owns) Thread.Sleep(800);
+            }
             if (!owns) { MessageBox.Show("StoryToon đang mở. Hãy chuyển về cửa sổ ứng dụng hiện tại.", "StoryToon"); return; }
             try { Application.Run(new StudioWindow(root, smoke)); }
             catch (Exception ex) { MessageBox.Show("Không mở được StoryToon:\n" + ex.Message, "StoryToon", MessageBoxButtons.OK, MessageBoxIcon.Error); Environment.ExitCode = 1; }
@@ -46,7 +54,7 @@ sealed class StudioWindow : Form {
     string notifiedVersion = "";
     public StudioWindow(string root, string smoke) {
         this.root = root; this.smoke = smoke;
-        Text = "StoryToon v1.1.1 · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
+        Text = "StoryToon v1.1.2 · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
         StartPosition = FormStartPosition.CenterScreen; BackColor = Color.FromArgb(20, 25, 34);
         try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
         var bar = new Panel { Dock = DockStyle.Top, Height = 58, BackColor = Color.FromArgb(24, 31, 43) };
@@ -115,6 +123,11 @@ sealed class StudioWindow : Form {
             };
             view.CoreWebView2.NewWindowRequested += delegate(object sender, CoreWebView2NewWindowRequestedEventArgs e) { e.Handled = true; OpenExternal(e.Uri); };
             view.CoreWebView2.NavigationCompleted += delegate { status.Text = "Sẵn sàng · Dữ liệu lưu trên máy"; };
+            view.CoreWebView2.WebMessageReceived += delegate(object sender, CoreWebView2WebMessageReceivedEventArgs e) {
+                Uri uri; if (!Uri.TryCreate(e.Source, UriKind.Absolute, out uri) || uri.GetLeftPart(UriPartial.Authority) != address) return;
+                string message; try { message = e.TryGetWebMessageAsString(); } catch { return; }
+                if (message == "storytoon:restart-after-update") RestartAfterUpdate();
+            };
             view.CoreWebView2.Navigate(address);
             if (smoke == null) { updateTimer.Start(); await CheckUpdates(); }
             if (smoke != null) await SmokeTest();
@@ -137,10 +150,30 @@ sealed class StudioWindow : Form {
             notifiedVersion = version;
             string notes = result.ContainsKey("notes") ? Convert.ToString(result["notes"]) : "";
             if (notes.Length > 1200) notes = notes.Substring(0, 1200) + "…";
-            string text = "Có bản cập nhật StoryToon " + version + "." + (notes.Length > 0 ? "\n\nNội dung thay đổi:\n" + notes : "") + "\n\nMở trang cập nhật ngay?";
+            string text = "Có bản cập nhật StoryToon " + version + "." + (notes.Length > 0 ? "\n\nNội dung thay đổi:\n" + notes : "") + "\n\nCập nhật ngay? App sẽ tự tải, cài đặt và khởi động lại.";
             if (MessageBox.Show(this, text, "Cập nhật StoryToon", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes && view != null && ready)
-                view.CoreWebView2.Navigate(address + "/updates");
+                view.CoreWebView2.Navigate(address + "/updates?start=1");
         } catch { /* Updates must never prevent opening the studio. */ }
+    }
+    bool restarting;
+    async void RestartAfterUpdate() {
+        if (restarting || shuttingDown) return;
+        // Only restart when the backend really finished installing an update.
+        try {
+            var request = (HttpWebRequest)WebRequest.Create(address + "/__desktop__/update-state");
+            request.Proxy = null; request.Headers["X-StoryToon-Desktop"] = token; request.Timeout = 10000;
+            string json = await Task.Run(delegate { using (var response = request.GetResponse()) using (var reader = new StreamReader(response.GetResponseStream())) return reader.ReadToEnd(); });
+            if (!json.Contains("\"state\":\"done\"")) return;
+        } catch { return; }
+        restarting = true;
+        string exe = Path.Combine(root, "StoryToon-Desktop-Portable.exe");
+        if (!File.Exists(exe)) exe = Application.ExecutablePath;
+        try { Process.Start(new ProcessStartInfo(exe, "--after-update") { UseShellExecute = false, WorkingDirectory = root }); }
+        catch (Exception ex) {
+            restarting = false;
+            MessageBox.Show(this, "Đã cài bản mới nhưng không tự mở lại được (" + ex.Message + "). Hãy mở lại StoryToon.", "StoryToon");
+        }
+        allowClose = true; Close();
     }
     async Task<string> BackendStatus() {
         var request = (HttpWebRequest)WebRequest.Create(address + "/__desktop__/status");
