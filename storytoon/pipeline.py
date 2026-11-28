@@ -175,7 +175,9 @@ def _audio_input_hash(pr: Project) -> str:
     script = pr.script.read_bytes() if pr.script.exists() else b""   # khoảng nghỉ theo đoạn văn
     tts = json.dumps(config.get("tts", {}), sort_keys=True, ensure_ascii=False)
     mix = json.dumps(config.get("audio", {}), sort_keys=True, ensure_ascii=False)
-    return _sha(sb, script, tts, mix, "audio-v2")
+    library = b"".join(p.read_bytes() for p in (paths.MUSIC / "catalog.json", paths.SFX / "catalog.json")
+                       if p.exists())                                # đổi kho nhạc/hiệu ứng → trộn lại
+    return _sha(sb, script, tts, mix, library, "audio-v3")
 
 
 class _FileLogHandler(logging.Handler):

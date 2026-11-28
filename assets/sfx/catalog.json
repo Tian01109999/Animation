@@ -1,0 +1,1278 @@
+{
+ "schema": 1,
+ "note": "Hiệu ứng CC0/Public Domain: Freesound (CC0), Wikimedia Commons (PDSounds.org…) và âm tổng hợp; xem nguồn từng âm.",
+ "sounds": {
+  "door_knock": {
+   "file": "door_knock.ogg",
+   "kind": "oneshot",
+   "use": "Có người gõ cửa.",
+   "aliases": [
+    "knock",
+    "knocking"
+   ],
+   "source": {
+    "title": "Knocking on wood or door.ogg",
+    "author": "stephan",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Knocking_on_wood_or_door.ogg"
+   },
+   "duration": 4.0
+  },
+  "door": {
+   "file": "door.ogg",
+   "kind": "oneshot",
+   "use": "Đóng/mở cửa gỗ bình thường.",
+   "aliases": [
+    "door_open",
+    "door_close",
+    "door_slam"
+   ],
+   "source": {
+    "title": "Slam door.MP3",
+    "author": "SoundsForHim",
+    "license": "CC0",
+    "page": "https://freesound.org/people/SoundsForHim/sounds/395653/",
+    "freesound_id": 395653
+   },
+   "duration": 4.79
+  },
+  "door_creak": {
+   "file": "door_creak.ogg",
+   "kind": "oneshot",
+   "use": "Cửa cũ kẽo kẹt mở chậm — nhà hoang, ký túc xá đêm, cảnh rợn.",
+   "aliases": [
+    "creak",
+    "squeaky_door"
+   ],
+   "source": {
+    "title": "Squeaky door.ogg",
+    "author": "leonmire",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Squeaky_door.ogg"
+   },
+   "duration": 6.0
+  },
+  "door_metal": {
+   "file": "door_metal.ogg",
+   "kind": "oneshot",
+   "use": "Cửa sắt / cửa kho / cửa phòng máy mở.",
+   "aliases": [
+    "metal_door",
+    "iron_door"
+   ],
+   "source": {
+    "title": "Open metallic door.ogg",
+    "author": "hc",
+    "license": "Public domain",
+    "page": "https://commons.wikimedia.org/wiki/File:Open_metallic_door.ogg"
+   },
+   "duration": 5.0
+  },
+  "elevator": {
+   "file": "elevator.ogg",
+   "kind": "oneshot",
+   "use": "Cửa thang máy đóng, thang máy chạy.",
+   "aliases": [
+    "lift"
+   ],
+   "source": {
+    "title": "elevator bell doors.wav",
+    "author": "cognito perceptu",
+    "license": "CC0",
+    "page": "https://freesound.org/people/cognito%20perceptu/sounds/18768/",
+    "freesound_id": 18768
+   },
+   "duration": 5.29
+  },
+  "footsteps": {
+   "file": "footsteps.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng bước chân vang trong hành lang — ai đó đang đến gần.",
+   "aliases": [
+    "steps",
+    "footstep",
+    "walking"
+   ],
+   "source": {
+    "title": "STEPS IN CORRIDOR.wav",
+    "author": "colo777",
+    "license": "CC0",
+    "page": "https://freesound.org/people/colo777/sounds/251435/",
+    "freesound_id": 251435
+   },
+   "duration": 8.0
+  },
+  "phone_ringtone": {
+   "file": "phone_ringtone.ogg",
+   "kind": "oneshot",
+   "use": "Điện thoại di động đổ chuông, cuộc gọi đến.",
+   "aliases": [
+    "phone",
+    "ringtone",
+    "cell_phone",
+    "mobile_ring"
+   ],
+   "source": {
+    "generated": true,
+    "license": "CC0 (tổng hợp bởi StoryToon)"
+   },
+   "duration": 6.0
+  },
+  "phone_vibrate": {
+   "file": "phone_vibrate.ogg",
+   "kind": "oneshot",
+   "use": "Điện thoại rung trên bàn / trong túi, tin nhắn bí ẩn.",
+   "aliases": [
+    "vibrate",
+    "vibration"
+   ],
+   "source": {
+    "generated": true,
+    "license": "CC0 (tổng hợp bởi StoryToon)"
+   },
+   "duration": 3.0
+  },
+  "phone_ring": {
+   "file": "phone_ring.ogg",
+   "kind": "oneshot",
+   "use": "Điện thoại bàn kiểu cũ reo (văn phòng, đồn cảnh sát, nhà cũ).",
+   "aliases": [
+    "telephone",
+    "landline"
+   ],
+   "source": {
+    "title": "Phone Old Landline Ringing",
+    "author": "robotjay",
+    "license": "CC0",
+    "page": "https://freesound.org/people/robotjay/sounds/275163/",
+    "freesound_id": 275163
+   },
+   "duration": 8.0
+  },
+  "phone_dial": {
+   "file": "phone_dial.ogg",
+   "kind": "oneshot",
+   "use": "Bấm số gọi điện.",
+   "aliases": [
+    "dial",
+    "dialing"
+   ],
+   "source": {
+    "title": "phone02_j008b.wav",
+    "author": "j008b",
+    "license": "CC0",
+    "page": "https://freesound.org/people/j008b/sounds/85344/",
+    "freesound_id": 85344
+   },
+   "duration": 5.0
+  },
+  "phone_hangup": {
+   "file": "phone_hangup.ogg",
+   "kind": "oneshot",
+   "use": "Đầu dây bên kia cúp máy.",
+   "aliases": [
+    "hang_up",
+    "call_end"
+   ],
+   "source": {
+    "title": "busy signal_europe.mp3",
+    "author": "Felfa",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Felfa/sounds/178821/",
+    "freesound_id": 178821
+   },
+   "duration": 1.03
+  },
+  "notification": {
+   "file": "notification.ogg",
+   "kind": "oneshot",
+   "use": "Thông báo / tin nhắn mới hiện trên điện thoại.",
+   "aliases": [
+    "message",
+    "ding",
+    "sms"
+   ],
+   "source": {
+    "title": "Chime Notification",
+    "author": "Jofae",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Jofae/sounds/380482/",
+    "freesound_id": 380482
+   },
+   "duration": 0.32
+  },
+  "typing": {
+   "file": "typing.ogg",
+   "kind": "ambience",
+   "use": "Gõ bàn phím máy tính — hacker, nhân viên văn phòng, tra cứu dữ liệu.",
+   "aliases": [
+    "keyboard",
+    "typing_keyboard"
+   ],
+   "source": {
+    "title": "Keyboard Typing",
+    "author": "Trollarch2",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Trollarch2/sounds/331656/",
+    "freesound_id": 331656
+   },
+   "duration": 15.0
+  },
+  "camera_shutter": {
+   "file": "camera_shutter.ogg",
+   "kind": "oneshot",
+   "use": "Chụp ảnh, chụp hiện trường.",
+   "aliases": [
+    "photo",
+    "shutter"
+   ],
+   "source": {
+    "title": "Vintage Camera Flash Powder and Shutter",
+    "author": "Werra",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Werra/sounds/232130/",
+    "freesound_id": 232130
+   },
+   "duration": 0.86
+  },
+  "electric_buzz": {
+   "file": "electric_buzz.ogg",
+   "kind": "oneshot",
+   "use": "Đèn chập chờn, chập điện, mất điện — điềm gở.",
+   "aliases": [
+    "buzz",
+    "flicker",
+    "electric"
+   ],
+   "source": {
+    "title": "Vintage Edison Bulb Flicker & Warm-Up Sound Effect",
+    "author": "hipoidogs",
+    "license": "CC0",
+    "page": "https://freesound.org/people/hipoidogs/sounds/866662/",
+    "freesound_id": 866662
+   },
+   "duration": 2.27
+  },
+  "static": {
+   "file": "static.ogg",
+   "kind": "oneshot",
+   "use": "Nhiễu sóng điện thoại/loa/màn hình, thiết bị bị \"ma ám\".",
+   "aliases": [
+    "interference",
+    "glitch"
+   ],
+   "source": {
+    "title": "continuous static.wav",
+    "author": "Jace",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Jace/sounds/35291/",
+    "freesound_id": 35291
+   },
+   "duration": 6.0
+  },
+  "radio_static": {
+   "file": "radio_static.ogg",
+   "kind": "oneshot",
+   "use": "Bộ đàm / radio dò sóng rè rè.",
+   "aliases": [
+    "radio",
+    "walkie_talkie"
+   ],
+   "source": {
+    "title": "Static.wav",
+    "author": "Jace",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Jace/sounds/17804/",
+    "freesound_id": 17804
+   },
+   "duration": 8.0
+  },
+  "server_room": {
+   "file": "server_room.ogg",
+   "kind": "ambience",
+   "use": "Tiếng ù máy chủ, phòng máy, trung tâm dữ liệu.",
+   "aliases": [
+    "server_hum",
+    "machine_hum",
+    "data_center"
+   ],
+   "source": {
+    "title": "070916 Machine room server rack fans 3.wav",
+    "author": "thaighaudio",
+    "license": "CC0",
+    "page": "https://freesound.org/people/thaighaudio/sounds/349689/",
+    "freesound_id": 349689
+   },
+   "duration": 12.0
+  },
+  "heart_monitor": {
+   "file": "heart_monitor.ogg",
+   "kind": "ambience",
+   "use": "Máy đo nhịp tim bệnh viện, phòng cấp cứu.",
+   "aliases": [
+    "hospital",
+    "ecg"
+   ],
+   "source": {
+    "title": "Heart Monitor Beep",
+    "author": "samfk360",
+    "license": "CC0",
+    "page": "https://freesound.org/people/samfk360/sounds/148897/",
+    "freesound_id": 148897
+   },
+   "duration": 15.0
+  },
+  "police_siren": {
+   "file": "police_siren.ogg",
+   "kind": "oneshot",
+   "use": "Còi xe cảnh sát / cứu thương đến hiện trường.",
+   "aliases": [
+    "siren",
+    "ambulance",
+    "police"
+   ],
+   "source": {
+    "title": "Police siren.mp3",
+    "author": "MultiMax2121",
+    "license": "CC0",
+    "page": "https://freesound.org/people/MultiMax2121/sounds/156869/",
+    "freesound_id": 156869
+   },
+   "duration": 12.0
+  },
+  "alarm": {
+   "file": "alarm.ogg",
+   "kind": "oneshot",
+   "use": "Còi báo động an ninh / hệ thống báo động khẩn cấp.",
+   "aliases": [
+    "security_alarm",
+    "emergency_alarm"
+   ],
+   "source": {
+    "title": "Security Alarm",
+    "author": "JSilverSound",
+    "license": "CC0",
+    "page": "https://freesound.org/people/JSilverSound/sounds/381957/",
+    "freesound_id": 381957
+   },
+   "duration": 8.0
+  },
+  "fire_alarm": {
+   "file": "fire_alarm.ogg",
+   "kind": "oneshot",
+   "use": "Chuông báo cháy tòa nhà.",
+   "aliases": [
+    "smoke_alarm"
+   ],
+   "source": {
+    "title": "extreme_alarm.wav",
+    "author": "sirplus",
+    "license": "CC0",
+    "page": "https://freesound.org/people/sirplus/sounds/25032/",
+    "freesound_id": 25032
+   },
+   "duration": 7.71
+  },
+  "alarm_clock": {
+   "file": "alarm_clock.ogg",
+   "kind": "oneshot",
+   "use": "Đồng hồ báo thức reo buổi sáng.",
+   "aliases": [
+    "wake_up_alarm"
+   ],
+   "source": {
+    "title": "alarmclockbeeps.aif",
+    "author": "tedthetrumpet",
+    "license": "CC0",
+    "page": "https://freesound.org/people/tedthetrumpet/sounds/15813/",
+    "freesound_id": 15813
+   },
+   "duration": 6.0
+  },
+  "school_bell": {
+   "file": "school_bell.ogg",
+   "kind": "oneshot",
+   "use": "Chuông trường reo, giờ vào/ra lớp.",
+   "aliases": [
+    "bell_school"
+   ],
+   "source": {
+    "title": "School bell.wav",
+    "author": "deleted_user_7020630",
+    "license": "CC0",
+    "page": "https://freesound.org/people/deleted_user_7020630/sounds/378394/",
+    "freesound_id": 378394
+   },
+   "duration": 3.08
+  },
+  "clock_tick": {
+   "file": "clock_tick.ogg",
+   "kind": "ambience",
+   "use": "Đồng hồ tích tắc trong căn phòng im lặng, chờ đợi, thời gian trôi.",
+   "aliases": [
+    "ticking",
+    "clock"
+   ],
+   "source": {
+    "title": "Clock ticking",
+    "author": "Mortifreshman",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Mortifreshman/sounds/237210/",
+    "freesound_id": 237210
+   },
+   "duration": 15.0
+  },
+  "scream": {
+   "file": "scream.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng hét thất thanh khi phát hiện xác / gặp ma.",
+   "aliases": [
+    "shriek",
+    "yell"
+   ],
+   "source": {
+    "title": "Demonic Woman Scream.wav",
+    "author": "nick121087",
+    "license": "CC0",
+    "page": "https://freesound.org/people/nick121087/sounds/333832/",
+    "freesound_id": 333832
+   },
+   "duration": 3.0
+  },
+  "crying": {
+   "file": "crying.ogg",
+   "kind": "oneshot",
+   "use": "Phụ nữ khóc nức nở.",
+   "aliases": [
+    "cry",
+    "sobbing",
+    "weeping"
+   ],
+   "source": {
+    "title": "Girl Crying",
+    "author": "mvVoiceActing",
+    "license": "CC0",
+    "page": "https://freesound.org/people/mvVoiceActing/sounds/218184/",
+    "freesound_id": 218184
+   },
+   "duration": 10.0
+  },
+  "baby_cry": {
+   "file": "baby_cry.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng trẻ con khóc (đêm khuya, nhà hoang, ma trẻ con).",
+   "aliases": [
+    "infant_cry"
+   ],
+   "source": {
+    "title": "Crying newborn baby child 2.WAV",
+    "author": "the_yura",
+    "license": "CC0",
+    "page": "https://freesound.org/people/the_yura/sounds/211528/",
+    "freesound_id": 211528
+   },
+   "duration": 8.0
+  },
+  "breathing": {
+   "file": "breathing.ogg",
+   "kind": "oneshot",
+   "use": "Thở dốc vì sợ hãi / sau khi chạy / trốn trong bóng tối.",
+   "aliases": [
+    "heavy_breathing",
+    "panting"
+   ],
+   "source": {
+    "title": "Breath",
+    "author": "mcroce",
+    "license": "CC0",
+    "page": "https://freesound.org/people/mcroce/sounds/234335/",
+    "freesound_id": 234335
+   },
+   "duration": 10.0
+  },
+  "sigh": {
+   "file": "sigh.ogg",
+   "kind": "oneshot",
+   "use": "Thở dài mệt mỏi, chán nản.",
+   "aliases": [],
+   "source": {
+    "title": " sigh",
+    "author": "wjtaylor",
+    "license": "CC0",
+    "page": "https://freesound.org/people/wjtaylor/sounds/265249/",
+    "freesound_id": 265249
+   },
+   "duration": 1.2
+  },
+  "cough": {
+   "file": "cough.ogg",
+   "kind": "oneshot",
+   "use": "Ho khan, người ốm / già.",
+   "aliases": [],
+   "source": {
+    "title": "Cough (3)",
+    "author": "OwlStorm",
+    "license": "CC0",
+    "page": "https://freesound.org/people/OwlStorm/sounds/151217/",
+    "freesound_id": 151217
+   },
+   "duration": 0.75
+  },
+  "laughter": {
+   "file": "laughter.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng cười vui vẻ của nhóm bạn.",
+   "aliases": [
+    "laugh"
+   ],
+   "source": {
+    "title": "Crowd laugh.wav",
+    "author": "deleted_user_2104797",
+    "license": "CC0",
+    "page": "https://freesound.org/people/deleted_user_2104797/sounds/324894/",
+    "freesound_id": 324894
+   },
+   "duration": 1.84
+  },
+  "evil_laugh": {
+   "file": "evil_laugh.ogg",
+   "kind": "oneshot",
+   "use": "Tràng cười ác độc / ma quái.",
+   "aliases": [
+    "creepy_laugh"
+   ],
+   "source": {
+    "title": "Evil Laugh.wav",
+    "author": "timtube",
+    "license": "CC0",
+    "page": "https://freesound.org/people/timtube/sounds/169826/",
+    "freesound_id": 169826
+   },
+   "duration": 8.0
+  },
+  "ghost": {
+   "file": "ghost.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng ma rên rỉ, thực thể siêu nhiên xuất hiện.",
+   "aliases": [
+    "ghost_moan",
+    "spirit"
+   ],
+   "source": {
+    "title": "groan.mp3",
+    "author": "Kneeling",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Kneeling/sounds/473525/",
+    "freesound_id": 473525
+   },
+   "duration": 4.29
+  },
+  "monster_growl": {
+   "file": "monster_growl.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng gầm gừ trầm đục của thứ gì đó trong bóng tối.",
+   "aliases": [
+    "growl",
+    "beast"
+   ],
+   "source": {
+    "title": "DRAGON_ROAR.wav",
+    "author": "JoelAudio",
+    "license": "CC0",
+    "page": "https://freesound.org/people/JoelAudio/sounds/85568/",
+    "freesound_id": 85568
+   },
+   "duration": 1.61
+  },
+  "thud": {
+   "file": "thud.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng đập/va chạm đục: ai đó ngã xuống, vật nặng rơi xuống sàn.",
+   "aliases": [
+    "hit",
+    "body_fall",
+    "fall",
+    "drop",
+    "object_fall",
+    "heavy_drop"
+   ],
+   "source": {
+    "title": "BODY FALL - V HVY - DIRT",
+    "author": "leonelmail",
+    "license": "CC0",
+    "page": "https://freesound.org/people/leonelmail/sounds/504626/",
+    "freesound_id": 504626
+   },
+   "duration": 1.0
+  },
+  "metal_clank": {
+   "file": "metal_clank.ogg",
+   "kind": "oneshot",
+   "use": "Vật kim loại rơi / va đập kim loại.",
+   "aliases": [
+    "clank",
+    "metal"
+   ],
+   "source": {
+    "title": "ANI Big Pipe Hit",
+    "author": "ani_music",
+    "license": "CC0",
+    "page": "https://freesound.org/people/ani_music/sounds/244983/",
+    "freesound_id": 244983
+   },
+   "duration": 0.6
+  },
+  "chop": {
+   "file": "chop.ogg",
+   "kind": "oneshot",
+   "use": "Dao chặt trên thớt (bếp, quán ăn).",
+   "aliases": [
+    "knife_chop",
+    "cleaver"
+   ],
+   "source": {
+    "title": "snijden_winterpeen.wav",
+    "author": "dutchlady",
+    "license": "CC0",
+    "page": "https://freesound.org/people/dutchlady/sounds/360794/",
+    "freesound_id": 360794
+   },
+   "duration": 4.0
+  },
+  "sizzle": {
+   "file": "sizzle.ogg",
+   "kind": "ambience",
+   "use": "Chiên xào trong chảo dầu (quán ăn, bếp).",
+   "aliases": [
+    "frying",
+    "cooking"
+   ],
+   "source": {
+    "title": "sizzling_frypan.WAV",
+    "author": "beatmad",
+    "license": "CC0",
+    "page": "https://freesound.org/people/beatmad/sounds/201936/",
+    "freesound_id": 201936
+   },
+   "duration": 10.14
+  },
+  "gunshot": {
+   "file": "gunshot.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng súng nổ.",
+   "aliases": [
+    "gun",
+    "shot"
+   ],
+   "source": {
+    "title": "Gunshot 4.wav",
+    "author": "ShawnyBoy",
+    "license": "CC0",
+    "page": "https://freesound.org/people/ShawnyBoy/sounds/166191/",
+    "freesound_id": 166191
+   },
+   "duration": 1.39
+  },
+  "coins": {
+   "file": "coins.ogg",
+   "kind": "oneshot",
+   "use": "Đồng xu rơi / đếm tiền.",
+   "aliases": [
+    "money",
+    "coin"
+   ],
+   "source": {
+    "title": "Coin dropping.wav",
+    "author": "Jace",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Jace/sounds/17502/",
+    "freesound_id": 17502
+   },
+   "duration": 1.77
+  },
+  "page_turn": {
+   "file": "page_turn.ogg",
+   "kind": "oneshot",
+   "use": "Lật trang sổ / hồ sơ / nhật ký.",
+   "aliases": [
+    "paper",
+    "page"
+   ],
+   "source": {
+    "title": "Page Turn",
+    "author": "davidbain",
+    "license": "CC0",
+    "page": "https://freesound.org/people/davidbain/sounds/136778/",
+    "freesound_id": 136778
+   },
+   "duration": 1.56
+  },
+  "writing": {
+   "file": "writing.ogg",
+   "kind": "ambience",
+   "use": "Viết bút lên giấy (ghi chép lời khai, viết thư).",
+   "aliases": [
+    "pen",
+    "write"
+   ],
+   "source": {
+    "title": "Writing On Paper.wav",
+    "author": "rivernile7",
+    "license": "CC0",
+    "page": "https://freesound.org/people/rivernile7/sounds/234016/",
+    "freesound_id": 234016
+   },
+   "duration": 10.0
+  },
+  "gong": {
+   "file": "gong.ogg",
+   "kind": "oneshot",
+   "use": "Chuông/cồng chùa ngân dài — linh thiêng, điềm báo.",
+   "aliases": [
+    "temple_bell",
+    "bell"
+   ],
+   "source": {
+    "title": "BurmaBell.aif",
+    "author": "LozKaye",
+    "license": "CC0",
+    "page": "https://freesound.org/people/LozKaye/sounds/94024/",
+    "freesound_id": 94024
+   },
+   "duration": 5.42
+  },
+  "car_start": {
+   "file": "car_start.ogg",
+   "kind": "oneshot",
+   "use": "Nổ máy xe ô tô rồi chạy đi.",
+   "aliases": [
+    "car",
+    "engine"
+   ],
+   "source": {
+    "title": "Car_Start_Drive_1.wav",
+    "author": "Duesenbert",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Duesenbert/sounds/404430/",
+    "freesound_id": 404430
+   },
+   "duration": 12.0
+  },
+  "car_unlock": {
+   "file": "car_unlock.ogg",
+   "kind": "oneshot",
+   "use": "Bấm khoá mở cửa xe.",
+   "aliases": [],
+   "source": {
+    "title": "Car Lock",
+    "author": "hz37",
+    "license": "CC0",
+    "page": "https://freesound.org/people/hz37/sounds/396448/",
+    "freesound_id": 396448
+   },
+   "duration": 0.4
+  },
+  "motorbike": {
+   "file": "motorbike.ogg",
+   "kind": "oneshot",
+   "use": "Xe máy chạy ngang qua / nổ máy.",
+   "aliases": [
+    "motorcycle",
+    "moped",
+    "scooter"
+   ],
+   "source": {
+    "title": "Motorbike Passing By",
+    "author": "JPBILLINGSLEYJR",
+    "license": "CC0",
+    "page": "https://freesound.org/people/JPBILLINGSLEYJR/sounds/484486/",
+    "freesound_id": 484486
+   },
+   "duration": 9.61
+  },
+  "helicopter": {
+   "file": "helicopter.ogg",
+   "kind": "ambience",
+   "use": "Trực thăng bay trên đầu (truy lùng, cứu hộ).",
+   "aliases": [
+    "chopper"
+   ],
+   "source": {
+    "title": "Helicopter Flyby / Pass",
+    "author": "mil0001",
+    "license": "CC0",
+    "page": "https://freesound.org/people/mil0001/sounds/241190/",
+    "freesound_id": 241190
+   },
+   "duration": 20.0
+  },
+  "thunder": {
+   "file": "thunder.ogg",
+   "kind": "oneshot",
+   "use": "Sấm sét nổ — khoảnh khắc kinh hoàng, đêm giông.",
+   "aliases": [
+    "lightning",
+    "thunderclap"
+   ],
+   "source": {
+    "title": "th_loud.wav",
+    "author": "Pingel",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Pingel/sounds/2689/",
+    "freesound_id": 2689
+   },
+   "duration": 8.01
+  },
+  "rain": {
+   "file": "rain.ogg",
+   "kind": "ambience",
+   "use": "Mưa rơi ngoài cửa sổ / mái hiên.",
+   "aliases": [
+    "rainy",
+    "raining"
+   ],
+   "source": {
+    "title": "Light rain on street.wav",
+    "author": "BonnyOrbit",
+    "license": "CC0",
+    "page": "https://freesound.org/people/BonnyOrbit/sounds/380651/",
+    "freesound_id": 380651
+   },
+   "duration": 30.0
+  },
+  "rain_storm": {
+   "file": "rain_storm.ogg",
+   "kind": "ambience",
+   "use": "Mưa giông lớn kèm sấm xa.",
+   "aliases": [
+    "storm",
+    "thunderstorm",
+    "heavy_rain"
+   ],
+   "source": {
+    "title": "Thunderstorm with heavy rain2.wav",
+    "author": "Audeption",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Audeption/sounds/425173/",
+    "freesound_id": 425173
+   },
+   "duration": 30.0
+  },
+  "wind": {
+   "file": "wind.ogg",
+   "kind": "ambience",
+   "use": "Gió rít — đêm lạnh, nơi hoang vắng, sân thượng.",
+   "aliases": [
+    "howling_wind",
+    "windy"
+   ],
+   "source": {
+    "title": "wind-noise.wav",
+    "author": "jorge0000",
+    "license": "CC0",
+    "page": "https://freesound.org/people/jorge0000/sounds/361053/",
+    "freesound_id": 361053
+   },
+   "duration": 30.0
+  },
+  "night_insects": {
+   "file": "night_insects.ogg",
+   "kind": "ambience",
+   "use": "Đêm yên tĩnh có côn trùng kêu (ngoại ô, nông thôn, nghĩa địa).",
+   "aliases": [
+    "crickets",
+    "night",
+    "night_ambience"
+   ],
+   "source": {
+    "title": "Night Crickets Back Porch.aiff",
+    "author": "hdfreema",
+    "license": "CC0",
+    "page": "https://freesound.org/people/hdfreema/sounds/333221/",
+    "freesound_id": 333221
+   },
+   "duration": 30.0
+  },
+  "cicadas": {
+   "file": "cicadas.ogg",
+   "kind": "ambience",
+   "use": "Ve sầu kêu trưa hè nóng nực.",
+   "aliases": [
+    "cicada",
+    "summer"
+   ],
+   "source": {
+    "title": "Cicadas ",
+    "author": "dethrok",
+    "license": "CC0",
+    "page": "https://freesound.org/people/dethrok/sounds/272168/",
+    "freesound_id": 272168
+   },
+   "duration": 25.0
+  },
+  "birds_morning": {
+   "file": "birds_morning.ogg",
+   "kind": "ambience",
+   "use": "Chim hót buổi sáng yên bình.",
+   "aliases": [
+    "birds",
+    "morning"
+   ],
+   "source": {
+    "title": "Birds In Spring (Scotland)",
+    "author": "BurghRecords",
+    "license": "CC0",
+    "page": "https://freesound.org/people/BurghRecords/sounds/463903/",
+    "freesound_id": 463903
+   },
+   "duration": 30.0
+  },
+  "rooster": {
+   "file": "rooster.ogg",
+   "kind": "oneshot",
+   "use": "Gà gáy sáng ở làng quê.",
+   "aliases": [
+    "chicken_crow"
+   ],
+   "source": {
+    "title": "Rooster chicken calls_2.wav",
+    "author": "AGFX",
+    "license": "CC0",
+    "page": "https://freesound.org/people/AGFX/sounds/43382/",
+    "freesound_id": 43382
+   },
+   "duration": 2.73
+  },
+  "dog_bark": {
+   "file": "dog_bark.ogg",
+   "kind": "oneshot",
+   "use": "Chó sủa trong đêm / khi có người lạ.",
+   "aliases": [
+    "dog",
+    "barking"
+   ],
+   "source": {
+    "title": "LBS_FX DOG Small Alert Bark001.wav",
+    "author": "LittleBigSounds",
+    "license": "CC0",
+    "page": "https://freesound.org/people/LittleBigSounds/sounds/163459/",
+    "freesound_id": 163459
+   },
+   "duration": 0.79
+  },
+  "owl": {
+   "file": "owl.ogg",
+   "kind": "oneshot",
+   "use": "Cú kêu trong đêm — điềm gở.",
+   "aliases": [
+    "owl_hoot"
+   ],
+   "source": {
+    "title": "Owl Hoot",
+    "author": "Breviceps",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Breviceps/sounds/465697/",
+    "freesound_id": 465697
+   },
+   "duration": 4.39
+  },
+  "city_street": {
+   "file": "city_street.ogg",
+   "kind": "ambience",
+   "use": "Đường phố đô thị ban ngày, xe cộ và người qua lại.",
+   "aliases": [
+    "street",
+    "city"
+   ],
+   "source": {
+    "title": "citystreet3.wav",
+    "author": "moxobna",
+    "license": "CC0",
+    "page": "https://freesound.org/people/moxobna/sounds/36734/",
+    "freesound_id": 36734
+   },
+   "duration": 30.0
+  },
+  "traffic": {
+   "file": "traffic.ogg",
+   "kind": "ambience",
+   "use": "Dòng xe chạy liên tục trên đường lớn / cầu.",
+   "aliases": [
+    "highway",
+    "cars"
+   ],
+   "source": {
+    "title": "City ambience.wav",
+    "author": "chimerical",
+    "license": "CC0",
+    "page": "https://freesound.org/people/chimerical/sounds/106839/",
+    "freesound_id": 106839
+   },
+   "duration": 30.0
+  },
+  "crowd": {
+   "file": "crowd.ogg",
+   "kind": "ambience",
+   "use": "Đông người trong trung tâm thương mại, sảnh, nơi công cộng.",
+   "aliases": [
+    "crowd_day",
+    "crowd_night",
+    "mall",
+    "murmur"
+   ],
+   "source": {
+    "title": "Indoor adult murmur, small group.wav",
+    "author": "SpliceSound",
+    "license": "CC0",
+    "page": "https://freesound.org/people/SpliceSound/sounds/260121/",
+    "freesound_id": 260121
+   },
+   "duration": 26.48
+  },
+  "market": {
+   "file": "market.ogg",
+   "kind": "ambience",
+   "use": "Chợ đông đúc, người mua bán.",
+   "aliases": [
+    "bazaar"
+   ],
+   "source": {
+    "title": "Market Walk.mp3",
+    "author": "alchemical",
+    "license": "CC0",
+    "page": "https://freesound.org/people/alchemical/sounds/23244/",
+    "freesound_id": 23244
+   },
+   "duration": 30.0
+  },
+  "restaurant": {
+   "file": "restaurant.ogg",
+   "kind": "ambience",
+   "use": "Quán ăn / nhà hàng có tiếng bát đũa, trò chuyện.",
+   "aliases": [
+    "cafe",
+    "diner"
+   ],
+   "source": {
+    "title": "Small Crowd pre-concert talking party bar walla talking",
+    "author": "JohnsonBrandEditing",
+    "license": "CC0",
+    "page": "https://freesound.org/people/JohnsonBrandEditing/sounds/243373/",
+    "freesound_id": 243373
+   },
+   "duration": 30.0
+  },
+  "classroom": {
+   "file": "classroom.ogg",
+   "kind": "ambience",
+   "use": "Lớp học, học sinh rì rầm.",
+   "aliases": [
+    "class",
+    "school"
+   ],
+   "source": {
+    "title": "classroom_ambiance.wav",
+    "author": "joedeshon",
+    "license": "CC0",
+    "page": "https://freesound.org/people/joedeshon/sounds/258094/",
+    "freesound_id": 258094
+   },
+   "duration": 30.0
+  },
+  "cafeteria": {
+   "file": "cafeteria.ogg",
+   "kind": "ambience",
+   "use": "Căng tin trường / ký túc xá ồn ào giờ ăn.",
+   "aliases": [
+    "canteen"
+   ],
+   "source": {
+    "title": "Crowd at Cafeteria",
+    "author": "sonically_sound",
+    "license": "CC0",
+    "page": "https://freesound.org/people/sonically_sound/sounds/625112/",
+    "freesound_id": 625112
+   },
+   "duration": 30.0
+  },
+  "bus": {
+   "file": "bus.ogg",
+   "kind": "ambience",
+   "use": "Ngồi trên xe buýt đang chạy.",
+   "aliases": [
+    "bus_ride"
+   ],
+   "source": {
+    "title": "bus_interior_highway_2.WAV",
+    "author": "ivolipa",
+    "license": "CC0",
+    "page": "https://freesound.org/people/ivolipa/sounds/264440/",
+    "freesound_id": 264440
+   },
+   "duration": 30.0
+  },
+  "train": {
+   "file": "train.ogg",
+   "kind": "ambience",
+   "use": "Ngồi trên tàu hoả / tàu điện.",
+   "aliases": [
+    "train_ride",
+    "subway"
+   ],
+   "source": {
+    "title": "Interieur_train",
+    "author": "FloLogramm",
+    "license": "CC0",
+    "page": "https://freesound.org/people/FloLogramm/sounds/347425/",
+    "freesound_id": 347425
+   },
+   "duration": 30.0
+  },
+  "fan": {
+   "file": "fan.ogg",
+   "kind": "ambience",
+   "use": "Quạt máy chạy trong phòng trọ / ký túc xá đêm hè.",
+   "aliases": [
+    "ventilator"
+   ],
+   "source": {
+    "title": "Ceiling Fan (Indoor).wav",
+    "author": "liferecorded_archive",
+    "license": "CC0",
+    "page": "https://freesound.org/people/liferecorded_archive/sounds/345230/",
+    "freesound_id": 345230
+   },
+   "duration": 16.16
+  },
+  "water_tap": {
+   "file": "water_tap.ogg",
+   "kind": "ambience",
+   "use": "Nước chảy từ vòi (nhà vệ sinh, bồn rửa).",
+   "aliases": [
+    "faucet",
+    "sink",
+    "water"
+   ],
+   "source": {
+    "title": "Faucet",
+    "author": "FillSoko",
+    "license": "CC0",
+    "page": "https://freesound.org/people/FillSoko/sounds/257959/",
+    "freesound_id": 257959
+   },
+   "duration": 15.0
+  },
+  "shower": {
+   "file": "shower.ogg",
+   "kind": "ambience",
+   "use": "Vòi sen trong phòng tắm.",
+   "aliases": [
+    "bathroom"
+   ],
+   "source": {
+    "title": "shower.wav",
+    "author": "jrssandoval",
+    "license": "CC0",
+    "page": "https://freesound.org/people/jrssandoval/sounds/67162/",
+    "freesound_id": 67162
+   },
+   "duration": 19.29
+  },
+  "whoosh": {
+   "file": "whoosh.ogg",
+   "kind": "oneshot",
+   "use": "Chuyển cảnh nhanh, vật lao vụt qua.",
+   "aliases": [
+    "swoosh",
+    "transition"
+   ],
+   "source": {
+    "generated": true,
+    "license": "CC0 (tổng hợp bởi StoryToon)"
+   },
+   "duration": 1.2
+  },
+  "impact": {
+   "file": "impact.ogg",
+   "kind": "oneshot",
+   "use": "Cú \"đánh\" trầm nhấn mạnh khoảnh khắc kinh hoàng / tiết lộ sự thật.",
+   "aliases": [
+    "hit_boom",
+    "boom",
+    "sting",
+    "stinger"
+   ],
+   "source": {
+    "generated": true,
+    "license": "CC0 (tổng hợp bởi StoryToon)"
+   },
+   "duration": 3.0
+  },
+  "riser": {
+   "file": "riser.ogg",
+   "kind": "oneshot",
+   "use": "Âm dâng dần lên trước khi điều đáng sợ xảy ra.",
+   "aliases": [
+    "build_up",
+    "tension_rise"
+   ],
+   "source": {
+    "generated": true,
+    "license": "CC0 (tổng hợp bởi StoryToon)"
+   },
+   "duration": 5.0
+  },
+  "heartbeat": {
+   "file": "heartbeat.ogg",
+   "kind": "oneshot",
+   "use": "Nhịp tim đập dồn dập — sợ hãi tột độ, hồi hộp chờ đợi.",
+   "aliases": [
+    "heart",
+    "heart_beat"
+   ],
+   "source": {
+    "title": "Four Heartbeats HQ_BeatSmith.wav",
+    "author": "Lunardrive",
+    "license": "CC0",
+    "page": "https://freesound.org/people/Lunardrive/sounds/22416/",
+    "freesound_id": 22416
+   },
+   "duration": 3.52
+  },
+  "whisper": {
+   "file": "whisper.ogg",
+   "kind": "oneshot",
+   "use": "Tiếng thì thầm ma quái không rõ lời.",
+   "aliases": [
+    "whispers",
+    "whispering"
+   ],
+   "source": {
+    "title": "Ghostly Whispers",
+    "author": "dimbark1",
+    "license": "CC0",
+    "page": "https://freesound.org/people/dimbark1/sounds/316797/",
+    "freesound_id": 316797
+   },
+   "duration": 8.0
+  },
+  "glass_break": {
+   "file": "glass_break.ogg",
+   "kind": "oneshot",
+   "use": "Kính / cửa sổ / ly vỡ.",
+   "aliases": [
+    "glass",
+    "glass_shatter",
+    "window_break"
+   ],
+   "source": {
+    "title": "Glass Break",
+    "author": "unfa",
+    "license": "CC0",
+    "page": "https://freesound.org/people/unfa/sounds/221528/",
+    "freesound_id": 221528
+   },
+   "duration": 0.44
+  }
+ }
+}

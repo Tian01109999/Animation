@@ -6,17 +6,27 @@ finalize(sb, ...)      : đánh số lại shot, điền giọng, tạo stub cho
 """
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from ..schema import CharacterDef, CharacterInShot, LocationDef, Overlay, Shot, Storyboard
 from . import vocab
 from .ids import nfc, slugify
 
+log = logging.getLogger(__name__)
 _NARRATOR_ALIASES = {"", "narrator", "nguoi_ke", "nguoi_ke_chuyen", "dan_truyen", "voice_over", "vo"}
 _MOOD_ALIASES = {
-    "mystery": "tense", "suspense": "tense", "creepy": "horror", "scary": "horror", "fear": "horror",
-    "dark": "horror", "peaceful": "calm", "happy": "calm", "neutral": "calm", "sorrow": "sad",
-    "melancholy": "sad", "tension": "tense",
+    "suspense": "tense", "tension": "tense", "danger": "tense",
+    "creepy": "horror", "scary": "horror", "fear": "horror", "dark": "horror", "ghost": "horror",
+    "peaceful": "calm", "neutral": "calm", "daily": "calm",
+    "happy": "warm", "tender": "warm", "nostalgic": "warm", "family": "warm",
+    "sorrow": "sad", "melancholy": "sad", "grief": "sad",
+    "mysterious": "mystery", "eerie": "mystery",
+    "police": "investigation", "detective": "investigation", "interrogation": "investigation",
+    "chase": "action", "fight": "action", "escape": "action",
+    "reveal": "shock", "twist": "shock",
+    "hope": "hopeful", "ending": "hopeful", "relief": "hopeful",
+    "hacker": "tech", "technology": "tech", "cyber": "tech",
 }
 
 
@@ -154,6 +164,27 @@ def _clamp_slots(chars: list[CharacterInShot]) -> None:
         used.add(slot)
 
 
+def _clean_sfx(names: list[str]) -> list[str]:
+    """Đổi về tên chuẩn của thư viện âm thanh, bỏ tên không có, bỏ trùng (tối đa 3 âm / shot)."""
+    from ..audio import library
+
+    has_catalog = bool(library.sfx_guide())
+    out: list[str] = []
+    for raw in names:
+        if not raw or not raw.strip():
+            continue
+        name = slugify(raw, "sfx")
+        if has_catalog:
+            canon = library.known_sfx(name)
+            if canon is None:
+                log.info("Bỏ hiệu ứng không có trong thư viện: %s", raw)
+                continue
+            name = canon
+        if name not in out:
+            out.append(name)
+    return out[:3]
+
+
 def _clamp_mood(mood: str | None) -> str | None:
     if not mood:
         return None
@@ -276,7 +307,7 @@ def finalize(
             effects.append("cctv")
         shot.effects = list(dict.fromkeys(e for e in effects if e in vocab.EFFECTS))
 
-        shot.sfx = [slugify(s, "sfx") for s in shot.sfx if s.strip()]
+        shot.sfx = _clean_sfx(shot.sfx)
         shot.music_mood = _clamp_mood(shot.music_mood)
         lo, hi = vocab.MIN_DURATION_RANGE
         shot.min_duration = min(max(shot.min_duration, lo), hi)

@@ -2,34 +2,48 @@
 
 Mixer (`storytoon/audio/mixer.py`) chọn nhạc theo `Shot.music_mood` trong storyboard.
 
-## Đặt tên
-- Một file cho mỗi mood: `assets/music/<mood>.<đuôi>` — ví dụ `horror.mp3`, `tense.ogg`, `calm.wav`.
-- Hoặc một thư mục: `assets/music/<mood>/` chứa nhiều bài; hiện dùng bài đầu tiên theo thứ tự tên.
-- Đuôi hỗ trợ: `.wav .ogg .mp3 .flac .m4a .opus` (ffmpeg giải mã, tự chuyển 48 kHz stereo).
-- Mood chuẩn: `calm`, `sad`, `tense`, `horror`, `mystery`. Tên khác được quy đổi
-  (`scary/creepy/dark` → horror, `suspense/action` → tense, `happy/peaceful` → calm,
-  `mysterious/eerie` → mystery, ...); không quy đổi được thì dùng `mystery`.
-- `music_mood: "none"` (hoặc `silence`) trong một shot = tắt nhạc từ shot đó.
+## Mood và cách dùng
+Danh sách mood, mô tả "dùng khi nào" và từng bài nằm trong `catalog.json`. AI tách kịch bản đọc mô tả này
+để chọn mood theo cảm xúc câu chuyện:
 
-## File hiện có
-Các file `calm/sad/tense/horror/mystery.ogg` lúc đầu là **nhạc nền tạo bằng thuật toán** (drone tối,
-lặp liền mạch 32 giây) chỉ để bản demo có tiếng. Muốn thay: xoá file `.ogg` tương ứng và chép bài thật
-vào với cùng tên mood. File của bạn không bao giờ bị ghi đè; chỉ file thiếu mới được tạo lại.
+| mood | dùng khi |
+|---|---|
+| calm | đời thường yên bình, buổi sáng, sinh hoạt |
+| warm | tình thân, tình bạn, hồi tưởng kỷ niệm đẹp |
+| sad | mất mát, tang thương, hối hận, chia ly |
+| mystery | điều lạ xuất hiện, quan sát manh mối |
+| tense | nguy hiểm đến gần, rình rập, đếm ngược |
+| horror | ma quỷ, xác chết, cảnh rợn người |
+| investigation | cảnh sát lấy lời khai, suy luận, truy tìm thủ phạm |
+| action | rượt đuổi, chạy trốn, ẩu đả |
+| shock | phát hiện kinh hoàng, cú twist, sự thật hé lộ |
+| hopeful | giải thoát, công lý, kết thúc có hậu |
+| tech | hacker, máy chủ, dữ liệu, camera giám sát |
 
-## Lấy nhạc ở đâu (miễn phí bản quyền — kiểm tra điều khoản từng bài trước khi đăng YouTube)
-- YouTube Audio Library (studio.youtube.com → Thư viện âm thanh): lọc thể loại Cinematic / Ambient, tâm trạng Dark.
-- Pixabay Music (pixabay.com/music) — giấy phép Pixabay, không cần ghi nguồn.
-- Incompetech (Kevin MacLeod) — CC BY 4.0, phải ghi nguồn trong mô tả video.
-- Freesound.org — lọc giấy phép CC0.
+Mỗi mood có 3–5 bài trong `assets/music/<mood>/`. Khi một mood xuất hiện nhiều lần trong phim, mixer luân
+phiên các bài (bắt đầu từ bài khác nhau tuỳ tên phim) nên phim dài không lặp đi lặp lại một bài.
+Tên khác được quy đổi: `scary/creepy/ghost` → horror, `suspense/danger` → tense, `chase/fight` → action,
+`police/detective` → investigation, `reveal/twist` → shock, `happy/family` → warm, `ending/relief` → hopeful,
+`hacker/cyber` → tech.
+
+## Nguồn và giấy phép
+Toàn bộ 45 bài là **CC0 / Public Domain**: lấy từ Wikimedia Commons (Komiku, Rafael Archangel, Rafael Krux,
+Kevin MacLeod, John Bartmann) và bản lưu FreePD.com trên Internet Archive. Không bắt buộc ghi nguồn; `catalog.json` lưu tác giả, giấy phép
+và trang nguồn của từng bài. Dựng lại / bổ sung bằng:
+
+    runtime/venv/Scripts/python.exe -X utf8 tools/make_audio_library.py --only music
+
+Nghe thử toàn bộ: `logs/asset_review/audio_library.html`.
+
+## Thêm bài của bạn
+Chép file vào `assets/music/<mood>/` và thêm mục vào `tracks` của mood đó trong `catalog.json`
+(đuôi `.wav .ogg .mp3 .flac .m4a .opus`). Kiểm tra điều khoản bản quyền trước khi đăng video.
 
 ## Mức âm lượng
-Mixer tự chuẩn hoá nhạc về RMS khoảng −30 dBFS và hạ thêm 12 dB khi có lời thoại. Có thể chỉnh trong
-`config.yaml`:
+Mixer chuẩn hoá nhạc về RMS khoảng −30 dBFS và hạ thêm 12 dB khi có lời. Chỉnh trong `config.yaml`:
 ```yaml
 audio:
   music_rms_db: -30
   duck_db: -12
-  sfx_peak_db: -6
   crossfade_s: 1.5
 ```
-Nên dùng bài có đoạn đầu và cuối nhẹ nhàng; bài ngắn hơn cảnh sẽ được lặp lại, nối bằng crossfade 0.5 giây.

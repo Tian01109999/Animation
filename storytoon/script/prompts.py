@@ -7,6 +7,38 @@ from collections.abc import Sequence
 from ..schema import CharacterDef, LocationDef
 from . import vocab
 
+_MOOD_USE_DEFAULT = {
+    "calm": "đời thường yên bình", "warm": "ấm áp, tình thân, kỷ niệm", "sad": "buồn, mất mát",
+    "mystery": "bí ẩn, điều lạ", "tense": "căng thẳng, nguy hiểm đến gần", "horror": "kinh dị, ma quỷ",
+    "investigation": "điều tra, lấy lời khai", "action": "rượt đuổi, ẩu đả", "shock": "phát hiện kinh hoàng, twist",
+    "hopeful": "hy vọng, kết thúc có hậu", "tech": "công nghệ, hacker, máy chủ",
+}
+
+
+def _sound_section() -> str:
+    """Mục âm thanh của prompt, lấy từ thư viện nhạc/hiệu ứng (catalog) để AI chọn đúng ngữ cảnh."""
+    from ..audio import library
+
+    moods = library.music_moods()
+    mood_lines = "\n".join(f"  - {m}: {moods.get(m) or _MOOD_USE_DEFAULT.get(m, '')}" for m in vocab.MUSIC_MOODS)
+    guide = library.sfx_guide()
+    if guide:
+        sfx_lines = "\n".join(f"  - {k}: {v}" for k, v in guide.items())
+    else:
+        sfx_lines = ("  - door_creak, footsteps, wind, heartbeat, whisper, crowd_night, sizzle, metal_clank, "
+                     "glass_break, chop, gong")
+    return f"""\
+- music_mood: chọn theo cảm xúc của CÂU CHUYỆN tại shot đó, null để giữ nhạc trước. Chỉ đặt khi tâm trạng \
+thực sự đổi (thường mỗi 5-20 shot), không đổi qua lại liên tục.
+{mood_lines}
+- sfx: CHỈ dùng tên trong danh sách dưới (tên khác bị bỏ). Tối đa 2-3 âm/shot, chỉ khi hành động/không gian \
+đó thật sự có trong lời kể hoặc hình (gõ cửa → door_knock; cảnh sát tới → police_siren; trời mưa → rain). \
+Âm nền (mưa, phố, chợ, côn trùng đêm, phòng máy…) đặt lặp lại ở MỌI shot liên tiếp cùng không gian đó để \
+nghe liền mạch; bỏ đi khi đổi cảnh. Âm một lần (hét, sấm, còi, chuông) chỉ đặt ở đúng shot sự việc xảy ra. \
+Cú tiết lộ / phát hiện kinh hoàng: impact (có thể kèm riser ở shot ngay trước).
+{sfx_lines}"""
+
+
 SYSTEM_PROMPT = f"""\
 Bạn là đạo diễn phân cảnh (storyboard artist) cho kênh YouTube kể chuyện kinh dị / bí ẩn bằng hoạt hình 2D \
 kiểu "Real Lens / Sigma Lens": nền vẽ chi tiết tông trầm, nhân vật vector phẳng dạng cutout puppet, \
@@ -116,10 +148,7 @@ datetime, phone="09xx xxx 123", photo="character:<id nhân vật>" | "blank", va
 - Không dùng tên thương hiệu / ngân hàng / ứng dụng có thật.
 
 ## 5. Âm thanh
-- sfx: CHỈ dùng các tên có trong thư viện âm thanh: door_creak, footsteps, wind, heartbeat, whisper, \
-crowd_night, sizzle, metal_clank, glass_break, chop, gong (tên khác sẽ bị bỏ qua — không có tiếng hét, \
-sấm). Chỉ thêm khi có ý nghĩa.
-- music_mood: {" | ".join(vocab.MUSIC_MOODS)} hoặc null để giữ nhạc trước. Chỉ đặt khi tâm trạng đổi.
+{_sound_section()}
 
 ## 6. Định nghĩa nhân vật & địa điểm
 - id: ascii snake_case, KHÔNG dấu ("Chú Tư" → "chu_tu", "Chợ đêm" → "cho_dem"). Người kể ngôi thứ nhất \

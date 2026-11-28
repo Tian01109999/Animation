@@ -1,0 +1,421 @@
+{
+ "schema": 1,
+ "note": "Nhạc CC0/Public Domain từ Wikimedia Commons; xem nguồn từng bài.",
+ "moods": {
+  "calm": {
+   "use": "Đời thường yên bình: buổi sáng, sinh hoạt hằng ngày, mở đầu nhẹ nhàng, trò chuyện bình thường.",
+   "tracks": [
+    {
+     "file": "calm/rafael_archangel_07_calm_down.ogg",
+     "title": "Rafael Archangel - 07 - Calm Down",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_07_-_Calm_Down.ogg",
+     "duration": 175.1
+    },
+    {
+     "file": "calm/rafael_archangel_17_sleep_time.ogg",
+     "title": "Rafael Archangel - 17 - Sleep Time",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_17_-_Sleep_Time.ogg",
+     "duration": 103.4
+    },
+    {
+     "file": "calm/john_bartmann_cold_morning_master.ogg",
+     "title": "John Bartmann - cold-morning-master",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_cold-morning-master.ogg",
+     "duration": 180.0
+    },
+    {
+     "file": "calm/komiku_57_quiet_saturday.ogg",
+     "title": "Komiku - 57 - Quiet Saturday",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_57_-_Quiet_Saturday.ogg",
+     "duration": 113.1
+    }
+   ]
+  },
+  "warm": {
+   "use": "Ấm áp, tình thân, tình bạn, hồi tưởng kỷ niệm đẹp, khoảnh khắc dịu dàng.",
+   "tracks": [
+    {
+     "file": "warm/john_bartmann_19_tender_moment.ogg",
+     "title": "John Bartmann - 19 - Tender Moment",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_19_-_Tender_Moment.ogg",
+     "duration": 180.0
+    },
+    {
+     "file": "warm/komiku_01_childhood_scene.ogg",
+     "title": "Komiku - 01 - Childhood scene",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_01_-_Childhood_scene.ogg",
+     "duration": 135.4
+    },
+    {
+     "file": "warm/john_bartmann_05_home_at_last.ogg",
+     "title": "John Bartmann - 05 - Home At Last",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_05_-_Home_At_Last.ogg",
+     "duration": 119.6
+    }
+   ]
+  },
+  "sad": {
+   "use": "Buồn, mất mát, tang thương, hối hận, chia ly, nhân vật khóc.",
+   "tracks": [
+    {
+     "file": "sad/komiku_32_sad_walk_with_sad_piano.ogg",
+     "title": "Komiku - 32 - Sad walk with sad piano",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_32_-_Sad_walk_with_sad_piano.ogg",
+     "duration": 180.0
+    },
+    {
+     "file": "sad/rafael_archangel_13_melancholy_tune.ogg",
+     "title": "Rafael Archangel - 13 - Melancholy Tune",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_13_-_Melancholy_Tune.ogg",
+     "duration": 168.4
+    },
+    {
+     "file": "sad/rafael_archangel_03_forgotten.ogg",
+     "title": "Rafael Archangel - 03 - Forgotten",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_03_-_Forgotten.ogg",
+     "duration": 82.0
+    },
+    {
+     "file": "sad/rafael_archangel_02_gray.ogg",
+     "title": "Rafael Archangel - 02 - Gray",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_02_-_Gray.ogg",
+     "duration": 150.0
+    }
+   ]
+  },
+  "mystery": {
+   "use": "Bí ẩn, điều lạ bắt đầu xuất hiện, thắc mắc, quan sát manh mối, chưa nguy hiểm rõ.",
+   "tracks": [
+    {
+     "file": "mystery/rafael_archangel_06_thinking.ogg",
+     "title": "Rafael Archangel - 06 - Thinking",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_06_-_Thinking.ogg",
+     "duration": 149.8
+    },
+    {
+     "file": "mystery/komiku_16_ambiant_wait.ogg",
+     "title": "Komiku - 16 - Ambiant Wait",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_16_-_Ambiant_Wait.ogg",
+     "duration": 101.2
+    },
+    {
+     "file": "mystery/komiku_08_ambiant_truth.ogg",
+     "title": "Komiku - 08 - Ambiant Truth",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_08_-_Ambiant_Truth.ogg",
+     "duration": 160.9
+    },
+    {
+     "file": "mystery/john_bartmann_enigmatic_needle_master.ogg",
+     "title": "John Bartmann - enigmatic-needle-master",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_enigmatic-needle-master.ogg",
+     "duration": 180.0
+    }
+   ]
+  },
+  "tense": {
+   "use": "Căng thẳng, hồi hộp, nguy hiểm đang đến gần, rình rập, lén lút, đếm ngược.",
+   "tracks": [
+    {
+     "file": "tense/komiku_12_tension.ogg",
+     "title": "Komiku - 12 - Tension",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_12_-_Tension.ogg",
+     "duration": 180.0
+    },
+    {
+     "file": "tense/komiku_03_ambiant_anxiety.ogg",
+     "title": "Komiku - 03 - Ambiant Anxiety",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_03_-_Ambiant_Anxiety.ogg",
+     "duration": 55.8
+    },
+    {
+     "file": "tense/rafael_archangel_01_rising_danger.ogg",
+     "title": "Rafael Archangel - 01 - Rising Danger",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_01_-_Rising_Danger.ogg",
+     "duration": 96.8
+    },
+    {
+     "file": "tense/john_bartmann_broken_suspense_master.ogg",
+     "title": "John Bartmann - broken-suspense-master",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_broken-suspense-master.ogg",
+     "duration": 180.0
+    }
+   ]
+  },
+  "horror": {
+   "use": "Kinh dị: ma quỷ, xác chết, cảnh rợn người, thứ không giải thích được trong bóng tối.",
+   "tracks": [
+    {
+     "file": "horror/rafael_krux_horror_suspense.ogg",
+     "title": "Rafael Krux - Horror Suspense",
+     "author": "Rafael Krux",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Krux_-_Horror_Suspense.ogg",
+     "duration": 133.9
+    },
+    {
+     "file": "horror/kevin_macleod_horroriffic.ogg",
+     "title": "Kevin MacLeod - Horroriffic",
+     "author": "Kevin MacLeod",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Kevin_MacLeod_-_Horroriffic.ogg",
+     "duration": 161.6
+    },
+    {
+     "file": "horror/komiku_09_ambiant_evil.ogg",
+     "title": "Komiku - 09 - Ambiant Evil",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_09_-_Ambiant_Evil.ogg",
+     "duration": 83.2
+    },
+    {
+     "file": "horror/rafael_archangel_08_ghosts.ogg",
+     "title": "Rafael Archangel - 08 - Ghosts",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_08_-_Ghosts.ogg",
+     "duration": 139.4
+    },
+    {
+     "file": "horror/john_bartmann_dark_basement_master.ogg",
+     "title": "John Bartmann - dark-basement-master",
+     "author": "John Bartmann",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:John_Bartmann_-_dark-basement-master.ogg",
+     "duration": 180.0
+    },
+    {
+     "file": "horror/freepd_horror_footsteps_in_the_attic.ogg",
+     "title": "FreePD - Footsteps in the Attic",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#horror/Footsteps%20in%20the%20Attic.mp3",
+     "duration": 53.5
+    },
+    {
+     "file": "horror/freepd_misc_dark_hallway.ogg",
+     "title": "FreePD - Dark Hallway",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#misc/Dark%20Hallway.mp3",
+     "duration": 44.9
+    },
+    {
+     "file": "horror/freepd_horror_creepy_hallow.ogg",
+     "title": "FreePD - Creepy Hallow",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#horror/Creepy%20Hallow.mp3",
+     "duration": 120.1
+    }
+   ]
+  },
+  "investigation": {
+   "use": "Điều tra: cảnh sát lấy lời khai, phân tích manh mối, suy luận, truy tìm thủ phạm.",
+   "tracks": [
+    {
+     "file": "investigation/komiku_06_action_investigation.ogg",
+     "title": "Komiku - 06 - Action Investigation",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_06_-_Action_Investigation.ogg",
+     "duration": 119.7
+    },
+    {
+     "file": "investigation/komiku_02_action_time_attack_research.ogg",
+     "title": "Komiku - 02 - Action Time Attack Research",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_02_-_Action_Time_Attack_Research.ogg",
+     "duration": 125.0
+    },
+    {
+     "file": "investigation/komiku_15_ambiant_inconvenient_truth.ogg",
+     "title": "Komiku - 15 - Ambiant Inconvenient Truth",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_15_-_Ambiant_Inconvenient_Truth.ogg",
+     "duration": 165.5
+    },
+    {
+     "file": "investigation/rafael_archangel_11_deep_dive.ogg",
+     "title": "Rafael Archangel - 11 - Deep Dive",
+     "author": "Rafael Archangel",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Rafael_Archangel_-_11_-_Deep_Dive.ogg",
+     "duration": 126.4
+    }
+   ]
+  },
+  "action": {
+   "use": "Hành động: rượt đuổi, chạy trốn, ẩu đả, giằng co, chạy đua với thời gian.",
+   "tracks": [
+    {
+     "file": "action/komiku_04_action_chasing.ogg",
+     "title": "Komiku - 04 - Action Chasing",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_04_-_Action_Chasing.ogg",
+     "duration": 81.0
+    },
+    {
+     "file": "action/komiku_19_action_decisive_move.ogg",
+     "title": "Komiku - 19 - Action Decisive Move",
+     "author": "Komiku",
+     "license": "CC0",
+     "source": "https://commons.wikimedia.org/wiki/File:Komiku_-_19_-_Action_Decisive_Move.ogg",
+     "duration": 156.6
+    },
+    {
+     "file": "action/freepd_scoring_city_run.ogg",
+     "title": "FreePD - City Run",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#scoring/City%20Run.mp3",
+     "duration": 33.4
+    },
+    {
+     "file": "action/freepd_scoring_action_strike.ogg",
+     "title": "FreePD - Action Strike",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#scoring/Action%20Strike.mp3",
+     "duration": 131.5
+    }
+   ]
+  },
+  "shock": {
+   "use": "Sốc: phát hiện kinh hoàng, cú twist, sự thật được hé lộ, khoảnh khắc chết lặng.",
+   "tracks": [
+    {
+     "file": "shock/freepd_horror_hidden_truth.ogg",
+     "title": "FreePD - Hidden Truth",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#horror/Hidden%20Truth.mp3",
+     "duration": 92.4
+    },
+    {
+     "file": "shock/freepd_horror_mind_chaos.ogg",
+     "title": "FreePD - Mind Chaos",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#horror/Mind%20Chaos.mp3",
+     "duration": 174.5
+    },
+    {
+     "file": "shock/freepd_misc_painful_disorientation.ogg",
+     "title": "FreePD - Painful Disorientation",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#misc/Painful%20Disorientation.mp3",
+     "duration": 82.7
+    }
+   ]
+  },
+  "hopeful": {
+   "use": "Hy vọng, giải thoát, công lý được thực thi, kết thúc có hậu, nhân vật vượt qua nỗi sợ.",
+   "tracks": [
+    {
+     "file": "hopeful/freepd_misc_journey_of_hope.ogg",
+     "title": "FreePD - Journey of Hope",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#misc/Journey%20of%20Hope.mp3",
+     "duration": 180.0
+    },
+    {
+     "file": "hopeful/freepd_misc_finally_see_the_light.ogg",
+     "title": "FreePD - Finally See The Light",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#misc/Finally%20See%20The%20Light.mp3",
+     "duration": 180.0
+    },
+    {
+     "file": "hopeful/freepd_scoring_after_the_end.ogg",
+     "title": "FreePD - After the End",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#scoring/After%20the%20End.mp3",
+     "duration": 93.0
+    }
+   ]
+  },
+  "tech": {
+   "use": "Công nghệ: hacker, máy chủ, dữ liệu, màn hình, camera giám sát, AI, phố đêm hiện đại.",
+   "tracks": [
+    {
+     "file": "tech/freepd_misc_circuit.ogg",
+     "title": "FreePD - Circuit",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#misc/Circuit.mp3",
+     "duration": 178.4
+    },
+    {
+     "file": "tech/freepd_electronic_chronos.ogg",
+     "title": "FreePD - Chronos",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#electronic/Chronos.mp3",
+     "duration": 126.5
+    },
+    {
+     "file": "tech/freepd_electronic_3_am_west_end.ogg",
+     "title": "FreePD - 3 am West End",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#electronic/3%20am%20West%20End.mp3",
+     "duration": 180.0
+    },
+    {
+     "file": "tech/freepd_electronic_space_ambience.ogg",
+     "title": "FreePD - Space Ambience",
+     "author": "FreePD.com",
+     "license": "Public domain (CC0) — FreePD.com",
+     "source": "https://archive.org/details/freepd#electronic/Space%20Ambience.mp3",
+     "duration": 180.0
+    }
+   ]
+  }
+ }
+}

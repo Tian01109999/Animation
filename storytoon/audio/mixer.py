@@ -5,11 +5,15 @@
 - Giọng: mỗi Line đặt tại (offset shot + Line.start). Cần chạy timing.fill_timing trước.
 - Nhạc nền: theo Shot.music_mood (None = giữ nhạc trước; "none"/"silence" = tắt nhạc), lặp lại cho đủ,
   crossfade khi đổi mood, ducking −12 dB khi có lời.
-- SFX: phát ở đầu shot.
-- File nhạc/sfx tìm trong assets/music/<mood>.* và assets/sfx/<tên>.*; thiếu thì tự tạo bản thủ tục.
+- Nhạc: mỗi mood có nhiều bài (assets/music/catalog.json); các đoạn cùng mood luân phiên bài khác nhau.
+- SFX một lần (oneshot): phát ở đầu shot.
+- SFX âm nền (ambience: mưa, phố, côn trùng đêm…): lặp liền mạch suốt chuỗi shot liên tiếp có cùng âm,
+  vào/ra mềm, hạ nhỏ khi có lời.
+- File nhạc/sfx tìm qua catalog, rồi assets/music/<mood>.* và assets/sfx/<tên>.*; thiếu thì tạo bản thủ tục.
 
 Tham số tuỳ chọn trong config.yaml (không bắt buộc):
-    audio: {music_rms_db: -30, duck_db: -12, sfx_peak_db: -6, crossfade_s: 1.5}
+    audio: {music_rms_db: -30, duck_db: -12, sfx_peak_db: -6, crossfade_s: 1.5,
+            ambience_rms_db: -34, ambience_duck_db: -6}
 """
 from __future__ import annotations
 
@@ -21,19 +25,31 @@ import numpy as np
 from ..config import get
 from ..paths import MUSIC, SFX
 from ..schema import Storyboard
-from . import audio_io, procedural
+from . import audio_io, library, procedural
 from .timing import film_duration, shot_offsets
 
 log = logging.getLogger(__name__)
 SR = audio_io.SR
 
 MOOD_ALIASES = {
-    "scary": "horror", "fear": "horror", "dark": "horror", "creepy": "horror",
-    "suspense": "tense", "danger": "tense", "action": "tense",
-    "peaceful": "calm", "happy": "calm", "neutral": "calm", "warm": "calm",
-    "melancholy": "sad", "grief": "sad",
-    "mysterious": "mystery", "eerie": "mystery",
+    "scary": "horror", "fear": "horror", "dark": "horror", "creepy": "horror", "ghost": "horror",
+    "suspense": "tense", "danger": "tense", "tension": "tense",
+    "chase": "action", "fight": "action", "escape": "action",
+    "peaceful": "calm", "neutral": "calm", "daily": "calm",
+    "happy": "warm", "tender": "warm", "nostalgic": "warm", "family": "warm",
+    "melancholy": "sad", "grief": "sad", "sorrow": "sad",
+    "mysterious": "mystery", "eerie": "mystery", "curious": "mystery",
+    "police": "investigation", "detective": "investigation", "interrogation": "investigation",
+    "reveal": "shock", "twist": "shock", "shocked": "shock",
+    "hope": "hopeful", "ending": "hopeful", "resolution": "hopeful", "relief": "hopeful",
+    "hacker": "tech", "technology": "tech", "cyber": "tech",
 }
+# mood chưa có bài trong thư viện → mượn bài thật của mood gần nhất
+_LIBRARY_FALLBACK = {"shock": "horror", "hopeful": "warm", "tech": "mystery", "action": "tense",
+                     "investigation": "mystery", "warm": "calm"}
+# mood mới → mood thủ tục gần nhất khi bản cũ chưa có thư viện nhạc
+_PROCEDURAL_FALLBACK = {"warm": "calm", "hopeful": "calm", "investigation": "mystery", "tech": "mystery",
+                        "action": "tense", "shock": "horror"}
 SILENT_MOODS = {"none", "silence", "off", "stop"}
 SFX_ALIASES = {
     "crowd_night": "crowd", "crowd_day": "crowd", "market": "crowd", "murmur": "crowd",
@@ -50,28 +66,41 @@ def _db(x: float) -> float:
 
 
 # ---------------------------------------------------------------- tìm / tạo tài sản
-def resolve_music(mood: str) -> Path | None:
+def resolve_music(mood: str, nth: int = 0, seed: str = "") -> Path | None:
+    """Bài nhạc cho mood; nth = lần thứ mấy mood này xuất hiện trong phim (để luân phiên bài)."""
     mood = mood.strip().lower()
+    canon = MOOD_ALIASES.get(mood, mood)
+    p = library.music_track(canon, nth, seed) or library.music_track(_LIBRARY_FALLBACK.get(canon, ""), nth, seed)
+    if p:
+        return p
     p = procedural.find_audio(MUSIC, mood)
     if p:
         return p
-    canon = MOOD_ALIASES.get(mood, mood)
+    canon = _PROCEDURAL_FALLBACK.get(canon, canon)
     if canon not in procedural.MUSIC_MOODS:
         log.warning("Không có nhạc cho mood '%s' — dùng 'mystery'.", mood)
         canon = "mystery"
     return procedural.find_audio(MUSIC, canon) or procedural.make_music(canon, MUSIC)
 
 
-def resolve_sfx(name: str) -> Path | None:
+def resolve_sound(name: str) -> library.SoundInfo | None:
+    """Hiệu ứng theo tên (catalog → file cùng tên → tên đồng nghĩa cũ → âm thủ tục)."""
+    info = library.sfx(name)
+    if info:
+        return info
     key = name.strip().lower().replace(" ", "_")
-    p = procedural.find_audio(SFX, key)
-    if p:
-        return p
     canon = SFX_ALIASES.get(key, key)
-    p = procedural.find_audio(SFX, canon) or procedural.make_sfx(canon, SFX)
+    p = (procedural.find_audio(SFX, key) or procedural.find_audio(SFX, canon)
+         or procedural.make_sfx(canon, SFX))
     if p is None:
         log.warning("Không tìm thấy hiệu ứng '%s' trong assets/sfx — bỏ qua.", name)
-    return p
+        return None
+    return library.SoundInfo(canon, p)
+
+
+def resolve_sfx(name: str) -> Path | None:
+    info = resolve_sound(name)
+    return info.path if info else None
 
 
 # ---------------------------------------------------------------- xử lý tín hiệu
@@ -169,6 +198,28 @@ def music_segments(sb: Storyboard) -> list[tuple[str, float, float]]:
     return [s for s in segs if s[2] - s[1] > 0.05]
 
 
+def ambience_runs(sb: Storyboard, offs: list[float] | None = None) -> list[tuple[str, float, float]]:
+    """[(tên, t_bắt_đầu, t_kết_thúc)] cho âm nền: các shot liên tiếp cùng âm gộp thành 1 đoạn liền."""
+    offs = offs if offs is not None else shot_offsets(sb)
+    ends = [o + (s.duration if s.duration is not None else s.min_duration) for o, s in zip(offs, sb.shots)]
+    runs: list[tuple[str, float, float]] = []
+    open_runs: dict[str, float] = {}
+    for i, shot in enumerate(sb.shots):
+        names = set()
+        for name in shot.sfx:
+            info = library.sfx(name)
+            if info and info.kind == "ambience":
+                names.add(info.key)
+        for key in list(open_runs):
+            if key not in names:
+                runs.append((key, open_runs.pop(key), ends[i - 1]))
+        for key in names:
+            open_runs.setdefault(key, offs[i])
+    for key, start in open_runs.items():
+        runs.append((key, start, ends[-1] if ends else 0.0))
+    return sorted(runs, key=lambda r: (r[1], r[0]))
+
+
 def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *,
                      music: bool = True, sfx: bool = True) -> Path:
     project_dir = Path(project_dir)
@@ -206,8 +257,11 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
         bed = np.zeros((n, 2), dtype=np.float32)
         xf = int(xf_s * SR)
         cache: dict[Path, np.ndarray] = {}
+        seen: dict[str, int] = {}
         for i, (mood, t0, t1) in enumerate(music_segments(storyboard)):
-            path = resolve_music(mood)
+            nth = seen.get(mood, 0)
+            seen[mood] = nth + 1
+            path = resolve_music(mood, nth, storyboard.title)
             if path is None:
                 continue
             if path not in cache:
@@ -228,13 +282,37 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
 
     # hiệu ứng
     if sfx:
+        amb_rms = float(get("audio.ambience_rms_db", -34))
+        amb_duck = float(get("audio.ambience_duck_db", -6))
+        # âm nền: lặp liền mạch trên cả chuỗi shot, vào/ra mềm, hạ nhỏ khi có lời
+        runs = ambience_runs(storyboard, offs)
+        if runs:
+            bed = np.zeros((n, 2), dtype=np.float32)
+            amb_cache: dict[str, np.ndarray] = {}
+            for key, t0, t1 in runs:
+                info = library.sfx(key)
+                if info is None:
+                    continue
+                if key not in amb_cache:
+                    amb_cache[key] = _rms_normalize(audio_io.decode(info.path, channels=2), amb_rms)
+                a, b = int(t0 * SR), min(n, int(t1 * SR))
+                if b - a < SR // 10:
+                    continue
+                seg = loop_to(amb_cache[key], b - a, xfade=SR)
+                fin, fout = min(len(seg), int(0.6 * SR)), min(len(seg), int(1.0 * SR))
+                seg[:fin] *= np.linspace(0, 1, fin, dtype=np.float32)[:, None]
+                seg[len(seg) - fout:] *= np.linspace(1, 0, fout, dtype=np.float32)[:, None]
+                bed[a:b] += seg
+            bed *= duck_gain(voice, amb_duck)[:, None]
+            mix += bed
+            del bed, amb_cache
         fx_cache: dict[str, np.ndarray | None] = {}
         for off, shot in zip(offs, storyboard.shots):
             for name in shot.sfx:
                 if name not in fx_cache:   # mỗi hiệu ứng chỉ tìm/giải mã 1 lần (phim dài lặp lại nhiều)
-                    path = resolve_sfx(name)
-                    fx_cache[name] = (None if path is None else
-                                      _peak_normalize(audio_io.decode(path, channels=2), sfx_peak))
+                    info = resolve_sound(name)
+                    fx_cache[name] = (None if info is None or info.kind == "ambience" else
+                                      _peak_normalize(audio_io.decode(info.path, channels=2), sfx_peak))
                 fx = fx_cache[name]
                 if fx is None:
                     continue
