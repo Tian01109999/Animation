@@ -113,8 +113,15 @@ def breakdown(
     chunk_chars: int | None = None,
     generate_text: Callable[[Any], str] | None = None,
     provider_name: str = "ChatGPT",
+    done_parts: Sequence[dict] = (),
+    on_part: Callable[[int, int, dict], None] | None = None,
 ) -> Storyboard:
-    """Convert a script through ChatGPT, with an injectable text generator for tests."""
+    """Convert a script through ChatGPT, with an injectable text generator for tests.
+
+    `done_parts`: storyboard dumps of chunks already finished in an earlier run (in order);
+    those chunks are not sent again. `on_part(i, n, dump)` is called right after chunk i
+    (0-based) finishes so the caller can save it and resume later.
+    """
     if not script_text or not script_text.strip():
         raise BreakdownError("Kịch bản trống.")
     model = model or ""
@@ -123,8 +130,19 @@ def breakdown(
     n = len(chunks)
     acc = Storyboard(title="")
     voices = _voices()
+    resumed = 0
+    for dump in list(done_parts)[:n]:
+        try:
+            merge_part(acc, Storyboard.model_validate(dump))
+        except (ValueError, ValidationError):
+            break                      # phần lưu hỏng → tách lại từ đây
+        resumed += 1
+    if resumed and on_progress:
+        on_progress(resumed, n, f"Đã có sẵn {resumed}/{n} đoạn từ lần chạy trước — tiếp tục từ đoạn {resumed + 1}.")
 
     for i, chunk in enumerate(chunks):
+        if i < resumed:
+            continue
         if on_progress:
             on_progress(i + 1, n, f"Đang tách đoạn {i + 1}/{n} bằng {provider_name} ({len(chunk)} ký tự)…")
         # finalize tạm để biết nametag/chương/luật đã có (không ảnh hưởng acc)
@@ -149,10 +167,29 @@ def breakdown(
         )
         part = breakdown_chunk(client, prompt, model=model, sleep=sleep, generate_text=generate_text,
                                provider_name=provider_name)
+        dump = part.model_dump(mode="json")
         merge_part(acc, part)
+        if on_part:
+            on_part(i, n, dump)
 
     if on_progress:
         on_progress(n, n, "Đang hậu xử lý storyboard…")
     sb = finalize(acc, voices=voices)
     # kiểm tra lần cuối theo schema
     return Storyboard.model_validate(sb.model_dump())
+
+
+def preview_parts(done_parts: Sequence[dict]) -> Storyboard | None:
+    """Storyboard tạm ghép từ các đoạn đã tách xong (chỉ để hiển thị, không lưu)."""
+    acc = Storyboard(title="")
+    for dump in done_parts:
+        try:
+            merge_part(acc, Storyboard.model_validate(dump))
+        except (ValueError, ValidationError):
+            break
+    if not acc.shots:
+        return None
+    try:
+        return finalize(acc, voices=_voices())
+    except Exception:  # noqa: BLE001 - bản xem trước, lỗi hậu xử lý thì hiện bản thô
+        return acc

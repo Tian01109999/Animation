@@ -101,6 +101,28 @@ def _stats(sb: Storyboard | None) -> str:
     return "**" + sb.title + "** — " + storyboard_stats(sb).summary()
 
 
+def _partial_view(proj: str | None, *, running: bool = False) -> tuple[str, list[list[Any]]] | None:
+    """(thông báo, các dòng shot) của phần tách dở khớp kịch bản hiện tại, hoặc None."""
+    if not proj:
+        return None
+    try:
+        part = pipeline.breakdown_partial(pipeline.project(proj))
+    except Exception:  # noqa: BLE001 - chỉ là bản xem trước
+        log.exception("Không đọc được phần tách dở")
+        return None
+    if not part:
+        return None
+    sb, done, total = part
+    if running:
+        msg = f"**Đang tách kịch bản: xong {done}/{total} đoạn** — bảng dưới là kết quả tạm thời."
+    elif done < total:
+        msg = (f"**Tách dở: đã xong {done}/{total} đoạn** (bảng dưới là kết quả tạm). "
+               f"Bấm **Tách kịch bản** để làm tiếp từ đoạn {done + 1}, không phải làm lại từ đầu.")
+    else:
+        msg = f"**Đã tách đủ {total}/{total} đoạn nhưng chưa lưu xong.** Bấm **Tách kịch bản** để hoàn tất."
+    return msg, shot_rows(sb)
+
+
 def _projects_update(value: str | None = None) -> Any:
     ps = pipeline.list_projects()
     return gr.update(choices=ps, value=value if value in ps else (ps[0] if ps else None))
@@ -220,6 +242,9 @@ def build_script_tab(proj: gr.Dropdown, app: gr.Blocks) -> tuple[gr.Dataframe, g
             return "", "_Chưa chọn project._", []
         pr = pipeline.project(p)
         text = pr.script.read_text(encoding="utf-8") if pr.script.exists() else ""
+        partial = _partial_view(p)          # tách dở của kịch bản hiện tại → ưu tiên hiện phần đã có
+        if partial:
+            return text, partial[0], partial[1]
         sb = _sb_or_none(p)
         return text, _stats(sb), shot_rows(sb)
 
@@ -244,12 +269,35 @@ def build_script_tab(proj: gr.Dropdown, app: gr.Blocks) -> tuple[gr.Dataframe, g
         def work(say: Callable[[str], None]) -> Any:
             return pipeline.run(p, ["breakdown"], progress=_progress_to(say))
 
+        ckpt = pipeline.project(p).dir / "breakdown_parts.json"
+
+        def ckpt_stamp() -> float:
+            try:
+                return ckpt.stat().st_mtime_ns
+            except OSError:
+                return 0
+
+        seen = 0.0                           # chạy lại sau lỗi → hiện ngay các đoạn đã có
+        finished = False
+        logtext = ""
         for logtext, res in _stream(work):
-            if res is None:
-                yield logtext, gr.update(), gr.update()
-            else:
+            if res is not None:
+                finished = True
                 sb = _sb_or_none(p)
                 yield logtext, _stats(sb), shot_rows(sb)
+                continue
+            stamp = ckpt_stamp()
+            if stamp and stamp != seen:      # vừa xong thêm 1 đoạn → hiện ngay các shot đã có
+                seen = stamp
+                partial = _partial_view(p, running=True)
+                if partial:
+                    yield logtext, partial[0], partial[1]
+                    continue
+            yield logtext, gr.update(), gr.update()
+        if not finished:                     # lỗi giữa chừng → giữ các đoạn đã xong, hướng dẫn làm tiếp
+            partial = _partial_view(p)
+            if partial:
+                yield logtext, partial[0], partial[1]
 
     gr.on([proj.change, app.load], load, inputs=proj, outputs=[script, stats, table])
     btn_new.click(create, inputs=new_name, outputs=[proj, logbox])

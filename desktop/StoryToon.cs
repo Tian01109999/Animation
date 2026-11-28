@@ -18,7 +18,7 @@ using Microsoft.Web.WebView2.WinForms;
 [assembly: System.Reflection.AssemblyTitle("StoryToon Desktop")]
 [assembly: System.Reflection.AssemblyProduct("StoryToon")]
 [assembly: System.Reflection.AssemblyDescription("StoryToon - ứng dụng dựng phim hoạt hình 2D")]
-[assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
+[assembly: System.Reflection.AssemblyVersion("1.1.1.0")]
 
 static class Program {
     [STAThread] static void Main(string[] args) {
@@ -46,7 +46,7 @@ sealed class StudioWindow : Form {
     string notifiedVersion = "";
     public StudioWindow(string root, string smoke) {
         this.root = root; this.smoke = smoke;
-        Text = "StoryToon v1.0.0 · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
+        Text = "StoryToon v1.1.1 · Xưởng phim hoạt hình"; Width = 1360; Height = 900; MinimumSize = new Size(980, 680);
         StartPosition = FormStartPosition.CenterScreen; BackColor = Color.FromArgb(20, 25, 34);
         try { Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath); } catch { }
         var bar = new Panel { Dock = DockStyle.Top, Height = 58, BackColor = Color.FromArgb(24, 31, 43) };
@@ -55,7 +55,7 @@ sealed class StudioWindow : Form {
         var data = new Button { Text = "Thư mục dữ liệu", Dock = DockStyle.Right, Width = 145, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
         data.FlatAppearance.BorderSize = 0; data.Click += delegate { Process.Start(new ProcessStartInfo("explorer.exe", Quote(root)) { UseShellExecute = true }); };
         bar.Controls.Add(brand); bar.Controls.Add(status); bar.Controls.Add(data);
-        var updates = new Button { Text = "Cập nhật assets", Dock = DockStyle.Right, Width = 150, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
+        var updates = new Button { Text = "Cập nhật", Dock = DockStyle.Right, Width = 120, FlatStyle = FlatStyle.Flat, ForeColor = Color.White };
         updates.FlatAppearance.BorderSize = 0;
         updates.Click += delegate { if (view != null && ready) view.CoreWebView2.Navigate(address + "/updates"); };
         bar.Controls.Add(updates);
@@ -135,8 +135,11 @@ sealed class StudioWindow : Form {
             string version = Convert.ToString(result["version"]);
             if (shuttingDown || !Convert.ToBoolean(result["available"]) || version == notifiedVersion) return;
             notifiedVersion = version;
-            if (MessageBox.Show(this, "Có kho assets mới " + version + ". Mở trang tải gói assets? Đóng app trước khi giải nén gói vào thư mục chứa EXE.", "Cập nhật assets", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-                OpenExternal(Convert.ToString(result["url"]));
+            string notes = result.ContainsKey("notes") ? Convert.ToString(result["notes"]) : "";
+            if (notes.Length > 1200) notes = notes.Substring(0, 1200) + "…";
+            string text = "Có bản cập nhật StoryToon " + version + "." + (notes.Length > 0 ? "\n\nNội dung thay đổi:\n" + notes : "") + "\n\nMở trang cập nhật ngay?";
+            if (MessageBox.Show(this, text, "Cập nhật StoryToon", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes && view != null && ready)
+                view.CoreWebView2.Navigate(address + "/updates");
         } catch { /* Updates must never prevent opening the studio. */ }
     }
     async Task<string> BackendStatus() {

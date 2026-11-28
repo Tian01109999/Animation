@@ -60,13 +60,19 @@ BLUSH = "#ec7f86"
 
 HAIR_STYLES = ("spiky", "short_side_part", "buzz", "bald", "curly_short", "afro_curly", "long_straight",
                "long_ponytail", "bob_bangs", "long_over_face", "bun", "grey_short", "cap_hidden", "none_entity",
-               "slick_side_part", "bowl_cut")
+               "slick_side_part", "bowl_cut",
+               # batch 4
+               "quiff_undercut", "low_ponytail_bangs")
 OUTFITS = ("polo_uniform", "hoodie", "utility_jacket", "tee", "tank", "shirt_button", "school_uniform_f",
            "school_uniform_m", "office_blouse", "floral_blouse", "ao_ba_ba", "ao_dai", "red_traditional_dress",
            "hi_vis_vest", "police_uniform", "security_uniform", "nurse_scrubs", "monk_robe", "ritual_robe",
            "pajamas", "dress", "long_sheet_shirt", "silhouette",
            # batch 2
-           "khaki_uniform", "blazer_tie", "butcher_apron", "zip_jacket", "dot_blouse")
+           "khaki_uniform", "blazer_tie", "butcher_apron", "zip_jacket", "dot_blouse",
+           # batch 3
+           "rain_jacket", "blazer_skirt", "suspender_skirt", "trench_coat", "cardigan",
+           # batch 4
+           "denim_shirt", "print_shirt", "hoodie_jacket", "denim_vest_skirt", "vendor_apron", "work_uniform")
 EYE_STATES = ("open", "half", "closed", "wide", "shock", "teary", "happy", "droop", "big", "wince")
 BROW_STATES = ("neutral", "angry", "sad", "evil", "surprised", "worried_asym", "smirk", "low")
 MOUTH_VISEMES = tuple("ABCDEFGHX")
@@ -96,6 +102,24 @@ EXTRA_EXPRESSIONS: dict[str, dict[str, Any]] = {
     "pained": {"eyes": "wince", "brows": "sad", "mouth": "clench", "fx": ["sweat"]},
     "shout_angry": {"eyes": "open", "brows": "angry", "mouth": "shout", "fx": ["vein", "flush"]},
     "wailing": {"eyes": "wince", "brows": "sad", "mouth": "shout", "fx": ["tears"]},
+}
+# Lô 3 (chỉ nhân vật archetype "batch": 3): khẩu hình kinh dị + biểu cảm mới. Không thêm vào nhân vật cũ để giữ
+# nguyên từng byte ảnh bộ phận (slot mouth tính bbox chung mọi trạng thái).
+BATCH3_MOUTHS = ("wide_grin", "slit_smile")
+BATCH3_EXPRESSIONS: dict[str, dict[str, Any]] = {
+    "wide_grin": {"eyes": "shock", "brows": "neutral", "mouth": "wide_grin", "fx": ["shade"]},
+    "slit_smile": {"eyes": "half", "brows": "evil", "mouth": "slit_smile", "fx": ["shade"]},
+    "cringe": {"eyes": "wince", "brows": "worried_asym", "mouth": "wavy", "fx": ["dashes", "sweat"]},
+}
+# Lô 4 (chỉ nhân vật archetype "batch": 4): mắt cười híp, dấu gân giận lớn, lớp mặt bầm/trầy (overlay FX).
+# Trạng thái/slot mới chỉ sinh cho nhân vật lô 4 để giữ nguyên ảnh bộ phận của nhân vật cũ.
+BATCH4_EYES = ("laugh_squint",)
+BATCH4_FX_SLOTS = ("fx_vein_big", "fx_bruise")
+BATCH4_EXPRESSIONS: dict[str, dict[str, Any]] = {
+    "laugh": {"eyes": "laugh_squint", "brows": "surprised", "mouth": "laugh", "fx": ["flush"]},
+    "angry_vein": {"eyes": "half", "brows": "angry", "mouth": "clench", "fx": ["vein_big", "flush"]},
+    "hurt": {"eyes": "wince", "brows": "sad", "mouth": "clench", "fx": ["bruise", "sweat"]},
+    "determined": {"eyes": "open", "brows": "angry", "mouth": "flat", "fx": []},
 }
 
 
@@ -252,7 +276,7 @@ def normalize(p: CharParams) -> CharParams:
         acc.append("glasses_black_rect")
     if q.scar and "scar" not in acc:
         acc.append("scar")
-    if q.facial_hair not in ("none", "stubble", "mustache", "white_goatee", "goatee"):
+    if q.facial_hair not in ("none", "stubble", "mustache", "white_goatee", "goatee", "walrus"):
         q.facial_hair = "none"
     if q.wrinkles is None:
         q.wrinkles = q.age == "old"
@@ -378,6 +402,52 @@ def outfit_spec(p: CharParams) -> Spec:
         s = Spec(g("blouse", "top", d="#6d4a8c"), "round", None, "long",
                  lower="sarong" if "skirt" in c else "pants", lower_col=g("skirt", "pants", d="#3a2440"),
                  shoe="sandals", shoe_col=g("sandals", d="#5a4a44"))
+    # ---- batch 3
+    elif o == "rain_jacket":
+        jc = g("jacket", d="#f2c230")
+        s = Spec(jc, "hood", None, "long", cuff=mul(jc, 0.86), lower_col=g("pants", d="#1f1f24"), shoe="sneakers",
+                 shoe_col=g("shoes", d="#efede8"), tunic=0.045)
+    elif o == "blazer_skirt":
+        bz = g("blazer", "jacket", d="#24304f")
+        s = Spec(g("shirt", d="#f4f4f1"), "shirt", None, "long", sleeve_col=bz, cuff=mul(bz, 0.86), lower="skirt",
+                 lower_col=g("skirt", d="#7b7e86"), hem=0.0, shoe="shoes", shoe_col=g("shoes", d="#6a4228"),
+                 sock=c.get("socks"), tunic=0.03)
+    elif o == "suspender_skirt":
+        s = Spec(g("blouse", "shirt", d="#f4f4f1"), "peter_pan", None, "short", lower="skirt",
+                 lower_col=g("skirt", d="#c0262e"), hem=-0.01, shoe="shoes", shoe_col=g("shoes", d="#2a2226"),
+                 sock=c.get("socks"))
+    elif o == "trench_coat":
+        tc = g("coat", d="#c8b08a")
+        s = Spec(tc, "v", None, "long", sleeve_col=tc, cuff=mul(tc, 0.84), lower="coat", lower_col=tc,
+                 shoe="flats", shoe_col=g("shoes", d="#c3262e"), tunic=0.03)
+    elif o == "cardigan":
+        cg = g("cardigan", d="#6a4a86")
+        s = Spec(g("top", d="#e6d8bc"), "round", None, "long", sleeve_col=cg, cuff=mul(cg, 0.84), lower="skirt",
+                 lower_col=g("skirt", d="#3a3540"), hem=0.08, shoe="flats", shoe_col=g("shoes", d="#4a3a34"),
+                 sock=c.get("socks"), tunic=0.045)
+    # ---- batch 4
+    elif o == "denim_shirt":     # sơ mi jean mở, xắn tay, áo thun trong
+        dn = g("denim", "shirt", d="#4a6f9e")
+        s = Spec(g("tee", d="#8a8d92"), "crew", None, "short", sleeve_col=dn, cuff=lit(dn, 0.28),
+                 lower_col=g("pants", d="#1f2026"), shoe="sneakers", shoe_col=g("shoes", d="#8d9096"))
+    elif o == "print_shirt":     # sơ mi cổ bẻ cộc tay in hoạ tiết (dứa)
+        s = Spec(g("shirt", d="#2f6fb8"), "v", None, "short", lower="shorts" if "shorts" in c else "pants",
+                 lower_col=g("shorts", "pants", d="#b8a47a"), shoe="flipflops" if "flipflops" in c else shoe_kind,
+                 shoe_col=g("flipflops", d=shoe_col))
+    elif o == "hoodie_jacket":   # áo khoác tối mở ngoài hoodie
+        hc = g("hoodie", d="#3f8a4a")
+        jc = g("jacket", d="#1d1e23")
+        s = Spec(hc, "hood", None, "long", sleeve_col=jc, cuff=hc, lower_col=g("pants", d="#26272d"),
+                 shoe="sneakers", shoe_col=g("shoes", d="#2c2d33"), tunic=0.015)
+    elif o == "denim_vest_skirt":   # gi-lê jean ngoài áo thun + váy dài tới mắt cá
+        s = Spec(g("tee", "shirt", d="#f1efe8"), "crew", None, "short", lower="sarong",
+                 lower_col=g("skirt", d="#7a2636"), shoe="flats", shoe_col=g("shoes", d="#5a3e30"))
+    elif o == "vendor_apron":    # áo bà ba cộc tay + tạp dề hoa văn
+        s = Spec(g("blouse", "shirt", d="#f2c84a"), "round", None, "short", lower_col=g("pants", d="#2a2a30"),
+                 shoe="sandals", shoe_col=g("sandals", d="#6a4a3a"))
+    elif o == "work_uniform":    # áo đồng phục lao động dài tay, 2 túi ngực
+        s = Spec(g("shirt", d="#9cc3e0"), "shirt", None, "long", lower_col=g("pants", d="#7a7d84"),
+                 shoe=shoe_kind, shoe_col=g("shoes", d=shoe_col))
     else:
         s = Spec(g("shirt", d="#4d6070"))
     # quần đùi cho áo khoác / hoodie / sơ mi (batch 2: chỉ khi archetype khai báo màu "shorts")
@@ -569,6 +639,10 @@ def draw_ears(c: skia.Canvas, g: Geo, back: bool = False) -> None:
                  (ex + s * 0.09 * g.rx, ey + 0.13 * g.ry)], mul(skin, 0.7), g.rx * 0.03, 0.8)
         if not back:
             acc = g.p.accessories
+            if "stud_earring" in acc and s == 1:   # lô 3: khuyên tai tròn bạc một bên
+                sx_, sy_ = ex + s * 0.07 * g.rx, ey + 0.17 * g.ry
+                c.drawPath(circle(sx_, sy_, g.rx * 0.045), paint("#c9ccd1"))
+                c.drawPath(circle(sx_ - g.rx * 0.012, sy_ - g.rx * 0.012, g.rx * 0.015), paint("#ffffff", 0.9))
             if "earrings_drop_blue" in acc or "gold_earrings" in acc:
                 gold = "gold_earrings" in acc
                 cc = "#e3b23c" if gold else "#4f8fd0"
@@ -668,6 +742,13 @@ def draw_face(c: skia.Canvas, g: Geo) -> None:
              g.rx * 0.018, 0.7)
     if "mole" in p.accessories:
         c.drawPath(circle(*g.P(fu + 0.52, 0.56), g.rx * 0.035), paint("#3a2622", 0.9))
+    if "slit_scar" in p.accessories:   # lô 3: sẹo khâu kéo dài từ khoé miệng lên má (không máu)
+        sc = mix(skin, "#9a3a44", 0.55)
+        for s in (-1, 1):
+            pts = g.pts([(fu + s * 0.2, 0.62), (fu + s * 0.42, 0.58), (fu + s * 0.66, 0.46), (fu + s * 0.86, 0.3)])
+            seam(c, pts, mix(skin, "#c06a70", 0.4), g.rx * 0.06, 0.7)
+            seam(c, pts, sc, g.rx * 0.024, 0.95)
+            _stitches(c, g, s, 0.3, 0.84, mul(sc, 0.7), 0.62)
     c.restore()
     if p.facial_hair in ("white_goatee", "goatee"):
         gc = "#ecebe6" if p.facial_hair == "white_goatee" else hc
@@ -681,6 +762,106 @@ def draw_face(c: skia.Canvas, g: Geo) -> None:
         mus = smooth(g.pts([(fu - 0.34, 0.57), (fu - 0.1, 0.48), (fu, 0.5), (fu + 0.1, 0.48), (fu + 0.34, 0.57),
                             (fu + 0.22, 0.6), (fu, 0.55), (fu - 0.22, 0.6)]), tension=0.4)
         c.drawPath(mus, paint(hc))
+    elif p.facial_hair == "walrus":   # lô 4: ria mép to rậm rủ hai bên (ông bảo vệ già)
+        mc = p.colors.get("mustache") or (hc if luma(hc) > 0.5 else "#ecebe6")
+        mus = smooth(g.pts([(fu - 0.58, 0.7), (fu - 0.5, 0.5), (fu - 0.22, 0.42), (fu, 0.45), (fu + 0.22, 0.42),
+                            (fu + 0.5, 0.5), (fu + 0.58, 0.7), (fu + 0.42, 0.66), (fu + 0.2, 0.6), (fu, 0.6),
+                            (fu - 0.2, 0.6), (fu - 0.42, 0.66)]), tension=0.4)
+        flat(c, mus, mc, d=0.05 * g.rx, rim=0.25, hl=0.1, bottom=0.1)
+        for s in (-1, 1):
+            for k in range(3):
+                u0 = fu + s * (0.12 + k * 0.13)
+                seam(c, g.pts([(u0, 0.47 + k * 0.02), (u0 + s * 0.06, 0.56 + k * 0.03)]), mul(mc, 0.78), g.rx * 0.018,
+                     0.7, curve=False)
+    if "bruises" in p.accessories:   # lô 4: mặt bầm dập tĩnh (biến thể bị thương)
+        _draw_bruises(c, g)
+
+
+def _draw_bruises(c: skia.Canvas, g: Geo) -> None:
+    """Mắt thâm (vòng tím quanh mắt trái màn hình, không che con ngươi), vết bầm má, vết trầy trán, băng cá nhân."""
+    p = g.p
+    skin = p.skin
+    fu = g.fu
+    c.save()
+    c.clipPath(face_path(g), doAntiAlias=True)
+    ex, ey = g.ex["l"], g.ey
+    ring = diff(oval(ex, ey + g.ery * 0.15, g.erx * 2.5, g.ery * 2.0), oval(ex, ey, g.erx * 1.25, g.ery * 1.2))
+    c.drawPath(ring, skia.Paint(AntiAlias=True, Color=color(mix(skin, "#5a3a78", 0.72), 0.75),
+                                MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, g.rx * 0.03)))
+    bx, by = g.P(fu + 0.6, 0.5)
+    c.drawPath(oval(bx, by, g.rx * 0.17, g.ry * 0.09),
+               skia.Paint(AntiAlias=True, Color=color(mix(skin, "#7a4a86", 0.5), 0.7),
+                          MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, g.rx * 0.035)))
+    c.drawPath(oval(bx + g.rx * 0.03, by + g.ry * 0.02, g.rx * 0.08, g.ry * 0.04),
+               skia.Paint(AntiAlias=True, Color=color(mix(skin, "#b0a040", 0.35), 0.6),
+                          MaskFilter=skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, g.rx * 0.02)))
+    for k in range(3):   # vết trầy má trái màn hình
+        x0, y0 = g.P(fu - 0.78 + k * 0.06, 0.4 + k * 0.07)
+        c.drawPath(poly([(x0, y0), (x0 + g.rx * 0.2, y0 - g.ry * 0.06)], close=False), pen("#c0484a", g.rx * 0.022, 0.8))
+    c.restore()
+    # băng cá nhân chéo ở cằm trái màn hình
+    cxb, cyb = g.P(fu - 0.36, 0.84)
+    c.save()
+    c.rotate(22, cxb, cyb)
+    band = rrect(cxb - g.rx * 0.24, cyb - g.ry * 0.055, cxb + g.rx * 0.24, cyb + g.ry * 0.055, g.ry * 0.05)
+    c.drawPath(band, paint("#f0c9a0"))
+    c.drawPath(band, pen("#c9a07a", g.rx * 0.012, 0.8))
+    c.drawPath(rrect(cxb - g.rx * 0.08, cyb - g.ry * 0.04, cxb + g.rx * 0.08, cyb + g.ry * 0.04, g.ry * 0.02),
+               paint("#f7e2cc"))
+    for dx in (-0.16, -0.12, 0.12, 0.16):
+        c.drawPath(circle(cxb + g.rx * dx, cyb, g.rx * 0.008), paint("#b8906a", 0.8))
+    c.restore()
+
+
+_SLIT_CURVE = ((0.0, 0.64), (0.2, 0.62), (0.42, 0.58), (0.66, 0.46), (0.86, 0.3), (0.98, 0.2))
+
+
+def _slit_v(a: float) -> float:
+    """Đường sẹo/miệng rạch: v theo khoảng cách ngang a = |u - fu| (nội suy tuyến tính)."""
+    pts = _SLIT_CURVE
+    a = max(pts[0][0], min(pts[-1][0], a))
+    for (a0, v0), (a1, v1) in zip(pts, pts[1:]):
+        if a <= a1:
+            return v0 + (v1 - v0) * (a - a0) / (a1 - a0)
+    return pts[-1][1]
+
+
+def _stitches(c: skia.Canvas, g: Geo, s: int, a0: float, a1: float, col: str, alpha: float = 1.0,
+              step: float = 0.12, ln: float = 0.075) -> None:
+    """Mũi khâu vuông góc dọc đường rạch phía s (−1 trái / +1 phải màn hình), từ a0 tới a1."""
+    a = a0
+    while a <= a1 + 1e-6:
+        x, y = g.P(g.fu + s * a, _slit_v(a))
+        x2, y2 = g.P(g.fu + s * (a + 0.02), _slit_v(a + 0.02))
+        tx, ty = x2 - x, y2 - y
+        n = math.hypot(tx, ty) or 1.0
+        nx, ny = -ty / n, tx / n
+        L = g.rx * ln
+        c.drawPath(poly([(x - nx * L, y - ny * L), (x + nx * L, y + ny * L)], close=False), pen(col, g.rx * 0.022, alpha))
+        a += step
+
+
+def draw_mask(c: skia.Canvas, g: Geo) -> None:
+    """Khẩu trang y tế (lô 3): phủ mũi→cằm, nếp gấp ngang, quai đeo tai. Vẽ ĐÈ lên slot miệng nên khẩu hình
+    không bao giờ lộ ra ngoài khẩu trang."""
+    p = g.p
+    mc = p.colors.get("mask", "#eef1f2")
+    fp = face_path(g)
+    region = smooth(g.pts([(-1.4, 0.3), (-0.62, 0.22), (g.fu, 0.17), (0.62, 0.22), (1.4, 0.3), (1.4, 1.6), (-1.4, 1.6)]),
+                    tension=0.35)
+    m = inter(fp, region)
+    for s in (-1, 1):   # quai đeo tai (sau khẩu trang)
+        loop = smooth(g.pts([(s * 0.94, 0.3), (s * 1.12, 0.02), (s * 1.17, 0.34), (s * 0.88, 0.8)]), close=False)
+        c.drawPath(loop, pen(mul(mc, 0.85), g.rx * 0.03))
+    flat(c, m, mc, d=0.12 * g.rx, rim=0.25, hl=0.12, bottom=0.15)
+    c.save()
+    c.clipPath(m, doAntiAlias=True)
+    for v in (0.47, 0.64, 0.81):
+        seam(c, g.pts([(-1.05, v + 0.03), (-0.4, v - 0.01), (g.fu, v - 0.015), (0.5, v - 0.01), (1.05, v + 0.03)]),
+             mul(mc, 0.78), g.rx * 0.025, 0.8)
+    seam(c, g.pts([(-0.95, 0.31), (-0.5, 0.25), (g.fu, 0.21), (0.5, 0.25), (0.95, 0.31)]), "#ffffff", g.rx * 0.04, 0.7)
+    c.restore()
+    c.drawPath(m, pen(mul(mc, 0.72), g.rx * 0.018, 0.7))
 
 
 def draw_neck(c: skia.Canvas, g: Geo) -> None:
@@ -740,6 +921,15 @@ def draw_eyes(c: skia.Canvas, g: Geo, state: str) -> None:
         if state == "happy":
             seam(c, [(ex - rx * 1.5, ey + ry * 0.35), (ex, ey - ry * 0.55), (ex + rx * 1.5, ey + ry * 0.35)], LINE_INK,
                  lw * 1.1)
+            continue
+        if state == "laugh_squint":   # lô 4: cười híp mắt ^ ^ đậm + nếp chân chim + giọt nước mắt vui
+            outer = -inner
+            seam(c, [(ex - rx * 1.6, ey + ry * 0.5), (ex - rx * 0.6, ey - ry * 0.6), (ex, ey - ry * 0.75),
+                     (ex + rx * 0.6, ey - ry * 0.6), (ex + rx * 1.6, ey + ry * 0.5)], EYE_INK, lw * 1.45)
+            for k in (-1, 1):
+                seam(c, [(ex + outer * rx * 1.85, ey + ry * (0.1 + 0.45 * k)),
+                         (ex + outer * rx * 2.5, ey + ry * (0.05 + 0.85 * k))], LINE_INK, lw * 0.6, 0.8, curve=False)
+            c.drawPath(_drop(ex + outer * rx * 1.7, ey + ry * 1.25, ry * 1.1), paint(TEAR, 0.9))
             continue
         if state in ("wide", "shock"):
             k = 1.0 if state == "wide" else 1.25
@@ -968,6 +1158,49 @@ def draw_mouth(c: skia.Canvas, g: Geo, shape: str) -> None:
         for s in (-1, 1):
             seam(c, [(mx + s * mw * 1.2, my - ry * 0.12), (mx + s * mw * 1.04, my - ry * 0.06)], line_col, lw * 0.8,
                  curve=False)
+    elif shape == "wide_grin":   # lô 3: nụ cười toác mang tai, 2 hàng răng, mũi khâu ở khoé (kinh dị)
+        fu = g.fu
+        o = smooth(g.pts([(fu - 0.86, 0.44), (fu - 0.45, 0.58), (fu, 0.62), (fu + 0.45, 0.57), (fu + 0.86, 0.42),
+                          (fu + 0.62, 0.68), (fu + 0.3, 0.83), (fu, 0.87), (fu - 0.3, 0.83), (fu - 0.62, 0.69)]),
+                   tension=0.42)
+        c.drawPath(o, paint(MOUTH_IN))
+        th = ry * 0.075
+        top_t = diff(o, offset(o, 0, th))
+        bot_t = diff(o, offset(o, 0, -th * 0.85))
+        c.drawPath(top_t, paint(TEETH))
+        c.drawPath(bot_t, paint(TEETH, 0.95))
+        c.save()
+        c.clipPath(o, doAntiAlias=True)
+        b = o.getBounds()
+        n = 11
+        for i in range(1, n):
+            x = b.left() + b.width() * i / n
+            c.drawPath(poly([(x, b.top()), (x, b.bottom())], close=False), pen("#b9ad9e", lw * 0.45))
+        c.drawPath(oval(*g.P(fu, 0.78), mw * 0.9, ry * 0.05), paint(TONGUE, 0.55))
+        c.restore()
+        c.drawPath(o, pen(LINE_INK, lw * 0.7))
+        for s in (-1, 1):   # vết rạch khâu nối khoé miệng lên má
+            pts = g.pts([(fu + s * 0.84, 0.43), (fu + s * 0.93, 0.32), (fu + s * 0.98, 0.2)])
+            seam(c, pts, "#8a2a32", lw * 1.1, 0.95)
+            _stitches(c, g, s, 0.7, 0.96, "#3a1418", 0.95, step=0.09, ln=0.07)
+    elif shape == "slit_smile":   # lô 3: miệng rạch kéo dài lên tận má, có mũi khâu, hé răng giữa
+        fu = g.fu
+        for s in (-1, 1):
+            pts = [g.P(fu + s * a, _slit_v(a)) for a in (0.0, 0.2, 0.42, 0.66, 0.86, 0.96)]
+            seam(c, pts, "#c25a62", lw * 2.4, 0.45)
+            seam(c, pts, "#6e1a22", lw * 1.15, 0.95)
+            _stitches(c, g, s, 0.3, 0.9, "#3a1418", 0.95)
+        o = smooth(g.pts([(fu - 0.28, 0.615), (fu, 0.6), (fu + 0.28, 0.615), (fu + 0.14, 0.7), (fu, 0.715),
+                          (fu - 0.14, 0.7)]), tension=0.45)
+        c.drawPath(o, paint(MOUTH_IN))
+        c.save()
+        c.clipPath(o, doAntiAlias=True)
+        c.drawPath(diff(o, offset(o, 0, ry * 0.045)), paint(TEETH))
+        b = o.getBounds()
+        for i in range(1, 6):
+            x = b.left() + b.width() * i / 6
+            c.drawPath(poly([(x, b.top()), (x, b.bottom())], close=False), pen("#b9ad9e", lw * 0.4))
+        c.restore()
     elif shape == "B":
         fill_open(opening(0.72, 0.09), teeth_top=1.0, tongue=False)
         c.drawPath(poly([(mx - mw * 0.7, my + 1), (mx + mw * 0.7, my + 1)], close=False), pen("#c9c0b2", 1.2))
@@ -1034,6 +1267,21 @@ def draw_fx(c: skia.Canvas, g: Geo, kind: str) -> None:
             p1 = (x + math.cos(a) * r, y + math.sin(a) * r)
             mid = ((p0[0] + p1[0]) / 2 + math.cos(a + 1.57) * r * 0.2, (p0[1] + p1[1]) / 2 + math.sin(a + 1.57) * r * 0.2)
             c.drawPath(smooth([p0, mid, p1], close=False), pen(VEIN, g.rx * 0.045))
+    elif kind == "vein_big":   # lô 4: dấu gân giận to kiểu manga (4 cung lồi), viền tối, góc trán
+        x, y = g.P(g.fu + 0.5, -0.66)
+        r = g.rx * 0.24
+        for ang in (45, 135, 225, 315):
+            a = math.radians(ang)
+            p0 = (x + math.cos(a - 0.62) * r * 0.32, y + math.sin(a - 0.62) * r * 0.32)
+            p1 = (x + math.cos(a + 0.62) * r * 0.32, y + math.sin(a + 0.62) * r * 0.32)
+            tip = (x + math.cos(a) * r, y + math.sin(a) * r)
+            arc_ = smooth([p0, (x + math.cos(a - 0.3) * r * 0.9, y + math.sin(a - 0.3) * r * 0.9), tip,
+                           (x + math.cos(a + 0.3) * r * 0.9, y + math.sin(a + 0.3) * r * 0.9), p1], close=False)
+            c.drawPath(arc_, pen("#6e0e10", g.rx * 0.085))
+            c.drawPath(arc_, pen(VEIN, g.rx * 0.05))
+    elif kind == "bruise":     # lô 4: lớp mặt bầm/trầy bật theo biểu cảm "hurt"
+        if "bruises" not in p.accessories:   # biến thể bị thương đã có vết bầm tĩnh
+            _draw_bruises(c, g)
     elif kind == "flush":
         for s in (-1, 1):
             cxb, cyb = g.P(g.fu + s * 0.55, 0.42)
@@ -1117,6 +1365,11 @@ def draw_hair_back(c: skia.Canvas, g: Geo) -> None:
         tail = smooth([g.P(-0.55, 0.55), g.P(-0.9, 0.7), (g.U(-1.02), sy + 0.02 * g.Hf), (g.U(-0.86), sy + 0.07 * g.Hf),
                        (g.U(-0.62), sy + 0.03 * g.Hf), g.P(-0.5, 0.95)], tension=0.45)
         hair_fill(c, tail, g, col=mul(g.p.hair_color, 0.9) if luma(g.p.hair_color) > 0.2 else g.p.hair_color)
+    if g.p.hair_style == "low_ponytail_bangs":   # lô 4: đuôi tóc thấp ló sau gáy bên trái màn hình (vẽ sau thân)
+        sy = g.shoulder_y
+        tail = smooth([g.P(-0.5, 0.5), g.P(-0.95, 0.68), (g.U(-1.15), sy + 0.03 * g.Hf), (g.U(-1.0), sy + 0.11 * g.Hf),
+                       (g.U(-0.68), sy + 0.06 * g.Hf), g.P(-0.45, 1.0)], tension=0.45)
+        hair_fill(c, tail, g, strokes=[[(-0.85, 0.95), (-1.0, 1.5)]])
     pth = hair_back_path(g)
     if pth is None:
         return
@@ -1193,6 +1446,29 @@ def draw_hair_front(c: skia.Canvas, g: Geo) -> None:
         c.drawPath(pth, paint(hc, 1))
         hair_fill(c, pth, g, arc=[(-0.55, -0.95), (-0.1, -1.08), (0.4, -1.0)],
                   strokes=[[(0.5, -0.62), (0.05, -0.5), (-0.25, -0.22)], [(0.75, -0.75), (0.45, -0.72)]])
+        return
+    if hs == "quiff_undercut":    # lô 4: mái hất cao bóng (quiff) + hai bên cạo sát
+        shave = mix(p.skin, mul(hc, 0.45) if luma(hc) > 0.45 else hc, 0.38)
+        for s in (-1, 1):
+            side = smooth(g.pts([(s * 0.8, -0.66), (s * 1.06, -0.5), (s * 1.07, -0.02), (s * 0.96, 0.06),
+                                 (s * 0.88, -0.32)]), tension=0.45)
+            c.drawPath(side, paint(shave))
+        outer = [(-0.84, -0.48), (-0.98, -0.88), (-0.72, -1.22), (-0.25, -1.42), (0.3, -1.6), (0.8, -1.54),
+                 (1.08, -1.3), (1.04, -1.02), (0.9, -0.8)]
+        inner = [(0.84, -0.64), (0.42, -0.7), (0.0, -0.68), (-0.44, -0.6), (-0.8, -0.44)]
+        pth = smooth(g.pts(outer + inner), tension=0.42)
+        hair_fill(c, pth, g, arc=[(-0.45, -1.2), (0.1, -1.42), (0.62, -1.42)],
+                  strokes=[[(-0.6, -0.9), (-0.1, -1.15), (0.5, -1.25)], [(-0.4, -0.72), (0.15, -0.92), (0.7, -1.05)],
+                           [(0.85, -1.36), (0.98, -1.15)]])
+        curl = smooth(g.pts([(0.78, -1.5), (1.1, -1.36), (1.06, -1.1), (0.94, -1.22)]), tension=0.5)
+        hair_fill(c, curl, g)
+        return
+    if hs == "low_ponytail_bangs":   # lô 4: tóc dài buộc thấp sau gáy, mái lệch một bên che trán
+        inner =[(0.98, 0.06), (0.92, -0.38), (0.62, -0.6), (0.3, -0.7), (0.02, -0.62), (-0.32, -0.46), (-0.62, -0.26),
+                 (-0.86, -0.02), (-0.98, 0.12)]
+        pth = smooth(g.pts(_cap_outer(-1.1, 0.1, 1.06) + inner), tension=0.42)
+        hair_fill(c, pth, g, arc=[(-0.3, -0.98), (0.25, -1.02), (0.62, -0.86)],
+                  strokes=[[(0.35, -0.86), (-0.2, -0.62), (-0.7, -0.22)], [(0.6, -0.95), (0.8, -0.62)]])
         return
     if hs == "slick_side_part":   # rẽ ngôi lệch, chải bóng ra sau: mép tóc gọn, 2 cung bóng
         inner = [(0.98, -0.05), (0.9, -0.45), (0.6, -0.66), (0.2, -0.74), (-0.22, -0.74), (-0.36, -0.9), (-0.52, -0.66),
@@ -1401,8 +1677,28 @@ def draw_hair_back_view(c: skia.Canvas, g: Geo) -> None:
                         200, 100)
             c.drawPath(arcp, pen(hl, g.rx * 0.035, 0.8))
         return
+    if hs == "quiff_undercut":   # lô 4: gáy + hai bên cạo, phần trên chải ngược ra sau
+        shave = mix(p.skin, mul(hc, 0.45) if luma(hc) > 0.45 else hc, 0.38)
+        nape = smooth(g.pts([(-1.05, -0.5), (-0.8, -1.04), (0, -1.15), (0.8, -1.04), (1.05, -0.5), (1.0, 0.3), (0.7, 0.5),
+                             (0, 0.55), (-0.7, 0.5), (-1.0, 0.3)]), tension=0.42)
+        c.drawPath(nape, paint(shave))
+        top = smooth(g.pts([(-0.9, -0.42), (-0.98, -0.88), (-0.7, -1.24), (0, -1.46), (0.7, -1.24), (0.98, -0.88),
+                            (0.9, -0.42), (0.4, -0.3), (0, -0.28), (-0.4, -0.3)]), tension=0.42)
+        hair_fill(c, top, g, arc=[(-0.5, -1.0), (0, -1.2), (0.5, -1.0)],
+                  strokes=[[(-0.5, -0.5), (-0.4, -1.0)], [(0.0, -0.45), (0.0, -1.1)], [(0.5, -0.5), (0.4, -1.0)]])
+        return
+    if hs == "low_ponytail_bangs":   # lô 4: tóc ôm đầu, chun buộc thấp ở gáy, đuôi dài xuống giữa lưng
+        cap = smooth(g.pts([(-1.07, -0.4), (-0.85, -1.04), (0, -1.15), (0.85, -1.04), (1.07, -0.4), (1.02, 0.4),
+                            (0.6, 0.66), (0, 0.72), (-0.6, 0.66), (-1.02, 0.4)]), tension=0.42)
+        hair_fill(c, cap, g, arc=[(-0.5, -0.88), (0, -1.0), (0.5, -0.88)],
+                  strokes=[[(-0.6, -0.5), (-0.25, 0.55)], [(0.6, -0.5), (0.25, 0.55)]])
+        tail = smooth([g.P(-0.24, 0.62), g.P(0.24, 0.62), g.P(0.3, 1.1), (g.U(0.24), sy + 0.17 * g.Hf),
+                       (g.U(0), sy + 0.21 * g.Hf), (g.U(-0.24), sy + 0.17 * g.Hf), g.P(-0.3, 1.1)], tension=0.45)
+        hair_fill(c, tail, g, strokes=[[(0.0, 0.9), (0.03, 1.9)]])
+        c.drawPath(rrect(g.U(-0.25), g.V(0.6), g.U(0.25), g.V(0.76), g.rx * 0.05), paint(p.hair_tie or "#2a2a2e"))
+        return
     # ngắn / spiky / bun / bob / ponytail / buzz / grey
-    nape_v = {"bob_bangs": 1.12, "buzz": 0.45, "spiky": 0.5}.get(hs, 0.62)
+    nape_v ={"bob_bangs": 1.12, "buzz": 0.45, "spiky": 0.5}.get(hs, 0.62)
     w = 1.24 if hs == "bob_bangs" else 1.06
     pts = [(-w, -0.4), (-w * 0.8, -1.04), (0, -1.15), (w * 0.8, -1.04), (w, -0.4), (w * 0.98, nape_v * 0.7),
            (w * 0.7 if hs != "bob_bangs" else w * 0.95, nape_v), (0, nape_v + 0.05), (-(w * 0.7 if hs != "bob_bangs" else w * 0.95), nape_v),
@@ -1446,6 +1742,119 @@ def draw_head_props(c: skia.Canvas, g: Geo, back: bool = False) -> None:
     if "toothpick" in acc and not back:
         x0, y0 = g.mx + g.mw * 0.55, g.my + g.ry * 0.01
         c.drawPath(poly([(x0, y0), (x0 + g.rx * 0.38, y0 - g.ry * 0.09)], close=False), pen("#e3cf9a", g.rx * 0.035))
+    if "hairpin" in acc:   # lô 3: trâm cài búi tóc (que + hạt), xiên qua búi
+        pc = p.colors.get("hairpin", "#a8323a")
+        a, b = (g.P(-0.62, -1.02), g.P(0.6, -1.3)) if not back else (g.P(-0.62, -0.84), g.P(0.62, -1.1))
+        c.drawPath(poly([a, b], close=False), pen(mul(pc, 0.75), g.rx * 0.05))
+        c.drawPath(poly([a, b], close=False), pen(pc, g.rx * 0.03))
+        c.drawPath(circle(*b, g.rx * 0.075), paint("#e0b43c"))
+        c.drawPath(circle(b[0] - g.rx * 0.02, b[1] - g.rx * 0.02, g.rx * 0.025), paint("#fff3c4", 0.9))
+        c.drawPath(poly([(b[0] + g.rx * 0.02, b[1] + g.rx * 0.06), (b[0] + g.rx * 0.08, b[1] + g.rx * 0.3)], close=False),
+                   pen(pc, g.rx * 0.02, 0.9))
+    if "safety_hat" in acc:   # lô 3: mũ vàng an toàn học sinh (vòm tròn + vành quanh + đai)
+        hc = p.colors.get("hat", "#f4c623")
+        brim_back = oval(*g.P(0, -0.42), 1.36 * g.rx, 0.2 * g.ry)
+        flat(c, brim_back, mul(hc, 0.86), d=0.08 * g.rx, rim=0.25, hl=0.1, bottom=0)
+        dome = smooth(g.pts([(-1.1, -0.42), (-1.08, -0.86), (-0.74, -1.24), (0, -1.36), (0.74, -1.24), (1.08, -0.86),
+                             (1.1, -0.42), (0, -0.36)]), tension=0.42)
+        flat(c, dome, hc, d=0.2 * g.rx, rim=0.3, hl=0.2)
+        c.save()
+        c.clipPath(dome, doAntiAlias=True)
+        c.drawPath(smooth(g.pts([(-1.2, -0.62), (0, -0.56), (1.2, -0.62), (1.2, -0.4), (0, -0.33), (-1.2, -0.4)]),
+                          tension=0.4), paint(mul(hc, 0.8)))
+        c.drawPath(smooth(g.pts([(-0.5, -1.1), (-0.15, -1.24), (0.3, -1.22)]), close=False), pen("#ffffff", g.rx * 0.06, 0.45))
+        c.restore()
+        if not back:
+            lip = diff(oval(*g.P(0, -0.42), 1.36 * g.rx, 0.2 * g.ry), oval(*g.P(0, -0.47), 1.12 * g.rx, 0.14 * g.ry))
+            lip = inter(lip, rrect(g.U(-1.5), g.V(-0.44), g.U(1.5), g.V(-0.1), 0))
+            flat(c, lip, lit(hc, 0.05), d=0.05 * g.rx, rim=0.2, hl=0.25, bottom=0)
+            c.drawPath(circle(*g.P(0.62, -0.5), g.rx * 0.06), paint("#e8e6e0"))   # phản quang tròn nhỏ, không chữ
+        else:
+            lip = inter(oval(*g.P(0, -0.42), 1.36 * g.rx, 0.2 * g.ry), rrect(g.U(-1.5), g.V(-0.44), g.U(1.5), g.V(-0.1), 0))
+            flat(c, lip, mul(hc, 0.92), d=0.05 * g.rx, rim=0.2, hl=0.2, bottom=0)
+    # ---- lô 4
+    if "hair_net" in acc and p.hair_style in ("curly_short", "afro_curly"):   # lưới bọc tóc (bán hàng ăn)
+        reg = _curly_region(g, back)
+        nc = p.colors.get("hair_net", "#3a3640")
+        c.save()
+        c.clipPath(reg, doAntiAlias=True)
+        b = reg.getBounds()
+        step = g.rx * 0.16
+        k = -b.height()
+        while k < b.width() + b.height():
+            x = b.left() + k
+            c.drawPath(poly([(x, b.top()), (x + b.height(), b.bottom())], close=False), pen(nc, g.rx * 0.014, 0.5))
+            c.drawPath(poly([(x + b.height(), b.top()), (x, b.bottom())], close=False), pen(nc, g.rx * 0.014, 0.5))
+            k += step
+        c.restore()
+        if not back:
+            seam(c, g.pts([(-1.0, -0.2), (-0.7, -0.5), (0, -0.6), (0.7, -0.5), (1.0, -0.2)]), nc, g.rx * 0.03, 0.6)
+    if "head_loupe" in acc:   # kính lúp đeo trán (thợ sửa điện thoại): đai đầu + ống kính lật lên
+        band = smooth(g.pts([(-1.08, -0.5), (-0.85, -0.98), (0, -1.14), (0.85, -0.98), (1.08, -0.5), (0.98, -0.42),
+                             (0.75, -0.86), (0, -1.0), (-0.75, -0.86), (-0.98, -0.42)]), tension=0.4)
+        flat(c, band, "#2b2c31", d=0.04 * g.rx, rim=0.2, hl=0.2, bottom=0)
+        if not back:
+            x, y = g.P(0.42, -0.9)
+            c.drawPath(rrect(x - g.rx * 0.05, y, x + g.rx * 0.05, y + g.ry * 0.18, g.rx * 0.02), paint("#3a3b42"))
+            lens = capsule(x - g.rx * 0.2, y - g.ry * 0.02, x + g.rx * 0.2, y - g.ry * 0.02, g.rx * 0.17, g.rx * 0.17)
+            flat(c, lens, "#40424a", d=0.03 * g.rx, rim=0.2, hl=0.25, bottom=0)
+            c.drawPath(oval(x + g.rx * 0.2, y - g.ry * 0.02, g.rx * 0.06, g.rx * 0.15), paint("#9fd0e8", 0.9))
+            c.drawPath(oval(x + g.rx * 0.21, y - g.ry * 0.06, g.rx * 0.02, g.rx * 0.05), paint("#ffffff", 0.8))
+    if "straw_hat" in acc:   # mũ cói rộng vành + dải ruy băng
+        hc = p.colors.get("hat", "#e2c27a")
+        rb = p.colors.get("hat_band", "#6a2a34")
+        brim = oval(*g.P(0, -0.62), 1.85 * g.rx, 0.36 * g.ry)
+        flat(c, brim, hc, d=0.1 * g.rx, rim=0.25, hl=0.12, bottom=0.12)
+        c.save()
+        c.clipPath(brim, doAntiAlias=True)
+        for k in range(1, 5):
+            c.drawPath(oval(*g.P(0, -0.62), (1.85 - k * 0.2) * g.rx, (0.36 - k * 0.045) * g.ry),
+                       pen(mul(hc, 0.78), g.rx * 0.014, 0.6))
+        c.restore()
+        crown = smooth(g.pts([(-0.92, -0.62), (-0.95, -1.05), (-0.62, -1.42), (0, -1.5), (0.62, -1.42), (0.95, -1.05),
+                              (0.92, -0.62), (0, -0.55)]), tension=0.42)
+        flat(c, crown, lit(hc, 0.04), d=0.16 * g.rx, rim=0.28, hl=0.18)
+        c.save()
+        c.clipPath(crown, doAntiAlias=True)
+        for v in (-1.32, -1.16, -1.0):
+            seam(c, g.pts([(-1.0, v + 0.05), (0, v - 0.02), (1.0, v + 0.05)]), mul(hc, 0.8), g.rx * 0.014, 0.6)
+        c.drawPath(smooth(g.pts([(-1.0, -0.86), (0, -0.92), (1.0, -0.86), (1.0, -0.62), (0, -0.56), (-1.0, -0.62)]),
+                          tension=0.4), paint(rb))
+        c.restore()
+        if not back:
+            c.drawPath(oval(*g.P(0.78, -0.74), 0.16 * g.rx, 0.1 * g.ry), paint(mul(rb, 0.85)))
+    if "helmet" in acc:   # mũ bảo hiểm nửa đầu trắng, lưỡi trai ngắn, quai cằm
+        hc = p.colors.get("helmet", "#f2f2ee")
+        if not back:
+            for s in (-1, 1):
+                seam(c, g.pts([(s * 1.0, -0.3), (s * 0.95, 0.4), (s * 0.62, 0.96)]), "#3a3b40", g.rx * 0.04, 0.9)
+        shell = smooth(g.pts([(-1.16, -0.3), (-1.14, -0.82), (-0.78, -1.28), (0, -1.42), (0.78, -1.28), (1.14, -0.82),
+                              (1.16, -0.3), (0, -0.4)]), tension=0.42)
+        flat(c, shell, hc, d=0.2 * g.rx, rim=0.3, hl=0.15, edge=0.4)
+        c.save()
+        c.clipPath(shell, doAntiAlias=True)
+        stripe = p.colors.get("helmet_stripe", "#f08a24")
+        c.drawPath(rrect(g.U(-0.12), g.V(-1.5), g.U(0.12), g.V(-0.3), g.rx * 0.05), paint(stripe))
+        c.drawPath(smooth(g.pts([(-1.2, -0.5), (0, -0.56), (1.2, -0.5), (1.2, -0.28), (0, -0.36), (-1.2, -0.28)]),
+                          tension=0.4), paint(mul(hc, 0.82)))
+        c.drawPath(smooth(g.pts([(-0.6, -1.12), (-0.2, -1.28), (0.3, -1.26)]), close=False), pen("#ffffff", g.rx * 0.06, 0.6))
+        c.restore()
+        if not back:
+            visor = smooth(g.pts([(-0.95, -0.42), (0, -0.5), (0.95, -0.42), (0.78, -0.24), (0, -0.2), (-0.78, -0.24)]),
+                           tension=0.45)
+            flat(c, visor, "#2a2b30", d=0.05 * g.rx, rim=0.2, hl=0.3)
+
+
+def _curly_region(g: Geo, back: bool = False) -> skia.Path:
+    """Vùng tóc xoăn ngắn (hợp các lọn tròn) — dùng để cắt lưới bọc tóc."""
+    if back:
+        blobs = [(math.cos(a) * 0.95, -0.15 + math.sin(a) * 0.95) for a in [math.radians(x) for x in range(160, 390, 22)]]
+        blobs += [(-0.5, -0.2), (0, -0.25), (0.5, -0.2), (-0.35, 0.3), (0.35, 0.3), (0, 0.45), (-0.3, -0.7), (0.3, -0.7)]
+        return union(*[circle(*g.P(u, v), g.rx * 0.3) for u, v in blobs])
+    ring = [(-1.0, 0.05), (-1.06, -0.3), (-0.98, -0.66), (-0.72, -0.95), (-0.36, -1.12), (0.02, -1.18), (0.4, -1.12),
+            (0.74, -0.95), (0.98, -0.66), (1.06, -0.3), (1.0, 0.05)]
+    inner = [(-0.62, -0.62), (-0.25, -0.72), (0.15, -0.74), (0.52, -0.64)]
+    return union(*([circle(*g.P(u, v), g.rx * 0.3) for u, v in ring] + [circle(*g.P(u, v), g.rx * 0.255) for u, v in inner]))
 
 
 def draw_police_cap(c: skia.Canvas, g: Geo, back: bool = False) -> None:
@@ -1459,7 +1868,16 @@ def draw_police_cap(c: skia.Canvas, g: Geo, back: bool = False) -> None:
         visor = smooth(g.pts([(-0.98, -0.58), (0, -0.62), (0.98, -0.58), (0.7, -0.38), (0, -0.33), (-0.7, -0.38)]),
                        tension=0.45)
         flat(c, visor, "#16161a", d=0.05 * g.rx, rim=0.2, hl=0.3)
-        c.drawPath(circle(*g.P(0, -0.98), g.rx * 0.1), paint("#d9b44a"))   # nút tròn chung (không quốc huy)
+        if "cap_shield" in g.p.accessories:   # lô 3: huy hiệu khiên vàng trơn (bảo vệ), không chữ
+            x, y = g.P(0, -1.04)
+            w, h = g.rx * 0.15, g.ry * 0.17
+            sh = smooth([(x - w, y - h), (x, y - h * 0.8), (x + w, y - h), (x + w * 0.9, y + h * 0.2), (x, y + h),
+                         (x - w * 0.9, y + h * 0.2)], tension=0.25)
+            c.drawPath(sh, paint("#d9b44a"))
+            c.drawPath(sh, pen(mul("#d9b44a", 0.6), g.rx * 0.02))
+            c.drawPath(circle(x, y - h * 0.05, w * 0.35), paint("#fff3c4"))
+        else:
+            c.drawPath(circle(*g.P(0, -0.98), g.rx * 0.1), paint("#d9b44a"))   # nút tròn chung (không quốc huy)
 
 
 # ======================================================================= thân
@@ -1538,6 +1956,24 @@ def draw_pattern(c: skia.Canvas, g: Geo, path: skia.Path, sp: Spec, seed: int = 
         while y < b.bottom():
             c.drawRect(skia.Rect.MakeLTRB(b.left() - 5, y, b.right() + 5, y + 0.016 * g.Hf), paint(cl["stripe"]))
             y += 0.05 * g.Hf
+    elif o == "print_shirt":   # lô 4: hoạ tiết quả dứa nhỏ + lá (gốc, chung chung)
+        fc, lc = cl.get("fruit", "#f4c430"), cl.get("leaf", "#3f9a52")
+        for i, (x, y) in enumerate(_scatter(seed + 31, 12, b)):
+            r = g.Hf * 0.009
+            c.save()
+            c.rotate(-18 if i % 2 else 14, x, y)
+            for a in (-0.5, 0.0, 0.5):
+                c.drawPath(poly([(x - r * 0.25, y - r * 0.9), (x + math.sin(a) * r * 1.4, y - r * 2.1),
+                                 (x + r * 0.25, y - r * 0.9)]), paint(lc))
+            fr = oval(x, y, r * 0.75, r)
+            c.drawPath(fr, paint(fc))
+            c.drawPath(poly([(x - r * 0.5, y - r * 0.5), (x + r * 0.5, y + r * 0.5)], close=False), pen(mul(fc, 0.7), r * 0.14))
+            c.drawPath(poly([(x + r * 0.5, y - r * 0.5), (x - r * 0.5, y + r * 0.5)], close=False), pen(mul(fc, 0.7), r * 0.14))
+            c.restore()
+        for x, y in _scatter(seed + 47, 8, b):   # lá rời
+            r = g.Hf * 0.008
+            c.drawPath(smooth([(x - r, y + r * 0.4), (x, y - r * 0.6), (x + r, y + r * 0.4), (x, y + r * 0.1)], tension=0.5),
+                       paint(lit(lc, 0.12), 0.9))
     c.restore()
 
 
@@ -1580,7 +2016,7 @@ def draw_torso(c: skia.Canvas, g: Geo, back: bool = False) -> None:
         coll = smooth([(cx - nw * 2.2, sy - 2), (cx, sy + 0.03 * Hf), (cx + nw * 2.2, sy - 2)], close=False)
         c.drawPath(coll, pen(sp.collar or "#d9b44a", 0.008 * Hf))
         return
-    if not back or o == "dot_blouse":
+    if not back or o in ("dot_blouse", "print_shirt"):
         draw_pattern(c, g, path, sp, seed=3)
     fold = mul(top, 0.62)
     # nếp áo nhẹ
@@ -1728,6 +2164,44 @@ def draw_torso(c: skia.Canvas, g: Geo, back: bool = False) -> None:
         seam(c, [(cx, vtop + 0.016 * Hf), (cx, sy + 0.09 * Hf)], mul(top, 0.66), 1.4, 0.7, curve=False)
         for i in range(3):
             c.drawPath(circle(cx, sy + 0.03 * Hf + i * 0.028 * Hf, 0.0038 * Hf), paint(lit(top, 0.45)))
+    elif o == "rain_jacket":
+        _draw_rain_jacket(c, g, sp, path, tunic_bottom)
+    elif o == "blazer_skirt":
+        _draw_blazer(c, g, sp, tunic_bottom)
+    elif o == "suspender_skirt":
+        _draw_suspenders(c, g, sp, path, tunic_bottom)
+    elif o == "trench_coat":
+        _draw_trench(c, g, sp, path, tunic_bottom)
+    elif o == "cardigan":
+        _draw_cardigan(c, g, sp, path, tunic_bottom)
+    # ---- lô 4
+    elif o == "denim_shirt":
+        _draw_open_shirt(c, g, sp, tunic_bottom)
+    elif o == "print_shirt":
+        _draw_camp_shirt(c, g, sp, tunic_bottom)
+    elif o == "hoodie_jacket":
+        _draw_hoodie_jacket(c, g, sp, tunic_bottom)
+    elif o == "denim_vest_skirt":
+        seam(c, [(cx - nw * 1.15, vtop + 2), (cx, vtop + 0.017 * Hf), (cx + nw * 1.15, vtop + 2)], mul(top, 0.72),
+             0.006 * Hf)
+        _draw_denim_vest(c, g, tunic_bottom)
+    elif o == "vendor_apron":
+        seam(c, [(cx - nw * 1.15, vtop + 2), (cx, vtop + 0.016 * Hf), (cx + nw * 1.15, vtop + 2)], mul(top, 0.7),
+             0.005 * Hf)
+        _draw_vendor_apron(c, g)
+    elif o == "work_uniform":
+        seam(c, [(cx, sy + 0.03 * Hf), (cx, tunic_bottom - 4)], mul(top, 0.7), 1.4, 0.6, curve=False)
+        for i in range(4):
+            by = sy + 0.05 * Hf + i * 0.045 * Hf
+            if by < tunic_bottom - 0.01 * Hf:
+                c.drawPath(circle(cx + 3, by, 0.0042 * Hf), paint(mul(top, 0.6)))
+        for s in (-1, 1):
+            px = cx + s * g.sw * 0.5
+            c.drawPath(rrect(px - 0.025 * Hf, sy + 0.05 * Hf, px + 0.025 * Hf, sy + 0.1 * Hf, 2), pen(mul(top, 0.66), 1.4, 0.8))
+            c.drawPath(rrect(px - 0.027 * Hf, sy + 0.044 * Hf, px + 0.027 * Hf, sy + 0.062 * Hf, 3), paint(mul(top, 0.88)))
+        _collar_flaps(c, g, top)
+        c.drawPath(rrect(cx - g.hw * 1.05, tunic_bottom - 0.016 * Hf, cx + g.hw * 1.05, tunic_bottom + 1, 2),
+                   paint(mul(top, 0.9)))
     _torso_accessories(c, g, sp)
 
 
@@ -1745,9 +2219,10 @@ def _draw_blazer(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
                  (cx - nw * 0.22, sy + 0.03 * Hf)])
     blade = poly([(cx - nw * 0.2, sy + 0.028 * Hf), (cx + nw * 0.2, sy + 0.028 * Hf), (cx + nw * 0.36, sy + 0.2 * Hf),
                   (cx, sy + 0.225 * Hf), (cx - nw * 0.36, sy + 0.2 * Hf)])
-    c.drawPath(blade, paint(tie))
-    c.drawPath(knot, paint(lit(tie, 0.12)))
-    btn_y = sy + 0.165 * Hf
+    if "ribbon" not in p.colors:   # lô 3: nơ đồng phục nữ sinh (vẽ cuối, đè lên ve áo) thay cà vạt
+        c.drawPath(blade, paint(tie))
+        c.drawPath(knot, paint(lit(tie, 0.12)))
+    btn_y = sy + (0.165 if "ribbon" not in p.colors else 0.12) * Hf
     for s in (-1, 1):
         panel = poly([(cx + s * nw * 1.25, vtop - 0.006 * Hf), (cx + s * g.sw * 0.62, sy - 0.008 * Hf),
                        (cx + s * g.sw * 0.95, sy + 0.012 * Hf), (cx + s * g.sw * 1.0, sy + 0.05 * Hf),
@@ -1766,6 +2241,8 @@ def _draw_blazer(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
         seam(c, [(cx + s * g.sw * 0.78, sy + 0.07 * Hf), (cx + s * g.hw * 0.95, bottom - 0.01 * Hf)], seam_c, 1.1, 0.45)
     seam(c, [(cx + g.sw * 0.4, sy + 0.075 * Hf), (cx + g.sw * 0.66, sy + 0.072 * Hf)], seam_c, 1.4, 0.7, curve=False)
     c.drawPath(circle(cx + nw * 0.05, btn_y + 0.012 * Hf, 0.005 * Hf), paint(mul(bz, 0.6)))
+    if "ribbon" in p.colors:
+        _draw_ribbon(c, g, p.colors["ribbon"], cx, vtop + 0.03 * Hf, nw)
 
 
 def _poly_pts(path: skia.Path) -> list[tuple[float, float]]:
@@ -1847,6 +2324,398 @@ def _draw_zip_jacket(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
     c.drawPath(rrect(cx + nw * 1.0, sy + 0.1 * Hf, cx + nw * 1.0 + 0.008 * Hf, sy + 0.118 * Hf, 1.5), paint("#c9ccd1"))
 
 
+# ----------------------------------------------------------------- batch 3: áo mưa / nơ / váy yếm / trench / cardigan
+def _draw_ribbon(c: skia.Canvas, g: Geo, col: str, x: float, y: float, nw: float) -> None:
+    """Nơ cổ áo nữ sinh: 2 cánh + 2 đuôi + nút giữa."""
+    w, h = nw * 1.55, nw * 0.8
+    for s in (-1, 1):
+        tail = poly([(x - s * nw * 0.12, y + h * 0.2), (x + s * w * 0.62, y + h * 2.3), (x + s * w * 0.3, y + h * 2.55),
+                     (x - s * nw * 0.05, y + h * 0.45)])
+        c.drawPath(tail, paint(mul(col, 0.84)))
+    for s in (-1, 1):
+        loop = smooth([(x, y), (x + s * w * 0.5, y - h * 0.78), (x + s * w, y - h * 0.55), (x + s * w * 1.02, y + h * 0.5),
+                       (x + s * w * 0.5, y + h * 0.72)], tension=0.4)
+        flat(c, loop, col, d=2, rim=0.2, hl=0.15, bottom=0)
+    c.drawPath(rrect(x - nw * 0.3, y - h * 0.45, x + nw * 0.3, y + h * 0.45, nw * 0.12), paint(mul(col, 0.78)))
+
+
+def _draw_rain_jacket(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path, bottom: float) -> None:
+    """Áo mưa / áo gió kéo kín: mũ trùm xám cuộn quanh cổ, khoá kéo giữa, túi chéo, gấu bo + chốt dây rút."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    jc = sp.top
+    hood = p.colors.get("hood", "#8d9096")
+    c.save()
+    c.clipPath(path, doAntiAlias=True)
+    c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.5, bottom - 0.02 * Hf, cx + g.sw * 1.5, bottom + 8), paint(mul(jc, 0.86)))
+    c.restore()
+    zp = pen(mul(jc, 0.5), 0.007 * Hf)
+    zp.setPathEffect(skia.DashPathEffect.Make([2.2, 1.8], 0))
+    c.drawPath(poly([(cx + 2, sy + 0.03 * Hf), (cx + 3, bottom)], close=False), zp)
+    seam(c, [(cx + 2 - 0.007 * Hf, sy + 0.03 * Hf), (cx + 3 - 0.007 * Hf, bottom)], mul(jc, 0.66), 1.3, 0.7, curve=False)
+    c.drawPath(rrect(cx - 0.004 * Hf + 2, sy + 0.05 * Hf, cx + 0.008 * Hf + 2, sy + 0.075 * Hf, 2), paint("#5d6168"))
+    for s in (-1, 1):
+        px = cx + s * g.sw * 0.56
+        seam(c, [(px - s * 0.022 * Hf, bottom - 0.1 * Hf), (px + s * 0.008 * Hf, bottom - 0.04 * Hf)], mul(jc, 0.58),
+             0.006 * Hf, 0.9, curve=False)
+        c.drawPath(circle(cx + s * g.hw * 0.95, bottom - 0.008 * Hf, 0.0055 * Hf), paint("#3a3d44"))
+        seam(c, [(cx + s * g.sw * 0.62, sy + 0.01 * Hf), (cx + s * g.sw * 0.7, sy + 0.12 * Hf)], mul(jc, 0.7), 1.3, 0.5)
+    hd = diff(smooth([(cx - nw * 3.1, sy - 0.002 * Hf), (cx, sy - 0.03 * Hf), (cx + nw * 3.1, sy - 0.002 * Hf),
+                      (cx + nw * 2.7, sy + 0.045 * Hf), (cx, sy + 0.034 * Hf), (cx - nw * 2.7, sy + 0.045 * Hf)], tension=0.5),
+              oval(cx, vtop + 0.004 * Hf, nw * 1.2, 0.02 * Hf))
+    flat(c, hd, hood, d=4, rim=0.25, hl=0.12, bottom=0)
+    seam(c, [(cx - nw * 2.4, sy + 0.03 * Hf), (cx, sy + 0.02 * Hf), (cx + nw * 2.4, sy + 0.03 * Hf)], mul(hood, 0.7), 1.4, 0.7)
+
+
+def _draw_suspenders(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path, bottom: float) -> None:
+    """Váy yếm / váy dây đeo: cạp váy cao trùm gấu áo, 2 dây đeo + cúc trắng, cổ sen."""
+    p = g.p
+    Hf, cx, sy = g.Hf, g.cx, g.shoulder_y
+    sk = sp.lower_col
+    su = p.colors.get("suspenders", sk)
+    _collar_flaps(c, g, sp.top, "peter_pan")
+    band = inter(path, rrect(cx - g.sw * 1.6, g.waist_y - 0.035 * Hf, cx + g.sw * 1.6, bottom + 10, 0))
+    flat(c, band, sk, d=g.hw * 0.3, rim=0.3, edge=0.35, hl=0.1)
+    for s in (-1, 1):
+        x0, x1 = cx + s * g.sw * 0.46, cx + s * g.hw * 0.52
+        strap = capsule(x0, sy - 0.006 * Hf, x1, g.waist_y - 0.02 * Hf, 0.012 * Hf, 0.012 * Hf)
+        flat(c, strap, su, d=2, rim=0.2, hl=0.1, bottom=0)
+        c.drawPath(circle(x1, g.waist_y - 0.026 * Hf, 0.0065 * Hf), paint("#f4f2ec"))
+        c.drawPath(circle(x1, g.waist_y - 0.026 * Hf, 0.0065 * Hf), pen(mul(su, 0.6), 1.1, 0.7))
+
+
+def _draw_trench(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path, bottom: float) -> None:
+    """Áo măng tô trench be: cổ bẻ + ve to, cài 2 hàng cúc, nắp vai, đai lưng có khoá, áo lót tối ở cổ V."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    tc = sp.top
+    dk = mul(tc, 0.6)
+    inner = p.colors.get("inner", "#3a3236")
+    c.drawPath(poly([(cx - nw * 1.05, vtop + 0.002 * Hf), (cx + nw * 1.05, vtop + 0.002 * Hf), (cx, sy + 0.07 * Hf)]),
+               paint(inner))
+    # nắp chắn mưa ngực (bên trái màn hình)
+    flap = poly([(cx - nw * 1.6, sy - 0.004 * Hf), (cx - g.sw * 0.92, sy + 0.012 * Hf), (cx - g.sw * 0.9, sy + 0.1 * Hf),
+                 (cx - nw * 1.4, sy + 0.09 * Hf)])
+    c.drawPath(flap, paint(mul(tc, 0.95)))
+    c.drawPath(flap, pen(dk, 1.3, 0.55))
+    # mép vạt chồng (2 hàng cúc)
+    seam(c, [(cx + nw * 0.4, sy + 0.07 * Hf), (cx + g.hw * 0.42, bottom)], dk, 1.6, 0.8)
+    for row in range(2):
+        y = sy + (0.105 + row * 0.055) * Hf
+        for xx in (cx - nw * 0.9, cx + nw * 1.6):
+            c.drawPath(circle(xx, y, 0.0062 * Hf), paint(mul(tc, 0.45)))
+            c.drawPath(circle(xx - 0.0015 * Hf, y - 0.0015 * Hf, 0.002 * Hf), paint(lit(tc, 0.3), 0.8))
+    for s in (-1, 1):
+        coll = poly([(cx + s * nw * 0.95, vtop - 0.03 * Hf), (cx + s * nw * 2.3, vtop - 0.014 * Hf),
+                     (cx + s * nw * 3.0, vtop + 0.012 * Hf), (cx + s * nw * 1.25, vtop + 0.004 * Hf)])
+        c.drawPath(coll, paint(mul(tc, 0.86)))
+        lapel = poly([(cx + s * nw * 1.25, vtop - 0.002 * Hf), (cx + s * nw * 3.0, vtop + 0.012 * Hf),
+                      (cx + s * nw * 2.7, sy + 0.05 * Hf), (cx + s * nw * 2.1, sy + 0.062 * Hf), (cx + s * nw * 0.15, sy + 0.08 * Hf)])
+        flat(c, lapel, mul(tc, 0.93), d=3, rim=0.2, hl=0.1, bottom=0)
+        c.drawPath(lapel, pen(dk, 1.2, 0.6))
+        x = cx + s * g.sw * 0.72
+        c.drawPath(rrect(x - 0.03 * Hf, sy - 0.008 * Hf, x + 0.03 * Hf, sy + 0.009 * Hf, 3), paint(mul(tc, 0.84)))
+        c.drawPath(circle(x - s * 0.018 * Hf, sy, 0.004 * Hf), paint(mul(tc, 0.45)))
+    # đai lưng + khoá
+    belt = inter(path, rrect(cx - g.sw * 1.6, g.waist_y - 0.02 * Hf, cx + g.sw * 1.6, g.waist_y + 0.002 * Hf, 0))
+    flat(c, belt, mul(tc, 0.82), d=3, rim=0.2, hl=0.1, bottom=0)
+    bx = cx + nw * 0.7
+    c.drawPath(rrect(bx - 0.014 * Hf, g.waist_y - 0.024 * Hf, bx + 0.014 * Hf, g.waist_y + 0.006 * Hf, 2), pen(mul(tc, 0.42), 2.2))
+
+
+def _draw_cardigan(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path, bottom: float) -> None:
+    """Áo len cardigan mở: 2 vạt tím, nẹp bo sáng, 3 cúc, 2 túi đắp; áo trong cổ tròn màu be."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    top = sp.top
+    cg = sp.sleeve_col or "#6a4a86"
+    seam(c, [(cx - nw * 1.15, vtop + 2), (cx, vtop + 0.017 * Hf), (cx + nw * 1.15, vtop + 2)], mul(top, 0.72), 0.006 * Hf)
+    btn = p.colors.get("buttons", "#efe6d2")
+    for s in (-1, 1):
+        panel = smooth([(cx + s * nw * 1.35, vtop - 0.004 * Hf), (cx + s * g.sw * 0.6, sy - 0.006 * Hf),
+                        (cx + s * g.sw * 1.0, sy + 0.04 * Hf), (cx + s * g.hw * 1.12, bottom + 2),
+                        (cx + s * g.hw * 0.22, bottom + 4), (cx + s * nw * 0.75, sy + 0.14 * Hf),
+                        (cx + s * nw * 1.25, sy + 0.04 * Hf)], tension=0.18)
+        flat(c, panel, cg, d=g.sw * 0.12, rim=0.25, edge=0.4)
+        c.save()
+        c.clipPath(panel, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.5, bottom - 0.02 * Hf, cx + g.sw * 1.5, bottom + 8), paint(mul(cg, 0.86)))
+        c.restore()
+        seam(c, [(cx + s * nw * 1.38, vtop), (cx + s * nw * 0.95, sy + 0.1 * Hf), (cx + s * g.hw * 0.26, bottom)],
+             lit(cg, 0.22), 0.009 * Hf, 0.9)
+        px = cx + s * g.sw * 0.56
+        pk = rrect(px - 0.028 * Hf, bottom - 0.085 * Hf, px + 0.028 * Hf, bottom - 0.035 * Hf, 3)
+        c.drawPath(pk, paint(mul(cg, 0.92)))
+        c.drawPath(pk, pen(lit(cg, 0.2), 1.3, 0.8))
+    for i in range(3):
+        t = (i + 0.6) / 3.4
+        y = sy + 0.11 * Hf + (bottom - sy - 0.13 * Hf) * t
+        x = cx + nw * 0.95 + (g.hw * 0.26 - nw * 0.95) * ((y - sy - 0.1 * Hf) / max(1.0, bottom - sy - 0.1 * Hf))
+        c.drawPath(circle(x, y, 0.0058 * Hf), paint(btn))
+        c.drawPath(circle(x, y, 0.0058 * Hf), pen(mul(btn, 0.6), 1.0, 0.7))
+
+
+# ----------------------------------------------------------------- batch 4: sơ mi jean / áo hoa / khoác+hoodie / gi-lê / tạp dề
+def _open_panel(g: Geo, s: int, bottom: float, inner_k: float = 1.25) -> skia.Path:
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    return smooth([(cx + s * nw * 1.4, vtop - 0.004 * Hf), (cx + s * g.sw * 0.6, sy - 0.006 * Hf),
+                   (cx + s * g.sw * 1.0, sy + 0.04 * Hf), (cx + s * g.hw * 1.12, bottom + 2),
+                   (cx + s * g.hw * 0.36, bottom + 4), (cx + s * nw * inner_k, sy + 0.09 * Hf)], tension=0.18)
+
+
+def _draw_open_shirt(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
+    """Sơ mi jean mở cúc ngoài áo thun: 2 vạt, cổ bẻ nhọn, túi ngực nắp, hàng cúc, chỉ may sáng."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    top = sp.top
+    dn = sp.sleeve_col or "#4a6f9e"
+    st = p.colors.get("stitch", "#d9b86a")
+    seam(c, [(cx - nw * 1.15, vtop + 2), (cx, vtop + 0.017 * Hf), (cx + nw * 1.15, vtop + 2)], mul(top, 0.72), 0.006 * Hf)
+    for s in (-1, 1):
+        panel = _open_panel(g, s, bottom)
+        flat(c, panel, dn, d=g.sw * 0.12, rim=0.25, edge=0.4)
+        seam(c, [(cx + s * nw * 1.4, vtop + 0.004 * Hf), (cx + s * nw * 1.3, sy + 0.09 * Hf), (cx + s * g.hw * 0.4, bottom)],
+             st, 0.003 * Hf, 0.8, dash=(3, 2))
+        coll = poly([(cx + s * nw * 1.1, vtop - 0.012 * Hf), (cx + s * nw * 2.5, vtop - 0.004 * Hf),
+                     (cx + s * nw * 2.2, sy + 0.04 * Hf), (cx + s * nw * 1.4, sy + 0.012 * Hf)])
+        flat(c, coll, mul(dn, 0.9), d=2.5, rim=0.15, hl=0, bottom=0)
+        c.drawPath(coll, pen(mul(dn, 0.6), 1.2, 0.6))
+        px = cx + s * g.sw * 0.58
+        pk = rrect(px - 0.024 * Hf, sy + 0.055 * Hf, px + 0.024 * Hf, sy + 0.1 * Hf, 3)
+        c.drawPath(pk, paint(mul(dn, 0.93)))
+        c.drawPath(pk, pen(st, 0.0025 * Hf, 0.7))
+        c.drawPath(rrect(px - 0.026 * Hf, sy + 0.05 * Hf, px + 0.026 * Hf, sy + 0.066 * Hf, 3), paint(mul(dn, 0.82)))
+        c.drawPath(circle(px, sy + 0.06 * Hf, 0.0035 * Hf), paint("#d9d4c6"))
+        c.save()
+        c.clipPath(panel, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.3, bottom - 0.014 * Hf, cx + g.sw * 1.3, bottom + 8), paint(mul(dn, 0.86)))
+        c.restore()
+    for i in range(4):   # hàng cúc trên vạt phải màn hình
+        y = sy + 0.11 * Hf + i * 0.04 * Hf
+        if y < bottom - 0.01 * Hf:
+            t = (y - sy - 0.09 * Hf) / max(1.0, bottom - sy - 0.09 * Hf)
+            x = cx + nw * 1.3 + (g.hw * 0.4 - nw * 1.3) * t + 0.008 * Hf
+            c.drawPath(circle(x, y, 0.0042 * Hf), paint("#d9d4c6"))
+
+
+def _draw_camp_shirt(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
+    """Sơ mi cổ bẻ rộng (kiểu đi biển) phanh cúc trên: nẹp giữa, cổ bẻ to, gấu ngang."""
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    top = sp.top
+    seam(c, [(cx, sy + 0.06 * Hf), (cx, bottom - 4)], mul(top, 0.62), 1.6, 0.8, curve=False)
+    for i in range(3):
+        by = sy + 0.09 * Hf + i * 0.05 * Hf
+        if by < bottom - 0.01 * Hf:
+            c.drawPath(circle(cx + 3, by, 0.0045 * Hf), paint(lit(top, 0.55)))
+    for s in (-1, 1):
+        coll = poly([(cx + s * nw * 0.2, sy + 0.062 * Hf), (cx + s * nw * 1.0, vtop - 0.006 * Hf),
+                     (cx + s * nw * 2.7, vtop + 0.004 * Hf), (cx + s * nw * 2.3, sy + 0.05 * Hf)])
+        flat(c, coll, top, d=3, rim=0.2, hl=0.1, bottom=0)
+        c.drawPath(coll, pen(mul(top, 0.55), 1.4, 0.75))
+    c.drawPath(rrect(cx - g.hw * 1.05, bottom - 0.012 * Hf, cx + g.hw * 1.05, bottom + 1, 2), paint(mul(top, 0.86)))
+
+
+def _draw_hoodie_jacket(c: skia.Canvas, g: Geo, sp: Spec, bottom: float) -> None:
+    """Hoodie màu (mũ trùm quanh cổ, dây rút, túi kangaroo) + áo khoác tối mở ngoài, khoá kéo hai mép."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    hc = sp.top
+    jc = sp.sleeve_col or "#1d1e23"
+    pk = smooth([(cx - g.sw * 0.4, bottom - 0.03 * Hf), (cx - g.sw * 0.3, sy + 0.17 * Hf),
+                 (cx + g.sw * 0.3, sy + 0.17 * Hf), (cx + g.sw * 0.4, bottom - 0.03 * Hf)], tension=0.15)
+    c.drawPath(pk, paint(mul(hc, 0.92)))
+    c.drawPath(pk, pen(mul(hc, 0.62), 1.6, 0.7))
+    c.drawRect(skia.Rect.MakeLTRB(cx - g.hw * 0.9, bottom - 0.024 * Hf, cx + g.hw * 0.9, bottom + 2), paint(mul(hc, 0.85)))
+    for s in (-1, 1):
+        panel = _open_panel(g, s, bottom, inner_k=1.1)
+        flat(c, panel, jc, d=g.sw * 0.12, rim=0.25, edge=0.4)
+        c.save()
+        c.clipPath(panel, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.3, bottom - 0.016 * Hf, cx + g.sw * 1.3, bottom + 8), paint(lit(jc, 0.06)))
+        c.restore()
+        seam(c, [(cx + s * nw * 1.38, vtop + 0.004 * Hf), (cx + s * nw * 1.12, sy + 0.09 * Hf), (cx + s * g.hw * 0.38, bottom)],
+             lit(jc, 0.3), 0.004 * Hf, 0.85, dash=(3, 2))
+        px = cx + s * g.sw * 0.62
+        seam(c, [(px, sy + 0.17 * Hf), (px + s * 0.012 * Hf, sy + 0.23 * Hf)], lit(jc, 0.25), 0.004 * Hf, 0.8, curve=False)
+    hood = diff(smooth([(cx - nw * 3.0, sy - 0.004 * Hf), (cx, sy - 0.026 * Hf), (cx + nw * 3.0, sy - 0.004 * Hf),
+                        (cx + nw * 2.6, sy + 0.045 * Hf), (cx, sy + 0.065 * Hf), (cx - nw * 2.6, sy + 0.045 * Hf)],
+                       tension=0.5), oval(cx, vtop + 0.006 * Hf, nw * 1.15, 0.022 * Hf))
+    flat(c, hood, mul(hc, 0.92), d=4, rim=0.2, hl=0)
+    strings = p.colors.get("strings", "#f1f1ef")
+    for s in (-1, 1):
+        x = cx + s * nw * 0.7
+        seam(c, [(x, sy + 0.04 * Hf), (x + s * 2, sy + 0.11 * Hf)], strings, 0.006 * Hf)
+
+
+def _draw_denim_vest(c: skia.Canvas, g: Geo, bottom: float, back: bool = False) -> None:
+    """Gi-lê jean không tay: khoét nách rộng, 2 vạt mở, túi ngực nắp, cúc kim loại, chỉ vàng."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vc = p.colors.get("vest", "#5a7fae")
+    st = p.colors.get("stitch", "#d9b86a")
+    vest = torso_path(g, bottom + 0.004 * Hf, 1.04)
+    for s in (-1, 1):
+        vest = diff(vest, oval(cx + s * g.sw * 1.05, sy + 0.03 * Hf, g.sw * 0.3, 0.085 * Hf))
+    if back:
+        vest = diff(vest, oval(cx, sy - 0.012 * Hf, nw * 1.5, 0.022 * Hf))
+        flat(c, vest, vc, d=g.sw * 0.15, rim=0.25, edge=0.4)
+        seam(c, [(cx - g.sw * 0.7, sy + 0.08 * Hf), (cx, sy + 0.1 * Hf), (cx + g.sw * 0.7, sy + 0.08 * Hf)], st, 0.003 * Hf,
+             0.8, dash=(3, 2))
+        return
+    vest = diff(vest, poly([(cx - nw * 1.5, sy - 0.03 * Hf), (cx + nw * 1.5, sy - 0.03 * Hf), (cx + g.hw * 0.3, bottom + 10),
+                            (cx - g.hw * 0.3, bottom + 10)]))
+    flat(c, vest, vc, d=g.sw * 0.15, rim=0.25, edge=0.4)
+    for s in (-1, 1):
+        seam(c, [(cx + s * nw * 1.6, sy - 0.006 * Hf), (cx + s * g.hw * 0.36, bottom)], st, 0.003 * Hf, 0.85, curve=False,
+             dash=(3, 2))
+        px = cx + s * g.sw * 0.55
+        c.drawPath(rrect(px - 0.024 * Hf, sy + 0.06 * Hf, px + 0.024 * Hf, sy + 0.078 * Hf, 3), paint(mul(vc, 0.84)))
+        c.drawPath(circle(px, sy + 0.072 * Hf, 0.0035 * Hf), paint("#c9a243"))
+    for i in range(3):
+        y = sy + 0.1 * Hf + i * 0.045 * Hf
+        if y < bottom - 0.01 * Hf:
+            t = (y - sy) / max(1.0, bottom - sy)
+            x = cx + nw * 1.6 + (g.hw * 0.36 - nw * 1.6) * t + 0.006 * Hf
+            c.drawPath(circle(x, y, 0.0045 * Hf), paint("#c9a243"))
+
+
+def _draw_vendor_apron(c: skia.Canvas, g: Geo, back: bool = False) -> None:
+    """Tạp dề bán hàng có yếm, dài tới gối, hoạ tiết hoa nhí / ô vuông, viền màu, túi trước, dây cổ + dây eo."""
+    p = g.p
+    Hf, cx, sy, nw = g.Hf, g.cx, g.shoulder_y, g.neck_w
+    vtop = sy - 0.014 * Hf
+    ac = p.colors.get("apron", "#c83c3c")
+    pc = p.colors.get("apron_pattern", "#f4ecd8")
+    trim = p.colors.get("apron_trim", mul(ac, 0.7))
+    if back:
+        for s in (-1, 1):
+            seam(c, [(cx + s * nw * 1.1, sy - 0.012 * Hf), (cx - s * g.sw * 0.3, sy + 0.12 * Hf),
+                     (cx - s * g.hw * 1.05, g.waist_y - 0.006 * Hf)], trim, 0.008 * Hf)
+        seam(c, [(cx - g.hw * 1.12, g.waist_y - 0.006 * Hf), (cx + g.hw * 1.12, g.waist_y - 0.006 * Hf)], trim,
+             0.008 * Hf, 0.9, curve=False)
+        for s in (-1, 1):
+            loop = smooth([(cx, g.waist_y - 0.006 * Hf), (cx + s * 0.03 * Hf, g.waist_y - 0.022 * Hf),
+                           (cx + s * 0.034 * Hf, g.waist_y + 0.006 * Hf)], tension=0.5)
+            c.drawPath(loop, paint(ac))
+            seam(c, [(cx, g.waist_y), (cx + s * 0.012 * Hf, g.waist_y + 0.06 * Hf)], ac, 0.007 * Hf)
+        return
+    bib_top = sy + 0.045 * Hf
+    bw = nw * 2.1
+    bot = g.knee_y - 0.01 * Hf
+    for s in (-1, 1):
+        seam(c, [(cx + s * bw * 0.85, bib_top + 4), (cx + s * nw * 1.3, sy + 0.01 * Hf), (cx + s * nw * 1.05, vtop)], trim,
+             0.008 * Hf)
+    pth = smooth([(cx - bw, bib_top), (cx + bw, bib_top), (cx + bw * 1.02, sy + 0.09 * Hf),
+                  (cx + g.hw * 1.08, g.waist_y - 0.01 * Hf), (cx + g.hw * 1.16, (g.waist_y + bot) / 2),
+                  (cx + g.hw * 1.24, bot), (cx, bot + 3), (cx - g.hw * 1.24, bot), (cx - g.hw * 1.16, (g.waist_y + bot) / 2),
+                  (cx - g.hw * 1.08, g.waist_y - 0.01 * Hf), (cx - bw * 1.02, sy + 0.09 * Hf)], tension=0.12)
+    flat(c, pth, ac, d=g.hw * 0.22, rim=0.28, edge=0.4)
+    c.save()
+    c.clipPath(pth, doAntiAlias=True)
+    b = pth.getBounds()
+    step = 0.024 * Hf
+    row = 0
+    y = b.top() + step * 0.5
+    while y < b.bottom():
+        x = b.left() + (step * 0.5 if row % 2 else 0)
+        while x < b.right() + step:
+            _flower(c, x, y, 0.0065 * Hf, pc, mix(pc, "#e0b43c", 0.7))
+            x += step
+        y += step * 0.86
+        row += 1
+    c.restore()
+    c.drawPath(pth, pen(trim, 0.006 * Hf, 0.9))
+    seam(c, [(cx - g.hw * 1.12, g.waist_y - 0.006 * Hf), (cx + g.hw * 1.12, g.waist_y - 0.006 * Hf)], trim, 0.008 * Hf, 0.95,
+         curve=False)
+    pk = rrect(cx - g.hw * 0.62, g.waist_y + 0.05 * Hf, cx + g.hw * 0.62, g.waist_y + 0.11 * Hf, 3)
+    c.drawPath(pk, paint(ac))
+    c.drawPath(pk, pen(trim, 0.005 * Hf, 0.9))
+    seam(c, [(cx, g.waist_y + 0.05 * Hf), (cx, g.waist_y + 0.11 * Hf)], trim, 0.004 * Hf, 0.8, curve=False)
+
+
+def _draw_tool_pouch(c: skia.Canvas, g: Geo, back: bool = False) -> None:
+    """Túi đồ nghề đeo hông (bên phải màn hình): túi vải nâu, tua vít / nhíp cắm miệng túi, đai qua eo."""
+    Hf, cx = g.Hf, g.cx
+    pc = g.p.colors.get("pouch", "#6b4a2e")
+    y0 = g.waist_y + 0.01 * Hf
+    sgn = -1 if back else 1
+    x = cx + sgn * g.hw * 0.62
+    if not back:
+        for k, (dx, col, h) in enumerate(((-0.014, "#d04a3a", 0.05), (0.0, "#e0b43c", 0.06), (0.014, "#3a7fc0", 0.045))):
+            hx = x + dx * Hf
+            c.drawPath(rrect(hx - 0.0018 * Hf, y0 - h * Hf, hx + 0.0018 * Hf, y0 + 0.01 * Hf, 1), paint("#b9bec6"))
+            c.drawPath(rrect(hx - 0.004 * Hf, y0 - h * Hf - 0.002 * Hf, hx + 0.004 * Hf, y0 - (h - 0.022) * Hf, 2), paint(col))
+    pouch = rrect(x - 0.034 * Hf, y0, x + 0.034 * Hf, y0 + 0.075 * Hf, 0.008 * Hf)
+    flat(c, pouch, pc, d=4, rim=0.25, edge=0.4)
+    c.drawPath(rrect(x - 0.036 * Hf, y0 - 0.002 * Hf, x + 0.036 * Hf, y0 + 0.012 * Hf, 3), paint(mul(pc, 0.78)))
+    seam(c, [(x - 0.028 * Hf, y0 + 0.035 * Hf), (x + 0.028 * Hf, y0 + 0.035 * Hf)], lit(pc, 0.3), 1.2, 0.8, curve=False,
+         dash=(3, 2))
+
+
+def _draw_delivery_box(c: skia.Canvas, g: Geo, back: bool) -> None:
+    """Thùng giao hàng giữ nhiệt (đeo lưng). Front: lộ 2 bên vai sau thân; back: mặt thùng + nhãn "DELIVERY"."""
+    p = g.p
+    Hf, cx, sy = g.Hf, g.cx, g.shoulder_y
+    bc = p.colors.get("backpack", "#1f9a95")
+    if not back:
+        box = rrect(cx - g.sw * 1.34, sy - 0.07 * Hf, cx + g.sw * 1.34, sy + 0.25 * Hf, 0.022 * Hf)
+        flat(c, box, mul(bc, 0.88), d=g.sw * 0.2, rim=0.3, edge=0.4)
+        lid = inter(box, rrect(cx - g.sw * 1.5, sy - 0.08 * Hf, cx + g.sw * 1.5, sy - 0.045 * Hf, 0))
+        c.drawPath(lid, paint(mul(bc, 0.72)))
+        return
+    box = rrect(cx - g.sw * 1.16, sy - 0.065 * Hf, cx + g.sw * 1.16, sy + 0.27 * Hf, 0.022 * Hf)
+    flat(c, box, bc, d=g.sw * 0.2, rim=0.3, edge=0.45)
+    b = box.getBounds()
+    lid = inter(box, rrect(b.left() - 4, b.top() - 4, b.right() + 4, b.top() + 0.04 * Hf, 0))
+    c.drawPath(lid, paint(mul(bc, 0.8)))
+    seam(c, [(b.left() + 3, b.top() + 0.04 * Hf), (b.right() - 3, b.top() + 0.04 * Hf)], mul(bc, 0.55), 1.6, 0.8, curve=False)
+    c.drawPath(rrect(cx - 0.035 * Hf, b.top() - 0.012 * Hf, cx + 0.035 * Hf, b.top() + 0.004 * Hf, 0.006 * Hf),
+               pen("#2a2d33", 0.006 * Hf))
+    # dải phản quang + nhãn chữ tiếng Anh (chung chung, không thương hiệu)
+    c.drawRect(skia.Rect.MakeLTRB(b.left() + 2, b.bottom() - 0.05 * Hf, b.right() - 2, b.bottom() - 0.038 * Hf), paint("#dfe3e6"))
+    label = rrect(b.left() + b.width() * 0.24, b.top() + 0.09 * Hf, b.right() - b.width() * 0.24, b.top() + 0.15 * Hf,
+                  0.01 * Hf)
+    c.drawPath(label, paint(lit(bc, 0.85)))
+    txt = "DELIVERY"
+    fsz = 0.03 * Hf
+    f = font(fsz, "extrabold")
+    tw = f.measureText(txt)
+    lb = label.getBounds()
+    if tw > lb.width() * 0.88:
+        fsz *= lb.width() * 0.88 / tw
+        f = font(fsz, "extrabold")
+        tw = f.measureText(txt)
+    c.drawString(txt, cx - tw / 2, lb.centerY() + fsz * 0.36, f, paint(mul(bc, 0.55)))
+    for s in (-1, 1):   # khoá kéo hai mép
+        seam(c, [(cx + s * g.sw * 1.1, b.top() + 0.05 * Hf), (cx + s * g.sw * 1.1, b.bottom() - 0.06 * Hf)], mul(bc, 0.6),
+             1.4, 0.8, curve=False, dash=(3, 2))
+
+
+def _draw_keys(c: skia.Canvas, g: Geo, x: float, y: float) -> None:
+    """Chùm chìa khoá: móc + vòng + 3 chìa (đồng/bạc)."""
+    Hf = g.Hf
+    r = 0.011 * Hf
+    seam(c, [(x, y - 0.012 * Hf), (x, y - r)], "#7d828a", 0.004 * Hf, curve=False)
+    c.drawPath(circle(x, y, r), pen("#aab0b8", 0.0032 * Hf))
+    for ang, col in ((-28, "#c9a243"), (4, "#c3c8cf"), (32, "#b88a3a")):
+        c.save()
+        c.rotate(ang, x, y)
+        hy = y + r + 0.006 * Hf
+        c.drawPath(circle(x, hy, 0.0062 * Hf), paint(col))
+        c.drawPath(circle(x, hy, 0.0022 * Hf), paint(mul(col, 0.55)))
+        c.drawPath(rrect(x - 0.0022 * Hf, hy + 0.004 * Hf, x + 0.0022 * Hf, hy + 0.03 * Hf, 1), paint(col))
+        c.drawPath(rrect(x, hy + 0.02 * Hf, x + 0.0055 * Hf, hy + 0.024 * Hf, 0.5), paint(col))
+        c.drawPath(rrect(x, hy + 0.026 * Hf, x + 0.0045 * Hf, hy + 0.03 * Hf, 0.5), paint(col))
+        c.restore()
+
+
 def _draw_vest(c: skia.Canvas, g: Geo, bottom: float, back: bool = False) -> None:
     p = g.p
     Hf, cx, sy = g.Hf, g.cx, g.shoulder_y
@@ -1905,12 +2774,12 @@ def _torso_back_details(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path) -> No
             for s in (-1, 1):
                 x = cx + s * g.sw * 0.68
                 c.drawPath(rrect(x - 0.03 * Hf, sy - 0.004 * Hf, x + 0.03 * Hf, sy + 0.012 * Hf, 3), paint(ep))
-    elif o in ("blazer_tie", "zip_jacket"):
+    elif o in ("blazer_tie", "zip_jacket", "blazer_skirt"):
         jc = sp.sleeve_col or top
         flat(c, path, jc, d=g.sw * 0.2, rim=0.3, edge=0.35)
-        lt = mix(jc, "#c9ccd2", 0.5) if o == "blazer_tie" else lit(jc, 0.35)
+        lt = mix(jc, "#c9ccd2", 0.5) if o in ("blazer_tie", "blazer_skirt") else lit(jc, 0.35)
         c.drawPath(rrect(cx - g.neck_w * 2.0, sy - 0.022 * Hf, cx + g.neck_w * 2.0, sy + 0.01 * Hf, 5), paint(mul(jc, 0.86)))
-        if o == "blazer_tie":
+        if o in ("blazer_tie", "blazer_skirt"):
             seam(c, [(cx, sy + 0.12 * Hf), (cx, g.waist_y + 0.06 * Hf)], lt, 1.4, 0.7, curve=False)  # xẻ tà sau
             for s in (-1, 1):
                 seam(c, [(cx + s * g.sw * 0.45, sy + 0.03 * Hf), (cx + s * g.hw * 0.7, g.waist_y + 0.05 * Hf)], lt, 1.1, 0.45)
@@ -1929,6 +2798,53 @@ def _torso_back_details(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path) -> No
             c.restore()
             seam(c, [(cx - g.sw * 0.8, sy + 0.07 * Hf), (cx + g.sw * 0.8, sy + 0.07 * Hf)], lt, 1.2, 0.6, curve=False,
                  dash=(3, 2))
+    elif o == "rain_jacket":     # mũ trùm thả sau lưng + gấu bo
+        hood = p.colors.get("hood", "#8d9096")
+        bottom = g.waist_y + (0.035 + sp.tunic) * Hf
+        c.save()
+        c.clipPath(path, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.5, bottom - 0.02 * Hf, cx + g.sw * 1.5, bottom + 8), paint(mul(top, 0.86)))
+        c.restore()
+        seam(c, [(cx - g.sw * 0.85, sy + 0.1 * Hf), (cx, sy + 0.115 * Hf), (cx + g.sw * 0.85, sy + 0.1 * Hf)], mul(top, 0.66),
+             1.4, 0.6)
+        hd = smooth([(cx - g.neck_w * 3.0, sy - 0.012 * Hf), (cx + g.neck_w * 3.0, sy - 0.012 * Hf),
+                     (cx + g.neck_w * 2.6, sy + 0.1 * Hf), (cx, sy + 0.135 * Hf), (cx - g.neck_w * 2.6, sy + 0.1 * Hf)],
+                    tension=0.5)
+        flat(c, hd, hood, d=5, rim=0.25)
+        seam(c, [(cx - g.neck_w * 1.7, sy + 0.02 * Hf), (cx, sy + 0.09 * Hf), (cx + g.neck_w * 1.7, sy + 0.02 * Hf)],
+             mul(hood, 0.62), 1.6, 0.7)
+    elif o == "suspender_skirt":   # dây đeo bắt chéo chữ X sau lưng + cạp váy cao
+        sk = sp.lower_col
+        su = p.colors.get("suspenders", sk)
+        c.drawPath(rrect(cx - g.neck_w * 1.8, sy - 0.02 * Hf, cx + g.neck_w * 1.8, sy + 0.006 * Hf, 4), paint(mul(top, 0.95)))
+        bottom = g.waist_y + (0.035 + sp.tunic) * Hf
+        band = inter(path, rrect(cx - g.sw * 1.6, g.waist_y - 0.035 * Hf, cx + g.sw * 1.6, bottom + 10, 0))
+        flat(c, band, sk, d=g.hw * 0.3, rim=0.3, edge=0.35, hl=0.1)
+        for s in (-1, 1):
+            strap = capsule(cx + s * g.sw * 0.46, sy - 0.006 * Hf, cx - s * g.hw * 0.5, g.waist_y - 0.02 * Hf,
+                            0.012 * Hf, 0.012 * Hf)
+            flat(c, strap, su, d=2, rim=0.2, hl=0.1, bottom=0)
+    elif o == "trench_coat":     # cầu vai sau (storm shield), đường may giữa, đai lưng
+        yoke = inter(path, smooth([(cx - g.sw * 1.4, sy - 0.05 * Hf), (cx + g.sw * 1.4, sy - 0.05 * Hf),
+                                   (cx + g.sw * 1.4, sy + 0.1 * Hf), (cx, sy + 0.125 * Hf), (cx - g.sw * 1.4, sy + 0.1 * Hf)],
+                                  tension=0.2))
+        c.drawPath(yoke, paint(mul(top, 0.93)))
+        c.drawPath(yoke, pen(mul(top, 0.62), 1.3, 0.5))
+        seam(c, [(cx, sy + 0.125 * Hf), (cx, g.waist_y)], mul(top, 0.62), 1.4, 0.6, curve=False)
+        belt = inter(path, rrect(cx - g.sw * 1.6, g.waist_y - 0.02 * Hf, cx + g.sw * 1.6, g.waist_y + 0.002 * Hf, 0))
+        flat(c, belt, mul(top, 0.82), d=3, rim=0.2, hl=0.1, bottom=0)
+        for s in (-1, 1):
+            x = cx + s * g.sw * 0.72
+            c.drawPath(rrect(x - 0.03 * Hf, sy - 0.008 * Hf, x + 0.03 * Hf, sy + 0.009 * Hf, 3), paint(mul(top, 0.84)))
+    elif o == "cardigan":
+        cg = sp.sleeve_col or top
+        flat(c, path, cg, d=g.sw * 0.2, rim=0.3, edge=0.35)
+        bottom = g.waist_y + (0.035 + sp.tunic) * Hf
+        c.save()
+        c.clipPath(path, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.5, bottom - 0.02 * Hf, cx + g.sw * 1.5, bottom + 8), paint(mul(cg, 0.86)))
+        c.restore()
+        c.drawPath(rrect(cx - g.neck_w * 1.9, sy - 0.02 * Hf, cx + g.neck_w * 1.9, sy + 0.006 * Hf, 4), paint(lit(cg, 0.12)))
     elif o == "butcher_apron":   # dây tạp dề bắt chéo sau lưng + nơ eo
         ac = p.colors.get("apron", "#2a2a30")
         for s in (-1, 1):
@@ -1949,6 +2865,38 @@ def _torso_back_details(c: skia.Canvas, g: Geo, sp: Spec, path: skia.Path) -> No
         _draw_vest(c, g, g.waist_y + 0.035 * Hf, back=True)
     elif o in ("ao_dai", "red_traditional_dress"):
         c.drawPath(rrect(cx - g.neck_w * 1.25, sy - 0.03 * Hf, cx + g.neck_w * 1.25, sy - 0.006 * Hf, 3), paint(mul(top, 0.92)))
+    # ---- lô 4
+    elif o in ("denim_shirt", "hoodie_jacket"):
+        jc = sp.sleeve_col or top
+        flat(c, path, jc, d=g.sw * 0.2, rim=0.3, edge=0.35)
+        bottom = g.waist_y + (0.035 + sp.tunic) * Hf
+        c.save()
+        c.clipPath(path, doAntiAlias=True)
+        c.drawRect(skia.Rect.MakeLTRB(cx - g.sw * 1.3, bottom - 0.016 * Hf, cx + g.sw * 1.3, bottom + 8),
+                   paint(mul(jc, 0.86) if o == "denim_shirt" else lit(jc, 0.06)))
+        c.restore()
+        if o == "denim_shirt":
+            st = p.colors.get("stitch", "#d9b86a")
+            yoke = [(cx - g.sw * 0.9, sy + 0.05 * Hf), (cx, sy + 0.075 * Hf), (cx + g.sw * 0.9, sy + 0.05 * Hf)]
+            seam(c, yoke, st, 0.003 * Hf, 0.8, dash=(3, 2))
+            c.drawPath(rrect(cx - g.neck_w * 1.9, sy - 0.022 * Hf, cx + g.neck_w * 1.9, sy + 0.008 * Hf, 4), paint(mul(jc, 0.88)))
+        else:
+            hood = smooth([(cx - g.neck_w * 3.0, sy - 0.01 * Hf), (cx + g.neck_w * 3.0, sy - 0.01 * Hf),
+                           (cx + g.neck_w * 2.5, sy + 0.09 * Hf), (cx, sy + 0.12 * Hf), (cx - g.neck_w * 2.5, sy + 0.09 * Hf)],
+                          tension=0.5)
+            flat(c, hood, mul(top, 0.92), d=5, rim=0.25)
+            seam(c, [(cx - g.neck_w * 1.6, sy + 0.02 * Hf), (cx, sy + 0.08 * Hf), (cx + g.neck_w * 1.6, sy + 0.02 * Hf)],
+                 mul(top, 0.65), 1.6, 0.7)
+    elif o in ("print_shirt", "work_uniform"):
+        c.drawPath(rrect(cx - g.neck_w * 1.8, sy - 0.02 * Hf, cx + g.neck_w * 1.8, sy + 0.006 * Hf, 4), paint(mul(top, 0.92)))
+        seam(c, [(cx - g.sw * 0.85, sy + 0.05 * Hf), (cx, sy + 0.065 * Hf), (cx + g.sw * 0.85, sy + 0.05 * Hf)],
+             mul(top, 0.7), 1.3, 0.5)
+    elif o == "denim_vest_skirt":
+        _draw_denim_vest(c, g, g.waist_y + (0.035 + sp.tunic) * Hf, back=True)
+    elif o == "vendor_apron":
+        _draw_vendor_apron(c, g, back=True)
+    if "tool_pouch" in p.accessories:
+        _draw_tool_pouch(c, g, back=True)
     if "scarf" in p.colors:
         _draw_scarf(c, g, back=True)
 
@@ -2007,6 +2955,24 @@ def _torso_accessories(c: skia.Canvas, g: Geo, sp: Spec) -> None:
             flat(c, strap, mul(bc, 0.85), d=2, rim=0.2)
             c.drawPath(rrect(cx + s * g.sw * 0.62 - 0.014 * Hf, sy + 0.1 * Hf, cx + s * g.sw * 0.62 + 0.014 * Hf,
                              sy + 0.115 * Hf, 2), paint("#2a2a2e"))
+    if "delivery_box" in acc:   # lô 3: quai thùng giao hàng + bùa đỏ treo quai
+        sc_ = p.colors.get("straps", "#34373e")
+        for s in (-1, 1):
+            strap = capsule(cx + s * g.sw * 0.58, sy - 0.008 * Hf, cx + s * g.sw * 0.66, sy + 0.2 * Hf, 0.024 * Hf, 0.022 * Hf)
+            flat(c, strap, sc_, d=2, rim=0.2, hl=0.12)
+            c.drawPath(rrect(cx + s * g.sw * 0.66 - 0.016 * Hf, sy + 0.12 * Hf, cx + s * g.sw * 0.66 + 0.016 * Hf,
+                             sy + 0.135 * Hf, 2), paint("#1d1e22"))
+        if "strap_charm_red" in acc:
+            x, y = cx + g.sw * 0.64, sy + 0.08 * Hf
+            seam(c, [(x, y - 0.012 * Hf), (x + 0.002 * Hf, y + 0.012 * Hf)], "#e0b43c", 0.0028 * Hf, curve=False)
+            pouch = smooth([(x - 0.012 * Hf, y + 0.014 * Hf), (x + 0.013 * Hf, y + 0.014 * Hf), (x + 0.016 * Hf, y + 0.046 * Hf),
+                            (x + 0.002 * Hf, y + 0.052 * Hf), (x - 0.014 * Hf, y + 0.046 * Hf)], tension=0.3)
+            flat(c, pouch, "#c8282e", d=2, rim=0.2, hl=0.2, bottom=0)
+            c.drawPath(rrect(x - 0.012 * Hf, y + 0.012 * Hf, x + 0.014 * Hf, y + 0.018 * Hf, 1.5), paint("#e0b43c"))
+            for k in range(3):
+                c.drawPath(circle(x + 0.002 * Hf, y + (0.026 + k * 0.008) * Hf, 0.0018 * Hf), paint("#f1d27a", 0.9))
+    if "key_ring" in acc:
+        _draw_keys(c, g, cx + g.hw * 0.92, g.waist_y + (0.035 + sp.tunic) * Hf - 0.004 * Hf)
     if "handbag" in acc:
         strap = poly([(cx - g.sw * 0.75, sy - 0.004 * Hf), (cx + g.sw * 0.9, g.waist_y)], close=False)
         c.drawPath(strap, pen("#5a3a2a", 0.012 * Hf))
@@ -2124,6 +3090,18 @@ def _torso_accessories(c: skia.Canvas, g: Geo, sp: Spec) -> None:
             yy = by + i * 0.014 * Hf
             c.drawPath(poly([(bx - 0.07 * Hf, yy), (bx + 0.07 * Hf, yy)], close=False), pen("#8a5e2c", 1.4, 0.7))
         c.restore()
+    # ---- lô 4
+    if "gold_chain_thick" in acc:   # dây chuyền vàng to kiểu xoắn, không mặt
+        gold, dg = "#e8bd3e", "#8a6514"
+        ch = smooth([(cx - nw * 1.2, vtop), (cx - nw * 0.9, sy + 0.05 * Hf), (cx, sy + 0.075 * Hf),
+                     (cx + nw * 0.9, sy + 0.05 * Hf), (cx + nw * 1.2, vtop)], close=False)
+        c.drawPath(ch, pen(dg, 0.011 * Hf))
+        c.drawPath(ch, pen(gold, 0.008 * Hf))
+        links = pen("#fff0b0", 0.004 * Hf, 0.85)
+        links.setPathEffect(skia.DashPathEffect.Make([0.004 * Hf, 0.005 * Hf], 0))
+        c.drawPath(ch, links)
+    if "tool_pouch" in acc:
+        _draw_tool_pouch(c, g)
     if p.outfit_type == "police_uniform" or sp.belt:
         pass  # thắt lưng vẽ ở pelvis
 
@@ -2139,6 +3117,9 @@ def _backpack_color(p: CharParams) -> str:
 
 def draw_backpack_behind(c: skia.Canvas, g: Geo) -> None:
     """Front view: phần balo lộ ra hai bên thân (vẽ sau thân)."""
+    if "delivery_box" in g.p.accessories:
+        _draw_delivery_box(c, g, back=False)
+        return
     if not any(a.startswith("backpack") for a in g.p.accessories):
         return
     bc = _backpack_color(g.p)
@@ -2148,6 +3129,9 @@ def draw_backpack_behind(c: skia.Canvas, g: Geo) -> None:
 
 
 def draw_backpack_back(c: skia.Canvas, g: Geo) -> None:
+    if "delivery_box" in g.p.accessories:
+        _draw_delivery_box(c, g, back=True)
+        return
     if not any(a.startswith("backpack") for a in g.p.accessories):
         return
     bc = _backpack_color(g.p)
@@ -2181,6 +3165,28 @@ def draw_pelvis(c: skia.Canvas, g: Geo, back: bool = False) -> None:
                  0.6, curve=False)
         if sp.lower == "skirt":
             c.drawPath(rrect(cx - hw * 1.0, top - 2, cx + hw * 1.0, top + 0.014 * Hf, 3), paint(mul(lc, 0.85)))
+        return
+    if sp.lower == "coat":   # lô 3: vạt áo măng tô dài quá gối (che đùi), chân lộ dưới gấu
+        hem = g.knee_y + 0.075 * Hf
+        t0 = top - 0.02 * Hf
+        sk = smooth([(cx - hw * 1.02, t0), (cx - hw * 1.18, (t0 + hem) / 2), (cx - hw * 1.36, hem), (cx, hem + 3),
+                     (cx + hw * 1.36, hem), (cx + hw * 1.18, (t0 + hem) / 2), (cx + hw * 1.02, t0)], tension=0.25)
+        flat(c, sk, lc, d=hw * 0.35, rim=0.3, edge=0.35)
+        for dx in (-0.7, 0.75):
+            seam(c, [(cx + hw * dx, t0 + 0.06 * Hf), (cx + hw * dx * 1.25, hem - 4)], mul(lc, 0.66), 1.5, 0.45)
+        if not back:
+            seam(c, [(cx + hw * 0.36, t0), (cx + hw * 0.5, hem - 2)], mul(lc, 0.58), 1.8, 0.85)
+            for s in (-1, 1):
+                seam(c, [(cx + s * hw * 0.6, t0 + 0.05 * Hf), (cx + s * hw * 0.86, t0 + 0.1 * Hf)], mul(lc, 0.55),
+                     0.005 * Hf, 0.9, curve=False)
+            bx = cx + g.neck_w * 0.7
+            for k, dx in enumerate((0.0, 0.012)):
+                tail = poly([(bx + dx * Hf - 0.005 * Hf, t0), (bx + dx * Hf + 0.005 * Hf, t0),
+                             (bx + dx * Hf + 0.007 * Hf + k * 0.004 * Hf, t0 + (0.1 - k * 0.02) * Hf),
+                             (bx + dx * Hf - 0.003 * Hf + k * 0.004 * Hf, t0 + (0.1 - k * 0.02) * Hf)])
+                c.drawPath(tail, paint(mul(lc, 0.8)))
+        else:
+            seam(c, [(cx, hem - 0.14 * Hf), (cx, hem)], mul(lc, 0.55), 1.8, 0.85, curve=False)
         return
     if sp.lower == "pencil":
         hem = g.knee_y + 0.005 * Hf
@@ -2250,8 +3256,10 @@ def draw_leg_up(c: skia.Canvas, g: Geo, s: str) -> None:
     sp = outfit_spec(g.p)
     x, y = g.hipj(s)
     kx, ky = g.knee(s)
-    bare = sp.lower in ("skirt", "dress", "pencil", "shorts")
+    bare = sp.lower in ("skirt", "dress", "pencil", "shorts", "coat")
     col = g.p.skin if bare else sp.lower_col
+    if sp.lower == "coat" and "tights" in g.p.colors:
+        col = g.p.colors["tights"]
     if sp.shoe == "stick":
         col = sp.shoe_col
     pth = capsule(x, y - g.thigh_w * 0.25, kx, ky, g.thigh_w, g.thigh_w * 0.82)
@@ -2260,6 +3268,16 @@ def draw_leg_up(c: skia.Canvas, g: Geo, s: str) -> None:
         sh = inter(pth, rrect(x - 80, y - 50, x + 80, y + (ky - y) * 0.55, 0))
         flat(c, union(sh, rrect(x - g.thigh_w * 0.62, y + (ky - y) * 0.3, x + g.thigh_w * 0.62, y + (ky - y) * 0.55, 6)),
              sp.lower_col, d=g.thigh_w * 0.18, edge=0.3)
+        if "cargo_shorts" in g.p.accessories:   # lô 4: túi hộp hai bên ống quần đùi
+            sg = g.side(s)
+            lc = sp.lower_col
+            px = x + sg * g.thigh_w * 0.38
+            py0, py1 = y + (ky - y) * 0.22, y + (ky - y) * 0.48
+            pk = rrect(px - g.thigh_w * 0.3, py0, px + g.thigh_w * 0.3, py1, 3)
+            c.drawPath(pk, paint(mul(lc, 0.92)))
+            c.drawPath(pk, pen(mul(lc, 0.62), 1.3, 0.8))
+            c.drawPath(rrect(px - g.thigh_w * 0.33, py0 - 2, px + g.thigh_w * 0.33, py0 + (py1 - py0) * 0.3, 3),
+                       paint(mul(lc, 0.82)))
     if sp.lower == "aodai":
         pass
 
@@ -2271,8 +3289,10 @@ def draw_leg_low(c: skia.Canvas, g: Geo, s: str) -> None:
     ay = g.ankle_y
     FY = g.FY
     w = g.shin_w
-    bare = sp.lower in ("skirt", "dress", "pencil", "shorts")
+    bare = sp.lower in ("skirt", "dress", "pencil", "shorts", "coat")
     col = p.skin if bare else sp.lower_col
+    if sp.lower == "coat" and "tights" in p.colors:
+        col = p.colors["tights"]
     sg = g.side(s)
     if sp.shoe == "stick":
         shin = capsule(x, ky, x + sg * 2, FY - 6, w, w * 0.7)
@@ -2301,6 +3321,17 @@ def draw_leg_low(c: skia.Canvas, g: Geo, s: str) -> None:
         return
     # bàn chân / giày (front view: mũi giày chĩa ra ngoài một chút)
     toe = x + sg * w * 0.35
+    if sp.shoe == "flipflops":   # lô 4: dép tông: đế dày + quai chữ V
+        foot = smooth([(x - w * 0.45, ay - 4), (x + w * 0.45, ay - 4), (toe + w * 0.7, FY - 9), (toe + w * 0.6, FY - 3),
+                       (toe - w * 0.7, FY - 3), (toe - w * 0.75, FY - 9)], tension=0.4)
+        flat(c, foot, p.skin, d=w * 0.12, rim=0.2, bottom=0)
+        sole = rrect(toe - w * 0.85, FY - 0.011 * g.Hf, toe + w * 0.82, FY + 2, 3)
+        c.drawPath(sole, paint(sp.shoe_col))
+        c.drawPath(rrect(toe - w * 0.85, FY - 0.004 * g.Hf, toe + w * 0.82, FY + 2, 3), paint(mul(sp.shoe_col, 0.7)))
+        tx, ty = toe + sg * w * 0.3, FY - 0.012 * g.Hf
+        for k in (-1, 1):
+            seam(c, [(tx, ty), (toe + k * w * 0.62, FY - 0.028 * g.Hf)], mul(sp.shoe_col, 0.85), w * 0.2, curve=False)
+        return
     if sp.shoe in ("sandals", "bare"):
         skin = p.skin if sp.shoe == "sandals" else (sp.shoe_col if sp.shoe_col.startswith("#") else p.skin)
         foot = smooth([(x - w * 0.45, ay - 4), (x + w * 0.45, ay - 4), (toe + w * 0.7, FY - 8), (toe + w * 0.6, FY),
@@ -2361,6 +3392,23 @@ def draw_arm_up(c: skia.Canvas, g: Geo, s: str) -> None:
         draw_pattern(c, g, puff, sp, seed=11 if s == "l" else 13)
     if p.outfit_type in ("pajamas", "dress") and "dots" in p.colors:
         draw_pattern(c, g, puff, sp, seed=17)
+    if p.outfit_type == "print_shirt":
+        draw_pattern(c, g, puff, sp, seed=19 if s == "l" else 29)
+    if "torn_sleeve" in p.accessories and s == "r":   # lô 4: tay áo rách lởm chởm lộ da + vết xước
+        b0 = puff.getBounds()
+        L0, T0, W0, H0 = b0.left(), b0.top(), b0.width(), b0.height()
+        tear = poly([(L0 + W0 * u, T0 + H0 * v) for u, v in
+                     ((0.3, 0.5), (0.42, 0.36), (0.5, 0.46), (0.62, 0.3), (0.7, 0.44), (0.82, 0.4), (0.76, 0.56),
+                      (0.84, 0.66), (0.68, 0.7), (0.58, 0.78), (0.48, 0.68), (0.36, 0.72), (0.38, 0.6))])
+        c.save()
+        c.clipPath(puff, doAntiAlias=True)
+        c.drawPath(tear, paint(p.skin))
+        c.drawPath(tear, pen(mul(sc, 0.55), 1.4, 0.9))
+        c.restore()
+        for k in range(2):
+            xx = x1 + (x2 - x1) * (0.62 + k * 0.1) + w * 0.1
+            yy = y1 + (y2 - y1) * (0.62 + k * 0.1)
+            c.drawPath(poly([(xx - w * 0.3, yy), (xx + w * 0.25, yy + w * 0.18)], close=False), pen("#c0484a", w * 0.07, 0.85))
     b = puff.getBounds()
     hem_y = b.bottom() - w * 0.16
     cuff = sp.cuff
@@ -2374,6 +3422,16 @@ def draw_arm_up(c: skia.Canvas, g: Geo, s: str) -> None:
 
 def _sleeve_marks(c: skia.Canvas, g: Geo, s: str, puff: skia.Path) -> None:
     """Vạch quân hàm (chevron vàng chung chung, không phù hiệu thật) trên tay áo."""
+    if "shoulder_patch" in g.p.accessories:   # lô 3: phù hiệu vai hình khiên, không chữ
+        b = puff.getBounds()
+        x, y = (b.left() + b.right()) / 2, b.top() + b.height() * 0.46
+        w, h = b.width() * 0.26, b.height() * 0.3
+        sh = smooth([(x - w, y - h * 0.8), (x + w, y - h * 0.8), (x + w, y + h * 0.1), (x, y + h * 0.95),
+                     (x - w, y + h * 0.1)], tension=0.2)
+        pc = g.p.colors.get("patch", "#d9b44a")
+        c.drawPath(sh, paint(g.p.colors.get("patch_inner", "#1c2440")))
+        c.drawPath(sh, pen(pc, w * 0.18))
+        c.drawPath(circle(x, y - h * 0.05, w * 0.32), paint(pc))
     if "chevrons" not in g.p.accessories:
         return
     b = puff.getBounds()
@@ -2453,6 +3511,8 @@ def draw_hand(c: skia.Canvas, g: Geo, s: str, state: str) -> None:
     w = g.fore_w * 1.12
     inner = -g.side(s)                       # phía ngón cái (về giữa thân)
     skin = p.skin
+    if "gloves" in p.accessories:            # lô 3: găng tay (trắng / cao su)
+        skin = p.colors.get("gloves", "#f3f1ec")
     if g.ent:   # tay dài, ngón như vuốt
         col = p.colors.get("legs") or mul(skin, 0.9)
         palm = rrect(x - w * 0.45, y - 2, x + w * 0.45, y + L * 0.35, w * 0.3)
@@ -2598,6 +3658,25 @@ def _profile(cid: str, p: CharParams, meta: dict | None) -> dict:
         prof["provenance"] = "procedural_library"
         if meta.get("description_en"):
             prof["description_en"] = meta["description_en"]
+        if meta.get("batch3"):   # lô 3: biểu cảm kinh dị mới + nhãn EN + khẩu trang
+            prof["batch"] = 3
+            if not faceless and p.face != "entity":
+                prof["extra_expressions"] = prof["extra_expressions"] + list(BATCH3_EXPRESSIONS)
+            if meta.get("label_en"):
+                prof["label_en"] = meta["label_en"]
+            if "face_mask" in p.accessories:
+                prof["lipsync"] = False
+                prof["mouth_hidden_by"] = "face_mask"
+        if meta.get("batch4"):   # lô 4: cười híp, gân giận to, mặt bầm (overlay), quyết tâm + nhãn EN
+            prof["batch"] = 4
+            if not faceless and p.face != "entity":
+                prof["extra_expressions"] = prof["extra_expressions"] + ["cringe"] + list(BATCH4_EXPRESSIONS)
+            if meta.get("label_en"):
+                prof["label_en"] = meta["label_en"]
+            if meta.get("variant_of"):
+                prof["variant_of"] = meta["variant_of"]
+            if "sunglasses" in p.accessories:
+                prof["eyes_hidden_by"] = "sunglasses"
     return prof
 
 
@@ -2651,6 +3730,8 @@ def make_character(cid: str, params: CharParams | dict | None = None, out_root: 
         b["pivot"] = [round(v, 2) for v in b["pivot"]]
 
     face_on = p.face != "none"
+    batch3 = bool(meta and meta.get("batch3"))
+    batch4 = bool(meta and meta.get("batch4")) and not g.ent
     # ---- thứ tự vẽ (sau cùng ở trên)
     w.part("hair_back", "head", lambda c: draw_hair_back(c, g), view="front")
     w.part("backpack_behind", "torso", lambda c: draw_backpack_behind(c, g), view="front")
@@ -2666,15 +3747,18 @@ def make_character(cid: str, params: CharParams | dict | None = None, out_root: 
     w.part("head", "head", lambda c: draw_head(c, g), view="front", region=hr)
     w.part("face", "head", lambda c: draw_face(c, g), view="front")
     if face_on:
-        w.slot("eyes", "head", {k: (lambda c, k=k: draw_eyes(c, g, k)) for k in EYE_STATES}, view="front", region=hr)
-        mouth_states = list(MOUTH_VISEMES) + list(MOUTH_EXTRA)
+        eye_states = list(EYE_STATES) + (list(BATCH4_EYES) if batch4 else [])
+        w.slot("eyes", "head", {k: (lambda c, k=k: draw_eyes(c, g, k)) for k in eye_states}, view="front", region=hr)
+        mouth_states = list(MOUTH_VISEMES) + list(MOUTH_EXTRA) + (list(BATCH3_MOUTHS) if batch3 and not g.ent else [])
         w.slot("mouth", "head", {k: (lambda c, k=k: draw_mouth(c, g, k)) for k in mouth_states}, view="front", region=hr)
+        if "face_mask" in p.accessories:   # khẩu trang đè lên slot miệng
+            w.part("mask", "head", lambda c: draw_mask(c, g), view="front", region=hr)
     brows_states = {k: (lambda c, k=k: draw_brows(c, g, k)) for k in BROW_STATES}
     over_face = p.hair_style == "long_over_face"
     # mũ lưỡi trai (archetype khai báo màu mũ): mày nằm DƯỚI vành mũ — chỉ ló ra khi hạ thấp (giận/nheo)
     brows_under = over_face or (p.hair_style == "cap_hidden" and bool(p.cap_color) and bool(meta and meta.get("library")))
     def fx_slots() -> None:
-        for fx in FX_SLOTS:
+        for fx in list(FX_SLOTS) + (list(BATCH4_FX_SLOTS) if batch4 else []):
             kind = fx[3:]
             w.slot(fx, "head", {"on": (lambda c, kind=kind: draw_fx(c, g, kind))}, view="front", default="off",
                    region=hr)
@@ -2708,7 +3792,12 @@ def make_character(cid: str, params: CharParams | dict | None = None, out_root: 
     wx, wy = g.wrist("r")
     exprs = {}
     library = bool(meta and meta.get("library"))
-    for k, v in list(EXPRESSIONS.items()) + (list(EXTRA_EXPRESSIONS.items()) if library and face_on and not g.ent else []):
+    extra = list(EXTRA_EXPRESSIONS.items()) if library and face_on and not g.ent else []
+    if batch3 and face_on and not g.ent:
+        extra += list(BATCH3_EXPRESSIONS.items())
+    if batch4 and face_on:   # lô 4: cringe (chỉ dùng slot sẵn có) + biểu cảm mới
+        extra += [("cringe", BATCH3_EXPRESSIONS["cringe"])] + list(BATCH4_EXPRESSIONS.items())
+    for k, v in list(EXPRESSIONS.items()) + extra:
         e = dict(v)
         e["fx"] = [f for f in v["fx"] if face_on and not g.ent]
         exprs[k] = e
@@ -2719,6 +3808,8 @@ def make_character(cid: str, params: CharParams | dict | None = None, out_root: 
         "image_scale": SS,
         "canvas": [W, g.CH],
         "head_box": [round(g.U(-1.15), 1), round(g.top - (0.25 * g.hh if p.hair_style in ("spiky", "afro_curly", "bun")
+                                                         or (batch4 and (p.hair_style == "quiff_undercut" or any(
+                                                             a in p.accessories for a in ("straw_hat", "helmet"))))
                                                          else 0.06 * g.hh), 1), round(g.U(1.15), 1), round(g.chin, 1)],
         "bones": bones,
         "parts": w.parts,
@@ -2750,6 +3841,10 @@ def _ghostify(p: CharParams) -> CharParams:
     """Ma: khử bão hoà lạnh mọi màu áo (trừ váy đỏ — phần tử bão hoà duy nhất), da lạnh."""
     q = p
     keep = {"dress", "dress_dark", "trim"} if p.outfit_type in ("ao_dai", "red_traditional_dress") else set()
+    if p.outfit_type == "suspender_skirt":   # lô 3: váy yếm đỏ là phần tử bão hoà duy nhất
+        keep = {"skirt", "suspenders"}
+    elif p.outfit_type == "trench_coat":     # giày đỏ
+        keep = {"shoes"}
     tint = "#9fb0c8"
     amt = {"water": 0.55, "pale": 0.5, "frozen": 0.6, "entity": 1.0}.get(p.ghost or "", 0.5)
     q.colors = {k: (v if k in keep else desat(v, amt, tint, 0.12)) for k, v in p.colors.items()}
@@ -2764,6 +3859,32 @@ def _ghostify(p: CharParams) -> CharParams:
 def draw_glasses(c: skia.Canvas, g: Geo) -> None:
     acc = g.p.accessories
     if g.p.face == "none":
+        return
+    if "sunglasses" in acc:   # lô 4: kính râm tròng tối, gọng vàng mảnh, ánh phản chiếu chéo
+        lw = g.rx * 0.035
+        bs = []
+        for s in ("l", "r"):
+            ex, ey = g.ex[s], g.ey
+            sg = -1 if s == "l" else 1
+            lens = smooth([(ex - g.erx * 2.9, ey - g.ery * 1.5), (ex + g.erx * 2.9, ey - g.ery * 1.5),
+                           (ex + g.erx * (2.7 if sg < 0 else 2.9), ey + g.ery * 0.6), (ex, ey + g.ery * 1.9),
+                           (ex - g.erx * (2.9 if sg < 0 else 2.7), ey + g.ery * 0.6)], tension=0.35)
+            c.drawPath(lens, paint("#17181d", 0.96))
+            c.drawPath(lens, pen("#c9a243", lw))
+            b = lens.getBounds()
+            c.save()
+            c.clipPath(lens, doAntiAlias=True)
+            c.drawPath(poly([(b.left() + b.width() * 0.45, b.top()), (b.left() + b.width() * 0.7, b.top()),
+                             (b.left() + b.width() * 0.35, b.bottom()), (b.left() + b.width() * 0.1, b.bottom())]),
+                       paint("#ffffff", 0.18))
+            c.restore()
+            bs.append(b)
+        bl, br = bs
+        y = bl.top() + bl.height() * 0.25
+        seam(c, [(bl.right(), y), (br.left(), y)], "#c9a243", lw, curve=False)
+        for b, s in ((bl, -1), (br, 1)):
+            x = b.left() if s < 0 else b.right()
+            seam(c, [(x, y), (g.U(s * 0.98), g.V(0.06))], "#c9a243", lw * 0.9, curve=False)
         return
     rect = any(a in acc for a in ("glasses_black_rect", "glasses", "glasses_thin"))
     gold = "reading_glasses_gold_round" in acc
@@ -2790,6 +3911,26 @@ def draw_glasses(c: skia.Canvas, g: Geo) -> None:
     for b, s in ((bl, -1), (br, 1)):
         x = b.left() if s < 0 else b.right()
         seam(c, [(x, y), (g.U(s * 0.98), g.V(0.08))], fr, lw * 0.8, curve=False)
+    if "cracked_lens" in acc:   # lô 4: tròng phải màn hình nứt hình sao
+        b = br
+        ox, oy = b.left() + b.width() * 0.62, b.top() + b.height() * 0.4
+        c.save()
+        c.clipPath(rrect(b.left(), b.top(), b.right(), b.bottom(), g.ery * 0.6), doAntiAlias=True)
+        for ang, ln in ((-160, 0.9), (-80, 0.6), (-20, 0.7), (40, 0.8), (110, 0.75), (190, 0.5)):
+            a = math.radians(ang)
+            L = b.width() * ln
+            mid = (ox + math.cos(a) * L * 0.5 + math.sin(a) * L * 0.08, oy + math.sin(a) * L * 0.5 - math.cos(a) * L * 0.08)
+            c.drawPath(poly([(ox, oy), mid, (ox + math.cos(a) * L, oy + math.sin(a) * L)], close=False),
+                       pen("#ffffff", lw * 0.45, 0.9))
+        c.restore()
+    if "taped_glasses" in acc:   # lô 4: băng dính trắng quấn bản lề gọng trái màn hình
+        x = bl.left()
+        tp = rrect(x - g.rx * 0.07, y - g.ery * 0.7, x + g.rx * 0.07, y + g.ery * 0.7, g.rx * 0.02)
+        c.drawPath(tp, paint("#f1efe6"))
+        c.drawPath(tp, pen("#b9b4a6", g.rx * 0.012, 0.8))
+        for k in (-0.35, 0.0, 0.35):
+            seam(c, [(x - g.rx * 0.07, y + g.ery * k), (x + g.rx * 0.07, y + g.ery * (k + 0.12))], "#c9c4b6", g.rx * 0.01,
+                 0.8, curve=False)
     if "eyeglass_chain_dotted" in acc:
         dots = pen("#d8b85a", g.rx * 0.035)
         dots.setPathEffect(skia.DashPathEffect.Make([0.1, g.rx * 0.07], 0))
@@ -2838,7 +3979,7 @@ def params_from_archetype(a: dict) -> CharParams:
     p.eye_bags = bool(tags & {"eye_bags", "tired"})
     p.wrinkles = "wrinkles" in tags or p.age == "old"
     fh = hair.get("facial_hair")
-    p.facial_hair = fh if fh in ("white_goatee", "goatee", "mustache", "stubble") else (
+    p.facial_hair = fh if fh in ("white_goatee", "goatee", "mustache", "stubble", "walrus") else (
         "stubble" if "stubble" in tags else ("goatee" if "beard" in tags else "none"))
     if "entity" in tags:
         p.face = "entity"
@@ -2884,6 +4025,16 @@ def make_archetype(archetype_id: str, out_root: Path = CHARACTERS, preview: bool
         if arch.get("description_en"):
             meta["description_en"] = arch["description_en"]
             meta["description"] = f"{meta['description']} | EN: {arch['description_en']}"
+        if arch.get("batch") == 3:   # lô 3: khẩu hình/biểu cảm mới chỉ sinh cho nhân vật lô này
+            meta["batch3"] = True
+            if arch.get("label_en"):
+                meta["label_en"] = arch["label_en"]
+        if arch.get("batch") == 4:   # lô 4: mắt cười híp / gân giận to / lớp mặt bầm chỉ sinh cho lô này
+            meta["batch4"] = True
+            if arch.get("label_en"):
+                meta["label_en"] = arch["label_en"]
+            if arch.get("variant_of"):
+                meta["variant_of"] = arch["variant_of"]
     return make_character(archetype_id, p, out_root, meta=meta, preview=preview)
 
 

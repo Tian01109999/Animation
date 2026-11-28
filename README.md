@@ -43,16 +43,8 @@ App dùng cùng Firebase project `media-srt-translator` với 24Media SRT Transl
 
 Giao diện và API yêu cầu đăng nhập. Phiên ghi nhớ được mã hóa bằng Windows DPAPI trong LocalAppData của người dùng, kiểm tra lại quyền khi khôi phục và định kỳ khi sử dụng; mật khẩu không được lưu. Đăng nhập 24Media độc lập với đăng nhập ChatGPT.
 
-## Cập nhật assets tự động thông báo
+## Cập nhật trong app
 
-Repository công khai: [Tian01109999/Animation](https://github.com/Tian01109999/Animation). Không cần token, tài khoản GitHub hoặc cấu hình trước để kiểm tra và tải cập nhật. Đăng nhập 24Media vẫn dùng để mở giao diện làm phim.
+App kiểm tra bản mới lúc mở và mỗi 4 giờ. Khi có bản mới, cửa sổ thông báo hiện phiên bản và nội dung thay đổi; chọn Có để mở trang **Cập nhật**, xem nội dung thay đổi rồi bấm **Cập nhật ngay**. App tự tải gói, kiểm tra mã SHA-256 và cài cả mã ứng dụng, EXE lẫn kho assets; file assets đã bị gỡ trong bản mới cũng được xóa. Dự án, cấu hình, runtime và tài khoản không bị thay đổi. Sau khi cài xong, đóng app và mở lại. Có thể kiểm tra thủ công bằng nút **Cập nhật** trên thanh trên cùng. Khi mất mạng, app vẫn mở bình thường và kiểm tra lại sau.
 
-Phiên bản kho assets độc lập với phiên bản app. App kiểm tra các Release `assets-vX.Y.Z` lúc mở và mỗi 4 giờ; cửa sổ cập nhật tự xuất hiện khi có kho mới hơn. Chọn Có để mở trang tải, chọn Không để tiếp tục làm việc; cùng một phiên bản chỉ nhắc một lần trong mỗi lần chạy. Nhấn **Cập nhật assets → Kiểm tra ngay** nếu muốn kiểm tra thủ công. Khi mất mạng hoặc GitHub giới hạn lượt truy cập, app vẫn mở bình thường và kiểm tra lại ở lần sau. Release app thông thường không kích hoạt thông báo assets.
-
-Người dùng tải **StoryToon-Assets-X.Y.Z.zip**, đóng app, giải nén vào thư mục chứa EXE và đồng ý ghi đè file trùng trong `assets/`, rồi mở lại. ZIP có sẵn thư mục `assets/`; không giải nén vào bên trong thư mục assets lần nữa. Gói không chứa EXE, runtime, dự án, cấu hình hoặc tài khoản. File riêng không trùng tên được giữ lại; file có sẵn đã chỉnh sửa có thể bị thay thế. Sao lưu kho nếu cần giữ các chỉnh sửa này. App chưa tự cài gói; người dùng giải nén thủ công. Marker `assets/.storytoon-assets-version.json` đi kèm gói giúp app biết đã cập nhật.
-
-Người dùng các bản thử nghiệm 0.2.x nên tải bản chính thức 1.0.0 đầy đủ, giải nén vào thư mục riêng và chuyển dự án/cấu hình cần giữ. Bản 1.0.0 bỏ hoàn toàn yêu cầu nhập token của các bản thử nghiệm.
-
-Để phát hành kho mới: sửa/thêm nội dung trong `assets/`, chạy `runtime/python/python.exe -X utf8 tools/prepare_assets_release.py --version 1.1.0` (tăng phiên bản mỗi lần phát hành). Commit assets và marker phiên bản, push lên main; tạo Release ổn định với tag **assets-v1.1.0**, tải ZIP và SHA256 từ `dist/` lên và đặt `--latest=false`. App chỉ nhận gói khi cả ZIP lẫn SHA256 đã upload xong và Release đã publish. Giữ các kho đã phát hành bất biến; sửa nội dung thì tăng phiên bản. Không cần build EXE hoặc đóng gói Python/runtime khi chỉ thay assets.
-
-Nếu thay mã app, cập nhật phiên bản Python và desktop đồng bộ, build EXE bằng `tools/build_root_desktop.py`; tạo bản vá nhỏ bằng `tools/prepare_app_patch.py` hoặc bản Portable đầy đủ bằng `tools/prepare_release.py`. Các công cụ này chạy qua Python portable đi kèm. Với bản vá nhỏ, chỉ giải nén lên app có đủ runtime tương thích.
+Để phát hành bản mới: tăng `__version__` trong `storytoon/__init__.py` và phiên bản trong `desktop/StoryToon.cs`, build EXE bằng `tools/build_root_desktop.py`, viết nội dung thay đổi vào `docs/release_notes/X.Y.Z.md`, rồi chạy `runtime/python/python.exe -X utf8 tools/prepare_update.py --notes docs/release_notes/X.Y.Z.md`. Tạo Release ổn định tag **vX.Y.Z**, nội dung Release là nội dung thay đổi, tải lên `StoryToon-Update-X.Y.Z.zip` và `.sha256` từ `dist/`. App chỉ nhận bản đã publish đủ cả hai file. Bản Portable đầy đủ cho người dùng mới vẫn tạo bằng `tools/prepare_release.py`.

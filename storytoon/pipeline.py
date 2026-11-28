@@ -234,14 +234,29 @@ def step_breakdown(pr: Project, say: Runner, *, force: bool = False, model: str 
         return load_storyboard(pr)
     from . import chatgpt
     generator, name = chatgpt.generate, 'GPT / ChatGPT'
+    # Lưu từng đoạn đã tách xong; lần chạy sau (cùng kịch bản) chỉ tách tiếp các đoạn còn thiếu.
+    ckpt_file = _breakdown_ckpt(pr)
+    done_parts: list[dict] = list(_read_ckpt(pr, source_hash).get('parts', []))
+
+    def save_part(i: int, n: int, dump: dict) -> None:
+        done_parts[i:] = [dump]
+        tmp = ckpt_file.with_suffix('.tmp')
+        tmp.write_text(json.dumps({'input': source_hash, 'chunks': n, 'parts': done_parts},
+                                  ensure_ascii=False), encoding='utf-8')
+        tmp.replace(ckpt_file)
+        say(f"Đã xong và lưu đoạn {i + 1}/{n}.", (i + 1) / max(1, n))
+
     say(f"Gửi kịch bản ({len(text)} ký tự) cho {name}…", 0.0)
     try:
         sb = breakdown(text, existing_characters=_existing_ids(paths.CHARACTERS, "character.json"),
                        existing_locations=_existing_ids(paths.LOCATIONS, "location.json"), model=model,
                        on_progress=lambda i, n, m: say(m, (i - 1) / max(1, n)),
-                       generate_text=generator, provider_name=name)
+                       generate_text=generator, provider_name=name,
+                       done_parts=list(done_parts), on_part=save_part)
     except (BreakdownError, RuntimeError) as e:
-        raise PipelineError(f"Tách kịch bản thất bại: {e}") from e
+        kept = (f" Đã lưu {len(done_parts)} đoạn xong — chạy lại sẽ tiếp tục từ đoạn {len(done_parts) + 1}."
+                if done_parts else "")
+        raise PipelineError(f"Tách kịch bản thất bại: {e}{kept}") from e
     from .asset_library import assign
     sb.style = 'cutout'
     assign(sb)
@@ -251,8 +266,40 @@ def step_breakdown(pr: Project, say: Runner, *, force: bool = False, model: str 
         shutil.copy2(pr.storyboard, pr.storyboard.with_name("storyboard.bak.json"))
     save_storyboard(pr, sb)
     _State(pr).set('breakdown',input=source_hash)
+    ckpt_file.unlink(missing_ok=True)
     say("Đã ghi storyboard.json — " + storyboard_stats(sb).summary(), 1.0)
     return sb
+
+
+def _breakdown_ckpt(pr: Project) -> Path:
+    return pr.dir / 'breakdown_parts.json'
+
+
+def _read_ckpt(pr: Project, source_hash: str) -> dict:
+    """Checkpoint các đoạn đã tách của đúng kịch bản này ({} nếu không có/không khớp)."""
+    try:
+        saved = json.loads(_breakdown_ckpt(pr).read_text(encoding='utf-8'))
+        if saved.get('input') == source_hash and isinstance(saved.get('parts'), list):
+            return saved
+    except (OSError, ValueError, AttributeError):
+        pass
+    return {}
+
+
+def breakdown_partial(pr: Project) -> tuple[Storyboard | None, int, int] | None:
+    """Kết quả tách dở của kịch bản hiện tại: (storyboard tạm, số đoạn xong, tổng số đoạn).
+
+    None nếu không có phần tách dở khớp với script.txt hiện tại.
+    """
+    if not pr.script.exists():
+        return None
+    saved = _read_ckpt(pr, _sha(pr.script.read_text(encoding='utf-8'), 'gpt-script-v2'))
+    parts = saved.get('parts') or []
+    if not parts:
+        return None
+    from .script.breakdown import preview_parts
+    total = int(saved.get('chunks') or len(parts))
+    return preview_parts(parts), len(parts), max(total, len(parts))
 
 
 def _existing_ids(root: Path, meta: str) -> list[str]:

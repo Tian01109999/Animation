@@ -4,6 +4,7 @@ Chạy:
   runtime\\venv\\Scripts\\python.exe -X utf8 tools\\make_location_library.py              (tất cả)
   ... --locations | --inserts | --sheets       (chỉ phần đó)
   ... --only cua_hang_loi_ke wall_clock        (chỉ các id này)
+  ... --batch2 | --batch3 | --batch4           (chỉ lô 2 / 3 / 4 + logs/asset_review/batch{2,3,4}_locations.png)
 
 Ra:  assets/locations/<id>[__<biến thể>]/  (bg.png, bg_far/mid/near.png, location.json)
      assets/locations/<id>/                    (cảnh thư viện mở rộng locgen.LIBRARY_SCENES: provenance
@@ -90,6 +91,11 @@ def locations_sheet(root: Path = LOCATIONS, out: Path = REVIEW / "locations_shee
 
 BATCH2 = ["bep_nha_hang", "kho_lanh", "san_thuong_binh_minh", "hem_nha_pho_dien", "phong_truong_cong_an", "phong_icu",
           "cho_co_mai", "phong_dieu_tra", "ben_go_nha_san", "tiem_tap_hoa_dem", "toa_an", "phong_ky_tuc_xa"]
+BATCH3 = ["nha_ve_sinh_nu_truong", "lop_hoc_cu_dem", "truong_hoc_dem", "sanh_tu_giay_truong", "pho_dan_cu_may_ban_nuoc",
+          "loi_di_dai_dem", "nha_tro_hai_tang", "phong_chieu_tatami", "bep_quan_mi", "phong_ngu_tv_cu"]
+BATCH4 = ["tang_trung_tam_dien_thoai", "sanh_thang_cuon", "pho_nha_pho_dem", "ham_xe_b2", "quan_mi_xe_day_dem",
+          "tiem_giat_24h", "trung_tam_du_lieu_dem", "phong_may_chu", "phong_dieu_khien_bao_dong", "tram_xe_buyt_binh_minh",
+          "song_binh_minh_thanh_pho", "quan_net_cu"]
 
 
 def batch_sheet(ids: list[str], root: Path = LOCATIONS, out: Path = REVIEW / "batch2_locations.png") -> Path:
@@ -118,6 +124,8 @@ def main() -> None:
     ap.add_argument("--sheets", action="store_true")
     ap.add_argument("--only", nargs="*")
     ap.add_argument("--batch2", action="store_true", help="chỉ vẽ 12 địa điểm lô 2 + logs/asset_review/batch2_locations.png")
+    ap.add_argument("--batch3", action="store_true", help="chỉ vẽ 10 địa điểm lô 3 + logs/asset_review/batch3_locations.png")
+    ap.add_argument("--batch4", action="store_true", help="chỉ vẽ 12 địa điểm lô 4 + logs/asset_review/batch4_locations.png")
     a = ap.parse_args()
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
     if a.batch2:
@@ -125,6 +133,18 @@ def main() -> None:
         paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH2)
         print(f"lô 2: {len(paths)} thư mục ({time.time() - t:.1f}s)")
         print("sheet:", batch_sheet(BATCH2))
+        return
+    if a.batch3:
+        t = time.time()
+        paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH3)
+        print(f"lô 3: {len(paths)} thư mục ({time.time() - t:.1f}s)")
+        print("sheet:", batch_sheet(BATCH3, out=REVIEW / "batch3_locations.png"))
+        return
+    if a.batch4:
+        t = time.time()
+        paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH4)
+        print(f"lô 4: {len(paths)} thư mục ({time.time() - t:.1f}s)")
+        print("sheet:", batch_sheet(BATCH4, out=REVIEW / "batch4_locations.png"))
         return
     every = not (a.locations or a.inserts or a.sheets)
     if every or a.locations:

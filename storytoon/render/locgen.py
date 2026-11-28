@@ -13,6 +13,14 @@
   hem_nha_pho_dien [+__fog], phong_truong_cong_an, phong_icu, cho_co_mai, phong_dieu_tra, ben_go_nha_san,
   tiem_tap_hoa_dem, toa_an, phong_ky_tuc_xa). Catalog có `name_en`/`description_en` -> nhãn & mô tả song ngữ;
   `library_variants: true` -> vẽ mọi biến thể thời gian (biến thể mới 'dawn'/'fog' quy về schema dusk/day).
+- Lô 3 (docs/reference_batch3_analysis.md): 10 cảnh thư viện mới (nha_ve_sinh_nu_truong [+__closeup],
+  lop_hoc_cu_dem [+__side], truong_hoc_dem, sanh_tu_giay_truong, pho_dan_cu_may_ban_nuoc [+__day], loi_di_dai_dem,
+  nha_tro_hai_tang [+__day], phong_chieu_tatami [+__day], bep_quan_mi, phong_ngu_tv_cu). Biến thể khung hình
+  'closeup'/'side' là cảnh đêm (TOD_SCHEMA). Chữ nướng vào pixel (số buồng, COLD/HOT, thực đơn, số phòng) là tiếng Anh.
+- Lô 4 (docs/reference_batch4_analysis.md): 12 cảnh thư viện mới (tang_trung_tam_dien_thoai [+__angle/__corridor/
+  __closed], sanh_thang_cuon, pho_nha_pho_dem [+__rain], ham_xe_b2, quan_mi_xe_day_dem, tiem_giat_24h [+__exterior],
+  trung_tam_du_lieu_dem, phong_may_chu, phong_dieu_khien_bao_dong, tram_xe_buyt_binh_minh, song_binh_minh_thanh_pho,
+  quan_net_cu). Mặt tiền ki-ốt/tủ rack vẽ trong hệ cục bộ rồi chiếu phối cảnh (`_on_quad`); chữ nướng ghi qua `_Bake`.
 
 Bản quyền: chỉ học phong cách/ngữ pháp từ khung tham khảo; mọi biển hiệu, huy hiệu, màu thương hiệu (palette
 `brand_store` xanh lục bảo/kem/cam), chữ đều là bịa mới, chung chung, bối cảnh Việt Nam.
@@ -4380,6 +4388,3087 @@ def scene_phong_ky_tuc_xa(tod: str) -> Scene:
                  lights=[{"x": 1920, "y": 310, "color": "#fff1c8"}])
 
 
+# =================================================================== LÔ 3 (docs/reference_batch3_analysis.md)
+# 10 loại cảnh mới (bối cảnh truyện ma học đường / phố dân cư đêm), vẽ GỐC bằng code. Không cắt/đồ lại khung tham
+# khảo; không tên trường/tiệm thật, không logo. Chữ nướng vào pixel (số buồng, nhãn máy bán hàng, thực đơn, số
+# phòng, biển địa chỉ) là TIẾNG ANH / chữ số; chữ biển lớn ("GIRLS 3F", tên trường) là lớp `signs`.
+def _moon(c, x, y, r, col="#f1ead2", a=1.0) -> None:
+    glow(c, x, y, r * 7, col, 0.3 * a)
+    glow(c, x, y, r * 2.2, col, 0.45 * a)
+    c.drawCircle(x, y, r, fill(col, a))
+    for (dx, dy, rr) in ((-0.32, -0.18, 0.2), (0.28, 0.3, 0.14), (0.1, -0.42, 0.09)):
+        c.drawCircle(x + dx * r, y + dy * r, rr * r, fill(shade(col, -0.08), a))
+
+
+def _light_cone(c, x, y, w0, fx, fy, w1, col, a=0.14) -> None:
+    """Nón sáng hình thang mờ dần về đáy."""
+    p = lin_paint((x, y), (x, fy), [(col, a), (col, a * 0.25)])
+    c.drawPath(poly([(x - w0, y), (x + w0, y), (fx + w1, fy), (fx - w1, fy)]), p)
+
+
+def _streetlamp(c, x, base, h, k, lit=True, arm=1, col="#2a2d36", light="#ffe2a0", cone=True, pool_y=None,
+                pole=True) -> tuple:
+    """Cột đèn đường cần cong. k = px/mét, h = chiều cao (m). pole=False: chỉ cần + đầu đèn (gắn cột điện).
+    Trả về (x, y) đầu đèn."""
+    top = base - h * k
+    if pole:
+        c.drawRect(_R(x - 0.075 * k, top, x + 0.075 * k, base), fill(col))
+        c.drawRect(_R(x - 0.13 * k, base - 0.35 * k, x + 0.13 * k, base), fill(shade(col, 0.08)))
+    else:
+        c.drawRect(_R(x - 0.1 * k, top + 0.15 * k, x + 0.1 * k, top + 0.4 * k), fill(col))
+    hx = x + arm * 0.95 * k
+    p = skia.Path()
+    p.moveTo(x, top + 0.25 * k)
+    p.quadTo(x, top - 0.12 * k, x + arm * 0.5 * k, top - 0.1 * k)
+    p.lineTo(hx, top - 0.06 * k)
+    c.drawPath(p, stroke(col, max(3.0, 0.06 * k)))
+    c.drawPath(rrect(hx - 0.3 * k, top - 0.12 * k, hx + 0.3 * k, top + 0.03 * k, 0.06 * k), fill(col))
+    c.drawPath(oval(hx, top + 0.04 * k, 0.24 * k, 0.05 * k), fill(light if lit else "#8a8a80"))
+    if lit:
+        fy = pool_y if pool_y is not None else base
+        if cone:
+            _light_cone(c, hx, top + 0.05 * k, 0.24 * k, hx, fy, 1.7 * k, light, 0.13)
+        ellipse_glow(c, hx, fy, 1.9 * k, 0.32 * k, light, 0.45)
+        glow(c, hx, top + 0.05 * k, 1.3 * k, light, 0.55)
+    return hx, top
+
+
+def _guard_stripes(c, l, t, r, b, k) -> None:
+    """Ống bảo vệ sọc vàng-đen (chân cột điện)."""
+    c.save()
+    c.clipRect(_R(l, t, r, b))
+    c.drawRect(_R(l, t, r, b), fill("#e8c23a"))
+    step = 0.22 * k
+    y = t - (r - l)
+    while y < b + (r - l):
+        c.drawPath(poly([(l, y), (r, y - (r - l) * 0.6), (r, y - (r - l) * 0.6 + step * 0.5), (l, y + step * 0.5)]),
+                   fill("#1d1d22"))
+        y += step
+    c.restore()
+
+
+def _util_pole(c, x, base, h, k, plate: str | None, baked: list, col="#8e8a84", trans=False) -> float:
+    """Cột điện bê tông: xà ngang, sứ cách điện, ống sọc vàng-đen, biển địa chỉ xanh (chữ số)."""
+    top = base - h * k
+    w = 0.15 * k
+    quad(c, [(x - w * 0.75, top), (x + w * 0.75, top), (x + w, base), (x - w, base)], col)
+    quad(c, [(x - w * 0.75, top), (x - w * 0.35, top), (x - w * 0.5, base), (x - w, base)], shade(col, 0.1))
+    for (dy, half) in ((0.45, 0.85), (1.0, 0.65)):
+        y = top + dy * k
+        c.drawRect(_R(x - half * k, y, x + half * k, y + 0.07 * k), fill(shade(col, -0.3)))
+        for sx in (-half + 0.08, -half * 0.4, half * 0.4, half - 0.08):
+            c.drawPath(rrect(x + sx * k - 0.03 * k, y - 0.11 * k, x + sx * k + 0.03 * k, y, 0.02 * k), fill("#d9d6cc"))
+    if trans:
+        c.drawPath(rrect(x + w, top + 1.4 * k, x + w + 0.42 * k, top + 2.2 * k, 0.08 * k), fill(shade(col, -0.15)))
+        c.drawRect(_R(x + w, top + 1.5 * k, x + w + 0.42 * k, top + 1.56 * k), fill(shade(col, -0.35)))
+    _guard_stripes(c, x - w * 1.25, base - 1.9 * k, x + w * 1.25, base - 0.15 * k, k)
+    if plate:
+        py = base - 2.55 * k
+        c.drawPath(rrect(x - w * 1.1, py - 0.26 * k, x + w * 1.1, py + 0.26 * k, 0.03 * k), fill("#2f5fa0"))
+        c.drawPath(rrect(x - w * 1.1, py - 0.26 * k, x + w * 1.1, py + 0.26 * k, 0.03 * k), stroke("#e8eef4", max(2.0, 0.015 * k)))
+        size = 0.15 * k
+        text_center(c, plate, x, py, size, "#f4f6f8", "extrabold", max_w=w * 1.9)
+        baked.append(_baked(plate, x, py, size))
+    return top
+
+
+def _vending(c, l, base, w, h, body, night: bool, seed: int, baked: list, rows=("COLD", "COLD", "HOT")) -> None:
+    """Máy bán nước nhìn thẳng: tủ kính 3 hàng lon chung chung + dải nhãn COLD/HOT, khe xu, màn số 000."""
+    rng = random.Random(seed)
+    r, t = l + w, base - h
+    c.drawPath(oval(l + w / 2, base, w * 0.6, w * 0.05), fill("#000000", 0.35))
+    c.drawPath(rrect(l, t, r, base, w * 0.03), fill(body))
+    c.drawRect(_R(r - w * 0.05, t + w * 0.03, r, base), fill(shade(body, -0.2)))
+    c.drawRect(_R(l, t, r, t + h * 0.035), fill(shade(body, 0.15)))
+    wl, wt, wr, wb = l + w * 0.07, t + h * 0.06, r - w * 0.1, t + h * 0.55
+    c.drawRect(_R(wl, wt, wr, wb), fill("#eef4f8" if night else "#dfe7ec"))
+    rh = (wb - wt) / len(rows)
+    can_cols = ["#d8423a", "#3a78c2", "#f3c94e", "#4fa35a", "#f08a2c", "#7a5aa0", "#e8e4dc", "#2b2d33"]
+    n = 6
+    cw = (wr - wl) / n
+    for i, lab in enumerate(rows):
+        y0 = wt + i * rh
+        y1 = y0 + rh * 0.72
+        for j in range(n):
+            cx = wl + cw * (j + 0.5)
+            col = rng.choice(can_cols)
+            ch = (y1 - y0) * rng.uniform(0.62, 0.8)
+            c.drawPath(rrect(cx - cw * 0.26, y1 - ch, cx + cw * 0.26, y1, cw * 0.08), fill(col))
+            c.drawRect(_R(cx - cw * 0.26, y1 - ch * 0.62, cx + cw * 0.26, y1 - ch * 0.36), fill(shade(col, 0.45)))
+            c.drawRect(_R(cx - cw * 0.2, y1 - ch - cw * 0.05, cx + cw * 0.2, y1 - ch + cw * 0.03), fill("#c9ccd2"))
+        sc = "#2f6fd0" if lab == "COLD" else "#d8352e"
+        c.drawRect(_R(wl, y1 + rh * 0.04, wr, y0 + rh * 0.98), fill(sc))
+        size = rh * 0.16
+        for j in range(n):
+            cx = wl + cw * (j + 0.5)
+            text_center(c, lab, cx, y1 + rh * 0.15, size, "#ffffff", "extrabold", max_w=cw * 0.86)
+        baked.append(_baked(lab, wl + cw * 0.5, y1 + rh * 0.15, size))
+    reflections(c, wl, wt, wr, wb, 3, 0.14, seed=seed)
+    c.drawRect(_R(wl, wt, wr, wb), stroke(shade(body, -0.35), max(3.0, w * 0.012)))
+    # bảng điều khiển
+    pl = r - w * 0.3
+    c.drawPath(rrect(pl, wb + h * 0.04, r - w * 0.1, wb + h * 0.2, w * 0.015), fill(shade(body, -0.25)))
+    c.drawPath(rrect(pl + w * 0.03, wb + h * 0.055, r - w * 0.13, wb + h * 0.095, w * 0.01), fill("#101214"))
+    size = h * 0.03
+    text_center(c, "000", pl + (r - w * 0.1 - pl) / 2, wb + h * 0.075, size, "#ff5a3a", "extrabold")
+    baked.append(_baked("000", pl + (r - w * 0.1 - pl) / 2, wb + h * 0.075, size))
+    c.drawPath(rrect(pl + w * 0.07, wb + h * 0.12, pl + w * 0.1, wb + h * 0.17, w * 0.008), fill("#1a1a1e"))
+    c.drawCircle(pl + w * 0.16, wb + h * 0.145, w * 0.02, fill("#c9ccd2"))
+    c.drawPath(rrect(l + w * 0.1, wb + h * 0.06, pl - w * 0.06, wb + h * 0.24, w * 0.02), fill(shade(body, 0.12)))
+    for j in range(3):
+        c.drawCircle(l + w * 0.2 + j * w * 0.12, wb + h * 0.15, w * 0.035, fill(shade(body, 0.3)))
+    # khe lấy hàng
+    c.drawPath(rrect(l + w * 0.14, base - h * 0.2, r - w * 0.2, base - h * 0.08, w * 0.02), fill("#141518"))
+    c.drawRect(_R(l + w * 0.14, base - h * 0.2, r - w * 0.2, base - h * 0.17), fill(shade(body, -0.35)))
+    c.drawRect(_R(l + w * 0.05, base - h * 0.05, r - w * 0.05, base), fill(shade(body, -0.4)))
+    if night:
+        glow(c, (wl + wr) / 2, (wt + wb) / 2, w * 1.1, "#e8f4ff", 0.45)
+
+
+def _block_wall(c, l, t, r, b, col, bw=150.0, bh=75.0) -> None:
+    c.drawRect(_R(l, t, r, b), fill(col))
+    y = t + bh * 0.4
+    row = 0
+    while y < b:
+        c.drawLine(l, y, r, y, stroke(shade(col, -0.16), 4))
+        x = l + (bw / 2 if row % 2 else 0)
+        while x < r:
+            c.drawLine(x, y, x, min(b, y + bh), stroke(shade(col, -0.16), 4))
+            x += bw
+        y += bh
+        row += 1
+    c.drawRect(_R(l - 10, t - 26, r + 10, t + 4), fill(shade(col, 0.12)))
+    c.drawRect(_R(l - 10, t + 4, r + 10, t + 14), fill(shade(col, -0.25)))
+
+
+def _curved_mirror(c, x, base, k, col="#e8742a") -> None:
+    """Gương cầu lồi giao thông: cột cam + gương tròn viền cam."""
+    top = base - 2.9 * k
+    c.drawRect(_R(x - 0.045 * k, top, x + 0.045 * k, base), fill(col))
+    c.drawRect(_R(x - 0.045 * k, top, x - 0.015 * k, base), fill(shade(col, 0.15)))
+    my = top - 0.1 * k
+    r = 0.42 * k
+    c.drawCircle(x, my, r * 1.12, fill(col))
+    c.drawCircle(x, my, r, rad_paint(x - r * 0.3, my - r * 0.3, r * 1.4, ["#dfe8f0", "#7f8ea0", "#3a4250"]))
+    c.save()
+    c.clipPath(circle(x, my, r))
+    c.drawPath(oval(x, my + r * 0.5, r * 1.1, r * 0.35), fill("#4a4c58", 0.6))
+    quad(c, [(x - r, my - r * 0.2), (x - r * 0.6, my - r), (x - r * 0.4, my - r), (x - r, my + 0.05 * r)], "#ffffff", 0.3)
+    c.restore()
+    c.drawRect(_R(x - 0.06 * k, my + r * 1.05, x + 0.06 * k, my + r * 1.35), fill(shade(col, -0.2)))
+
+
+def _shrine_gate(c, x, base, k, col="#c8452e", baked: list | None = None) -> None:
+    """Cổng đền nhỏ kiểu chung (2 cột, 2 xà, mái cong) + bảng 'SHRINE'."""
+    hh, half = 2.7, 1.15
+    for sg in (-1, 1):
+        quad(c, [(x + sg * half * k - 0.08 * k, base - hh * k), (x + sg * half * k + 0.08 * k, base - hh * k),
+                 (x + sg * (half + 0.05) * k + 0.1 * k, base), (x + sg * (half + 0.05) * k - 0.1 * k, base)], col)
+        c.drawRect(_R(x + sg * (half + 0.05) * k - 0.13 * k, base - 0.25 * k, x + sg * (half + 0.05) * k + 0.13 * k, base),
+                   fill("#2a2422"))
+    ny = base - hh * k + 0.42 * k
+    c.drawRect(_R(x - (half + 0.3) * k, ny, x + (half + 0.3) * k, ny + 0.16 * k), fill(col))
+    ty = base - hh * k
+    p = skia.Path()
+    p.moveTo(x - (half + 0.6) * k, ty - 0.38 * k)
+    p.quadTo(x, ty - 0.05 * k, x + (half + 0.6) * k, ty - 0.38 * k)
+    p.lineTo(x + (half + 0.5) * k, ty - 0.12 * k)
+    p.quadTo(x, ty + 0.15 * k, x - (half + 0.5) * k, ty - 0.12 * k)
+    p.close()
+    path_fill(c, p, "#2a2422")
+    c.drawRect(_R(x - (half + 0.35) * k, ty - 0.05 * k, x + (half + 0.35) * k, ty + 0.12 * k), fill(col))
+    c.drawRect(_R(x - 0.06 * k, ty + 0.12 * k, x + 0.06 * k, ny), fill(col))
+    pw, ph = 0.5 * k, 0.26 * k
+    py = (ty + 0.12 * k + ny) / 2
+    c.drawPath(rrect(x - pw / 2, py - ph / 2, x + pw / 2, py + ph / 2, 0.03 * k), fill("#2a2422"))
+    c.drawPath(rrect(x - pw / 2 + 0.03 * k, py - ph / 2 + 0.03 * k, x + pw / 2 - 0.03 * k, py + ph / 2 - 0.03 * k, 0.02 * k),
+               stroke("#d9a441", max(2.0, 0.015 * k)))
+    if baked is not None:
+        size = ph * 0.4
+        text_center(c, "SHRINE", x, py, size, "#f0d890", "extrabold", max_w=pw * 0.8)
+        baked.append(_baked("SHRINE", x, py, size))
+
+
+def _bicycle(c, x, base, k, col="#3a6ab0", basket=True, facing=1) -> None:
+    """Xe đạp mini nhìn ngang. x = tâm, base = mặt đất."""
+    r = 0.3 * k
+    w = max(2.0, 0.035 * k)
+    rx, fx = x - facing * 0.5 * k, x + facing * 0.5 * k
+    for wx in (rx, fx):
+        c.drawCircle(wx, base - r, r, stroke("#1d1f24", w * 1.8))
+        c.drawCircle(wx, base - r, r * 0.12, fill("#8a9098"))
+        for a in range(6):
+            ang = a * math.pi / 6
+            c.drawLine(wx - math.cos(ang) * r, base - r - math.sin(ang) * r, wx + math.cos(ang) * r,
+                       base - r + math.sin(ang) * r, stroke("#8a9098", max(1.0, w * 0.3)))
+    bx, by = x - facing * 0.05 * k, base - r
+    sx, sy = x - facing * 0.18 * k, base - 0.85 * k
+    hx, hy = fx - facing * 0.12 * k, base - 0.95 * k
+    for (a, b) in (((rx, base - r), (bx, by)), ((bx, by), (sx, sy)), ((rx, base - r), (sx + facing * 0.03 * k, sy + 0.08 * k)),
+                   ((bx, by), (hx - facing * 0.04 * k, hy + 0.25 * k)), ((sx, sy + 0.12 * k), (hx - facing * 0.04 * k, hy + 0.25 * k)),
+                   ((fx, base - r), (hx, hy))):
+        c.drawLine(*a, *b, stroke(col, w * 1.6))
+    c.drawPath(rrect(sx - 0.13 * k, sy - 0.06 * k, sx + 0.1 * k, sy + 0.02 * k, 0.03 * k), fill("#1d1f24"))
+    c.drawLine(hx - facing * 0.12 * k, hy - 0.02 * k, hx + facing * 0.05 * k, hy, stroke("#1d1f24", w * 1.6))
+    c.drawCircle(bx, by, 0.07 * k, stroke("#5a5e66", w))
+    if basket:
+        bl, br = (hx + facing * 0.02 * k, hx + facing * 0.36 * k)
+        c.drawPath(rrect(min(bl, br), hy - 0.02 * k, max(bl, br), hy + 0.24 * k, 0.03 * k), stroke("#9aa0a8", w))
+        for i in range(1, 4):
+            xx = min(bl, br) + abs(br - bl) * i / 4
+            c.drawLine(xx, hy - 0.02 * k, xx, hy + 0.24 * k, stroke("#9aa0a8", max(1.0, w * 0.5)))
+    c.drawPath(oval(x, base + 0.02 * k, 0.9 * k, 0.05 * k), fill("#000000", 0.25))
+
+
+def _num_plate(c, cx, cy, text, size, baked, bg="#f4f1e8", fg="#2b2d36", pad=0.45) -> None:
+    f = font(size, "extrabold")
+    tw = f.measureText(text)
+    c.drawPath(rrect(cx - tw / 2 - size * pad, cy - size * 0.72, cx + tw / 2 + size * pad, cy + size * 0.72, size * 0.18),
+               fill(bg))
+    text_center(c, text, cx, cy, size, fg, "extrabold")
+    baked.append(_baked(text, cx, cy, size))
+
+
+def _dust(c, l, t, r, b, n, seed, col="#f4f0e0") -> None:
+    rng = random.Random(seed)
+    for _ in range(n):
+        c.drawCircle(rng.uniform(l, r), rng.uniform(t, b), rng.choice([2.0, 3.0, 4.0, 5.5]), fill(col, rng.uniform(0.15, 0.5)))
+
+
+def _puddle(c, x, y, rx, ry, col="#8fa8c0", a=0.45) -> None:
+    c.drawPath(oval(x, y, rx, ry), fill(shade(col, -0.35), a * 0.6))
+    c.drawPath(oval(x - rx * 0.1, y - ry * 0.1, rx * 0.85, ry * 0.7), fill(col, a))
+    c.drawLine(x - rx * 0.5, y - ry * 0.2, x + rx * 0.1, y - ry * 0.35, stroke("#ffffff", max(2.0, ry * 0.12), a * 0.6))
+
+
+# ------------------------------------------------------------------- 37. nhà vệ sinh nữ trường học (+ cận cửa buồng)
+def _stall_door(c, l, t, r, b, col, num, occupied, baked, k=1.0) -> None:
+    c.drawRect(_R(l, t, r, b), fill(col))
+    c.drawRect(_R(l, t, r, t + 14 * k), fill(shade(col, 0.15)))
+    c.drawRect(_R(r - 16 * k, t, r, b), fill(shade(col, -0.16)))
+    c.drawRect(_R(l, b - 10 * k, r, b), fill(shade(col, -0.25)))
+    for hy in (t + (b - t) * 0.12, b - (b - t) * 0.12):
+        c.drawPath(rrect(l - 6 * k, hy - 34 * k, l + 22 * k, hy + 34 * k, 6 * k), fill("#b9bdc4"))
+    cx = (l + r) / 2
+    _num_plate(c, cx, t + (b - t) * 0.13, num, 92 * k, baked, bg="#f4f1e8", fg="#3a3d48", pad=0.6)
+    # khoá + chỉ báo (xanh = trống, đỏ = có người) — chỉ màu, không chữ
+    ix, iy = r - 110 * k, t + (b - t) * 0.5
+    c.drawPath(rrect(ix - 46 * k, iy - 30 * k, ix + 46 * k, iy + 30 * k, 10 * k), fill("#c9ccd2"))
+    c.drawPath(rrect(ix - 34 * k, iy - 18 * k, ix + 34 * k, iy + 18 * k, 18 * k), fill("#d8352e" if occupied else "#2f6fd0"))
+    if occupied:
+        glow(c, ix, iy, 120 * k, "#ff4a3a", 0.35)
+    c.drawPath(rrect(ix - 30 * k, iy + 60 * k, ix + 30 * k, iy + 150 * k, 12 * k), fill("#b9bdc4"))
+    c.drawPath(capsule(ix, iy + 105 * k, ix - 70 * k, iy + 105 * k, 22 * k, 18 * k), fill("#d9dce2"))
+
+
+def scene_nha_ve_sinh_nu_truong(tod: str) -> Scene:
+    close = tod == "closeup"
+    baked: list = []
+    s = new_surface()
+    c = s.getCanvas()
+    tile, tline = "#bcd3cf", "#9fb8b4"
+    door, frame = "#d29a98", "#b07a7a"
+    if not close:
+        FB = 1760
+        c.drawRect(_R(0, 0, W, FB), fill(tile))
+        _tile_grid(c, 0, 230, W, FB, 110, 110, tline, 4)
+        vgrad(c, 0, 0, W, 230, ["#6e7c7a", "#8fa09c"])
+        c.drawRect(_R(0, 220, W, 240), fill("#7f908c"))
+        rng = random.Random(37)
+        for _ in range(9):
+            c.drawPath(oval(rng.uniform(0, W), rng.uniform(300, 1500), rng.uniform(60, 200), rng.uniform(80, 260)),
+                       fill("#4a5650", rng.uniform(0.04, 0.09)))
+        # ô cửa sổ nhỏ trên cao (ánh trăng)
+        wl, wt, wr, wb = 1120, 290, 1440, 520
+        c.drawRect(_R(wl - 24, wt - 24, wr + 24, wb + 24), fill("#e8ecea"))
+        vgrad(c, wl, wt, wr, wb, ["#9fb4d8", "#dfe8f4"])
+        c.drawLine((wl + wr) / 2, wt, (wl + wr) / 2, wb, stroke("#e8ecea", 14))
+        for i in range(1, 6):
+            c.drawLine(wl, wt + i * 38, wr, wt + i * 38, stroke("#ffffff", 3, 0.25))
+        # gương + 2 bồn rửa
+        ml, mt, mr, mb = 180, 560, 1080, 1060
+        c.drawPath(rrect(ml - 20, mt - 20, mr + 20, mb + 20, 16), fill("#9aa4a8"))
+        vgrad(c, ml, mt, mr, mb, ["#7f96a8", "#a9bccb"])
+        reflections(c, ml, mt, mr, mb, 3, 0.2, seed=37)
+        c.drawRect(_R(120, 1150, 1140, 1200), fill("#e8ecec"))
+        c.drawRect(_R(120, 1200, 1140, 1240), fill("#b9c2c4"))
+        for bx in (400, 860):
+            p = skia.Path()
+            p.addArc(_R(bx - 190, 1060, bx + 190, 1360), 0, 180)
+            path_fill(c, p, "#f2f4f4")
+            c.drawPath(oval(bx, 1170, 170, 26), fill("#c9d3d6"))
+            c.drawRect(_R(bx - 14, 1040, bx + 14, 1150), fill("#c9ccd2"))
+            c.drawPath(capsule(bx, 1050, bx + 70, 1060, 22, 16), fill("#c9ccd2"))
+            c.drawPath(rrect(bx - 50, 1100, bx - 20, 1150, 8), fill("#dfe2e6"))
+            c.drawRect(_R(bx - 20, 1340, bx + 20, FB), fill("#b9bdc4"))
+        c.drawPath(rrect(1150, 1250, 1300, 1460, 18), fill("#e8eaee"))      # hộp xà phòng/giấy
+        # 3 buồng
+        SL, SR, ST, SB = 1600, 3780, 540, 1690
+        n = 3
+        sw = (SR - SL) / n
+        c.drawRect(_R(SL, ST - 30, SR, ST), fill(shade(frame, 0.12)))
+        for i in range(n):
+            l = SL + i * sw
+            c.drawRect(_R(l, ST, l + 46, SB + 60), fill(frame))
+            _stall_door(c, l + 46, ST + 20, l + sw - 4, SB, door, str(i + 1), i == 2, baked)
+            c.drawRect(_R(l + 46, SB, l + sw - 4, SB + 70), fill("#1a1e22"))
+        c.drawRect(_R(SR - 4, ST, SR + 40, SB + 60), fill(frame))
+        # sàn ướt + vũng nước
+        _persp_floor(c, FB, "#8fa09e", "#76878a", vx=1920, vy=900, spacing=300, dz=0.12)
+        ellipse_glow(c, 2700, 1790, 1100, 60, "#000000", 0.0)
+        for (px, py, rx, ry) in ((2350, 1880, 330, 46), (3000, 2030, 420, 60), (1500, 1980, 260, 38), (3400, 1820, 210, 28)):
+            _puddle(c, px, py, rx, ry, "#b9d0dc", 0.5)
+        # vệt sáng chéo từ cửa sổ
+        c.drawPath(poly([(wl, wt), (wr, wt), (wr - 260, H), (wl - 980, H)]), lin_paint((wl, wt), (wl - 400, H),
+                   [("#e8f0ff", 0.22), ("#e8f0ff", 0.04)]))
+        _dust(c, 300, 500, 1500, 1900, 70, 37)
+        _tube(c, 2650, 120, 760, on=True, col="#e4f4f0")
+        _tube(c, 900, 120, 600, on=False)
+        tint(s, "#5a6a90", 0.55)
+        glow(c, 2650, 150, 900, "#e4f4f0", 0.22)
+        glow(c, (wl + wr) / 2, (wt + wb) / 2, 500, "#dfe8ff", 0.35)
+        ix, iy = SL + 2 * sw + sw - 4 - 110, ST + 20 + (SB - ST - 20) * 0.5
+        glow(c, ix, iy, 140, "#ff4a3a", 0.5)
+        _vignette(c, 0.5)
+        mid = s.makeImageSnapshot()
+        slots = {"center": {"x": 1920, "y": 2010, "scale": 1.1}, "left": {"x": 800, "y": 2010, "scale": 1.1},
+                 "right": {"x": 3050, "y": 2010, "scale": 1.1}, "sink": {"x": 640, "y": 1900, "scale": 1.0},
+                 "stall_3": {"x": SL + 2.5 * sw, "y": 1960, "scale": 1.05}}
+        slots["stall_3"]["x"] = round(slots["stall_3"]["x"])
+        signs = [{"text": "GIRLS 3F", "box": [240, 270, 860, 430], "style": "white_board"}]
+        return Scene(None, mid, slots=slots, signs=signs, baked_signs=baked, floor_y=2010,
+                     lights=[{"x": 2650, "y": 140, "color": "#e4f4f0"}, {"x": 1280, "y": 400, "color": "#dfe8ff"}])
+    # --- cận cửa buồng số 3
+    k = 2.0
+    c.drawRect(_R(0, 0, W, H), fill(tile))
+    _tile_grid(c, 0, 0, W, H, 220, 220, tline, 6)
+    DL, DR, DT, DB = 1080, 2760, 140, 1930
+    c.drawRect(_R(DL - 140, 0, DL, H), fill(frame))
+    c.drawRect(_R(DR, 0, DR + 140, H), fill(frame))
+    c.drawRect(_R(DL - 140, 0, DL - 110, H), fill(shade(frame, 0.12)))
+    c.drawRect(_R(0, 0, DL - 140, H), fill(door))
+    c.drawRect(_R(DR + 140, 0, W, H), fill(door))
+    c.drawRect(_R(DL - 180, 0, DL - 140, H), fill(shade(door, -0.18)))
+    _stall_door(c, DL, DT, DR, DB, door, "3", True, baked, k=k)
+    c.drawRect(_R(DL - 140, DB - 20, DR + 140, DB + 70), fill(shade(frame, -0.2)))
+    _persp_floor(c, DB + 70, "#8fa09e", "#76878a", vx=1920, vy=700, spacing=520, dz=0.2, w=6)
+    c.drawRect(_R(DL, DB, DR, DB + 70), fill("#0c0f13"))
+    for x0 in (DL - 140, DR):
+        c.drawRect(_R(x0, DB, x0 + 140, DB + 70), fill(frame))
+    vgrad(c, 0, DB + 70, W, DB + 160, [("#000000", 0.45), ("#000000", 0.0)])
+    # nước rỉ ra từ khe dưới cửa
+    _puddle(c, 1900, 2070, 900, 62, "#b9d0dc", 0.55)
+    _puddle(c, 1250, 2125, 320, 26, "#b9d0dc", 0.45)
+    ellipse_glow(c, 1900, DB + 70, 700, 40, "#c9d8e8", 0.25)
+    for x in (1300, 1700, 2250, 2500):
+        c.drawPath(capsule(x, DB + 66, x + 6, DB + 120, 10, 6), fill("#b9d0dc", 0.6))
+    c.drawPath(poly([(0, 0), (1400, 0), (600, H), (0, H)]), lin_paint((0, 0), (900, H), [("#e8f0ff", 0.12), ("#e8f0ff", 0.0)]))
+    tint(s, "#5a6a90", 0.55)
+    ix, iy = DR - 110 * k, DT + (DB - DT) * 0.5
+    glow(c, ix, iy, 300, "#ff4a3a", 0.5)
+    _vignette(c, 0.6, r=W * 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2150, "scale": 1.9}, "left": {"x": 700, "y": 2150, "scale": 1.9},
+             "right": {"x": 3150, "y": 2150, "scale": 1.9}}
+    return Scene(None, mid, slots=slots, baked_signs=baked, floor_y=2150, lights=[{"x": round(ix), "y": round(iy), "color": "#ff4a3a"}])
+
+# ------------------------------------------------------------------- 38. lớp học cũ ban đêm (+ góc bên có tủ)
+def _wall_clock_face(c, x, y, r, hh=2, mm=40) -> None:
+    c.drawCircle(x, y, r * 1.1, fill("#5a4a3a"))
+    c.drawCircle(x, y, r, fill("#f2efe6"))
+    for i in range(12):
+        a = i / 12 * math.tau
+        r0 = r * (0.78 if i % 3 == 0 else 0.86)
+        c.drawLine(x + math.cos(a) * r0, y + math.sin(a) * r0, x + math.cos(a) * r * 0.93, y + math.sin(a) * r * 0.93,
+                   stroke("#2b2d33", max(2.0, r * (0.06 if i % 3 == 0 else 0.03))))
+    am = (mm / 60) * math.tau - math.pi / 2
+    ah = ((hh % 12) / 12 + mm / 720) * math.tau - math.pi / 2
+    c.drawLine(x, y, x + math.cos(ah) * r * 0.5, y + math.sin(ah) * r * 0.5, stroke("#2b2d33", max(3.0, r * 0.08)))
+    c.drawLine(x, y, x + math.cos(am) * r * 0.75, y + math.sin(am) * r * 0.75, stroke("#2b2d33", max(2.0, r * 0.05)))
+    c.drawCircle(x, y, r * 0.06, fill("#c8352e"))
+
+
+def _tape_x(c, l, t, r, b, w, col="#d9c79a", a=0.85) -> None:
+    c.drawLine(l, t, r, b, stroke(col, w, a))
+    c.drawLine(r, t, l, b, stroke(col, w, a))
+
+
+def _school_desk_3d(c, P: Persp, x, z, wood="#a87a4e", metal="#4a5058") -> None:
+    """Bàn + ghế học sinh (phối cảnh), x = tâm, z = mép bàn phía camera. Ghế ở phía camera."""
+    w, d, ht = 0.62, 0.45, 0.72
+    x0, x1 = x - w / 2, x + w / 2
+    for (lx, lz) in ((x0 + 0.03, z + d - 0.03), (x1 - 0.03, z + d - 0.03), (x0 + 0.03, z + 0.03), (x1 - 0.03, z + 0.03)):
+        c.drawLine(*P.p(lx, 0, lz), *P.p(lx, ht - 0.12, lz), stroke(metal, max(2.0, 0.035 * P.f / lz)))
+    path_fill(c, P.face_z(z + 0.02, x0 + 0.02, x1 - 0.02, ht - 0.2, ht - 0.03), shade(metal, -0.2))
+    path_fill(c, P.face_z(z + 0.03, x0 + 0.06, x1 - 0.06, ht - 0.17, ht - 0.06), "#16181c")
+    path_fill(c, P.plane_y(ht, x0, x1, z, z + d), shade(wood, 0.08))
+    path_fill(c, P.face_z(z, x0, x1, ht - 0.035, ht), shade(wood, -0.2))
+    # ghế
+    cz = z - 0.32
+    cw = 0.42
+    c0, c1 = x - cw / 2, x + cw / 2
+    for lx in (c0 + 0.03, c1 - 0.03):
+        for lz in (cz + 0.33, cz + 0.03):
+            c.drawLine(*P.p(lx, 0, lz), *P.p(lx, 0.42, lz), stroke(metal, max(2.0, 0.03 * P.f / lz)))
+    path_fill(c, P.plane_y(0.43, c0, c1, cz, cz + 0.36), wood)
+    path_fill(c, P.face_z(cz, c0, c1, 0.4, 0.43), shade(wood, -0.25))
+    for lx in (c0 + 0.03, c1 - 0.03):
+        c.drawLine(*P.p(lx, 0.43, cz - 0.02), *P.p(lx, 0.82, cz - 0.04), stroke(metal, max(2.0, 0.03 * P.f / cz)))
+    path_fill(c, P.face_z(cz - 0.04, c0, c1, 0.6, 0.82), shade(wood, -0.08))
+    path_fill(c, P.face_z(cz - 0.04, c0, c1, 0.6, 0.63), shade(wood, -0.3))
+
+
+def scene_lop_hoc_cu_dem(tod: str) -> Scene:
+    if tod == "side":
+        return _lop_hoc_cu_side()
+    P = Persp(f=1650, cx=W / 2, cy=1000, cam_h=1.45)
+    XL, XR, YT, Z0, ZB = -4.6, 4.6, 3.1, 0.6, 11.5
+    s = new_surface()
+    c = s.getCanvas()
+    wall, wood, floor_ = "#a89e88", "#a87a4e", "#7a5a40"
+    path_fill(c, P.plane_y(YT, XL, XR, Z0, ZB), "#5e5a52")
+    path_fill(c, P.plane_y(0, XL, XR, Z0, ZB), floor_)
+    x = XL
+    while x <= XR + 1e-6:
+        c.drawLine(*P.p(x, 0, Z0 + 0.3), *P.p(x, 0, ZB), stroke(shade(floor_, -0.22), 4))
+        x += 0.3
+    path_fill(c, P.face_z(ZB, XL, XR, 0, YT), wall)
+    path_fill(c, P.face_z(ZB, XL, XR, 0, 0.12), shade(wall, -0.35))
+    path_fill(c, P.wall_x(XL, Z0, ZB, 0, YT), shade(wall, -0.12))
+    path_fill(c, P.wall_x(XR, Z0, ZB, 0, YT), shade(wall, -0.06))
+    path_fill(c, P.wall_x(XR, Z0, ZB, 0, 0.9), shade(wall, -0.2))         # ốp chân tường gỗ
+    path_fill(c, P.wall_x(XL, Z0, ZB, 0, 0.9), shade(wall, -0.28))
+    # trần: đèn huỳnh quang tắt
+    for zz in (3.0, 6.0, 9.0):
+        for xx in (-2.2, 2.2):
+            path_fill(c, P.plane_y(YT - 0.01, xx - 0.7, xx + 0.7, zz, zz + 0.16), "#8a8c90")
+    # bảng đen + khung chữ trống + đồng hồ
+    path_fill(c, P.face_z(ZB - 0.01, -2.7, 2.7, 0.85, 2.25), "#6b4a32")
+    path_fill(c, P.face_z(ZB - 0.02, -2.6, 2.6, 0.92, 2.18), "#2c4638")
+    rng = random.Random(38)
+    for _ in range(9):
+        a_ = P.p(rng.uniform(-2.4, 2.2), rng.uniform(1.1, 2.0), ZB - 0.03)
+        c.drawPath(oval(a_[0], a_[1], rng.uniform(20, 70), rng.uniform(6, 18)), fill("#e8efe8", rng.uniform(0.06, 0.14)))
+    path_fill(c, P.face_z(ZB - 0.15, -2.7, 2.7, 0.82, 0.86), "#8a6a4a")
+    lx_, ly_ = P.p(-1.3, 2.75, ZB - 0.02)
+    rx_, ry_ = P.p(-0.25, 2.45, ZB - 0.02)
+    c.drawRect(_R(lx_, ly_, rx_, ry_), fill("#5a4030"))
+    c.drawRect(_R(lx_ + 8, ly_ + 8, rx_ - 8, ry_ - 8), fill("#ece4cc"))
+    for j in range(3):
+        yy = ly_ + 22 + j * (ry_ - ly_ - 40) / 3
+        c.drawLine(lx_ + 30, yy, rx_ - 30 - (j % 2) * 30, yy, stroke("#c9bfa4", 5))
+    cx_, cy_ = P.p(0.9, 2.62, ZB - 0.02)
+    _wall_clock_face(c, cx_, cy_, 0.2 * P.f / ZB, 2, 44)
+    # bục giảng
+    path_fill(c, P.face_z(10.2, -0.55, 0.55, 0, 1.0), shade(wood, -0.15))
+    path_fill(c, P.plane_y(1.0, -0.6, 0.6, 10.2, 10.6), shade(wood, 0.1))
+    # cửa sổ trái (băng keo X, rèm tối)
+    win_z = [(1.4, 3.3), (3.7, 5.6), (6.0, 7.9), (8.3, 10.2)]
+    for (za, zb) in win_z:
+        path_fill(c, P.wall_x(XL + 0.01, za - 0.06, zb + 0.06, 0.94, 2.66), "#c9c2b0")
+        path_fill(c, P.wall_x(XL + 0.02, za, zb, 1.0, 2.6), "#1e2a48")
+        mzc = (za + zb) / 2
+        a_ = P.p(XL + 0.02, 2.1, za + 0.4)
+        glow(c, a_[0], a_[1], 2.2 * P.f / za * 0.18, "#c9d8ff", 0.25)
+        for (z0_, z1_) in ((za, mzc), (mzc, zb)):
+            c.drawLine(*P.p(XL + 0.03, 1.0, z0_), *P.p(XL + 0.03, 2.6, z1_), stroke("#d9c79a", max(3.0, 0.06 * P.f / z0_), 0.8))
+            c.drawLine(*P.p(XL + 0.03, 2.6, z0_), *P.p(XL + 0.03, 1.0, z1_), stroke("#d9c79a", max(3.0, 0.06 * P.f / z0_), 0.8))
+        path_fill(c, P.wall_x(XL + 0.03, mzc - 0.03, mzc + 0.03, 1.0, 2.6), "#c9c2b0")
+        path_fill(c, P.wall_x(XL + 0.03, za, zb, 1.78, 1.82), "#c9c2b0")
+        path_fill(c, P.wall_x(XL + 0.06, zb - 0.45, zb + 0.1, 0.9, 2.75), "#2a2440")    # rèm gom
+        path_fill(c, P.quad([(XL, 0.9, za), (XL + 0.25, 0.9, za), (XL + 0.25, 0.9, zb), (XL, 0.9, zb)]), "#c9c2b0")
+    # cửa ra vào + bảng tin bên phải
+    path_fill(c, P.wall_x(XR - 0.01, 9.4, 10.6, 0, 2.1), "#6b4a32")
+    path_fill(c, P.wall_x(XR - 0.02, 9.55, 10.45, 1.3, 1.9), "#26304a")
+    path_fill(c, P.wall_x(XR - 0.01, 4.5, 7.5, 1.3, 2.3), "#8a6a44")
+    for (za, zb, yb, yt, col) in ((4.8, 5.5, 1.5, 2.1, "#ece4cc"), (5.8, 6.4, 1.6, 2.15, "#dfe6ee"), (6.7, 7.3, 1.45, 2.0, "#ece4cc")):
+        path_fill(c, P.wall_x(XR - 0.02, za, zb, yb, yt), col)
+    # vệt trăng trên sàn
+    for (za, zb) in win_z:
+        path_fill(c, P.quad([(XL + 0.9, 0.002, za + 0.4), (XL + 2.9, 0.002, za + 0.9), (XL + 2.9, 0.002, zb + 0.9),
+                             (XL + 0.9, 0.002, zb + 0.4)]), "#c9d8ff", 0.16)
+    # dãy bàn ghế: xa -> gần
+    cols = [-3.5, -2.2, -0.9, 0.9, 2.2, 3.5]
+    for z in (9.0, 7.7, 6.4, 5.1, 3.8, 2.5):
+        for xx in cols:
+            _school_desk_3d(c, P, xx, z, wood)
+    tint(s, "#4a5a8c", 0.58)
+    for (za, zb) in win_z:
+        a_ = P.p(XL + 0.02, 1.8, (za + zb) / 2)
+        glow(c, a_[0], a_[1], 1.4 * P.f / za * 0.3, "#c9d8ff", 0.2)
+    _dust(c, 150, 1050, 1500, 2000, 70, 38, "#dfe8ff")
+    _vignette(c, 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0, 2.6), "left": P.slot(-1.55, 3.0), "right": P.slot(1.55, 3.0),
+             "board": P.slot(0.0, 9.8), "window": P.slot(-3.9, 5.2)}
+    return Scene(None, mid, slots=slots, floor_y=slots["center"]["y"], lights=[])
+
+
+def _lop_hoc_cu_side() -> Scene:
+    s = new_surface()
+    c = s.getCanvas()
+    wall, wood = "#a89e88", "#a87a4e"
+    FB = 1560
+    c.drawRect(_R(0, 0, W, FB), fill(wall))
+    vgrad(c, 0, 0, W, 240, ["#5e5a52", wall])
+    c.drawRect(_R(0, FB - 380, W, FB), fill(shade(wall, -0.22)))
+    # cửa sổ trái + rèm
+    wl, wt, wr, wb = 160, 300, 1080, 1040
+    c.drawRect(_R(wl - 28, wt - 28, wr + 28, wb + 28), fill("#c9c2b0"))
+    vgrad(c, wl, wt, wr, wb, ["#121a34", "#2a3a62"])
+    _moon(c, 820, 500, 70, a=0.95)
+    for xx in ((wl + wr) / 2,):
+        c.drawLine(xx, wt, xx, wb, stroke("#c9c2b0", 20))
+    c.drawLine(wl, (wt + wb) / 2, wr, (wt + wb) / 2, stroke("#c9c2b0", 16))
+    for (l_, r_) in ((wl, (wl + wr) / 2), ((wl + wr) / 2, wr)):
+        _tape_x(c, l_ + 20, wt + 20, r_ - 20, (wt + wb) / 2 - 20, 22)
+        _tape_x(c, l_ + 20, (wt + wb) / 2 + 20, r_ - 20, wb - 20, 22)
+    for (cx_, sg) in ((wl - 40, 1), (wr + 40, -1)):
+        p = skia.Path()
+        p.moveTo(cx_ - 110, wt - 60)
+        p.lineTo(cx_ + 110, wt - 60)
+        p.quadTo(cx_ + 70 * sg + 40, (wt + wb) / 2, cx_ + 90, wb + 120)
+        p.lineTo(cx_ - 90, wb + 120)
+        p.close()
+        path_fill(c, p, "#2a2440")
+        for j in range(3):
+            c.drawLine(cx_ - 60 + j * 60, wt - 50, cx_ - 50 + j * 60, wb + 110, stroke("#1c1830", 8))
+    c.drawRect(_R(wl - 200, wt - 80, wr + 200, wt - 60), fill("#6e665a"))
+    # bảng tin + tủ cubby dọc tường sau
+    bl, bt, br, bb = 1500, 330, 2900, 820
+    c.drawRect(_R(bl - 24, bt - 24, br + 24, bb + 24), fill("#6b4a32"))
+    c.drawRect(_R(bl, bt, br, bb), fill("#b08a5a"))
+    rng = random.Random(381)
+    for i in range(7):
+        x = bl + 60 + i * 190 + rng.uniform(-20, 20)
+        y = bt + 50 + (i % 2) * 120 + rng.uniform(-10, 20)
+        c.save()
+        c.rotate(rng.uniform(-4, 4), x + 70, y + 100)
+        c.drawRect(_R(x, y, x + 140, y + 190), fill(rng.choice(["#f4f1e8", "#eae0c8", "#dfe6ee"])))
+        for j in range(4):
+            c.drawLine(x + 18, y + 40 + j * 34, x + 120 - (j % 2) * 30, y + 40 + j * 34, stroke("#9a9488", 5))
+        c.drawCircle(x + 70, y + 12, 9, fill("#c8352e"))
+        c.restore()
+    CL, CR, CT = 1240, 3780, 920
+    c.drawRect(_R(CL - 20, CT - 30, CR + 20, CT), fill(shade(wood, 0.1)))
+    c.drawRect(_R(CL, CT, CR, FB), fill(shade(wood, -0.1)))
+    ncol, nrow = 12, 3
+    cw, ch = (CR - CL) / ncol, (FB - 40 - CT) / nrow
+    bag_cols = ["#2f4a7a", "#7a3a3a", "#3a5a3a", "#2b2d33", "#8a6a3a"]
+    for i in range(ncol):
+        for j in range(nrow):
+            l_, t_ = CL + i * cw + 12, CT + j * ch + 12
+            c.drawRect(_R(l_, t_, l_ + cw - 24, t_ + ch - 24), fill("#2a1e16"))
+            if rng.random() < 0.45:
+                col = rng.choice(bag_cols)
+                c.drawPath(rrect(l_ + 14, t_ + ch * 0.25, l_ + cw - 38, t_ + ch - 24, 18), fill(col))
+                c.drawRect(_R(l_ + 30, t_ + ch * 0.45, l_ + cw - 54, t_ + ch * 0.52), fill(shade(col, -0.3)))
+            c.drawPath(rrect(l_ + cw * 0.3, t_ - 8, l_ + cw * 0.6, t_ + 6, 3), fill("#ece4cc"))
+    c.drawRect(_R(CL, FB - 40, CR, FB), fill(shade(wood, -0.35)))
+    _persp_floor(c, FB, "#7a5a40", "#5e4430", vx=1920, vy=700, spacing=260, dz=0.1)
+    # 2 bộ bàn ghế nhìn ngang (tiền cảnh)
+    def desk_side(x, base, k, flip=1):
+        top = base - 0.72 * k
+        c.drawRect(_R(x - 0.3 * k, top, x + 0.3 * k, top + 0.04 * k), fill(shade(wood, 0.08)))
+        c.drawRect(_R(x - 0.27 * k, top + 0.04 * k, x + 0.27 * k, top + 0.18 * k), fill("#3e444c"))
+        for lx in (x - 0.25 * k, x + 0.25 * k):
+            c.drawRect(_R(lx - 0.02 * k, top + 0.18 * k, lx + 0.02 * k, base), fill("#4a5058"))
+        c.drawRect(_R(x - 0.25 * k, base - 0.12 * k, x + 0.25 * k, base - 0.1 * k), fill("#4a5058"))
+        cx = x - flip * 0.5 * k
+        st = base - 0.43 * k
+        c.drawRect(_R(cx - 0.2 * k, st, cx + 0.2 * k, st + 0.035 * k), fill(wood))
+        for lx in (cx - 0.18 * k, cx + 0.18 * k):
+            c.drawRect(_R(lx - 0.018 * k, st, lx + 0.018 * k, base), fill("#4a5058"))
+        bx = cx - flip * 0.2 * k
+        c.drawRect(_R(bx - 0.018 * k, st - 0.42 * k, bx + 0.018 * k, st), fill("#4a5058"))
+        c.drawPath(rrect(bx - 0.03 * k, st - 0.42 * k, bx + 0.03 * k, st - 0.18 * k, 0.01 * k), fill(shade(wood, -0.1)))
+        c.drawPath(oval(x, base + 0.01 * k, 0.75 * k, 0.04 * k), fill("#000000", 0.25))
+    desk_side(1700, 1880, 700)
+    desk_side(2800, 1880, 700)
+    c.drawPath(rrect(2700, 1880 - 0.72 * 700 - 60, 2900, 1880 - 0.72 * 700, 6), fill("#e8e2d0"))
+    # vệt trăng
+    c.drawPath(poly([(wl, wt), (wr, wt), (wr + 1500, H), (wl + 700, H)]), lin_paint((wl, wt), (wl + 900, H),
+               [("#c9d8ff", 0.16), ("#c9d8ff", 0.03)]))
+    tint(s, "#4a5a8c", 0.58)
+    glow(c, 820, 500, 500, "#dfe8ff", 0.3)
+    _dust(c, 300, 400, 2400, 1900, 70, 39, "#dfe8ff")
+    _vignette(c, 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 2250, "y": 1990, "scale": 1.15}, "left": {"x": 1150, "y": 1990, "scale": 1.15},
+             "right": {"x": 3350, "y": 1990, "scale": 1.15}, "seat_1": {"x": 1350, "y": 1890, "scale": 1.0},
+             "seat_2": {"x": 2450, "y": 1890, "scale": 1.0}}
+    return Scene(None, mid, slots=slots, floor_y=1990, lights=[{"x": 820, "y": 500, "color": "#dfe8ff"}])
+
+
+# ------------------------------------------------------------------- 39. trường tiểu học ban đêm (ngoài)
+def scene_truong_hoc_dem(tod: str) -> Scene:
+    sf = new_surface()
+    c = sf.getCanvas()
+    _night_sky(c, 0, 1500, seed=39, top="#0b1026", bottom="#2a3360", n_stars=220)
+    _moon(c, 3180, 360, 115)
+    rng = random.Random(39)
+    for _ in range(5):
+        x, y = rng.uniform(-200, W), rng.uniform(200, 800)
+        c.drawPath(rrect(x, y, x + rng.uniform(500, 1100), y + rng.uniform(26, 50), 25), fill("#3a4470", 0.5))
+    _skyline(c, 1260, 391, "#141a34", 60, 200, lit="#ffd08a", lit_p=0.03)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    GB = 1420                       # chân toà nhà
+    wall_c = "#c9c0aa"
+    BL, BR, BT = 380, 3460, 760
+    # cây sau
+    for (tx, ty, tr) in ((300, 1150, 260), (3600, 1120, 300), (1000, 1240, 180), (2900, 1240, 200)):
+        round_tree(c, tx, ty, tr, "#1a2a2a", "#141818", seed=int(tx))
+    c.drawRect(_R(BL, BT, BR, GB), fill(wall_c))
+    c.drawRect(_R(BL - 20, BT - 50, BR + 20, BT), fill(shade(wall_c, 0.1)))
+    c.drawRect(_R(BL - 20, BT - 8, BR + 20, BT + 10), fill(shade(wall_c, -0.3)))
+    fh = (GB - BT) / 3
+    for f_ in range(3):
+        y0 = BT + f_ * fh
+        c.drawRect(_R(BL, y0 + fh - 16, BR, y0 + fh), fill(shade(wall_c, -0.18)))
+        for i in range(16):
+            x = BL + 70 + i * 190
+            if 1700 < x + 75 and x < 2140:
+                continue
+            lit = (f_, i) in ((1, 3), (0, 12))
+            c.drawRect(_R(x, y0 + 50, x + 130, y0 + fh - 50), fill("#e8d9a0" if lit else "#1e2844"))
+            c.drawLine(x + 65, y0 + 50, x + 65, y0 + fh - 50, stroke(shade(wall_c, -0.1), 6))
+            if not lit:
+                quad(c, [(x + 10, y0 + fh - 50), (x + 40, y0 + fh - 50), (x + 100, y0 + 50), (x + 70, y0 + 50)], "#ffffff", 0.07)
+    # tháp đồng hồ
+    TL, TR, TT = 1700, 2140, 330
+    c.drawRect(_R(TL, TT, TR, GB), fill(shade(wall_c, 0.05)))
+    c.drawRect(_R(TR - 40, TT, TR, GB), fill(shade(wall_c, -0.15)))
+    quad(c, [(TL - 40, TT), (TR + 40, TT), ((TL + TR) / 2, TT - 220)], "#4a3a3a")
+    c.drawRect(_R(TL - 40, TT - 10, TR + 40, TT + 24), fill(shade(wall_c, -0.3)))
+    _wall_clock_face(c, (TL + TR) / 2, TT + 190, 120, 11, 52)
+    c.drawRect(_R(TL + 110, TT + 360, TR - 110, TT + 560), fill("#1e2844"))
+    # sảnh + mái hiên
+    c.drawRect(_R(1760, GB - 330, 2080, GB), fill("#141a2c"))
+    c.drawRect(_R(1640, GB - 380, 2200, GB - 330), fill(shade(wall_c, -0.2)))
+    for x in (1700, 2140):
+        c.drawRect(_R(x - 18, GB - 330, x + 18, GB), fill(shade(wall_c, -0.1)))
+    # sân + tường rào + hàng rào lưới
+    c.drawRect(_R(0, GB, W, 1660), fill("#4a4a52"))
+    FT, FBm = 1250, 1660
+    c.drawRect(_R(0, FBm - 120, W, FBm), fill("#8a8478"))
+    c.drawRect(_R(0, FBm - 130, W, FBm - 112), fill("#a8a294"))
+    c.save()
+    gate_l, gate_r = 700, 1380
+    c.clipRect(_R(0, FT, W, FBm - 120))
+    for x0 in range(-600, W + 600, 46):
+        c.drawLine(x0, FT, x0 + (FBm - 120 - FT), FBm - 120, stroke("#9aa0a8", 3, 0.55))
+        c.drawLine(x0, FBm - 120, x0 + (FBm - 120 - FT), FT, stroke("#9aa0a8", 3, 0.55))
+    c.restore()
+    for x in list(range(40, W, 380)):
+        c.drawRect(_R(x - 10, FT - 20, x + 10, FBm - 120), fill("#6e747c"))
+    c.drawRect(_R(0, FT - 14, W, FT), fill("#6e747c"))
+    # cổng: 2 trụ + cửa trượt + bảng tên (signs)
+    c.drawRect(_R(gate_l, FT - 40, gate_r, FBm), fill("#3a3e48"))
+    c.drawRect(_R(gate_l, FT - 40, gate_r, FBm), fill("#000000", 0.0))
+    c.save()
+    c.clipRect(_R(gate_l, FT, gate_r, FBm))
+    vgrad(c, gate_l, FT, gate_r, FBm, ["#2a3050", "#4a4a52"])
+    for xx in range(gate_l, gate_r, 60):
+        c.drawLine(xx, FT + 60, xx, FBm - 10, stroke("#7a8088", 8))
+    c.drawLine(gate_l, FT + 60, gate_r, FT + 60, stroke("#7a8088", 12))
+    c.drawLine(gate_l, FBm - 30, gate_r, FBm - 30, stroke("#7a8088", 12))
+    c.restore()
+    for x in (gate_l - 70, gate_r):
+        c.drawRect(_R(x, FT - 160, x + 70, FBm), fill("#9a9488"))
+        c.drawRect(_R(x - 10, FT - 180, x + 80, FT - 150), fill("#b0aa9c"))
+    for x in (gate_r + 200, gate_r + 1000):         # 2 chân đỡ bảng tên (bảng chữ = signs)
+        c.drawRect(_R(x - 14, FT - 60, x + 14, FBm - 120), fill("#5a5e66"))
+    c.drawRect(_R(gate_r + 80, FT - 150, gate_r + 1120, FT - 20), fill("#2a1d12"))
+    # đường + vũng nước
+    c.drawRect(_R(0, FBm, W, H), fill("#2a2c36"))
+    c.drawRect(_R(0, FBm, W, FBm + 30), fill("#3a3c46"))
+    for x in range(100, W, 700):
+        c.drawRect(_R(x, 1990, x + 380, 2010), fill("#c9c0a0", 0.5))
+    _puddle(c, 1100, 1850, 420, 40, "#5a6a90", 0.5)
+    _puddle(c, 2600, 2060, 560, 56, "#5a6a90", 0.5)
+    c.drawPath(oval(2600, 2050, 60, 12), fill("#f1ead2", 0.35))         # trăng phản chiếu
+    lx, ly = _streetlamp(c, 3050, FBm + 20, 5.2, 210, lit=True, arm=-1, pool_y=1880)
+    tint(s, "#6a78b0", 0.42)
+    glow(c, lx, ly + 10, 260, "#ffe2a0", 0.6)
+    glow(c, (TL + TR) / 2, TT + 190, 260, "#f2efe6", 0.18)
+    for (f_, i) in ((1, 3), (0, 12)):
+        glow(c, BL + 70 + i * 190 + 65, BT + f_ * fh + fh / 2, 160, "#ffe2a0", 0.35)
+    _vignette(c, 0.45)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 1950, "scale": 0.9}, "left": {"x": 1040, "y": 1950, "scale": 0.9},
+             "right": {"x": 2700, "y": 1950, "scale": 0.9}, "gate": {"x": 1040, "y": 1680, "scale": 0.7}}
+    signs = [{"text": "CITY ELEMENTARY SCHOOL", "box": [gate_r + 90, FT - 140, gate_r + 1110, FT - 30], "style": "gold_board"}]
+    return Scene(far, mid, slots=slots, signs=signs, floor_y=1950, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": round(lx), "y": round(ly), "color": "#ffe2a0"}, {"x": 3180, "y": 360, "color": "#f1ead2"}])
+
+
+# ------------------------------------------------------------------- 40. sảnh tủ giày trường học
+def scene_sanh_tu_giay_truong(tod: str) -> Scene:
+    baked: list = []
+    s = new_surface()
+    c = s.getCanvas()
+    wall, wood = "#cfc6b0", "#9a7048"
+    FB = 1620
+    c.drawRect(_R(0, 0, W, FB), fill(wall))
+    vgrad(c, 0, 0, W, 200, ["#6e6a60", wall])
+    c.drawRect(_R(0, FB - 120, W, FB), fill(shade(wall, -0.2)))
+    rng = random.Random(40)
+    # 2 dãy tủ giày
+    def cubbies(l, r, t, b, ncol, nrow):
+        c.drawRect(_R(l - 18, t - 30, r + 18, b + 10), fill(shade(wood, -0.15)))
+        c.drawRect(_R(l - 24, t - 40, r + 24, t - 20), fill(shade(wood, 0.12)))
+        cw, ch = (r - l) / ncol, (b - t) / nrow
+        for i in range(ncol):
+            for j in range(nrow):
+                x0, y0 = l + i * cw + 8, t + j * ch + 8
+                x1, y1 = x0 + cw - 16, y0 + ch - 16
+                c.drawRect(_R(x0, y0, x1, y1), fill("#2a2018"))
+                c.drawRect(_R(x0, y0, x1, y0 + 10), fill("#140e0a"))
+                c.drawPath(rrect(x0 + cw * 0.3, y0 - 6, x1 - cw * 0.3, y0 + 8, 3), fill("#ece4cc"))
+                kind = rng.random()
+                if kind < 0.55:            # dép đi trong nhà trắng, mũi màu
+                    tip = rng.choice(["#3a78c2", "#c8352e", "#4fa35a"])
+                    for k_ in (0, 1):
+                        sx0 = x0 + 12 + k_ * (cw - 16) * 0.46
+                        sx1 = sx0 + (cw - 16) * 0.42
+                        c.drawPath(rrect(sx0, y1 - ch * 0.3, sx1, y1 - 4, 14), fill("#eeeae2"))
+                        c.drawPath(rrect(sx1 - (sx1 - sx0) * 0.45, y1 - ch * 0.3, sx1, y1 - 4, 14), fill(tip))
+                elif kind < 0.75:          # giày đi ngoài nâu
+                    for k_ in (0, 1):
+                        sx0 = x0 + 10 + k_ * (cw - 16) * 0.47
+                        c.drawPath(rrect(sx0, y1 - ch * 0.36, sx0 + (cw - 16) * 0.44, y1 - 4, 18), fill("#5a3a26"))
+        c.drawRect(_R(l - 18, b + 10, r + 18, b + 50), fill(shade(wood, -0.35)))
+    cubbies(120, 1300, 520, 1560, 7, 6)
+    cubbies(1400, 2580, 520, 1560, 7, 6)
+    # bảng ghim "NOTICE"
+    NL, NT, NR, NB = 2700, 520, 3240, 1100
+    c.drawRect(_R(NL - 24, NT - 24, NR + 24, NB + 24), fill("#6b4a32"))
+    c.drawRect(_R(NL, NT, NR, NB), fill("#b48a5a"))
+    for _ in range(40):
+        c.drawCircle(rng.uniform(NL, NR), rng.uniform(NT, NB), rng.uniform(3, 6), fill("#8a6a44", 0.5))
+    c.drawRect(_R(NL, NT, NR, NT + 100), fill("#2f5a8a"))
+    text_center(c, "NOTICE", (NL + NR) / 2, NT + 50, 62, "#f4f1e8", "extrabold")
+    baked.append(_baked("NOTICE", (NL + NR) / 2, NT + 50, 62))
+    for (x, y, w_, h_, a) in ((NL + 40, NT + 140, 200, 260, -3), (NL + 280, NT + 130, 210, 170, 2), (NL + 290, NT + 330, 200, 200, -2),
+                              (NL + 60, NT + 420, 180, 130, 4)):
+        c.save()
+        c.rotate(a, x + w_ / 2, y + h_ / 2)
+        c.drawRect(_R(x, y, x + w_, y + h_), fill(rng.choice(["#f4f1e8", "#f2e6b8", "#dfe6ee"])))
+        for j in range(int(h_ / 40) - 1):
+            c.drawLine(x + 16, y + 34 + j * 36, x + w_ - 16 - (j % 2) * 40, y + 34 + j * 36, stroke("#9a9488", 5))
+        c.drawCircle(x + w_ / 2, y + 10, 9, fill("#c8352e"))
+        c.restore()
+    # ô dù
+    c.drawRect(_R(2760, 1300, 3100, 1600), fill("#5a6066"))
+    for k_, col in enumerate(("#2f4a7a", "#c8352e", "#2b2d33", "#4fa35a")):
+        x = 2800 + k_ * 75
+        c.drawLine(x, 1300, x + 10, 1100 + k_ * 20, stroke(col, 26))
+        c.drawPath(capsule(x + 10, 1100 + k_ * 20, x + 30, 1070 + k_ * 20, 12, 10), fill("#2a2622"))
+    # cửa kính đôi ra sân (đêm)
+    DL, DT, DR, DB = 3330, 380, 3800, 1620
+    c.drawRect(_R(DL - 30, DT - 30, W, DB), fill("#8a9098"))
+    vgrad(c, DL, DT, DR, DB, ["#0e1430", "#2a3058"])
+    glow(c, DL + 260, DT + 420, 260, "#ffe2a0", 0.5)
+    c.drawRect(_R(DL, DB - 400, DR, DB), fill("#1a1e2a"))
+    c.drawLine((DL + DR) / 2, DT, (DL + DR) / 2, DB, stroke("#8a9098", 22))
+    c.drawLine(DL, DT + 520, DR, DT + 520, stroke("#8a9098", 14))
+    for hx in ((DL + DR) / 2 - 40, (DL + DR) / 2 + 40):
+        c.drawPath(rrect(hx - 8, DT + 600, hx + 8, DT + 820, 6), fill("#c9ccd2"))
+    reflections(c, DL, DT, DR, DB, 3, 0.15, seed=40)
+    # sàn: bậc gỗ trước tủ + đá xám
+    _persp_floor(c, FB, "#7e7a72", "#68645e", vx=1920, vy=800, spacing=320, dz=0.12)
+    c.drawRect(_R(80, FB + 20, 2620, FB + 140), fill(wood))
+    c.drawRect(_R(80, FB + 20, 2620, FB + 36), fill(shade(wood, 0.15)))
+    for x in range(140, 2600, 120):
+        c.drawLine(x, FB + 36, x, FB + 140, stroke(shade(wood, -0.3), 6))
+    c.drawRect(_R(80, FB + 140, 2620, FB + 170), fill("#000000", 0.3))
+    _tube(c, 1400, 110, 900, on=True, col="#eef6ff")
+    _tube(c, 3000, 110, 600, on=False)
+    tint(s, "#5a6890", 0.5)
+    glow(c, 1400, 140, 1000, "#eef6ff", 0.25)
+    glow(c, DL + 260, DT + 420, 200, "#ffe2a0", 0.4)
+    _vignette(c, 0.5)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2010, "scale": 1.1}, "left": {"x": 900, "y": 2010, "scale": 1.1},
+             "right": {"x": 2950, "y": 2010, "scale": 1.1}, "door": {"x": 3560, "y": 1960, "scale": 1.0},
+             "lockers": {"x": 1350, "y": 1900, "scale": 1.05}}
+    return Scene(None, mid, slots=slots, baked_signs=baked, floor_y=2010, lights=[{"x": 1400, "y": 130, "color": "#eef6ff"}])
+
+# ------------------------------------------------------------------- 41. phố dân cư đêm: máy bán nước, cột điện, cổng đền
+def _house_gable(c, l, r, base, wall_h, roof_h, wall, roof, night, rng, lit_p=0.5) -> None:
+    top = base - wall_h
+    c.drawRect(_R(l, top, r, base), fill(wall))
+    quad(c, [(l - 60, top + 10), (r + 60, top + 10), ((l + r) / 2 + 40, top - roof_h), ((l + r) / 2 - 40, top - roof_h)], roof)
+    c.drawRect(_R(l - 60, top + 4, r + 60, top + 26), fill(shade(roof, -0.3)))
+    nw = max(1, int((r - l) / 330))
+    for i in range(nw):
+        x = l + (r - l) * (i + 0.5) / nw
+        lit = night and rng.random() < lit_p
+        wc = "#ffd98a" if lit else ("#2a3048" if night else "#8aa0b4")
+        c.drawRect(_R(x - 90, top + 70, x + 90, top + 230), fill(wc))
+        c.drawLine(x, top + 70, x, top + 230, stroke(shade(wall, -0.2), 8))
+        c.drawRect(_R(x - 100, top + 230, x + 100, top + 246), fill(shade(wall, -0.15)))
+        if lit:
+            glow(c, x, top + 150, 220, "#ffd98a", 0.35)
+
+
+def scene_pho_dan_cu_may_ban_nuoc(tod: str) -> Scene:
+    night = tod != "day"
+    baked: list = []
+    sf = new_surface()
+    c = sf.getCanvas()
+    if night:
+        vgrad(c, 0, 0, W, 1300, ["#151638", "#3a2f62", "#7a5288", "#b07a96"], [0, 0.45, 0.8, 1])
+        stars(c, 0, 0, W, 500, 120, seed=41)
+        _moon(c, 860, 330, 90)
+    else:
+        _day_sky(c, 0, 1300, top="#8fb0cc", bottom="#e4ecf0")
+    _skyline(c, 1150, 411, "#2a2448" if night else "#a9b4bc", 60, 220, lit="#ffd08a" if night else None, lit_p=0.04)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(41)
+    GB = 1640                       # chân tường rào / mép đường
+    k = 450.0                       # px/mét ở mặt tường
+    wall_cols = ["#d8cbb0", "#c9c6bc", "#d9c2a8", "#bfc6c4"] if not night else ["#6a6078", "#5e6070", "#6e5e6a", "#585e6e"]
+    roof_cols = ["#3e4656", "#5a4040", "#3a4a48", "#4a4452"] if not night else ["#22263a", "#2e2230", "#1e2a30", "#28243a"]
+    for i, (l, r) in enumerate(((1100, 2050), (2150, 3050), (3150, 4000))):
+        _house_gable(c, l, r, 1300, 560, 240, wall_cols[i], roof_cols[i], night, rng, 0.6)
+    # lối nhỏ bên trái lên đền: bậc đá + cây tối + cổng
+    c.drawRect(_R(0, 700, 1000, GB), fill("#1e2a28" if night else "#5e7a5a"))
+    for (tx, ty, tr) in ((180, 900, 320), (760, 860, 300), (480, 760, 260)):
+        round_tree(c, tx, ty, tr, "#16221f" if night else "#4f6e4c", "#141818" if night else "#5a4636", seed=int(tx) + 4)
+    for j in range(6):
+        y = GB - j * 45
+        c.drawRect(_R(330 + j * 22, y - 45, 830 - j * 22, y), fill(shade("#9a948a" if not night else "#4a4a56", -0.04 * j)))
+        c.drawRect(_R(330 + j * 22, y - 45, 830 - j * 22, y - 36), fill(shade("#b0aa9e" if not night else "#5a5a66", 0)))
+    _shrine_gate(c, 580, GB - 280, 230, "#c8452e" if not night else "#8a3a30", baked)
+    # tường rào gạch block
+    blk = "#b4ae9e" if not night else "#5c5a68"
+    _block_wall(c, 1000, 1180, W + 20, GB, blk, bw=160, bh=80)
+    c.drawRect(_R(980, 1150, 1020, GB), fill(shade(blk, -0.2)))
+    # vỉa + đường
+    road = "#5a5c64" if not night else "#2c2c3c"
+    c.drawRect(_R(0, GB, W, H), fill(road))
+    c.drawRect(_R(0, GB, W, GB + 36), fill(shade(road, 0.18)))
+    c.drawRect(_R(0, GB + 70, W, GB + 86), fill("#e8e4d8" if not night else "#8a8a98"))
+    c.drawPath(oval(2950, 2020, 200, 40), fill(shade(road, -0.25)))
+    c.drawPath(oval(2950, 2020, 200, 40), stroke(shade(road, 0.15), 6))
+    for x in range(2780, 3130, 50):
+        c.drawLine(x, 2000, x + 20, 2040, stroke(shade(road, 0.1), 4))
+    # 2 máy bán nước
+    _vending(c, 1880, GB + 10, 460, 840, "#2f6fb0" if not night else "#2a5a98", night, 411, baked)
+    _vending(c, 2380, GB + 10, 460, 840, "#e8e4dc" if not night else "#b8b8c4", night, 412, baked, rows=("COLD", "HOT", "HOT"))
+    c.drawRect(_R(2850, GB - 120, 2960, GB + 10), fill("#3a7a4a"))       # thùng rác lon
+    c.drawPath(rrect(2840, GB - 140, 2970, GB - 110, 10), fill("#2f6a3e"))
+    c.drawCircle(2905, GB - 125, 22, fill("#141618"))
+    # cột điện + dây
+    poles = [(1340, "2-14"), (3560, "2-15")]
+    tops = []
+    for (px, plate) in poles:
+        tops.append(_util_pole(c, px, GB + 20, 9.0 / 2.2, k, plate, baked, col="#9a968e" if not night else "#5e5c66",
+                               trans=px > 3000))
+    wire = "#1c1c24" if night else "#3a3a40"
+    for n in range(4):
+        y0 = tops[0] + 0.5 * k + n * 18
+        sag_wire(c, -50, y0 + 60, 1340, y0, 50, wire, 5)
+        sag_wire(c, 1340, y0, 3560, tops[1] + 0.5 * k + n * 18, 120, wire, 5)
+        sag_wire(c, 3560, tops[1] + 0.5 * k + n * 18, W + 50, y0 + 80, 40, wire, 5)
+    # đèn đường gắn cột + gương cầu
+    lx, ly = _streetlamp(c, 1340 + 0.12 * k, GB + 20, 3.6, k * 0.9, lit=night, arm=1, cone=night, pool_y=1900, pole=False)
+    _curved_mirror(c, 3250, GB + 30, 420)
+    if night:
+        tint(s, "#8a80c0", 0.35)
+        glow(c, lx, ly + 10, 200, "#ffe2a0", 0.6)
+        glow(c, 2110, 1150, 500, "#e8f4ff", 0.3)
+        glow(c, 2610, 1150, 500, "#e8f4ff", 0.3)
+        ellipse_glow(c, 2360, GB + 120, 900, 120, "#e8f4ff", 0.35)
+        glow(c, 580, GB - 600, 400, "#ffb070", 0.15)
+    _vignette(c, 0.45 if night else 0.3)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 1990, "scale": 1.0}, "left": {"x": 1000, "y": 1990, "scale": 1.0},
+             "right": {"x": 3000, "y": 1990, "scale": 1.0}, "vending": {"x": 2360, "y": 1900, "scale": 0.95},
+             "shrine": {"x": 580, "y": 1600, "scale": 0.62}}
+    return Scene(far, mid, slots=slots, baked_signs=baked, floor_y=1990, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": round(lx), "y": round(ly), "color": "#ffe2a0"}] if night else [])
+
+
+# ------------------------------------------------------------------- 42. lối đi dài ban đêm, hàng cột đèn
+def scene_loi_di_dai_dem(tod: str) -> Scene:
+    P = Persp(f=1500, cx=W / 2, cy=980, cam_h=1.6)
+    XW, HW, Z0, ZB = 1.7, 2.3, 1.0, 70.0
+    sf = new_surface()
+    c = sf.getCanvas()
+    _night_sky(c, 0, 1300, seed=42, top="#070a18", bottom="#1a2140", n_stars=200)
+    _moon(c, 2900, 300, 70, a=0.9)
+    _skyline(c, 1000, 421, "#0e1224", 100, 400, lit="#ffd08a", lit_p=0.02, l=-60, r=W + 60)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    for sd in (-1, 1):                 # cây tối sau tường
+        for zz in (6, 14, 24, 40):
+            bx, by = P.p(sd * (XW + 2.5), HW + 2.2, zz)
+            r_ = 2.6 * P.f / zz
+            c.drawCircle(bx, by, r_, fill("#0c1418"))
+            c.drawCircle(bx + sd * r_ * 0.6, by + r_ * 0.3, r_ * 0.8, fill("#0c1418"))
+    path_fill(c, P.plane_y(0, -XW, XW, Z0, ZB), "#3a3c48")
+    z = 2.0
+    while z < ZB:
+        c.drawLine(*P.p(-XW, 0, z), *P.p(XW, 0, z), stroke("#2a2c36", max(1.5, 10 / z)))
+        z += 2.0
+    for sd in (-1, 1):
+        x = sd * XW
+        path_fill(c, P.wall_x(x, Z0, ZB, 0, HW), "#5a5c66" if sd < 0 else "#52545e")
+        path_fill(c, P.quad([(x, HW, Z0), (x, HW, ZB), (x + sd * 0.25, HW, ZB), (x + sd * 0.25, HW, Z0)]), "#6e707a")
+        z = 1.0
+        while z < ZB:
+            c.drawLine(*P.p(x, 0, z), *P.p(x, HW, z), stroke("#44464f", max(1.5, 8 / z)))
+            z += 3.0
+        y = 0.4
+        while y < HW:
+            c.drawLine(*P.p(x, y, Z0), *P.p(x, y, ZB), stroke("#4a4c56", 3, 0.6))
+            y += 0.4
+        path_fill(c, P.wall_x(x, Z0, ZB, 0, 0.15), "#2a2c34")
+        rs = random.Random(420 + sd)
+        for _ in range(14):                       # vệt ố / rêu trên tường
+            za = rs.uniform(1.2, 30.0)
+            zb = za + rs.uniform(0.6, 2.5)
+            yb = rs.uniform(0.0, 1.2)
+            path_fill(c, P.wall_x(x * 0.999, za, zb, yb, yb + rs.uniform(0.3, 1.0)), "#2a2e2a", rs.uniform(0.12, 0.25))
+    path_fill(c, P.face_z(ZB, -XW, XW, 0, HW), "#07080e")
+    # hàng cột đèn bên trái
+    lamps = []
+    for zz in (62.0, 50.0, 40.0, 31.0, 23.0, 16.0, 10.0, 5.2):
+        k = P.f / zz
+        bx, by = P.p(-XW + 0.35, 0, zz)
+        hx, hy = _streetlamp(c, bx, by, 3.8, k, lit=True, arm=1, cone=True)
+        lamps.append((hx, hy, k))
+    c.drawRect(_R(0, 0, W, H), rad_paint(P.cx, P.cy, 900, [("#000000", 0.55), ("#000000", 0.0)], [0, 1]))
+    tint(s, "#7a86b8", 0.3)
+    for (hx, hy, k) in lamps:
+        glow(c, hx, hy, 1.0 * k, "#ffe2a0", 0.45)
+    _vignette(c, 0.6)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0.0, 3.6), "left": P.slot(-0.8, 3.6), "right": P.slot(0.85, 3.6),
+             "far": P.slot(0.0, 14.0), "very_far": P.slot(0.1, 30.0)}
+    return Scene(far, mid, slots=slots, floor_y=slots["center"]["y"], parallax=(0.9, 1.0, 1.1),
+                 lights=[{"x": round(hx), "y": round(hy), "color": "#ffe2a0"} for (hx, hy, _) in lamps[-3:]])
+
+
+# ------------------------------------------------------------------- 43. nhà trọ 2 tầng: cầu thang sắt ngoài, xe đạp
+def scene_nha_tro_hai_tang(tod: str) -> Scene:
+    night = tod != "day"
+    baked: list = []
+    sf = new_surface()
+    c = sf.getCanvas()
+    if night:
+        _night_sky(c, 0, 1400, seed=43, top="#0b1022", bottom="#262e52", n_stars=200)
+        _moon(c, 3500, 260, 80)
+    else:
+        _day_sky(c, 0, 1400, top="#8fb0cc", bottom="#e4ecf0")
+    _skyline(c, 1250, 431, "#141a30" if night else "#b4bcc4", 80, 260, lit="#ffd08a" if night else None, lit_p=0.04)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    GB, k = 1800, 260.0
+    F2 = GB - 2.6 * k                # sàn tầng 2
+    RT = F2 - 2.6 * k                # mái
+    BL, BR = 360, 3020
+    siding = "#cdb894" if not night else "#6a6070"
+    c.drawRect(_R(0, GB, W, H), fill("#8a8478" if not night else "#2e2e3a"))
+    for _ in range(260):
+        x, y = rng_x = random.random() * W, GB + random.random() * (H - GB)
+    rng = random.Random(43)
+    for _ in range(260):
+        c.drawCircle(rng.uniform(0, W), rng.uniform(GB + 10, H), rng.uniform(2, 5), fill("#000000", 0.15))
+    c.drawRect(_R(BL, RT, BR, GB), fill(siding))
+    y = RT + 20
+    while y < GB:
+        c.drawLine(BL, y, BR, y, stroke(shade(siding, -0.12), 4))
+        y += 34
+    quad(c, [(BL - 120, RT + 30), (BR + 120, RT + 30), (BR + 40, RT - 120), (BL - 40, RT - 120)], "#3a3e48" if not night else "#1e2230")
+    c.drawRect(_R(BL - 120, RT + 20, BR + 120, RT + 44), fill("#2a2e38" if not night else "#16181f"))
+    # hành lang tầng 2 (sàn + lan can)
+    c.drawRect(_R(BL - 40, F2 - 10, BR + 40, F2 + 40), fill("#8a8c94" if not night else "#40424e"))
+    c.drawRect(_R(BL - 40, F2 + 40, BR + 40, F2 + 56), fill("#000000", 0.3))
+    for x in (BL - 20, BR + 20):
+        c.drawRect(_R(x - 14, F2 + 40, x + 14, GB), fill("#7a7c84" if not night else "#3a3c46"))
+    doors = [(800, GB, "101"), (1800, GB, "102"), (800, F2, "201"), (1800, F2, "202")]
+    door_col = "#8a6a4a" if not night else "#4a3a30"
+    lamps = []
+    for (dx, fy, num) in doors:
+        dl, dr, dt = dx - 0.45 * k, dx + 0.45 * k, fy - 2.0 * k
+        c.drawRect(_R(dl - 14, dt - 14, dr + 14, fy), fill(shade(siding, -0.25)))
+        c.drawRect(_R(dl, dt, dr, fy), fill(door_col))
+        c.drawRect(_R(dl + 20, dt + 20, dr - 20, dt + 60), fill(shade(door_col, -0.2)))
+        c.drawCircle(dr - 30, dt + 1.05 * k, 12, fill("#c9ccd2"))
+        c.drawRect(_R(dl + 40, dt + 0.75 * k, dl + 110, dt + 0.82 * k), fill("#2a2622"))   # khe thư
+        _num_plate(c, dx, dt + 0.32 * k, num, 0.2 * k, baked, bg="#f4f1e8", fg="#2b2d36", pad=0.35)
+        # cửa sổ song sắt cạnh cửa
+        wl_, wr_ = dx + 0.75 * k, dx + 2.15 * k
+        wt_, wb_ = fy - 1.75 * k, fy - 0.95 * k
+        lit = night and num in ("102", "201")
+        c.drawRect(_R(wl_, wt_, wr_, wb_), fill("#ffd98a" if lit else ("#22283c" if night else "#7f96a8")))
+        for i in range(1, 7):
+            xx = wl_ + (wr_ - wl_) * i / 7
+            c.drawLine(xx, wt_, xx, wb_, stroke("#5a5e66", 6))
+        c.drawRect(_R(wl_ - 10, wt_ - 10, wr_ + 10, wb_ + 10), stroke(shade(siding, -0.3), 10))
+        if lit:
+            glow(c, (wl_ + wr_) / 2, (wt_ + wb_) / 2, 260, "#ffd98a", 0.35)
+        # đèn nhỏ trên cửa
+        c.drawPath(rrect(dx - 26, dt - 70, dx + 26, dt - 26, 10), fill("#fff3cf" if night else "#e8e4dc"))
+        lamps.append((dx, dt - 48))
+        # máy giặt / chậu cây trước cửa
+        if num in ("201", "102"):
+            c.drawPath(rrect(dl - 260, fy - 0.85 * k, dl - 60, fy, 14), fill("#e8eaee" if not night else "#8a8c98"))
+            c.drawCircle(dl - 160, fy - 0.45 * k, 0.22 * k, fill("#3a3e48"))
+    # lan can tầng 2 (che phần dưới cửa tầng 2)
+    rail = "#6e7078" if not night else "#3a3c48"
+    c.drawRect(_R(BL - 40, F2 - 1.05 * k, BR + 40, F2 - 1.0 * k), fill(rail))
+    c.drawRect(_R(BL - 40, F2 - 0.55 * k, BR + 40, F2 - 0.52 * k), fill(rail))
+    x = BL - 30
+    while x < BR + 40:
+        c.drawRect(_R(x, F2 - 1.0 * k, x + 8, F2 - 10), fill(rail))
+        x += 60
+    # cầu thang sắt ngoài bên phải
+    st = "#7a7c84" if not night else "#40424e"
+    SX0, SX1 = 3060, 3700
+    c.drawRect(_R(BR + 40, F2 - 10, SX0 + 40, F2 + 40), fill("#8a8c94" if not night else "#40424e"))
+    nst = 13
+    for i in range(nst):
+        t = i / nst
+        x0 = SX0 + (SX1 - SX0) * t
+        y0 = F2 + (GB - F2) * t
+        c.drawRect(_R(x0, y0 + 10, x0 + (SX1 - SX0) / nst + 10, y0 + 30), fill(shade(st, 0.12)))
+    for off in (0, 26):
+        c.drawLine(SX0, F2 + 40 + off, SX1 + 30, GB + off * 0.2, stroke(st, 18))
+    c.drawLine(SX0, F2 - 1.0 * k, SX1 + 40, GB - 1.0 * k, stroke(st, 14))
+    for i in range(0, nst + 1, 2):
+        t = i / nst
+        x0 = SX0 + (SX1 - SX0) * t
+        y0 = F2 + (GB - F2) * t
+        c.drawLine(x0, y0, x0, y0 - 1.0 * k, stroke(st, 8))
+    c.drawRect(_R(SX1 + 20, GB - 1.0 * k, SX1 + 44, GB), fill(st))
+    # hộp thư (2x2, không chữ)
+    ml, mt = 2350, GB - 1.6 * k
+    for i in range(2):
+        for j in range(2):
+            x0, y0 = ml + i * 150, mt + j * 120
+            c.drawRect(_R(x0, y0, x0 + 140, y0 + 110), fill("#9aa0a8" if not night else "#5a5e6a"))
+            c.drawRect(_R(x0 + 20, y0 + 20, x0 + 120, y0 + 34), fill("#2a2c34"))
+    c.drawRect(_R(ml + 130, mt + 240, ml + 170, GB), fill("#6e7078" if not night else "#3a3c48"))
+    # xe đạp
+    _bicycle(c, 1250, GB + 60, 300, "#c8352e" if not night else "#7a2a26")
+    _bicycle(c, 1500, GB + 80, 300, "#3a6ab0" if not night else "#2a4a7a", basket=False)
+    _bicycle(c, 2950, GB + 40, 300, "#d9c34a" if not night else "#7a6e3a", facing=-1)
+    if night:
+        tint(s, "#6a78b0", 0.45)
+        for (lx_, ly_) in lamps:
+            glow(c, lx_, ly_, 240, "#ffe9b0", 0.55)
+            _light_cone(c, lx_, ly_ + 20, 30, lx_, ly_ + 2.1 * k, 260, "#ffe9b0", 0.1)
+    _vignette(c, 0.45 if night else 0.3)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2000, "scale": 0.68}, "left": {"x": 900, "y": 2000, "scale": 0.68},
+             "right": {"x": 2700, "y": 2000, "scale": 0.68}, "door_101": {"x": 800, "y": GB + 20, "scale": 0.6},
+             "door_201": {"x": 800, "y": round(F2), "scale": 0.58}, "stairs": {"x": 3500, "y": 1990, "scale": 0.65}}
+    return Scene(far, mid, slots=slots, baked_signs=baked, floor_y=2000, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": round(x_), "y": round(y_), "color": "#ffe9b0"} for (x_, y_) in lamps] if night else [])
+
+# ------------------------------------------------------------------- 44. phòng chiếu tatami
+def _tatami_floor(c, back_y, mat="#c2b47a", edge="#3e4a3a") -> Persp:
+    P = Persp(f=1500, cx=W / 2, cy=back_y - 1500 * 1.4 / 5.6, cam_h=1.4)
+    z0 = 1.4 * 1500 / (H + 40 - P.cy)
+    c.drawRect(_R(0, back_y, W, H), fill(mat))
+    x = -5.4
+    while x < 5.4:                          # sợi dệt mảnh dọc z
+        c.drawLine(*P.p(x, 0, z0), *P.p(x, 0, 5.6), stroke(shade(mat, -0.08), 2, 0.6))
+        x += 0.06
+    # chiếu 0.9 x 1.8: hàng ngang xen hàng dọc
+    rows = [(5.6, 4.7, "h"), (4.7, 2.9, "v"), (2.9, 2.0, "h"), (2.0, 0.2, "v")]
+    for (zf, zn, kind) in rows:
+        if kind == "v":
+            xx = -5.4
+            while xx <= 5.4:
+                path_fill(c, P.plane_y(0.001, xx - 0.025, xx + 0.025, max(zn, z0), zf), edge)
+                xx += 0.9
+        else:
+            xx = -5.4
+            while xx <= 5.4:
+                path_fill(c, P.plane_y(0.001, xx - 0.025, xx + 0.025, max(zn, z0), zf), edge)
+                xx += 1.8
+        if zn > z0:
+            path_fill(c, P.plane_y(0.001, -5.6, 5.6, zn - 0.025, zn + 0.025), edge)
+    return P
+
+
+def scene_phong_chieu_tatami(tod: str) -> Scene:
+    night = tod != "day"
+    baked: list = []
+    s = new_surface()
+    c = s.getCanvas()
+    BY = 1380
+    plaster, wood = "#d8cbb0", "#7a5a3c"
+    c.drawRect(_R(0, 0, W, BY), fill(plaster))
+    c.drawRect(_R(0, 0, W, 170), fill(shade(wood, -0.1)))
+    for x in range(0, W, 120):
+        c.drawLine(x, 0, x, 170, stroke(shade(wood, -0.3), 5))
+    c.drawRect(_R(0, 170, W, 230), fill(wood))                      # dầm ngang
+    c.drawRect(_R(0, BY - 40, W, BY), fill(shade(wood, -0.15)))     # chân tường
+    for x in (60, 1460, 2620, 3760):
+        c.drawRect(_R(x - 34, 170, x + 34, BY), fill(wood))
+        c.drawRect(_R(x - 34, 170, x - 20, BY), fill(shade(wood, 0.12)))
+    # cửa trượt fusuma (trái)
+    for i, (l, r) in enumerate(((94, 776), (776, 1426))):
+        c.drawRect(_R(l, 280, r, BY - 40), fill("#2e2418"))
+        c.drawRect(_R(l + 22, 302, r - 22, BY - 62), fill("#ece2c8"))
+        for (cx_, cy_, rr) in ((l + 200, 560, 160), (l + 420, 860, 220), (l + 150, 1100, 130)):
+            c.drawPath(oval(cx_, cy_, rr * 1.6, rr * 0.35), fill("#d9cba8", 0.6))
+        hx = r - 70 if i == 0 else l + 70
+        c.drawPath(oval(hx, 800, 26, 34), fill("#5a4a36"))
+        c.drawPath(oval(hx, 800, 16, 22), fill("#2e2418"))
+    # cửa sổ: nửa trái shoji, nửa phải kính thấy trời
+    wl, wt, wr, wb = 1640, 430, 2460, 1080
+    c.drawRect(_R(wl - 30, wt - 30, wr + 30, wb + 30), fill(wood))
+    mx = (wl + wr) / 2
+    if night:
+        vgrad(c, mx, wt, wr, wb, ["#0c1228", "#263058"])
+        _moon(c, mx + 230, wt + 170, 55)
+    else:
+        vgrad(c, mx, wt, wr, wb, ["#9fbcd8", "#e4ecf0"])
+        round_tree(c, mx + 280, wt + 420, 160, "#7f9a6a", "#5a4636", seed=3)
+    reflections(c, mx, wt, wr, wb, 2, 0.12, seed=44)
+    c.drawRect(_R(wl, wt, mx + 10, wb), fill("#f2ecdc" if not night else "#e8dcc0"))
+    for i in range(1, 4):
+        xx = wl + (mx - wl) * i / 4
+        c.drawLine(xx, wt, xx, wb, stroke(wood, 8))
+    for j in range(1, 6):
+        yy = wt + (wb - wt) * j / 6
+        c.drawLine(wl, yy, mx + 10, yy, stroke(wood, 8))
+    c.drawRect(_R(mx, wt, mx + 20, wb), fill(wood))
+    c.drawRect(_R(wl - 60, wb + 30, wr + 60, wb + 60), fill(shade(wood, 0.1)))
+    # lịch treo tường: chỉ con số + lưới ô trống
+    cl, ct, cr, cb = 2900, 560, 3260, 1050
+    c.drawLine((cl + cr) / 2, ct - 60, (cl + cr) / 2, ct, stroke("#3a3a40", 4))
+    c.drawCircle((cl + cr) / 2, ct - 62, 8, fill("#3a3a40"))
+    c.drawRect(_R(cl, ct, cr, cb), fill("#f6f3ea"))
+    c.drawRect(_R(cl, ct, cr, ct + 26), fill("#c8352e"))
+    for i in range(9):
+        c.drawCircle(cl + 30 + i * 38, ct + 12, 6, fill("#ece4cc"))
+    text_center(c, "13", (cl + cr) / 2, ct + 130, 140, "#2b2d36", "extrabold")
+    baked.append(_baked("13", (cl + cr) / 2, ct + 130, 140))
+    for i in range(7):
+        for j in range(4):
+            x0 = cl + 24 + i * 45
+            y0 = ct + 230 + j * 48
+            c.drawRect(_R(x0, y0, x0 + 36, y0 + 38), fill("#e4ddcc" if (i + j) % 5 else "#f0c8c0"))
+    # kệ thấp bên phải + bình hoa
+    c.drawRect(_R(2840, 1150, 3560, BY - 40), fill(shade(wood, -0.2)))
+    c.drawRect(_R(2820, 1130, 3580, 1160), fill(wood))
+    c.drawPath(rrect(3380, 980, 3470, 1130, 30), fill("#3a5a6a"))
+    for (dx, dy) in ((-30, -70), (10, -110), (40, -60)):
+        c.drawLine(3425, 990, 3425 + dx, 980 + dy, stroke("#4a6a3a", 6))
+        c.drawCircle(3425 + dx, 980 + dy, 18, fill("#e8a0a8"))
+    P = _tatami_floor(c, BY)
+    # bàn thấp tròn + đệm ngồi + ấm chén
+    tx, ty = 1920, 1770
+    c.drawPath(oval(tx, ty + 180, 640, 90), fill("#000000", 0.25))
+    for dx in (-380, 380):
+        c.drawRect(_R(tx + dx - 26, ty, tx + dx + 26, ty + 170), fill("#4a3020"))
+    c.drawPath(oval(tx, ty + 18, 600, 120), fill("#4a3020"))
+    c.drawPath(oval(tx, ty, 600, 120), fill("#7a4e30"))
+    c.drawPath(oval(tx, ty - 6, 560, 100), fill("#8a5a38"))
+    c.drawPath(rrect(tx - 90, ty - 140, tx + 70, ty - 20, 50), fill("#5a6a5a"))
+    c.drawPath(capsule(tx + 60, ty - 100, tx + 150, ty - 120, 26, 16), fill("#5a6a5a"))
+    c.drawPath(rrect(tx - 40, ty - 165, tx + 20, ty - 135, 12), fill("#4a584a"))
+    for cx_ in (tx - 300, tx + 280):
+        c.drawPath(rrect(cx_ - 45, ty - 70, cx_ + 45, ty - 10, 14), fill("#e8e2d4"))
+    for (cx_, cy_) in ((tx - 820, 1980), (tx + 820, 1980)):
+        c.drawPath(rrect(cx_ - 260, cy_ - 60, cx_ + 260, cy_ + 60, 40), fill("#8a3a4a"))
+        c.drawPath(rrect(cx_ - 230, cy_ - 46, cx_ + 230, cy_ + 40, 34), fill("#a04a5a"))
+    # đèn lồng giấy tròn treo trần
+    lx, ly, lr = 1920, 420, 150
+    c.drawLine(lx, 170, lx, ly - lr, stroke("#2a2622", 5))
+    c.drawPath(rrect(lx - 40, ly - lr - 20, lx + 40, ly - lr + 10, 8), fill("#2a2622"))
+    c.drawPath(oval(lx, ly, lr, lr * 0.92), fill("#fff3d6" if night else "#f2ecdc"))
+    for k_ in range(-3, 4):
+        c.drawPath(oval(lx, ly + k_ * lr * 0.24, lr * math.sqrt(max(0.0, 1 - (k_ * 0.26) ** 2)), 6),
+                   fill(shade("#f2ecdc", -0.12), 0.6))
+    c.drawPath(rrect(lx - 40, ly + lr * 0.88, lx + 40, ly + lr * 0.98, 8), fill("#2a2622"))
+    if night:
+        tint(s, "#4a5280", 0.55)
+        glow(c, lx, ly, 900, "#ffe2b0", 0.4)
+        glow(c, lx, ly, 260, "#fff3d6", 0.6)
+        ellipse_glow(c, tx, ty, 900, 200, "#ffe2b0", 0.25)
+        c.drawPath(oval(lx, ly, lr * 0.9, lr * 0.82), fill("#fff6e0", 0.5))
+    else:
+        c.drawPath(poly([(mx, wt), (wr, wt), (wr + 900, H), (mx + 300, H)]), lin_paint((mx, wt), (mx, H),
+                   [("#fff6dc", 0.2), ("#fff6dc", 0.04)]))
+    _vignette(c, 0.5 if night else 0.35)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2040, "scale": 1.12}, "left": {"x": 1000, "y": 2040, "scale": 1.12},
+             "right": {"x": 2850, "y": 2040, "scale": 1.12}, "door": {"x": 760, "y": 1700, "scale": 0.95},
+             "seat_left": {"x": 1100, "y": 2000, "scale": 1.1}, "seat_right": {"x": 2740, "y": 2000, "scale": 1.1}}
+    return Scene(None, mid, slots=slots, baked_signs=baked, floor_y=2040,
+                 lights=[{"x": lx, "y": ly, "color": "#ffe2b0"}] if night else [])
+
+
+# ------------------------------------------------------------------- 45. bếp quán mì nhỏ
+def scene_bep_quan_mi(tod: str) -> Scene:
+    baked: list = []
+    s = new_surface()
+    c = s.getCanvas()
+    FB = 1720
+    c.drawRect(_R(0, 0, W, FB), fill("#eef0ec"))
+    _tile_grid(c, 0, 0, W, FB, 96, 96, "#c9d0cc", 4)
+    rng = random.Random(45)
+    for _ in range(10):
+        c.drawPath(oval(rng.uniform(0, W), rng.uniform(300, 1200), rng.uniform(60, 180), rng.uniform(60, 200)),
+                   fill("#a89a6a", rng.uniform(0.05, 0.1)))
+    # dầm gỗ + thẻ thực đơn treo (chữ tiếng Anh nướng)
+    c.drawRect(_R(0, 150, W, 230), fill("#6b4a32"))
+    c.drawRect(_R(0, 150, W, 166), fill("#8a6a4a"))
+    menu = ["RAMEN ¥800", "MISO ¥900", "GYOZA ¥400", "BEER"]
+    for i, txt in enumerate(menu):
+        cx_ = 2060 + i * 480
+        l, r = cx_ - 220, cx_ + 220
+        for xx in (l + 60, r - 60):
+            c.drawLine(xx, 230, xx, 300, stroke("#3a2a1e", 5))
+        c.drawPath(rrect(l, 300, r, 450, 12), fill("#e9dcb8"))
+        c.drawPath(rrect(l + 10, 310, r - 10, 440, 8), stroke("#b89a68", 4))
+        text_center(c, txt, cx_, 375, 64, "#2a1e16", "extrabold", max_w=390)
+        baked.append(_baked(txt, cx_, 375, 64))
+    # cửa ra vào + rèm noren "NOODLES"
+    DL, DR, DT = 120, 820, 520
+    c.drawRect(_R(DL - 40, DT - 40, DR + 40, FB), fill("#6b4a32"))
+    vgrad(c, DL, DT, DR, FB, ["#1a1e2e", "#2a2e40"])
+    c.drawRect(_R(DL - 60, DT - 20, DR + 60, DT + 6), fill("#4a3424"))
+    nb = DT + 560
+    for j in range(3):
+        l = DL + j * (DR - DL) / 3 + 6
+        r = DL + (j + 1) * (DR - DL) / 3 - 6
+        c.drawRect(_R(l, DT + 6, r, nb), fill("#1f3a5e"))
+        c.drawRect(_R(l, nb - 40, r, nb), fill("#2a4a72"))
+    text_center(c, "NOODLES", (DL + DR) / 2, DT + 240, 104, "#f4f1e8", "extrabold", max_w=DR - DL - 60)
+    baked.append(_baked("NOODLES", (DL + DR) / 2, DT + 240, 104))
+    for j in range(1, 3):
+        x = DL + j * (DR - DL) / 3
+        c.drawRect(_R(x - 6, DT + 6, x + 6, nb), fill("#1a1e2e"))
+    # máy hút khói + bếp + nồi nước dùng
+    c.drawPath(poly([(1060, 560), (2060, 560), (2160, 820), (960, 820)]), fill("#b9c2c8"))
+    c.drawRect(_R(960, 820, 2160, 860), fill("#8e989f"))
+    c.drawRect(_R(1400, 0, 1720, 560), fill("#a9b2b8"))
+    CT = 1300
+    vgrad(c, 900, CT, 3620, FB, ["#bcc5cb", "#8e989f"])
+    c.drawRect(_R(880, CT - 30, 3640, CT), fill("#dfe5e9"))
+    c.drawRect(_R(880, CT - 30, 3640, CT - 22), fill("#f6f8f9"))
+    for x in range(1200, 3600, 400):
+        c.drawLine(x, CT + 20, x, FB, stroke("#7d878e", 5))
+    for (px, pw, ph, col) in ((1250, 440, 420, "#c9d1d7"), (1880, 320, 260, "#aab2b8")):
+        c.drawRect(_R(px - pw / 2 - 30, CT - 60, px + pw / 2 + 30, CT - 30), fill("#2b2d33"))
+        c.drawRect(_R(px - pw / 2, CT - 60 - ph, px + pw / 2, CT - 60), fill(col))
+        c.drawRect(_R(px - pw / 2, CT - 60 - ph, px - pw / 2 + 30, CT - 60), fill(shade(col, 0.15)))
+        c.drawPath(oval(px, CT - 60 - ph, pw / 2, 26), fill(shade(col, -0.2)))
+        c.drawPath(oval(px, CT - 60 - ph, pw / 2 - 20, 18), fill("#d9b46a"))
+        for sx in (-1, 1):
+            c.drawPath(rrect(px + sx * (pw / 2 + 10) - 24, CT - 60 - ph * 0.7, px + sx * (pw / 2 + 10) + 24,
+                             CT - 60 - ph * 0.6, 10), fill("#6e7478"))
+        for k_ in range(3):                   # hơi nước
+            sx = px - pw * 0.25 + k_ * pw * 0.25
+            p = skia.Path()
+            p.moveTo(sx, CT - 80 - ph)
+            p.cubicTo(sx - 60, CT - 200 - ph, sx + 60, CT - 280 - ph, sx - 10, CT - 400 - ph)
+            c.drawPath(p, stroke("#ffffff", 26, 0.22))
+    c.drawLine(1500, CT - 520, 1560, CT - 90, stroke("#6e7478", 14))       # muôi
+    c.drawPath(oval(1560, CT - 90, 50, 20), fill("#6e7478"))
+    # kệ trên + chồng bát viền đỏ
+    SY = 860
+    c.drawRect(_R(2300, SY, 3700, SY + 30), fill("#9aa4ab"))
+    for x in (2360, 3640):
+        c.drawLine(x, SY + 30, x - 40, SY + 130, stroke("#8e989f", 10))
+    for i in range(5):
+        bx = 2450 + i * 260
+        for j in range(3 + (i % 2)):
+            by = SY - j * 52
+            quad(c, [(bx - 100, by - 50), (bx + 100, by - 50), (bx + 66, by), (bx - 66, by)], "#d9d9d0")
+            quad(c, [(bx - 84, by - 26), (bx + 84, by - 26), (bx + 66, by), (bx - 66, by)], "#b9b9b0")
+            c.drawRect(_R(bx - 100, by - 50, bx + 100, by - 40), fill("#c8352e"))
+    for j in range(7):                                       # chồng đĩa trên quầy
+        c.drawPath(oval(2400, CT - 34 - j * 18, 170, 26), fill("#e4e4dc"))
+        c.drawPath(oval(2400, CT - 34 - j * 18, 170, 26), stroke("#c8352e", 6))
+    for (x, col) in ((2700, "#e8c86a"), (2800, "#c8352e"), (2900, "#4a3a2a")):
+        c.drawPath(rrect(x - 36, CT - 170, x + 36, CT - 30, 14), fill(col))
+        c.drawRect(_R(x - 30, CT - 190, x + 30, CT - 170), fill("#2b2d33"))
+    # bồn rửa + vòi
+    SL, SR = 3000, 3560
+    c.drawRect(_R(SL, CT - 30, SR, CT + 40), fill("#8e989f"))
+    c.drawRect(_R(SL + 20, CT - 26, SR - 20, CT - 6), fill("#5a6066"))
+    c.drawRect(_R(SR - 120, CT - 260, SR - 96, CT - 30), fill("#c9ccd2"))
+    c.drawPath(capsule(SR - 108, CT - 250, SR - 230, CT - 250, 24, 20), fill("#c9ccd2"))
+    c.drawLine(SR - 230, CT - 250, SR - 230, CT - 200, stroke("#c9ccd2", 18))
+    # đèn treo ấm + sàn
+    _persp_floor(c, FB, "#4a4440", "#3a3430", vx=1920, vy=900, spacing=300, dz=0.12)
+    for lx in (1150, 2300):
+        c.drawLine(lx, 230, lx, 520, stroke("#2a2622", 5))
+        quad(c, [(lx - 40, 520), (lx + 40, 520), (lx + 120, 610), (lx - 120, 610)], "#2a2622")
+        c.drawPath(oval(lx, 612, 90, 16), fill("#fff1c8"))
+    tint(s, "#8a7a6a", 0.25)
+    for lx in (1150, 2300):
+        glow(c, lx, 620, 900, "#ffe2a0", 0.3)
+        glow(c, lx, 615, 150, "#fff1c8", 0.6)
+    _vignette(c, 0.5)
+    mid = s.makeImageSnapshot()
+    slots = {"cook": {"x": 2050, "y": 1640, "scale": 0.98, "clip_bottom": CT - 30},
+             "center": {"x": 1920, "y": 2010, "scale": 1.1}, "left": {"x": 900, "y": 2010, "scale": 1.1},
+             "right": {"x": 3000, "y": 2010, "scale": 1.1}, "sink": {"x": 3280, "y": 1640, "scale": 0.98, "clip_bottom": CT - 30},
+             "door": {"x": 470, "y": 1880, "scale": 1.0}}
+    return Scene(None, mid, slots=slots, baked_signs=baked, floor_y=2010,
+                 lights=[{"x": 1150, "y": 612, "color": "#ffe2a0"}, {"x": 2300, "y": 612, "color": "#ffe2a0"}])
+
+
+# ------------------------------------------------------------------- 46. phòng ngủ tối + TV CRT
+def scene_phong_ngu_tv_cu(tod: str) -> Scene:
+    s = new_surface()
+    c = s.getCanvas()
+    BY = 1460
+    wall = "#8a8478"
+    c.drawRect(_R(0, 0, W, BY), fill(wall))
+    vgrad(c, 0, 0, W, 300, [shade(wall, -0.3), wall])
+    c.drawRect(_R(0, BY - 40, W, BY), fill(shade(wall, -0.3)))
+    rng = random.Random(46)
+    for _ in range(8):
+        c.drawPath(oval(rng.uniform(0, W), rng.uniform(200, 1300), rng.uniform(80, 240), rng.uniform(60, 200)),
+                   fill("#4a4438", rng.uniform(0.03, 0.06)))
+    # cửa sổ + rèm khép hờ
+    wl, wt, wr, wb = 380, 380, 1260, 1080
+    c.drawRect(_R(wl - 26, wt - 26, wr + 26, wb + 26), fill("#c9c2b0"))
+    vgrad(c, wl, wt, wr, wb, ["#0c1228", "#22305a"])
+    _moon(c, 1000, 560, 60, a=0.9)
+    c.drawLine((wl + wr) / 2, wt, (wl + wr) / 2, wb, stroke("#c9c2b0", 16))
+    for (l_, r_, tip) in ((wl - 120, wl + 230, wl + 260), (wr - 180, wr + 140, wr - 210)):
+        p = skia.Path()
+        p.moveTo(l_, wt - 70)
+        p.lineTo(r_, wt - 70)
+        p.quadTo(tip, (wt + wb) / 2, r_ - (r_ - l_) * 0.1, wb + 200)
+        p.lineTo(l_, wb + 200)
+        p.close()
+        path_fill(c, p, "#4a5a7a")
+        for j in range(4):
+            xx = l_ + (r_ - l_) * (j + 0.5) / 4
+            c.drawLine(xx, wt - 60, xx + 10, wb + 190, stroke("#3a4866", 10))
+    c.drawRect(_R(wl - 220, wt - 90, wr + 220, wt - 66), fill("#5a5448"))
+    # sàn gỗ
+    _persp_floor(c, BY, "#5a4634", "#4a3828", vx=1920, vy=900, spacing=260, dz=0.1)
+    # đệm futon gấp chồng góc phải
+    fx, fb = 3420, BY + 120
+    for j, col in enumerate(("#c9c2b8", "#5a7aa0", "#e8e2d4", "#a06a6a")):
+        t = fb - (j + 1) * 120
+        c.drawPath(rrect(fx - 360 + j * 6, t, fx + 360 - j * 6, t + 120, 40), fill(col))
+        c.drawLine(fx - 330, t + 60, fx + 330, t + 60, stroke(shade(col, -0.15), 5))
+    c.drawPath(rrect(fx - 220, fb - 560, fx + 200, fb - 480, 36), fill("#f0ebe0"))
+    # tủ thấp + TV CRT
+    CL, CR, CTp = 2180, 3080, 1300
+    c.drawRect(_R(CL, CTp, CR, BY + 110), fill("#4a3424"))
+    c.drawRect(_R(CL - 20, CTp - 20, CR + 20, CTp + 10), fill("#5e4430"))
+    for x0 in (CL + 30, (CL + CR) / 2 + 10):
+        c.drawRect(_R(x0, CTp + 50, x0 + (CR - CL) / 2 - 40, BY + 80), fill("#3a281c"))
+        c.drawCircle(x0 + (CR - CL) / 4 - 20, CTp + 220, 14, fill("#8a7a5a"))
+    TL, TR, TT, TB = 2300, 2960, 690, 1280
+    c.drawPath(rrect(TL + 60, TT - 40, TR - 60, TB - 20, 40), fill("#4e4c52"))     # lưng TV
+    c.drawPath(rrect(TL, TT, TR, TB, 34), fill("#8e8a86"))
+    c.drawPath(rrect(TL + 10, TT + 10, TR - 10, TT + 40, 20), fill("#a8a49e"))
+    sl, st_, sr, sb = TL + 60, TT + 60, TR - 170, TB - 70
+    c.drawPath(rrect(sl - 16, st_ - 16, sr + 16, sb + 16, 40), fill("#2e2c30"))
+    c.save()
+    c.clipPath(rrect(sl, st_, sr, sb, 46))
+    c.drawRect(_R(sl, st_, sr, sb), fill("#b8c4d4"))
+    for _ in range(2600):                   # nhiễu tĩnh
+        x, y = rng.uniform(sl, sr), rng.uniform(st_, sb)
+        g = rng.choice(["#ffffff", "#e0e6f0", "#7a8698", "#4a5468", "#d0dae8"])
+        c.drawRect(_R(x, y, x + rng.uniform(6, 22), y + rng.uniform(3, 7)), fill(g, 0.85))
+    for y in range(int(st_), int(sb), 8):
+        c.drawLine(sl, y, sr, y, stroke("#000000", 2, 0.12))
+    c.drawRect(_R(sl, st_ + (sb - st_) * 0.55, sr, st_ + (sb - st_) * 0.6), fill("#ffffff", 0.25))
+    c.restore()
+    c.drawPath(rrect(sl, st_, sr, sb, 46), lin_paint((sl, st_), (sr, sb), [("#ffffff", 0.18), ("#ffffff", 0.0)]))
+    for j in range(3):
+        c.drawCircle(TR - 90, TT + 140 + j * 90, 26, fill("#4e4c52"))
+    for j in range(6):
+        c.drawLine(TR - 130, TT + 420 + j * 22, TR - 50, TT + 420 + j * 22, stroke("#5a585e", 6))
+    c.drawLine(TL + 220, TT - 40, TL + 120, TT - 300, stroke("#5a585e", 8))
+    c.drawLine(TL + 340, TT - 40, TL + 460, TT - 320, stroke("#5a585e", 8))
+    # bàn thấp + cốc
+    tx, ty = 1500, 1700
+    c.drawRect(_R(tx - 420, ty, tx - 380, ty + 170), fill("#3a281c"))
+    c.drawRect(_R(tx + 380, ty, tx + 420, ty + 170), fill("#3a281c"))
+    c.drawRect(_R(tx - 470, ty - 40, tx + 470, ty), fill("#5e4430"))
+    c.drawRect(_R(tx - 470, ty - 40, tx + 470, ty - 30), fill("#6e5440"))
+    c.drawPath(rrect(tx + 120, ty - 140, tx + 200, ty - 40, 14), fill("#e8e2d4"))
+    c.drawPath(rrect(tx - 260, ty - 70, tx - 60, ty - 40, 6), fill("#2b2d33"))         # điều khiển
+    tint(s, "#3a4270", 0.68)
+    scx, scy = (sl + sr) / 2, (st_ + sb) / 2
+    glow(c, scx, scy, 1500, "#bcd4ff", 0.35)
+    glow(c, scx, scy, 420, "#e8f0ff", 0.45)
+    ellipse_glow(c, scx - 150, 1750, 1100, 260, "#bcd4ff", 0.22)
+    glow(c, 1000, 560, 300, "#dfe8ff", 0.3)
+    c.drawPath(poly([(wl, wt), (wr, wt), (wr + 700, H), (wl + 200, H)]), lin_paint((wl, wt), (wl, H),
+               [("#c9d8ff", 0.12), ("#c9d8ff", 0.02)]))
+    _vignette(c, 0.6)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2040, "scale": 1.12}, "left": {"x": 900, "y": 2040, "scale": 1.12},
+             "right": {"x": 2700, "y": 2040, "scale": 1.12}, "tv": {"x": 2400, "y": 1980, "scale": 1.05},
+             "futon": {"x": 3300, "y": 2020, "scale": 1.1}}
+    return Scene(None, mid, slots=slots, floor_y=2040, lights=[{"x": round(scx), "y": round(scy), "color": "#bcd4ff"}])
+
+
+# =================================================================== LÔ 4 (docs/reference_batch4_analysis.md)
+# 12 loại cảnh mới (bối cảnh thriller đô thị: trung tâm điện thoại, phố đêm, hầm xe, tiệm giặt, trung tâm dữ liệu...),
+# vẽ GỐC bằng code. Không cắt/đồ lại khung tham khảo; không tên/logo thật. MỌI chữ nướng vào pixel là TIẾNG ANH
+# (PHONE REPAIR, CASE SHOP, EXIT, B2, LAUNDRY 24H, RESTRICTED AREA...) và được ghi vào baked_signs -> profile.baked_text.
+U4 = 200.0                       # px/mét trong toạ độ cục bộ của một mặt tiền (ki-ốt, máy giặt...)
+
+
+def _quad_matrix(w: float, h: float, dst) -> skia.Matrix:
+    """Ma trận phối cảnh đưa hình chữ nhật (0,0,w,h) vào tứ giác dst [TL, TR, BR, BL]."""
+    m = skia.Matrix()
+    m.setPolyToPoly([skia.Point(0, 0), skia.Point(w, 0), skia.Point(w, h), skia.Point(0, h)],
+                    [skia.Point(*p) for p in dst])
+    return m
+
+
+class _Bake:
+    """Ghi chữ nướng (kể cả chữ vẽ trong hệ toạ độ cục bộ đã chiếu phối cảnh) -> baked_signs px."""
+
+    def __init__(self) -> None:
+        self.items: list = []
+        self.m: skia.Matrix | None = None
+
+    def text(self, c, txt, cx, cy, size, col, weight="extrabold", max_w=None, neon=None, a=1.0) -> None:
+        if neon:
+            f = font(size, weight)
+            tw = f.measureText(txt)
+            sz = size * (max_w / tw) if (max_w and tw > max_w) else size
+            f = font(sz, weight)
+            tw = f.measureText(txt)
+            p = fill(neon, 0.9 * a)
+            p.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, sz * 0.22))
+            c.drawString(txt, cx - tw / 2, cy + sz * 0.36, f, p)
+        text_center(c, txt, cx, cy, size, col, weight, a=a, max_w=max_w)
+        box = _baked(txt, cx, cy, size)["box"]
+        if max_w:
+            half = min((box[2] - box[0]) / 2, max_w / 2)
+            box = [cx - half, box[1], cx + half, box[3]]
+        if self.m is not None:
+            pts = [self.m.mapXY(x, y) for (x, y) in ((box[0], box[1]), (box[2], box[1]), (box[2], box[3]), (box[0], box[3]))]
+            box = [min(p.x() for p in pts), min(p.y() for p in pts), max(p.x() for p in pts), max(p.y() for p in pts)]
+        self.items.append({"text": txt, "box": [round(v) for v in box]})
+
+
+def _on_quad(c, bk: _Bake | None, w, h, dst, draw) -> None:
+    """Vẽ draw(c) trong hệ cục bộ w×h rồi chiếu lên tứ giác dst."""
+    m = _quad_matrix(w, h, dst)
+    c.save()
+    c.concat(m)
+    c.clipRect(_R(0, 0, w, h), skia.ClipOp.kIntersect, True)
+    if bk is not None:
+        bk.m = m
+    draw(c)
+    if bk is not None:
+        bk.m = None
+    c.restore()
+
+
+def _fire_ext(c, x, base, k) -> None:
+    """Bình chữa cháy đỏ (x = tâm, base = đáy, k = px/mét)."""
+    c.drawPath(rrect(x - 0.09 * k, base - 0.55 * k, x + 0.09 * k, base, 0.07 * k), fill("#d42e26"))
+    c.drawRect(_R(x - 0.09 * k, base - 0.36 * k, x + 0.09 * k, base - 0.3 * k), fill("#f2ead8"))
+    c.drawRect(_R(x - 0.03 * k, base - 0.66 * k, x + 0.03 * k, base - 0.55 * k), fill("#2b2d33"))
+    c.drawLine(x, base - 0.62 * k, x + 0.13 * k, base - 0.58 * k, stroke("#2b2d33", max(2.0, 0.025 * k)))
+    c.drawPath(capsule(x + 0.1 * k, base - 0.5 * k, x + 0.14 * k, base - 0.2 * k, 0.018 * k, 0.012 * k), fill("#1d1f24"))
+    c.drawRect(_R(x - 0.06 * k, base - 0.5 * k, x - 0.035 * k, base - 0.06 * k), fill("#ff6a5a", 0.6))
+
+
+def _exit_box(c, bk: _Bake, cx, cy, w, lit=True) -> None:
+    h = w * 0.36
+    c.drawPath(rrect(cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2, h * 0.12), fill("#f4f6f4"))
+    c.drawPath(rrect(cx - w / 2 + h * 0.08, cy - h / 2 + h * 0.08, cx + w / 2 - h * 0.08, cy + h / 2 - h * 0.08, h * 0.08),
+               fill("#19a85a" if lit else "#2a6a46"))
+    bk.text(c, "EXIT", cx, cy, h * 0.5, "#ffffff", max_w=w * 0.8)
+    if lit:
+        glow(c, cx, cy, w * 1.2, "#3ee08f", 0.35)
+
+
+# ------------------------------------------------------------------- 47. tầng trung tâm điện thoại (4 biến thể)
+KIOSKS = [("PHONE REPAIR", "repair", "#2fc4ff"), ("CASE SHOP", "cases", "#ff4fa3"), ("SCREEN FILM", "film", "#3ee08f"),
+          ("LAPTOP REPAIR", "laptop", "#ffb02e"), ("TOP-UP", "topup", "#b47bff")]
+
+
+def _phone(c, x, y, w, h, body="#22252c", screen="#3a4a6a", cracked=False, lit=False) -> None:
+    c.drawPath(rrect(x, y, x + w, y + h, w * 0.16), fill(body))
+    c.drawPath(rrect(x + w * 0.08, y + h * 0.07, x + w * 0.92, y + h * 0.93, w * 0.1), fill("#7ac8ff" if lit else screen))
+    if cracked:
+        cx_, cy_ = x + w * 0.62, y + h * 0.35
+        for (dx, dy) in ((-0.5, -0.25), (0.3, -0.3), (0.3, 0.5), (-0.4, 0.45), (0.05, 0.6)):
+            c.drawLine(cx_, cy_, cx_ + dx * w, cy_ + dy * h * 0.6, stroke("#e8f0ff", max(1.0, w * 0.03), 0.85))
+
+
+def _kiosk_wall(c, bk: _Bake, kind, l, t, r, b, rng, detail) -> None:
+    """Tường trong ki-ốt (giữa bảng hiệu và quầy) theo loại cửa hàng."""
+    if kind == "cases":
+        c.drawRect(_R(l, t, r, b), fill("#ece6da"))
+        y = t + 10
+        while y < b - 10:
+            x = l + 10
+            while x < r - 10:
+                c.drawCircle(x, y, 1.8, fill("#c9c0ae"))
+                x += 14
+            y += 14
+        cols = ["#ff4fa3", "#2fc4ff", "#f3c94e", "#4fa35a", "#ff7a3a", "#b47bff", "#ffffff", "#22252c", "#e83a3a"]
+        y = t + 18
+        while y + 70 < b:
+            x = l + 16
+            while x + 34 < r:
+                c.drawLine(x + 17, y - 8, x + 17, y + 2, stroke("#8a8f98", 3))
+                c.drawPath(rrect(x, y, x + 34, y + 62, 7), fill(rng.choice(cols)))
+                c.drawCircle(x + 9, y + 10, 4, fill("#000000", 0.35))
+                x += 46
+            y += 84
+    elif kind == "repair":
+        c.drawRect(_R(l, t, r, b), fill("#e6ebef"))
+        sh_r = r - (150 if detail else 0)
+        for sy in (t + 100, t + 210, b - 6):
+            c.drawRect(_R(l + 8, sy, sh_r - 8, sy + 8), fill("#9aa3ad"))
+            x = l + 22
+            while x + 30 < sh_r - 10:
+                _phone(c, x, sy - 66, 30, 62, cracked=rng.random() < 0.6, lit=rng.random() < 0.15)
+                x += 44
+        if detail:
+            pl, pt_, pr, pb = r - 140, t + 10, r - 6, t + 200
+            c.drawPath(rrect(pl, pt_, pr, pb, 6), fill("#1d2230"))
+            bk.text(c, "REPAIR PRICES", (pl + pr) / 2, pt_ + 22, 15, "#ffd25a", max_w=pr - pl - 12)
+            for i, row in enumerate(("SCREEN 900", "BATTERY 450", "CHARGE PORT 300", "DATA RECOVERY 500")):
+                bk.text(c, row, (pl + pr) / 2, pt_ + 60 + i * 36, 12, "#f4f6f8", "bold", max_w=pr - pl - 14)
+    elif kind == "film":
+        c.drawRect(_R(l, t, r, b), fill("#e2eef0"))
+        y = t + 14
+        while y + 60 < b:
+            x = l + 14
+            while x + 40 < r:
+                c.drawPath(rrect(x, y, x + 40, y + 58, 4), fill("#bfe4f2"))
+                c.drawPath(rrect(x + 6, y + 8, x + 34, y + 50, 3), fill("#ffffff", 0.7))
+                c.drawRect(_R(x, y + 48, x + 40, y + 58), fill("#3ee08f"))
+                x += 52
+            y += 74
+    elif kind == "laptop":
+        c.drawRect(_R(l, t, r, b), fill("#ebe6dc"))
+        for sy in (t + 150, b - 6):
+            c.drawRect(_R(l + 8, sy, r - 8, sy + 8), fill("#9aa3ad"))
+            x = l + 20
+            while x + 90 < r:
+                c.drawPath(rrect(x, sy - 80, x + 90, sy - 10, 5), fill("#2b2d33"))
+                c.drawRect(_R(x + 6, sy - 74, x + 84, sy - 16), fill(rng.choice(["#3a78c2", "#2fc4ff", "#3a4a6a", "#5a6a8a"])))
+                quad(c, [(x - 6, sy - 10), (x + 96, sy - 10), (x + 104, sy), (x - 14, sy)], "#9aa0a8")
+                x += 112
+    else:   # topup
+        c.drawRect(_R(l, t, r, b), fill("#efe8f4"))
+        cols = ["#b47bff", "#2fc4ff", "#ff4fa3", "#f3c94e", "#4fa35a"]
+        y = t + 16
+        while y + 40 < b:
+            x = l + 14
+            while x + 52 < r:
+                col = rng.choice(cols)
+                c.drawPath(rrect(x, y, x + 52, y + 34, 4), fill(col))
+                c.drawPath(rrect(x + 6, y + 8, x + 18, y + 24, 2), fill("#f3d27a"))
+                x += 62
+            y += 50
+
+
+def _kiosk_local(c, bk: _Bake, w, h, text, kind, ncol, closed, seed, detail=False) -> None:
+    """Mặt tiền 1 ki-ốt (toạ độ cục bộ, U4 px/m): bảng hiệu neon, tường hàng, quầy kính; closed -> cửa cuốn."""
+    rng = random.Random(seed)
+    SB = 0.55 * U4
+    CT = h - 1.05 * U4
+    if not closed:
+        vgrad(c, 0, SB, w, h, ["#fbfaf6", "#e6e2da"])
+        _kiosk_wall(c, bk, kind, 26, SB + 14, w - 26, CT - 6, rng, detail)
+        c.drawRect(_R(18, CT, w - 18, h), fill("#dde6ec"))
+        vgrad(c, 24, CT + 18, w - 24, h - 24, ["#d6ecf6", "#a6c6d8"])
+        for sy in (CT + 70, CT + 140):
+            c.drawRect(_R(24, sy, w - 24, sy + 4), fill("#ffffff", 0.7))
+            x = 40
+            while x + 30 < w - 40:
+                col = rng.choice(["#22252c", "#ff4fa3", "#2fc4ff", "#f3c94e", "#ffffff", "#4fa35a"])
+                c.drawPath(rrect(x, sy - 40, x + 24, sy - 2, 4), fill(col))
+                x += rng.uniform(34, 60)
+        reflections(c, 24, CT + 18, w - 24, h - 24, 3, 0.22, seed=seed)
+        c.drawRect(_R(14, CT - 10, w - 14, CT + 16), fill("#f6f8fa"))
+        c.drawRect(_R(14, CT + 12, w - 14, CT + 18), fill("#b9c2ca"))
+        c.drawRect(_R(18, h - 22, w - 18, h), fill("#4a4e58"))
+        if detail:
+            # mặt quầy sửa chữa: thảm cắt xanh, đèn bàn, cốc bút, điện thoại mở nắp, tua vít
+            quad(c, [(150, CT - 10), (430, CT - 10), (420, CT - 22), (160, CT - 22)], "#2f8a5a")
+            _phone(c, 210, CT - 32, 70, 22, body="#3a3e48", screen="#5a6070")
+            c.drawLine(330, CT - 26, 400, CT - 30, stroke("#d8423a", 6))
+            c.drawLine(395, CT - 30, 420, CT - 31, stroke("#c9ccd2", 3))
+            lx = 480
+            c.drawPath(oval(lx, CT - 14, 34, 8), fill("#2b2d33"))
+            c.drawLine(lx, CT - 16, lx + 20, CT - 120, stroke("#2b2d33", 7))
+            c.drawLine(lx + 20, CT - 120, lx - 50, CT - 165, stroke("#2b2d33", 7))
+            quad(c, [(lx - 30, CT - 180), (lx - 80, CT - 176), (lx - 96, CT - 136), (lx - 36, CT - 140)], "#2b2d33")
+            glow(c, lx - 66, CT - 136, 90, "#fff4d0", 0.5)
+            c.drawPath(rrect(90, CT - 60, 124, CT - 10, 5), fill("#3a78c2"))
+            for (dx, col) in ((-8, "#d8423a"), (2, "#2b2d33"), (10, "#f3c94e")):
+                c.drawLine(107 + dx, CT - 58, 107 + dx * 2, CT - 92, stroke(col, 4))
+            for i in range(3):
+                _phone(c, 560 + i * 34, CT - 62, 26, 50, cracked=True)
+    else:
+        vgrad(c, 0, SB, w, h, ["#a4aab2", "#868c96"])
+        y = SB + 12
+        while y < h - 20:
+            c.drawLine(0, y, w, y, stroke("#6e747e", 3))
+            c.drawLine(0, y + 3, w, y + 3, stroke("#c2c8d0", 1.5, 0.6))
+            y += 16
+        c.drawRect(_R(0, h - 26, w, h), fill("#5a606a"))
+        c.drawPath(rrect(w / 2 - 22, h - 22, w / 2 + 22, h - 8, 4), fill("#2b2d33"))
+        c.drawPath(rrect(w * 0.8 - 12, h - 50, w * 0.8 + 12, h - 24, 4), fill("#c9a440"))
+        c.drawCircle(w * 0.8, h - 54, 9, stroke("#9aa0a8", 4))
+    # bảng hiệu + khung nhôm
+    c.drawRect(_R(0, 0, w, SB), fill("#15171e"))
+    c.drawRect(_R(0, SB - 8, w, SB), fill(ncol if not closed else "#3a3e48"))
+    if closed:
+        bk.text(c, text, w / 2, SB * 0.48, SB * 0.42, shade(ncol, -0.45), max_w=w * 0.84)
+    else:
+        bk.text(c, text, w / 2, SB * 0.48, SB * 0.42, "#ffffff", max_w=w * 0.84, neon=ncol)
+    for x0 in (0, w - 16):
+        c.drawRect(_R(x0, 0, x0 + 16, h), fill("#3a3e48"))
+
+
+def _mall_shell(P: Persp, s, XW, YT, KH, Z0, ZB, bk, closed, sides=(-1, 1), seed=47, kz0=1.0, step=3.7, kw=3.4, open_left=False) -> list:
+    """Hành lang trung tâm thương mại 1 điểm tụ, ki-ốt hai bên. Trả về [(cx, cy, col)] ánh neon."""
+    c = s.getCanvas()
+    rng = random.Random(seed)
+    path_fill(c, P.plane_y(YT, -XW, XW, Z0, ZB), "#eef0f2")
+    path_fill(c, P.plane_y(0, -XW, XW, Z0, ZB), "#ece6da")
+    _floor_tiles(c, P, -XW, XW, Z0, ZB, 0.8, "#d8d0c0")
+    path_fill(c, P.face_z(ZB, -XW, XW, 0, YT), "#e3e6ea")
+    for sd in ((1,) if open_left else (-1, 1)):
+        path_fill(c, P.wall_x(sd * XW, Z0, ZB, KH, YT), "#f6f6f4" if sd < 0 else "#efefed")
+        path_fill(c, P.wall_x(sd * XW, Z0, ZB, KH, KH + 0.08), "#c9ccd2")
+        if sd not in sides:
+            path_fill(c, P.wall_x(sd * XW, Z0, ZB, 0, KH), "#e8eaec")
+    # cửa thoát hiểm cuối hành lang + biển EXIT + bình chữa cháy
+    path_fill(c, P.face_z(ZB - 0.01, -0.8, 0.8, 0, 2.2), "#c9ccd2")
+    path_fill(c, P.face_z(ZB - 0.02, -0.72, 0.72, 0, 2.12), "#8a9098")
+    c.drawLine(*P.p(0, 0, ZB - 0.02), *P.p(0, 2.12, ZB - 0.02), stroke("#6a7078", 4))
+    ex, ey = P.p(0, 2.55, ZB - 0.02)
+    _exit_box(c, bk, ex, ey, 0.9 * P.f / ZB, lit=True)
+    fx, fb = P.p(1.2, 0, ZB - 0.05)
+    _fire_ext(c, fx, fb, P.f / ZB)
+    # dải đèn trần
+    for xx in (-1.4, 1.4):
+        path_fill(c, P.plane_y(YT - 0.01, xx - 0.12, xx + 0.12, Z0, ZB), "#ffffff" if not closed else "#9aa0aa")
+    z = 2.0
+    while z < ZB:
+        cx_, cy_ = P.p(0, YT - 0.01, z)
+        c.drawPath(oval(cx_, cy_, 0.18 * P.f / z, 0.05 * P.f / z), fill("#fffbe8" if not closed else "#7a8090"))
+        z += 3.0
+    neons = []
+    for sd in sides:
+        x = sd * XW
+        z = kz0
+        i = rng.randrange(len(KIOSKS))
+        while z + kw < ZB - 0.5:
+            text, kind, ncol = KIOSKS[i % len(KIOSKS)]
+            i += 1
+            if sd < 0:
+                dst = [P.p(x, KH, z), P.p(x, KH, z + kw), P.p(x, 0, z + kw), P.p(x, 0, z)]
+            else:
+                dst = [P.p(x, KH, z + kw), P.p(x, KH, z), P.p(x, 0, z), P.p(x, 0, z + kw)]
+            _on_quad(c, bk, kw * U4, KH * U4, dst,
+                     lambda cc, t=text, k=kind, n=ncol, sd_=rng.randrange(9999): _kiosk_local(cc, bk, kw * U4, KH * U4, t, k, n,
+                                                                                        closed, sd_))
+            path_fill(c, P.wall_x(x, z + kw, z + step, 0, KH), "#c9ccd2")
+            if not closed:
+                path_fill(c, P.quad([(x, 0.002, z + 0.3), (x - sd * 0.9, 0.002, z + 0.6), (x - sd * 0.9, 0.002, z + kw - 0.3),
+                                     (x, 0.002, z + kw - 0.6)]), ncol, 0.10)
+            neons.append((*P.p(x, KH - 0.25, z + kw / 2), ncol, P.f / (z + kw / 2)))
+            z += step
+    return neons
+
+
+def _mall_corridor(tod: str) -> Scene:
+    closed = tod == "closed"
+    P = Persp(f=1500, cx=W / 2, cy=1000, cam_h=1.6)
+    s = new_surface()
+    c = s.getCanvas()
+    bk = _Bake()
+    neons = _mall_shell(P, s, 3.2, 4.4, 3.2, 0.8, 40.0, bk, closed)
+    if closed:
+        tint(s, "#4a5480", 0.6)
+        for z in (6.0, 15.0, 27.0):
+            cx_, cy_ = P.p(0, 0, z)
+            ellipse_glow(c, cx_, cy_, 1.6 * P.f / z, 0.4 * P.f / z, "#c9d4ff", 0.35)
+            hx, hy = P.p(0, 4.39, z)
+            glow(c, hx, hy, 0.6 * P.f / z, "#dfe8ff", 0.5)
+        ex, ey = P.p(0, 2.55, 39.9)
+        glow(c, ex, ey, 260, "#3ee08f", 0.5)
+        _vignette(c, 0.65)
+    else:
+        for (nx, ny, col, k) in neons:
+            glow(c, nx, ny, 1.2 * k, col, 0.25)
+        glow(c, P.cx, P.cy - 120, 1100, "#ffffff", 0.45)
+        c.drawRect(_R(0, 0, W, H), fill("#ffffff", 0.06))
+        _vignette(c, 0.25)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0, 3.2), "left": P.slot(-1.3, 3.6), "right": P.slot(1.3, 3.6),
+             "far": P.slot(0.2, 10.0), "very_far": P.slot(-0.3, 20.0)}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=slots["center"]["y"],
+                 lights=[{"x": round(P.cx), "y": round(P.p(0, 2.55, 39.9)[1]), "color": "#3ee08f"}] if closed else [])
+
+
+def _mall_angle() -> Scene:
+    P = Persp(f=1450, cx=880, cy=1000, cam_h=1.6)
+    s = new_surface()
+    c = s.getCanvas()
+    bk = _Bake()
+    # khoảng thông tầng bên trái: mặt tiền tầng đối diện xa + lan can kính
+    vgrad(c, 0, 0, W, H, ["#f4f6f8", "#e2e6ea"])
+    XA = -8.0
+    for lvl, (y0, y1) in enumerate(((-4.0, -0.6), (0.0, 3.2), (4.4, 7.6), (8.8, 12.0))):
+        path_fill(c, P.wall_x(XA, 1.0, 60.0, y1, y1 + 0.9), "#f2f2f0")
+        path_fill(c, P.wall_x(XA, 1.0, 60.0, y1 + 0.9, y1 + 1.0), "#c9ccd2")
+        z = 2.0
+        rng = random.Random(470 + lvl)
+        while z < 58:
+            col = rng.choice(KIOSKS)[2]
+            path_fill(c, P.wall_x(XA, z, z + 3.2, y0, y1), "#f8f6f0")
+            path_fill(c, P.wall_x(XA, z, z + 3.2, y1 - 0.5, y1), "#1a1c22")
+            path_fill(c, P.wall_x(XA, z + 0.3, z + 2.9, y1 - 0.36, y1 - 0.16), col, 0.85)
+            z += 3.6
+    c.drawRect(_R(0, 0, W, H), fill("#ffffff", 0.35))
+    neons = _mall_shell(P, s, 2.4, 4.4, 3.2, 0.8, 60.0, bk, False, sides=(1,), seed=471, kz0=0.6, open_left=True)
+    # bỏ tường trái: vẽ lại sàn hành lang + lan can kính
+    path_fill(c, P.quad([(-2.4, 0, 0.8), (-2.4, 0, 60), (-2.42, -0.4, 60), (-2.42, -0.4, 0.8)]), "#c9ccd2")
+    path_fill(c, P.wall_x(-2.4, 0.8, 60.0, 0.0, 1.05), "#cfe6ee", 0.35)
+    z = 1.0
+    while z < 60:
+        c.drawLine(*P.p(-2.4, 0, z), *P.p(-2.4, 1.05, z), stroke("#b9c2ca", max(2.0, 30 / z)))
+        z += 1.6
+    c.drawLine(*P.p(-2.4, 1.08, 0.8), *P.p(-2.4, 1.08, 60), stroke("#8a9098", 10))
+    for (nx, ny, col, k) in neons:
+        glow(c, nx, ny, 1.2 * k, col, 0.25)
+    glow(c, P.cx, P.cy - 100, 900, "#ffffff", 0.45)
+    _vignette(c, 0.25)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0.2, 3.4), "left": P.slot(-1.2, 3.2), "right": P.slot(1.4, 3.4),
+             "kiosk": P.slot(1.9, 5.5), "far": P.slot(0.0, 10.0)}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=slots["center"]["y"])
+
+
+def _mall_kiosk_close() -> Scene:
+    bk = _Bake()
+    s = new_surface()
+    c = s.getCanvas()
+    FL, k = 2050, 600.0
+    vgrad(c, 0, 0, W, FL, ["#f6f6f4", "#e9e9e6"])
+    sc = k / U4
+    kw, kh = 3.4 * U4, 3.2 * U4
+    for (cx_, i, sd) in ((1920, 0, 4701), (1920 - 3.6 * k, 1, 4702), (1920 + 3.6 * k, 4, 4703)):
+        text, kind, ncol = KIOSKS[i]
+        l = cx_ - kw * sc / 2
+        dst = [(l, FL - kh * sc), (l + kw * sc, FL - kh * sc), (l + kw * sc, FL), (l, FL)]
+        _on_quad(c, bk, kw, kh, dst, lambda cc, t=text, kd=kind, n=ncol, sd_=sd, ct=cx_: _kiosk_local(
+            cc, bk, kw, kh, t, kd, n, False, sd_, detail=(ct == 1920)))
+        glow(c, cx_, FL - kh * sc + 0.27 * k, 1.6 * k, ncol, 0.22)
+    for x in (1920 - 1.8 * k - 0.1 * k, 1920 + 1.8 * k - 0.1 * k):
+        c.drawRect(_R(x, FL - 3.2 * k, x + 0.2 * k, FL), fill("#c9ccd2"))
+    _persp_floor(c, FL, "#ece6da", "#d4ccbc", vx=1920, vy=1000, spacing=320, dz=0.1)
+    ellipse_glow(c, 1920, FL + 80, 1500, 120, "#2fc4ff", 0.18)
+    glow(c, 1920, 300, 1500, "#ffffff", 0.3)
+    _vignette(c, 0.3)
+    mid = s.makeImageSnapshot()
+    CT = round(FL - 1.05 * k)
+    slots = {"tech": {"x": 1700, "y": FL - 40, "scale": 1.25, "clip_bottom": CT},
+             "center": {"x": 1920, "y": 2130, "scale": 1.45}, "left": {"x": 700, "y": 2130, "scale": 1.45},
+             "right": {"x": 3150, "y": 2130, "scale": 1.45}}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=2130,
+                 lights=[{"x": 1920 + 300, "y": CT - 140 * 3, "color": "#fff4d0"}])
+
+
+def scene_tang_trung_tam_dien_thoai(tod: str) -> Scene:
+    if tod == "angle":
+        return _mall_angle()
+    if tod in ("corridor", "closed"):
+        return _mall_corridor(tod)
+    return _mall_kiosk_close()
+
+
+# ------------------------------------------------------------------- 48. sảnh thang cuốn + thang máy
+def scene_sanh_thang_cuon(tod: str) -> Scene:
+    bk = _Bake()
+    s = new_surface()
+    c = s.getCanvas()
+    FL = 1720
+    vgrad(c, 0, 0, W, FL, ["#eceeef", "#e2e2de"])
+    c.drawRect(_R(0, 0, W, 190), fill("#f8f8f6"))
+    c.drawRect(_R(0, 186, W, 200), fill("#c9ccd2"))
+    for x in range(260, W, 520):
+        c.drawPath(oval(x, 192, 60, 12), fill("#fffbe8"))
+        glow(c, x, 200, 260, "#fff8e0", 0.35)
+    for x in range(0, W, 640):
+        c.drawLine(x, 200, x, FL, stroke("#d6d8da", 4))
+    # tầng trên (trái) + thang cuốn đi lên sang trái
+    c.drawRect(_R(0, 330, 760, 430), fill("#d4d6da"))
+    c.drawRect(_R(0, 420, 760, 440), fill("#9aa0a8"))
+    c.drawRect(_R(0, 160, 760, 330), fill("#cfe6ee", 0.35))
+    c.drawLine(0, 160, 760, 160, stroke("#8a9098", 12))
+    x0, y0, x1, y1 = 1780, FL, 640, 420
+    th = 260
+    quad(c, [(x0 + 240, y0), (x0, y0), (x1, y1), (x1 - 240, y1), (x1 - 240, y1 + th), (x1 + 40, y1 + th),
+             (x0 - 40, y0 + 10), (x0 + 240, y0 + 10)], "#b9c0c8")
+    quad(c, [(x0, y0 - 6), (x1, y1 - 6), (x1, y1 + 60), (x0, y0 + 60 - 6)], "#9aa2ac")
+    n = 22
+    for i in range(n):                         # bậc thang răng cưa
+        t0 = i / n
+        ax, ay = x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0
+        bx = x0 + (x1 - x0) * (t0 + 1 / n)
+        c.drawLine(ax, ay - 6, bx, ay - 6, stroke("#5a606a", 6))
+    gl = 330                                   # vách kính + tay vịn đen
+    quad(c, [(x0 + 120, y0 - 10), (x1 - 120, y1 - 10), (x1 - 120, y1 - gl), (x0 + 120, y0 - gl)], "#cfe6ee", 0.35)
+    for t0 in (0.15, 0.4, 0.65, 0.9):
+        ax, ay = x0 + (x1 - x0) * t0, y0 + (y1 - y0) * t0
+        c.drawLine(ax, ay - 10, ax, ay - gl, stroke("#b9c2ca", 5))
+    p = skia.Path()
+    p.moveTo(x0 + 240, y0 - gl + 10)
+    p.lineTo(x0 + 120, y0 - gl)
+    p.lineTo(x1 - 120, y1 - gl)
+    p.lineTo(x1 - 260, y1 - gl + 10)
+    c.drawPath(p, stroke("#1d1f24", 22))
+    c.drawPath(capsule(x0 + 120, y0 - gl, x0 + 250, y0 - 60, 14, 14), fill("#1d1f24"))
+    c.drawRect(_R(x0 - 40, y0 - 4, x0 + 260, y0 + 14), fill("#c9a440"))
+    # thang máy inox
+    EL, ER, ET = 2080, 2780, 560
+    c.drawRect(_R(EL - 70, ET - 70, ER + 70, FL), fill("#b9c0c8"))
+    c.drawRect(_R(EL - 70, ET - 70, ER + 70, ET - 54), fill("#d9dee4"))
+    for (l, r) in ((EL, (EL + ER) / 2), ((EL + ER) / 2, ER)):
+        hgrad(c, l, ET, r, FL, ["#d4d9df", "#aab2bc", "#cfd5db"])
+        reflections(c, l, ET, r, FL, 2, 0.12, seed=int(l))
+    c.drawLine((EL + ER) / 2, ET, (EL + ER) / 2, FL, stroke("#6e747e", 6))
+    c.drawPath(rrect((EL + ER) / 2 - 130, ET - 220, (EL + ER) / 2 + 130, ET - 100, 14), fill("#15171e"))
+    bk.text(c, "3", (EL + ER) / 2 - 40, ET - 160, 80, "#ff5a3a")
+    quad(c, [((EL + ER) / 2 + 50, ET - 130), ((EL + ER) / 2 + 110, ET - 130), ((EL + ER) / 2 + 80, ET - 190)], "#ff5a3a")
+    c.drawPath(rrect(ER + 130, 1040, ER + 210, 1240, 12), fill("#c9ced4"))
+    for (yy, up) in ((1100, True), (1180, False)):
+        c.drawCircle(ER + 170, yy, 26, fill("#f4f6f8"))
+        c.drawCircle(ER + 170, yy, 26, stroke("#8a9098", 4))
+        quad(c, [(ER + 156, yy + (8 if up else -8)), (ER + 184, yy + (8 if up else -8)), (ER + 170, yy + (-10 if up else 10))],
+             "#2b2d33")
+    bk.text(c, "3F", ER + 170, 960, 60, "#5a606a")
+    # hộp đèn quảng cáo dọc: vòng sáng, không chữ
+    AL, AR, AT, AB = 3080, 3620, 420, 1660
+    c.drawPath(rrect(AL - 24, AT - 24, AR + 24, AB + 24, 18), fill("#2b2d33"))
+    vgrad(c, AL, AT, AR, AB, ["#0c1030", "#1a1450", "#0c1030"])
+    acx, acy, ar = (AL + AR) / 2, AT + (AB - AT) * 0.42, 190
+    glow(c, acx, acy, ar * 2.4, "#6be0ff", 0.45)
+    c.drawCircle(acx, acy, ar, stroke("#bff4ff", 34))
+    c.drawCircle(acx, acy, ar, stroke("#6be0ff", 60, 0.35))
+    c.drawCircle(acx, acy, ar * 0.55, stroke("#c79bff", 14, 0.8))
+    for j in range(3):
+        c.drawPath(rrect(AL + 80, AB - 330 + j * 80, AR - 80 - j * 90, AB - 296 + j * 80, 14), fill("#6be0ff", 0.5 - j * 0.12))
+    # chậu cây + biển EXIT treo
+    for px in (1960, 2980):
+        c.drawPath(rrect(px - 90, FL - 220, px + 90, FL, 20), fill("#e8e4dc"))
+        for i in range(7):
+            a = -math.pi / 2 + (i - 3) * 0.32
+            c.drawPath(capsule(px, FL - 220, px + math.cos(a) * 220, FL - 220 + math.sin(a) * 300, 22, 6), fill("#3f8a52"))
+    c.drawLine(1650, 200, 1650, 290, stroke("#8a9098", 6))
+    _exit_box(c, bk, 1650, 340, 260)
+    _persp_floor(c, FL, "#f0ebe2", "#dcd4c6", vx=1920, vy=1000, spacing=320, dz=0.1)
+    ellipse_glow(c, (AL + AR) / 2, FL + 160, 500, 90, "#6be0ff", 0.25)
+    for xx in (2240, 2620):
+        c.drawPath(rrect(xx - 140, FL, xx + 140, FL + 300, 10),
+                   lin_paint((xx, FL), (xx, FL + 300), [("#b9c0c8", 0.35), ("#b9c0c8", 0.0)]))
+    glow(c, 1920, 500, 1700, "#ffffff", 0.28)
+    _vignette(c, 0.25)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1700, "y": 2010, "scale": 1.1}, "left": {"x": 800, "y": 2010, "scale": 1.1},
+             "right": {"x": 3000, "y": 2010, "scale": 1.1}, "elevator": {"x": 2430, "y": 1760, "scale": 0.98},
+             "escalator": {"x": 1350, "y": 1240, "scale": 0.9}}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=2010,
+                 lights=[{"x": round(acx), "y": round(acy), "color": "#6be0ff"}])
+
+
+# ------------------------------------------------------------------- 49. phố nhà phố về đêm (+ mưa)
+STREET_SIGNS = [("CAFE", "#c8532e"), ("HOTEL", "#2f5fa0"), ("PHARMACY", "#1f9a5a"), ("NOODLES", "#d23a2e"),
+                ("BARBER", "#3a4a8a"), ("CLOTHES", "#b0428a"), ("GOLD", "#b8862a"), ("MINIMART", "#1f7a6a"),
+                ("MASSAGE", "#7a3aa0")]
+
+
+def _rain(c, n, seed, a=0.35, l=0, t=0, r=W, b=H, col="#cfdcff", slant=0.18) -> None:
+    rng = random.Random(seed)
+    for _ in range(n):
+        x, y = rng.uniform(l - 200, r), rng.uniform(t, b)
+        ln = rng.uniform(40, 140)
+        c.drawLine(x, y, x + ln * slant, y + ln, stroke(col, rng.choice([1.5, 2.0, 3.0]), rng.uniform(0.3, 1.0) * a))
+
+
+def _street_reflect(c, x, top, w, col, length, a=0.35) -> None:
+    """Vệt phản chiếu dọc của nguồn sáng trên mặt đường ướt."""
+    p = lin_paint((0, top), (0, top + length), [(col, a), (col, 0.0)])
+    p.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, w * 0.2))
+    c.drawRect(_R(x - w / 2, top, x + w / 2, top + length), p)
+
+
+def scene_pho_nha_pho_dem(tod: str) -> Scene:
+    rain = tod == "rain"
+    bk = _Bake()
+    sf = new_surface()
+    c = sf.getCanvas()
+    _night_sky(c, 0, 1300, seed=49, top="#070b1c" if rain else "#0b1230", bottom="#2a2a4a" if rain else "#3a3060",
+               n_stars=0 if rain else 140)
+    _skyline(c, 1000, 491, "#141a30", 200, 620, lit="#ffd08a", lit_p=0.08, beacons=True)
+    _skyline(c, 1000, 492, "#1c2240", 80, 300, lit="#ffe0a0", lit_p=0.12)
+    # biển quảng cáo trên mái (vòng sáng, không chữ)
+    for (bx, by, bw, bh, col) in ((540, 300, 520, 260, "#6be0ff"), (2900, 240, 620, 300, "#ff6b8a")):
+        c.drawRect(_R(bx + bw * 0.45, by + bh, bx + bw * 0.55, by + bh + 260), fill("#141826"))
+        c.drawPath(rrect(bx, by, bx + bw, by + bh, 10), fill("#141826"))
+        vgrad(c, bx + 14, by + 14, bx + bw - 14, by + bh - 14, ["#20184a", "#0c1030"])
+        c.drawCircle(bx + bw * 0.3, by + bh / 2, bh * 0.3, stroke(col, 16))
+        glow(c, bx + bw * 0.3, by + bh / 2, bh * 0.7, col, 0.45)
+        for j in range(3):
+            c.drawPath(rrect(bx + bw * 0.55, by + bh * (0.3 + j * 0.16), bx + bw * (0.9 - j * 0.1), by + bh * (0.38 + j * 0.16), 8),
+                       fill(col, 0.6))
+    # đường trên cao: mặt cầu + lan can + đèn xe
+    DT = 480
+    for px in range(200, W, 900):
+        c.drawRect(_R(px - 50, DT + 90, px + 50, 1200), fill("#2a2e40"))
+    c.drawRect(_R(-20, DT, W + 20, DT + 90), fill("#3a3e52"))
+    c.drawRect(_R(-20, DT + 70, W + 20, DT + 90), fill("#2a2e40"))
+    c.drawRect(_R(-20, DT - 40, W + 20, DT), fill("#4a4e62"))
+    rng = random.Random(49)
+    for _ in range(18):
+        x = rng.uniform(0, W)
+        col = rng.choice(["#fff4d0", "#ff4a3a"])
+        c.drawCircle(x, DT - 18, 7, fill(col))
+        glow(c, x, DT - 18, 60, col, 0.5)
+    for px in range(100, W, 480):
+        c.drawLine(px, DT - 40, px, DT - 170, stroke("#2a2e40", 8))
+        c.drawLine(px, DT - 170, px + 60, DT - 170, stroke("#2a2e40", 8))
+        glow(c, px + 60, DT - 165, 70, "#ffd890", 0.6)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    GB = 1600
+    facades = ["#4a6a78", "#8a6a4a", "#6a5a7a", "#7a7a5a", "#5a7a6a", "#8a5a5a", "#5a6a8a", "#7a6a58", "#6a7a82"]
+    heights = [3, 2, 3, 3, 2, 3, 2, 3, 3]
+    hw = W / 9
+    neon_pts = []
+    for i in range(9):
+        l, r = i * hw - 6, (i + 1) * hw + 6
+        top = 300 if heights[i] == 3 else 700
+        col = facades[i]
+        c.drawRect(_R(l, top, r, GB), fill(col))
+        c.drawRect(_R(l, top - 40, r, top), fill(shade(col, 0.12)))
+        c.drawRect(_R(r - 14, top, r, GB), fill(shade(col, -0.25)))
+        fy = 1100
+        while fy - 400 >= top - 1:
+            wy0 = fy - 330
+            for (wl, wr) in ((l + 50, l + hw * 0.45), (l + hw * 0.55, r - 50)):
+                lit = rng.random() < 0.45
+                c.drawRect(_R(wl, wy0, wr, wy0 + 220), fill("#ffd98a" if lit else "#1c2236"))
+                if lit:
+                    glow(c, (wl + wr) / 2, wy0 + 110, 180, "#ffd98a", 0.25)
+                for k_ in range(1, 4):
+                    xx = wl + (wr - wl) * k_ / 4
+                    c.drawLine(xx, wy0, xx, wy0 + 220, stroke(shade(col, -0.35), 5))
+            c.drawRect(_R(l + 30, fy - 70, r - 30, fy - 60), fill(shade(col, -0.3)))
+            for xx in range(int(l + 40), int(r - 30), 26):
+                c.drawLine(xx, fy - 60, xx, fy - 10, stroke(shade(col, -0.35), 4))
+            c.drawRect(_R(l + 30, fy - 12, r - 30, fy), fill(shade(col, -0.3)))
+            if rng.random() < 0.6:
+                ax = rng.choice([l + 70, r - 190])
+                c.drawRect(_R(ax, fy - 170, ax + 120, fy - 80), fill("#c9ccd2"))
+                c.drawCircle(ax + 60, fy - 125, 32, stroke("#8a9098", 6))
+            fy -= 400
+        # tầng trệt: bảng hiệu + mặt tiền
+        text, scol = STREET_SIGNS[i]
+        c.drawRect(_R(l + 10, 1100, r - 10, 1185), fill(scol))
+        c.drawRect(_R(l + 10, 1100, r - 10, 1110), fill(shade(scol, 0.25)))
+        bk.text(c, text, (l + r) / 2, 1143, 56, "#fff6e0", max_w=hw - 70, neon="#fff0c0")
+        neon_pts.append(((l + r) / 2, 1143, scol))
+        if i in (2, 5):
+            vgrad(c, l + 24, 1190, r - 24, GB, ["#a4aab2", "#7a808a"])
+            for yy in range(1200, GB, 16):
+                c.drawLine(l + 24, yy, r - 24, yy, stroke("#626872", 3))
+        else:
+            warm = "#ffe6b0" if i % 2 else "#e8f4ff"
+            vgrad(c, l + 24, 1190, r - 24, GB, [warm, shade(warm, -0.25)])
+            for j in range(3):
+                sx = l + 60 + j * (hw - 120) / 3
+                c.drawRect(_R(sx, 1260 + (j % 2) * 30, sx + (hw - 160) / 3, 1420), fill(shade(scol, 0.1), 0.55))
+            glow(c, (l + r) / 2, 1400, 320, warm, 0.4)
+            neon_pts.append(((l + r) / 2, 1400, warm))
+        c.drawRect(_R(l, 1185, l + 24, GB), fill(shade(col, -0.2)))
+        c.drawRect(_R(r - 24, 1185, r, GB), fill(shade(col, -0.2)))
+        if i in (0, 3, 7):                       # mái hiên sọc
+            for j in range(8):
+                x0 = l + 20 + j * (hw - 40) / 8
+                quad(c, [(x0, 1190), (x0 + (hw - 40) / 8, 1190), (x0 + (hw - 40) / 8 + 6, 1260), (x0 + 6, 1260)],
+                     "#e8e2d4" if j % 2 else scol)
+    # biển dọc HOTEL
+    vx = hw * 1 + hw - 70
+    c.drawPath(rrect(vx - 50, 330, vx + 50, 900, 10), fill("#141826"))
+    for j, ch in enumerate("HOTEL"):
+        text_center(c, ch, vx, 400 + j * 105, 80, "#ffe8b0")
+        glow(c, vx, 400 + j * 105, 70, "#ffd060", 0.35)
+    bk.items.append({"text": "HOTEL", "box": [round(vx - 50), 330, round(vx + 50), 900]})
+    # vỉa hè + đường
+    c.drawRect(_R(0, GB, W, GB + 90), fill("#5a5e6a"))
+    _tile_grid(c, 0, GB, W, GB + 90, 120, 45, "#4a4e58", 3)
+    c.drawRect(_R(0, GB + 90, W, GB + 116), fill("#8a8e98"))
+    c.drawRect(_R(0, GB + 116, W, H), fill("#24262f" if rain else "#2a2c36"))
+    for x in range(-100, W, 420):
+        c.drawRect(_R(x, 1900, x + 230, 1918), fill("#d9d4c4", 0.8))
+    for (nx, ny, col) in neon_pts:
+        _street_reflect(c, nx, GB + 116, 260 if rain else 180, col, 520 if rain else 300, 0.32 if rain else 0.16)
+    for (sx_, col) in ((560, "#d8423a"), (1500, "#3a78c2"), (2700, "#e8e4dc"), (3400, "#4fa35a")):
+        _scooter(c, sx_, GB + 70, 140, col, facing=1 if sx_ % 2 else -1)
+    lamps = []
+    for lx_ in (W / 9 * 3, W / 9 * 7):
+        lamps.append(_streetlamp(c, lx_, GB + 70, 6.5, 150, lit=True, arm=1, cone=True, pool_y=GB + 140))
+    if rain:
+        tint(s, "#6a78a8", 0.35)
+        for (lx_, ly_) in lamps:
+            glow(c, lx_, ly_, 220, "#ffe2a0", 0.55)
+        for i in range(10):
+            _puddle(c, 300 + i * 360, 1780 + (i % 3) * 110, 160, 26, "#9ab0d0", 0.35)
+    _vignette(c, 0.5)
+    mid = s.makeImageSnapshot()
+    near = None
+    if rain:
+        ns = new_surface()
+        nc = ns.getCanvas()
+        _rain(nc, 1400, 490, 0.4)
+        nc.drawRect(_R(0, 0, W, H), fill("#8a9ac0", 0.06))
+        near = ns.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2090, "scale": 1.0}, "left": {"x": 900, "y": 2090, "scale": 1.0},
+             "right": {"x": 2950, "y": 2090, "scale": 1.0}, "sidewalk": {"x": 2200, "y": 1660, "scale": 0.3},
+             "sidewalk_left": {"x": 1000, "y": 1660, "scale": 0.3}}
+    return Scene(far, mid, near, slots=slots, baked_signs=bk.items, floor_y=2090, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": round(x), "y": round(y), "color": "#ffe2a0"} for (x, y) in lamps])
+
+
+# ------------------------------------------------------------------- 50. hầm gửi xe B2
+def _car_rear(c, P: Persp, x, z, col) -> None:
+    path_fill(c, P.face_z(z + 0.7, x - 0.78, x + 0.78, 0.95, 1.42), shade(col, -0.1))
+    path_fill(c, P.face_z(z + 0.65, x - 0.66, x + 0.66, 1.0, 1.36), "#1c2230")
+    path_fill(c, P.face_z(z, x - 0.9, x + 0.9, 0.28, 1.0), col)
+    path_fill(c, P.face_z(z - 0.01, x - 0.9, x + 0.9, 0.82, 1.0), shade(col, 0.12))
+    for sd in (-1, 1):
+        path_fill(c, P.face_z(z - 0.02, x + sd * 0.86, x + sd * 0.58, 0.68, 0.84), "#c8302a")
+        path_fill(c, P.face_z(z + 0.05, x + sd * 0.86, x + sd * 0.6, 0.0, 0.3), "#121418")
+    path_fill(c, P.face_z(z - 0.02, x - 0.26, x + 0.26, 0.42, 0.56), "#e8e4d8")
+    path_fill(c, P.face_z(z - 0.03, x - 0.9, x + 0.9, 0.24, 0.36), "#2b2d33")
+
+
+def scene_ham_xe_b2(tod: str) -> Scene:
+    bk = _Bake()
+    P = Persp(f=1400, cx=W / 2, cy=980, cam_h=1.5)
+    XW, YT, Z0, ZB = 9.0, 2.9, 0.8, 48.0
+    s = new_surface()
+    c = s.getCanvas()
+    con = "#6a6c70"
+    path_fill(c, P.plane_y(YT, -XW, XW, Z0, ZB), "#55575c")
+    path_fill(c, P.plane_y(0, -XW, XW, Z0, ZB), "#4e5054")
+    path_fill(c, P.face_z(ZB, -XW, XW, 0, YT), "#5e6064")
+    for sd in (-1, 1):
+        path_fill(c, P.wall_x(sd * XW, Z0, ZB, 0, YT), shade(con, -0.12))
+    # vết dầu loang + vạch đỗ xe
+    rng = random.Random(50)
+    for _ in range(40):
+        x, z = rng.uniform(-8, 8), rng.uniform(1.5, 40)
+        cx_, cy_ = P.p(x, 0, z)
+        c.drawPath(oval(cx_, cy_, 0.6 * P.f / z, 0.12 * P.f / z), fill("#2a2c30", rng.uniform(0.15, 0.35)))
+    for sd in (-1, 1):
+        z = 1.2
+        while z < ZB - 1:
+            c.drawLine(*P.p(sd * 2.9, 0, z), *P.p(sd * 8.2, 0, z), stroke("#e8e4d8", max(2.0, 0.1 * P.f / z), 0.85))
+            z += 2.6
+        c.drawLine(*P.p(sd * 2.9, 0, Z0), *P.p(sd * 2.9, 0, ZB), stroke("#e8e4d8", 6, 0.7))
+    z = 3.0
+    while z < ZB - 4:                          # mũi tên vàng giữa làn
+        a, b = P.p(-0.18, 0, z), P.p(0.18, 0, z + 1.6)
+        path_fill(c, P.plane_y(0.001, -0.12, 0.12, z, z + 1.2), "#e8c23a", 0.8)
+        path_fill(c, P.quad([(-0.4, 0.001, z + 1.2), (0.4, 0.001, z + 1.2), (0, 0.001, z + 1.9)]), "#e8c23a", 0.8)
+        z += 7.0
+    # trần: dầm ngang + ống dọc
+    z = 2.0
+    while z < ZB:
+        path_fill(c, P.face_z(z, -XW, XW, YT - 0.35, YT), "#606266")
+        path_fill(c, P.plane_y(YT - 0.35, -XW, XW, z, z + 0.4), "#47494d")
+        z += 7.8
+    for (xx, yy, w_, col) in ((-1.4, 2.7, 0.08, "#c8352e"), (-1.1, 2.72, 0.05, "#c8352e"), (2.2, 2.55, 0.35, "#8a8e94"),
+                              (4.8, 2.7, 0.12, "#3a6ab0"), (-4.5, 2.6, 0.2, "#9a9a92")):
+        path_fill(c, P.quad([(xx - w_, yy, 2.2), (xx + w_, yy, 2.2), (xx + w_, yy, ZB), (xx - w_, yy, ZB)]), shade(col, -0.2))
+        path_fill(c, P.quad([(xx - w_, yy - w_, 2.2), (xx + w_, yy - w_, 2.2), (xx + w_, yy - w_, ZB), (xx - w_, yy - w_, ZB)]),
+                  shade(col, -0.25))
+    # tường cuối: B2 lớn + EXIT + lối dốc
+    path_fill(c, P.face_z(ZB - 0.01, -2.5, 2.5, 0, 2.3), "#2a2c30")
+    path_fill(c, P.quad([(-2.5, 0.01, ZB - 0.02), (2.5, 0.01, ZB - 0.02), (2.5, 1.2, ZB + 6), (-2.5, 1.2, ZB + 6)]), "#3a3c40")
+    bx, by = P.p(-5.5, 1.5, ZB - 0.02)
+    bk.text(c, "B2", bx, by, 1.4 * P.f / ZB, "#e8c23a")
+    ex, ey = P.p(0, 2.55, ZB - 0.03)
+    _exit_box(c, bk, ex, ey, 0.9 * P.f / ZB)
+    # cột + xe, xa -> gần
+    items = []
+    z = 4.0
+    while z < ZB - 2:
+        for sd in (-1, 1):
+            items.append((z, "pillar", sd * 2.9))
+        z += 7.8
+    for sd in (-1, 1):
+        z = 1.2
+        while z < ZB - 3:
+            if rng.random() < 0.55:
+                items.append((z + 0.5, "car", sd * 5.5))
+            z += 2.6
+    lamps = []
+    for zi, kind, x in sorted(items, key=lambda t: -t[0]):
+        if kind == "pillar":
+            w_ = 0.35
+            path_fill(c, P.wall_x(x - (w_ if x > 0 else -w_), zi, zi + 0.7, 0, YT), shade(con, -0.18))
+            path_fill(c, P.face_z(zi, x - w_, x + w_, 0, YT), con)
+            k = P.f / zi
+            l_, t_ = P.p(x - w_, 1.0, zi)
+            r_, b_ = P.p(x + w_, 0.0, zi)
+            _guard_stripes(c, l_, t_, r_, b_, k)
+            tx, ty = P.p(x, 1.6, zi)
+            c.drawRect(_R(l_, ty - 0.28 * k, r_, ty + 0.28 * k), fill("#e8c23a"))
+            bk.text(c, "B2", tx, ty, 0.36 * k, "#1d1d22", max_w=(r_ - l_) * 0.9)
+        else:
+            col = rng.choice(["#c9ccd2", "#2b2d33", "#8a2a2a", "#e8e4dc", "#3a4a6a", "#5a6a5a"])
+            _car_rear(c, P, x, zi, col)
+    # đèn tuýp trần (mờ)
+    z = 3.0
+    while z < ZB:
+        for xx in (-4.5, 0.0, 4.5):
+            path_fill(c, P.plane_y(YT - 0.37, xx - 0.6, xx + 0.6, z, z + 0.12), "#eef6e0")
+            if xx == 0.0:
+                lamps.append(P.p(xx, YT - 0.37, z))
+        z += 7.8
+    tint(s, "#9aa880", 0.4)
+    for i, (lx_, ly_) in enumerate(lamps):
+        k = P.f / (3.0 + i * 7.8)
+        ellipse_glow(c, lx_, ly_ + 10, 1.4 * k, 0.4 * k, "#f4ffd8", 0.4)
+        fx_, fy_ = P.p(0, 0, 3.0 + i * 7.8)
+        ellipse_glow(c, fx_, fy_, 2.6 * k, 0.6 * k, "#f4ffd8", 0.18)
+    glow(c, ex, ey, 200, "#3ee08f", 0.4)
+    c.drawRect(_R(0, 0, W, H), rad_paint(P.cx, P.cy, 700, [("#000000", 0.5), ("#000000", 0.0)], [0, 1]))
+    _vignette(c, 0.6)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0, 3.4), "left": P.slot(-1.4, 3.6), "right": P.slot(1.4, 3.6),
+             "far": P.slot(0.3, 12.0), "car_left": P.slot(-3.6, 7.0)}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=slots["center"]["y"],
+                 lights=[{"x": round(lx_), "y": round(ly_), "color": "#f4ffd8"} for (lx_, ly_) in lamps[:2]])
+
+
+# ------------------------------------------------------------------- 51. góc chợ đêm: xe mì thuyền + ghế nhựa
+def _folding_table(c, l, r, top, base, col="#c9ccd2") -> None:
+    c.drawRect(_R(l, top, r, top + 22), fill(col))
+    c.drawRect(_R(l, top + 22, r, top + 34), fill(shade(col, -0.3)))
+    for (a, b) in ((l + 40, r - 60), (r - 40, l + 60)):
+        c.drawLine(a, top + 34, b, base, stroke("#6e747e", 12))
+
+
+def scene_quan_mi_xe_day_dem(tod: str) -> Scene:
+    bk = _Bake()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(51)
+    vgrad(c, 0, 0, W, 400, ["#070a18", "#141a34"])
+    GB = 1460
+    # dãy nhà phố cửa cuốn phía sau
+    cols = ["#4a4e62", "#5a5048", "#3e5058", "#584a5a", "#4e5648"]
+    hw = W / 6
+    for i in range(6):
+        l, r = i * hw - 4, (i + 1) * hw + 4
+        col = cols[i % len(cols)]
+        top = 60 + (i % 2) * 120
+        c.drawRect(_R(l, top, r, GB), fill(col))
+        c.drawRect(_R(r - 12, top, r, GB), fill(shade(col, -0.25)))
+        for wy in (top + 80, top + 420):
+            for wx in (l + 80, l + hw / 2 + 30):
+                lit = rng.random() < 0.35
+                c.drawRect(_R(wx, wy, wx + hw / 2 - 110, wy + 230), fill("#ffcf80" if lit else "#1a1e2c"))
+                if lit:
+                    glow(c, wx + 100, wy + 110, 200, "#ffcf80", 0.25)
+        c.drawRect(_R(l + 20, 900, r - 20, 960), fill(shade(col, -0.2)))
+        vgrad(c, l + 30, 960, r - 30, GB, ["#8a909a", "#6a707a"])
+        for yy in range(970, GB, 16):
+            c.drawLine(l + 30, yy, r - 30, yy, stroke("#565c66", 3))
+        if i in (1, 4):
+            for j in range(7):
+                x0 = l + 10 + j * (hw - 20) / 7
+                quad(c, [(x0, 860), (x0 + (hw - 20) / 7, 860), (x0 + (hw - 20) / 7 + 10, 960), (x0 + 10, 960)],
+                     "#2f6fb0" if j % 2 else "#e8e4dc")
+    # dây đèn bóng tròn
+    for (x0, y0, x1, y1, sag) in ((-50, 250, 1900, 330, 90), (1900, 330, W + 50, 220, 80), (-50, 520, W + 50, 480, 110)):
+        _bulb_string(c, x0, y0, x1, y1, sag, 14)
+    # mặt đường ướt
+    vgrad(c, 0, GB, W, H, ["#22242e", "#2c2e38"])
+    c.drawRect(_R(0, GB, W, GB + 20), fill("#3a3c46"))
+    # xe trái cây (xa, phải)
+    fl, fr, fb = 2950, 3600, GB + 40
+    c.drawLine((fl + fr) / 2, fb - 420, (fl + fr) / 2, fb - 900, stroke("#2b2d33", 10))
+    p = skia.Path()
+    p.moveTo(fl - 120, fb - 860)
+    p.quadTo((fl + fr) / 2, fb - 1060, fr + 120, fb - 860)
+    p.close()
+    path_fill(c, p, "#d8423a")
+    c.drawRect(_R(fl, fb - 420, fr, fb - 140), fill("#5a3a2a"))
+    c.drawRect(_R(fl + 20, fb - 400, fr - 20, fb - 250), fill("#dfeef4"))
+    for j in range(9):
+        x = fl + 60 + j * 62
+        c.drawPath(rrect(x, fb - 330, x + 44, fb - 262, 8), fill(rng.choice(["#f3c94e", "#e8584a", "#8ac85a", "#f08a2c"])))
+    c.drawRect(_R(fl + 20, fb - 400, fr - 20, fb - 250), stroke("#c9ccd2", 6))
+    for wx in (fl + 90, fr - 90):
+        c.drawCircle(wx, fb - 70, 70, fill("#1d1f24"))
+        c.drawCircle(wx, fb - 70, 26, fill("#8a9098"))
+    glow(c, (fl + fr) / 2, fb - 820, 260, "#ffe2a0", 0.5)
+    # xe mì thuyền: thân gỗ cong + tủ kính + nồi + mái sọc đỏ trắng
+    CL, CR, CB = 500, 1800, GB + 120
+    CT = CB - 560
+    for px in (CL + 40, CR - 40):
+        c.drawRect(_R(px - 12, CT - 640, px + 12, CT), fill("#3a3e48"))
+    aw_t, aw_b = CT - 700, CT - 560
+    for j in range(12):
+        x0 = CL - 80 + j * (CR - CL + 160) / 12
+        x1 = x0 + (CR - CL + 160) / 12
+        quad(c, [(x0 + 20, aw_t), (x1 + 20, aw_t), (x1, aw_b), (x0, aw_b)], "#d8352e" if j % 2 == 0 else "#f4f0e8")
+        p = skia.Path()
+        p.moveTo(x0, aw_b)
+        p.quadTo((x0 + x1) / 2, aw_b + 50, x1, aw_b)
+        p.close()
+        path_fill(c, p, "#d8352e" if j % 2 == 0 else "#f4f0e8")
+    c.drawRect(_R(CL - 70, aw_t - 20, CR + 90, aw_t), fill("#a8281f"))
+    bulb_x = (CL + CR) / 2
+    c.drawLine(bulb_x, aw_b, bulb_x, aw_b + 90, stroke("#1d1f24", 4))
+    c.drawCircle(bulb_x, aw_b + 110, 22, fill("#fff1c8"))
+    # nồi + tủ kính
+    for (px, pw, ph) in ((CL + 260, 300, 240), (CL + 620, 220, 180)):
+        c.drawRect(_R(px - pw / 2, CT - ph, px + pw / 2, CT), fill("#b9c2c8"))
+        c.drawRect(_R(px - pw / 2, CT - ph, px - pw / 2 + 24, CT), fill("#d9e0e4"))
+        c.drawPath(oval(px, CT - ph, pw / 2, 20), fill("#8a9298"))
+        for k_ in range(3):
+            sx = px - pw * 0.25 + k_ * pw * 0.25
+            st = skia.Path()
+            st.moveTo(sx, CT - ph - 20)
+            st.cubicTo(sx - 50, CT - ph - 120, sx + 50, CT - ph - 200, sx - 10, CT - ph - 300)
+            c.drawPath(st, stroke("#ffffff", 22, 0.2))
+    gl, gr = CL + 820, CR - 60
+    c.drawRect(_R(gl, CT - 320, gr, CT), fill("#dfeef4", 0.85))
+    for j in range(2):
+        yy = CT - 300 + j * 140
+        c.drawRect(_R(gl + 10, yy + 110, gr - 10, yy + 118), fill("#9aa0a8"))
+        for x in range(int(gl + 30), int(gr - 60), 90):
+            c.drawPath(oval(x + 30, yy + 90, 34, 20), fill(rng.choice(["#f3e4c0", "#e8c890", "#c8352e", "#7ab85a"])))
+    c.drawRect(_R(gl, CT - 320, gr, CT), stroke("#c9ccd2", 8))
+    reflections(c, gl, CT - 320, gr, CT, 2, 0.2, seed=51)
+    # thân xe
+    body = poly([(CL - 120, CT), (CR + 140, CT), (CR + 40, CB - 120), (CL - 20, CB - 120)])
+    path_fill(c, body, "#7a2e22")
+    c.drawRect(_R(CL - 130, CT - 14, CR + 150, CT + 16), fill("#a8452e"))
+    c.drawPath(rrect(CL + 200, CT + 70, CR - 200, CT + 250, 18), fill("#f4ead0"))
+    c.drawPath(rrect(CL + 214, CT + 84, CR - 214, CT + 236, 12), stroke("#a8281f", 6))
+    bk.text(c, "NOODLES", (CL + CR) / 2, CT + 160, 110, "#a8281f", max_w=CR - CL - 480)
+    for wx in (CL + 120, CR - 120):
+        c.drawCircle(wx, CB - 80, 86, fill("#1d1f24"))
+        c.drawCircle(wx, CB - 80, 32, fill("#8a9098"))
+    # bàn gấp + ghế nhựa đỏ / xanh (tiền cảnh)
+    for (tl, tr, tt, tb) in ((1650, 2550, 1640, 1960), (2750, 3650, 1680, 2010)):
+        for (sx, colr) in ((tl - 60, "#c8352e"), (tr + 60, "#2f6fb0")):
+            _plastic_stool(c, sx, tb + 30, 190, colr)
+        _folding_table(c, tl, tr, tt, tb)
+        for j in range(3):
+            bx_ = tl + 160 + j * 260
+            c.drawPath(oval(bx_, tt - 4, 70, 14), fill("#e8e4dc"))
+            quad(c, [(bx_ - 70, tt - 30), (bx_ + 70, tt - 30), (bx_ + 46, tt), (bx_ - 46, tt)], "#e8e4dc")
+            c.drawRect(_R(bx_ - 70, tt - 30, bx_ + 70, tt - 22), fill("#c8352e"))
+        c.drawPath(rrect(tr - 200, tt - 110, tr - 100, tt, 10), fill("#c9ccd2"))
+        for (dx, col) in ((-30, "#d8423a"), (0, "#3a2a1e"), (30, "#f3c94e")):
+            c.drawPath(rrect(tr - 150 + dx - 12, tt - 150, tr - 150 + dx + 12, tt - 60, 6), fill(col))
+        c.drawPath(rrect(tl + 40, tt - 90, tl + 100, tt, 8), fill("#2f6fb0"))
+        for dx in (-12, 0, 12):
+            c.drawLine(tl + 70 + dx, tt - 80, tl + 70 + dx * 1.4, tt - 160, stroke("#d9b46a", 5))
+    for (sx, colr) in ((1500, "#2f6fb0"), (3850, "#c8352e"), (300, "#c8352e")):
+        _plastic_stool(c, sx, 2140, 230, colr)
+    tint(s, "#6a70a8", 0.3)
+    glow(c, bulb_x, aw_b + 110, 700, "#ffd890", 0.5)
+    glow(c, bulb_x, aw_b + 110, 120, "#fff1c8", 0.7)
+    ellipse_glow(c, bulb_x, GB + 200, 1300, 260, "#ffd890", 0.25)
+    for x in range(200, W, 300):
+        _street_reflect(c, x, GB + 30, 60, "#ffd890", 260, 0.12)
+    _vignette(c, 0.5)
+    mid = s.makeImageSnapshot()
+    slots = {"vendor": {"x": 1150, "y": GB + 60, "scale": 0.8, "clip_bottom": CT},
+             "seat_left": {"x": 1590, "y": 2000, "scale": 0.95}, "seat_right": {"x": 2610, "y": 2000, "scale": 0.95},
+             "center": {"x": 2100, "y": 2100, "scale": 1.05}, "left": {"x": 700, "y": 2100, "scale": 1.05},
+             "right": {"x": 3300, "y": 2100, "scale": 1.05}}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=2100,
+                 lights=[{"x": round(bulb_x), "y": round(aw_b + 110), "color": "#ffd890"}])
+
+
+# ------------------------------------------------------------------- 52. tiệm giặt tự động 24h (+ mặt tiền đêm)
+def _washer(c, l, t, w, h, rng, dryer=False) -> None:
+    body = "#f2f2ee" if not dryer else "#e4e6e8"
+    c.drawPath(rrect(l, t, l + w, t + h, w * 0.04), fill(body))
+    c.drawRect(_R(l + w - w * 0.05, t + w * 0.04, l + w, t + h), fill(shade(body, -0.12)))
+    c.drawRect(_R(l, t, l + w, t + h * 0.16), fill(shade(body, -0.06)))
+    c.drawPath(rrect(l + w * 0.08, t + h * 0.04, l + w * 0.42, t + h * 0.12, w * 0.02), fill("#1d2230"))
+    c.drawRect(_R(l + w * 0.1, t + h * 0.06, l + w * 0.24, t + h * 0.1), fill("#3ee08f", 0.8))
+    for j in range(3):
+        c.drawCircle(l + w * (0.6 + j * 0.12), t + h * 0.08, w * 0.03, fill("#8a9098"))
+    cx_, cy_, r = l + w / 2, t + h * 0.58, min(w, h) * 0.33
+    c.drawCircle(cx_, cy_, r * 1.12, fill("#c9ccd2"))
+    c.drawCircle(cx_, cy_, r, fill("#2a3142"))
+    if rng.random() < 0.6:
+        for _ in range(4):
+            a = rng.uniform(0, math.tau)
+            c.drawCircle(cx_ + math.cos(a) * r * 0.45, cy_ + r * 0.25 + math.sin(a) * r * 0.25, r * rng.uniform(0.25, 0.4),
+                         fill(rng.choice(["#d8423a", "#3a78c2", "#f3c94e", "#e8e4dc", "#4fa35a"]), 0.8))
+    c.drawPath(oval(cx_ - r * 0.3, cy_ - r * 0.35, r * 0.35, r * 0.18), fill("#ffffff", 0.35))
+    c.drawCircle(cx_, cy_, r, stroke("#9aa0a8", max(2.0, w * 0.025)))
+
+
+def _laundry_inside(c, bk: _Bake | None, rng, L, R, FL, k) -> None:
+    """Tường máy giặt (2 tầng sấy trên, giặt dưới). k = px/mét."""
+    mw = 0.72 * k
+    x = L
+    while x + mw <= R:
+        _washer(c, x, FL - 1.0 * k, mw - 0.04 * k, 1.0 * k, rng)
+        _washer(c, x, FL - 1.92 * k, mw - 0.04 * k, 0.88 * k, rng, dryer=True)
+        x += mw
+
+
+def _detergent_machine(c, bk: _Bake, l, base, w, h) -> None:
+    t = base - h
+    c.drawPath(rrect(l, t, l + w, base, w * 0.04), fill("#c8302a"))
+    c.drawRect(_R(l + w - w * 0.06, t + 10, l + w, base), fill("#9a2420"))
+    c.drawPath(rrect(l + w * 0.06, t + h * 0.03, l + w * 0.9, t + h * 0.13, w * 0.03), fill("#f4f0e8"))
+    bk.text(c, "DETERGENT", l + w * 0.48, t + h * 0.08, h * 0.05, "#c8302a", max_w=w * 0.78)
+    c.drawRect(_R(l + w * 0.08, t + h * 0.17, l + w * 0.66, t + h * 0.6), fill("#eef4f8"))
+    rng = random.Random(52)
+    for j in range(4):
+        yy = t + h * (0.2 + j * 0.1)
+        for i in range(4):
+            xx = l + w * (0.11 + i * 0.135)
+            c.drawPath(rrect(xx, yy, xx + w * 0.1, yy + h * 0.07, 4), fill(rng.choice(["#2f6fd0", "#f3c94e", "#4fa35a", "#f08a2c", "#ffffff"])))
+        c.drawRect(_R(l + w * 0.08, yy + h * 0.075, l + w * 0.66, yy + h * 0.082), fill("#9aa0a8"))
+    reflections(c, l + w * 0.08, t + h * 0.17, l + w * 0.66, t + h * 0.6, 2, 0.2, seed=52)
+    c.drawPath(rrect(l + w * 0.72, t + h * 0.2, l + w * 0.9, t + h * 0.45, 6), fill("#7a1a16"))
+    c.drawRect(_R(l + w * 0.75, t + h * 0.23, l + w * 0.87, t + h * 0.28), fill("#101214"))
+    for j in range(3):
+        c.drawCircle(l + w * 0.81, t + h * (0.33 + j * 0.035), w * 0.025, fill("#f4f0e8"))
+    c.drawPath(rrect(l + w * 0.14, base - h * 0.22, l + w * 0.66, base - h * 0.1, 8), fill("#2a0e0c"))
+
+
+def scene_tiem_giat_24h(tod: str) -> Scene:
+    if tod == "exterior":
+        return _laundry_exterior()
+    bk = _Bake()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(52)
+    FL, k = 1760, 520.0
+    c.drawRect(_R(0, 0, W, FL), fill("#dfeee8"))
+    _tile_grid(c, 0, 820, W, FL, 104, 104, "#c4d8d0", 3)
+    c.drawRect(_R(0, 0, W, 120), fill("#f4f6f4"))
+    c.drawRect(_R(0, 808, W, 822), fill("#9abfb2"))
+    # cửa kính trái nhìn ra phố đêm
+    vgrad(c, 0, 240, 520, FL, ["#0c1430", "#1c2a48"])
+    for (gx, gy, col) in ((140, 700, "#ffcf80"), (380, 900, "#ff6b8a"), (260, 1100, "#6be0ff")):
+        glow(c, gx, gy, 120, col, 0.5)
+    c.drawRect(_R(0, 240, 520, FL), stroke("#8a9098", 22))
+    c.drawLine(260, 240, 260, FL, stroke("#8a9098", 14))
+    reflections(c, 0, 240, 520, FL, 3, 0.12, seed=521)
+    _laundry_inside(c, bk, rng, 640, 2780, FL, k)
+    _detergent_machine(c, bk, 2930, FL, 560, 1000)
+    c.drawPath(rrect(820, 300, 2600, 600, 18), fill("#2a7aa8"))
+    c.drawPath(rrect(1640, 640, 1980, 760, 10), fill("#f4f6f4"))
+    bk.text(c, "WASH 40  DRY 30", 1810, 700, 40, "#2a4a5a", max_w=310)
+    _tube(c, 1100, 140, 700)
+    _tube(c, 2700, 140, 700)
+    # sàn + bàn gấp đồ + ghế + xô lau
+    _persp_floor(c, FL, "#cfd2d0", "#b4b8b6", vx=1920, vy=900, spacing=280, dz=0.1)
+    TL, TR, TT = 2050, 3050, 1700
+    c.drawRect(_R(TL, TT, TR, TT + 40), fill("#e8e4dc"))
+    c.drawRect(_R(TL, TT + 40, TR, TT + 56), fill("#b4aea2"))
+    for x in (TL + 40, TR - 60):
+        c.drawRect(_R(x, TT + 56, x + 20, 2040), fill("#8a9098"))
+    for j, col in enumerate(("#3a78c2", "#e8e4dc", "#d8423a", "#f3c94e")):
+        c.drawPath(rrect(TL + 520, TT - 40 - j * 34, TL + 800, TT - 4 - j * 34, 8), fill(col))
+    c.drawPath(rrect(TL + 80, TT - 190, TL + 420, TT, 24), fill("#4fa3c8"))
+    for x in range(int(TL + 110), int(TL + 400), 40):
+        c.drawLine(x, TT - 170, x, TT - 20, stroke("#3a86a8", 6))
+    for cx_ in (700, 1100):
+        c.drawPath(rrect(cx_ - 120, 1700, cx_ + 120, 1740, 10), fill("#2f6fb0"))
+        c.drawPath(rrect(cx_ - 110, 1460, cx_ + 110, 1700, 20), fill("#3a7ac0"))
+        for dx in (-100, 100):
+            c.drawLine(cx_ + dx, 1740, cx_ + dx * 1.1, 1960, stroke("#2a5a90", 12))
+    c.drawPath(rrect(3380, 1860, 3620, 2060, 20), fill("#f3c94e"))
+    c.drawRect(_R(3380, 1860, 3620, 1890), fill("#d8a830"))
+    c.drawLine(3560, 1880, 3460, 1300, stroke("#8a6a4a", 14))
+    c.drawPath(oval(3450, 1300, 70, 30), fill("#c9c2b0"))
+    tint(s, "#e8f0ff", 0.08)
+    glow(c, 1100, 160, 1000, "#eef6ff", 0.25)
+    glow(c, 2700, 160, 1000, "#eef6ff", 0.25)
+    _vignette(c, 0.3)
+    mid = s.makeImageSnapshot()
+    signs = [{"text": "LAUNDRY 24H", "box": [860, 330, 2560, 570], "style": "plain"}]
+    slots = {"center": {"x": 1700, "y": 2070, "scale": 1.1}, "left": {"x": 1000, "y": 2070, "scale": 1.1},
+             "right": {"x": 3300, "y": 2070, "scale": 1.1}, "machines": {"x": 1400, "y": 1850, "scale": 1.0},
+             "table": {"x": 2550, "y": 2000, "scale": 1.05, "clip_bottom": TT + 40}}
+    return Scene(None, mid, slots=slots, signs=signs, baked_signs=bk.items, floor_y=2070,
+                 lights=[{"x": 1100, "y": 160, "color": "#eef6ff"}, {"x": 2700, "y": 160, "color": "#eef6ff"}])
+
+
+def _laundry_exterior() -> Scene:
+    bk = _Bake()
+    sf = new_surface()
+    c = sf.getCanvas()
+    _night_sky(c, 0, 900, seed=521, top="#070b1c", bottom="#1e2444", n_stars=60)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(521)
+    GB = 1620
+    c.drawRect(_R(560, 80, 3280, GB), fill("#7a8088"))
+    c.drawRect(_R(560, 80, 3280, 120), fill("#8a9098"))
+    for wx in (760, 1560, 2360):
+        lit = wx == 1560
+        c.drawRect(_R(wx, 200, wx + 640, 460), fill("#ffcf80" if lit else "#1c2236"))
+        c.drawRect(_R(wx - 20, 460, wx + 660, 480), fill("#5a6068"))
+        if lit:
+            glow(c, wx + 320, 330, 380, "#ffcf80", 0.3)
+    c.drawRect(_R(3000, 260, 3160, 380), fill("#c9ccd2"))
+    c.drawCircle(3080, 320, 44, stroke("#8a9098", 6))
+    # bảng hiệu LAUNDRY 24H (neon)
+    c.drawRect(_R(640, 560, 3200, 760), fill("#1a5a8a"))
+    c.drawRect(_R(640, 740, 3200, 760), fill("#6be0ff"))
+    bk.text(c, "LAUNDRY 24H", 1920, 655, 120, "#ffffff", max_w=2200, neon="#6be0ff")
+    # mặt kính + bên trong
+    L, R, T = 700, 3140, 800
+    c.drawRect(_R(L, T, R, GB), fill("#e8f2f0"))
+    _laundry_inside(c, None, rng, L + 120, R - 600, GB - 60, 330)
+    _detergent_machine(c, bk, R - 470, GB - 60, 330, 640)
+    c.drawRect(_R(L, GB - 60, R, GB), fill("#c9ccd0"))
+    c.drawRect(_R(L, T, R, T + 40), fill("#f4f8f8"))
+    for x in (L, (L + R) / 2 - 500, (L + R) / 2 + 500, R):
+        c.drawRect(_R(x - 14, T, x + 14, GB), fill("#4a4e58"))
+    c.drawPath(rrect(1446, 1120, 1476, 1320, 10), fill("#c9ccd2"))
+    reflections(c, L, T, R, GB, 4, 0.1, seed=522)
+    # hàng xóm: cửa cuốn đóng
+    for (l, r) in ((-20, 560), (3280, W + 20)):
+        c.drawRect(_R(l, 300, r, GB), fill("#4a4e5a"))
+        vgrad(c, l + 30, 800, r - 30, GB, ["#8a909a", "#6a707a"])
+        for yy in range(810, GB, 16):
+            c.drawLine(l + 30, yy, r - 30, yy, stroke("#565c66", 3))
+    # vỉa hè + đường + xe máy + đèn
+    c.drawRect(_R(0, GB, W, GB + 140), fill("#5a5e68"))
+    _tile_grid(c, 0, GB, W, GB + 140, 140, 70, "#4a4e58", 3)
+    c.drawRect(_R(0, GB + 140, W, GB + 170), fill("#8a8e98"))
+    c.drawRect(_R(0, GB + 170, W, H), fill("#2a2c36"))
+    _scooter(c, 3500, GB + 110, 330, "#d8423a", facing=-1)
+    lx, ly = _streetlamp(c, 300, GB + 120, 6.0, 170, lit=True, arm=1, cone=True, pool_y=GB + 150)
+    tint(s, "#7a86b8", 0.3)
+    glow(c, 1920, 1200, 1500, "#e8f4ff", 0.35)
+    ellipse_glow(c, 1920, GB + 100, 1500, 200, "#e8f4ff", 0.35)
+    glow(c, 1920, 655, 900, "#6be0ff", 0.2)
+    glow(c, lx, ly, 200, "#ffe2a0", 0.5)
+    _vignette(c, 0.5)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2080, "scale": 1.05}, "left": {"x": 900, "y": 2080, "scale": 1.05},
+             "right": {"x": 2950, "y": 2080, "scale": 1.05}, "door": {"x": 1250, "y": GB + 40, "scale": 0.73}}
+    return Scene(far, mid, slots=slots, baked_signs=bk.items, floor_y=2080, parallax=(0.9, 1.0, 1.1),
+                 lights=[{"x": 1920, "y": 655, "color": "#6be0ff"}, {"x": round(lx), "y": round(ly), "color": "#ffe2a0"}])
+
+
+# ------------------------------------------------------------------- 53. trung tâm dữ liệu về đêm (hàng rào kẽm gai)
+def _chain_fence(c, l, t, r, b, col="#9aa4b0", a=0.5, step=46) -> None:
+    c.save()
+    c.clipRect(_R(l, t, r, b))
+    x = l - (b - t)
+    while x < r:
+        c.drawLine(x, b, x + (b - t), t, stroke(col, 3, a))
+        c.drawLine(x, t, x + (b - t), b, stroke(col, 3, a))
+        x += step
+    c.restore()
+
+
+def _barbed(c, l, r, y, col="#8a94a0") -> None:
+    for j in range(3):
+        c.drawLine(l, y - j * 34, r, y - j * 34, stroke(col, 4))
+    x = l
+    while x < r:
+        c.drawCircle(x, y - 100, 48, stroke(col, 4, 0.85))
+        x += 58
+    for j in range(3):
+        x = l + j * 17
+        while x < r:
+            c.drawLine(x - 8, y - j * 34 - 8, x + 8, y - j * 34 + 8, stroke(col, 4))
+            x += 52
+
+
+def scene_trung_tam_du_lieu_dem(tod: str) -> Scene:
+    bk = _Bake()
+    sf = new_surface()
+    c = sf.getCanvas()
+    _night_sky(c, 0, 1300, seed=53, top="#060a18", bottom="#1a2444", n_stars=220)
+    _moon(c, 3350, 260, 70, a=0.85)
+    soft_hills(c, 1180, 160, "#0e1424", 531, n=6)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    BL, BR, BT, BB = 820, 3440, 430, 1420
+    box3(c, BL, BT, BR, BB, "#4e5666", top_h=0, side_w=320, side="left")
+    quad(c, [(BL, BT), (BR, BT), (BR - 40, BT - 60), (BL - 320, BT - 60)], "#5e6676")
+    for x in range(int(BL + 160), int(BR), 260):
+        c.drawRect(_R(x, BT + 20, x + 40, BB - 120), fill("#5a6272"))
+    for y in (620, 880, 1140):
+        c.drawRect(_R(BL, y, BR, y + 14), fill("#5ad4ff"))
+        glow(c, (BL + BR) / 2, y + 7, 1300, "#3ab0ff", 0.1)
+        quad(c, [(BL, y), (BL - 320, y - 60 * (1 - (y - BT) / (BB - BT))), (BL - 320, y - 60 * (1 - (y - BT) / (BB - BT)) + 12),
+                 (BL, y + 14)], "#3ab0e0")
+        for x in range(int(BL), int(BR), 120):
+            glow(c, x + 60, y + 7, 70, "#5ad4ff", 0.25)
+    for (ux, uw) in ((1100, 380), (1700, 300), (2700, 420)):          # máy làm mát trên mái
+        c.drawRect(_R(ux, BT - 150, ux + uw, BT - 20), fill("#3a4250"))
+        for j in range(int(uw // 110)):
+            c.drawCircle(ux + 60 + j * 110, BT - 85, 42, stroke("#2a303c", 8))
+    # biểu tượng đồng hồ cát trừu tượng + chữ DATA CENTER
+    lx, ly = 2900, 300 + BT
+    quad(c, [(lx - 70, ly - 110), (lx + 70, ly - 110), (lx, ly)], "#bfeaff")
+    quad(c, [(lx - 70, ly + 110), (lx + 70, ly + 110), (lx, ly)], "#5ad4ff")
+    c.drawCircle(lx, ly, 150, stroke("#bfeaff", 10))
+    glow(c, lx, ly, 300, "#5ad4ff", 0.35)
+    bk.text(c, "DATA CENTER", 2120, ly, 96, "#e8f6ff", max_w=1100, neon="#5ad4ff")
+    # cửa kính lối vào
+    c.drawRect(_R(1700, BB - 360, 2340, BB), fill("#a8e0ff", 0.85))
+    for x in (1860, 2020, 2180):
+        c.drawLine(x, BB - 360, x, BB, stroke("#3a4250", 10))
+    glow(c, 2020, BB - 180, 500, "#bfeaff", 0.35)
+    # sân + cỏ
+    c.drawRect(_R(0, BB, W, 1560), fill("#262a34"))
+    c.drawRect(_R(0, 1560, W, H), fill("#1c2a22"))
+    vgrad(c, 0, 1900, W, H, ["#2a3a2c", "#1e2a22"])
+    # đèn pha trên cột
+    lights = []
+    for (px, aim) in ((380, 1), (3640, -1)):
+        c.drawRect(_R(px - 16, 380, px + 16, 1700), fill("#2a2e38"))
+        hx, hy = px + aim * 60, 400
+        c.drawPath(rrect(hx - 70, hy - 40, hx + 70, hy + 40, 10), fill("#3a3e48"))
+        c.drawPath(oval(hx + aim * 50, hy + 20, 26, 40), fill("#fff8e0"))
+        _light_cone(c, hx + aim * 50, hy + 20, 40, hx + aim * 900, 1560, 600, "#fff8e0", 0.1)
+        glow(c, hx + aim * 50, hy + 20, 240, "#fff8e0", 0.7)
+        lights.append((hx + aim * 50, hy + 20))
+    # hàng rào lưới B40 + kẽm gai + cổng
+    FT, FB = 1010, 1960
+    for x in range(-60, W + 100, 460):
+        c.drawRect(_R(x - 12, FT - 120, x + 12, FB), fill("#6a7480"))
+        c.drawLine(x, FT - 120, x - 60, FT - 230, stroke("#6a7480", 10))
+    c.drawLine(0, FT, W, FT, stroke("#6a7480", 10))
+    c.drawLine(0, FB - 20, W, FB - 20, stroke("#6a7480", 8))
+    _chain_fence(c, 0, FT, W, FB)
+    _barbed(c, 0, W, FT - 40)
+    GL, GR = 1640, 2360
+    for x in (GL, GR):
+        c.drawRect(_R(x - 26, FT - 180, x + 26, FB), fill("#7a8490"))
+    for (l, r) in ((GL + 30, 2000), (2000, GR - 30)):
+        c.drawRect(_R(l, FT + 30, r, FB - 30), stroke("#8a94a0", 14))
+        c.drawLine(l, (FT + FB) / 2, r, (FT + FB) / 2, stroke("#8a94a0", 10))
+    c.drawPath(rrect(1975, (FT + FB) / 2 - 40, 2025, (FT + FB) / 2 + 40, 8), fill("#c9a440"))
+    SL, SR, ST, SB_ = 1720, 2280, 1180, 1500
+    c.drawPath(rrect(SL, ST, SR, SB_, 12), fill("#f4f2ec"))
+    c.drawRect(_R(SL, ST, SR, ST + 140), fill("#c8302a"))
+    bk.text(c, "RESTRICTED AREA", (SL + SR) / 2, ST + 70, 58, "#ffffff", max_w=SR - SL - 50)
+    bk.text(c, "STAFF ONLY", (SL + SR) / 2, ST + 230, 72, "#c8302a", max_w=SR - SL - 60)
+    c.drawPath(rrect(SL, ST, SR, SB_, 12), stroke("#c8302a", 10))
+    # camera an ninh trên cột cổng
+    c.drawPath(rrect(GR + 10, FT - 220, GR + 170, FT - 160, 14), fill("#e8e4dc"))
+    c.drawCircle(GR + 170, FT - 190, 18, fill("#1d1f24"))
+    c.drawCircle(GR + 150, FT - 205, 6, fill("#ff3b30"))
+    tint(s, "#7a88c0", 0.3)
+    for (x, y) in lights:
+        glow(c, x, y, 160, "#ffffff", 0.6)
+    glow(c, 2900, BT + 300, 260, "#5ad4ff", 0.3)
+    _vignette(c, 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 1920, "y": 2090, "scale": 1.0}, "left": {"x": 850, "y": 2090, "scale": 1.0},
+             "right": {"x": 3000, "y": 2090, "scale": 1.0}, "fence": {"x": 1200, "y": 1970, "scale": 0.95},
+             "inside": {"x": 2600, "y": 1540, "scale": 0.5}}
+    return Scene(far, mid, slots=slots, baked_signs=bk.items, floor_y=2090, parallax=(0.9, 1.0, 1.1),
+                 lights=[{"x": round(x), "y": round(y), "color": "#fff8e0"} for (x, y) in lights])
+
+
+# ------------------------------------------------------------------- 54. lối đi phòng máy chủ (1 điểm tụ)
+def _rack_local(c, w, h, seed) -> None:
+    rng = random.Random(seed)
+    c.drawRect(_R(0, 0, w, h), fill("#14171e"))
+    c.drawRect(_R(6, 6, w - 6, h - 6), fill("#1e222b"))
+    y = 22
+    while y < h - 30:
+        uh = rng.choice([14, 14, 28, 42])
+        c.drawRect(_R(12, y, w - 12, y + uh - 3), fill(rng.choice(["#262b36", "#2c313c", "#20242e"])))
+        for j in range(rng.randint(2, 6)):
+            col = rng.choices(["#3ee08f", "#2fa8ff", "#ffb02e", "#ff3b30"], [6, 5, 2, 1])[0]
+            c.drawCircle(18 + j * 9, y + 6, 2.6, fill(col))
+        c.drawLine(w * 0.45, y + uh / 2, w - 18, y + uh / 2, stroke("#3a404c", 1.5))
+        y += uh
+    for x in range(10, int(w) - 6, 6):
+        c.drawLine(x, 8, x, h - 8, stroke("#000000", 1.0, 0.18))
+    c.drawRect(_R(w - 14, h * 0.4, w - 8, h * 0.6), fill("#8a9098"))
+
+
+def scene_phong_may_chu(tod: str) -> Scene:
+    bk = _Bake()
+    P = Persp(f=1500, cx=W / 2, cy=1000, cam_h=1.6)
+    XW, RH, YT, Z0, ZB = 1.25, 2.2, 3.3, 0.8, 30.0
+    s = new_surface()
+    c = s.getCanvas()
+    path_fill(c, P.plane_y(YT, -4, 4, Z0, ZB), "#20242e")
+    path_fill(c, P.face_z(ZB, -4, 4, 0, YT), "#262a34")
+    path_fill(c, P.plane_y(0, -XW, XW, Z0, ZB), "#d4d8dc")
+    _floor_tiles(c, P, -XW, XW, Z0, ZB, 0.6, "#a8aeb6")
+    z = 1.2
+    while z < ZB:                                # tấm sàn đục lỗ
+        for xx in (-0.6, 0.0):
+            q = [P.p(xx + 0.05, 0, z + 0.05), P.p(xx + 0.55, 0, z + 0.05), P.p(xx + 0.55, 0, z + 0.55), P.p(xx + 0.05, 0, z + 0.55)]
+            path_fill(c, poly(q), "#9aa2ac", 0.5)
+        z += 1.8
+    # cửa cuối + EXIT
+    path_fill(c, P.face_z(ZB - 0.01, -0.6, 0.6, 0, 2.1), "#5a6270")
+    path_fill(c, P.face_z(ZB - 0.02, -0.5, 0.5, 0.9, 1.8), "#8ab8d8")
+    ex, ey = P.p(0, 2.45, ZB - 0.02)
+    _exit_box(c, bk, ex, ey, 0.8 * P.f / ZB)
+    # hai dãy tủ rack
+    leds = []
+    for sd in (-1, 1):
+        x = sd * XW
+        path_fill(c, P.plane_y(RH, x, x + sd * 0.9, Z0, ZB - 0.5), "#101318")
+        path_fill(c, P.wall_x(x, Z0, ZB - 0.5, RH, YT), "#1a1e26")
+        z = Z0
+        i = 0
+        while z < ZB - 1.0:
+            dst = ([P.p(x, RH, z), P.p(x, RH, z + 0.6), P.p(x, 0, z + 0.6), P.p(x, 0, z)] if sd < 0 else
+                   [P.p(x, RH, z + 0.6), P.p(x, RH, z), P.p(x, 0, z), P.p(x, 0, z + 0.6)])
+            _on_quad(c, None, 0.6 * U4, RH * U4, dst, lambda cc, sd_=530 + i * 7 + sd: _rack_local(cc, 0.6 * U4, RH * U4, sd_))
+            leds.append(P.p(x, 1.2, z + 0.3))
+            z += 0.62
+            i += 1
+        # máng cáp vàng trên trần
+        tx = sd * 0.9
+        for dy in (0.0, 0.12):
+            c.drawLine(*P.p(tx - 0.25, 2.75 + dy, Z0), *P.p(tx - 0.25, 2.75 + dy, ZB), stroke("#e8b830", 1))
+        path_fill(c, P.quad([(tx - 0.3, 2.75, Z0), (tx + 0.3, 2.75, Z0), (tx + 0.3, 2.75, ZB), (tx - 0.3, 2.75, ZB)]), "#c99a20")
+        path_fill(c, P.quad([(tx - 0.3, 2.85, Z0), (tx + 0.3, 2.85, Z0), (tx + 0.3, 2.85, ZB), (tx - 0.3, 2.85, ZB)]), "#e8b830")
+        z = 1.0
+        while z < ZB:
+            path_fill(c, P.quad([(tx - 0.3, 2.85, z), (tx + 0.3, 2.85, z), (tx + 0.3, 2.85, z + 0.06), (tx - 0.3, 2.85, z + 0.06)]),
+                      "#a87a10")
+            z += 0.5
+        for cz in (1.5, 6.0, 12.0):
+            c.drawLine(*P.p(tx, 2.85, cz), *P.p(tx, YT, cz), stroke("#5a606a", max(2.0, 0.03 * P.f / cz)))
+    # dải đèn trần lạnh + biển ROW B treo
+    path_fill(c, P.plane_y(YT - 0.01, -0.1, 0.1, Z0, ZB), "#eaf4ff")
+    sx_, sy_ = P.p(0, 2.55, 4.0)
+    k = P.f / 4.0
+    c.drawLine(sx_ - 0.3 * k, P.p(0, YT, 4.0)[1], sx_ - 0.3 * k, sy_, stroke("#8a9098", 4))
+    c.drawLine(sx_ + 0.3 * k, P.p(0, YT, 4.0)[1], sx_ + 0.3 * k, sy_, stroke("#8a9098", 4))
+    c.drawPath(rrect(sx_ - 0.42 * k, sy_, sx_ + 0.42 * k, sy_ + 0.2 * k, 10), fill("#1a5a8a"))
+    bk.text(c, "ROW B", sx_, sy_ + 0.1 * k, 0.13 * k, "#ffffff")
+    tint(s, "#7a9ad8", 0.35)
+    for (lx_, ly_) in leds[::3]:
+        glow(c, lx_, ly_, 60, "#2fa8ff", 0.25)
+    ellipse_glow(c, P.cx, P.p(0, 0, 6)[1], 900, 160, "#bfe0ff", 0.25)
+    glow(c, P.cx, P.cy, 500, "#bfe0ff", 0.3)
+    _vignette(c, 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0, 3.2), "left": P.slot(-0.6, 3.6), "right": P.slot(0.6, 3.6), "far": P.slot(0.0, 9.0),
+             "very_far": P.slot(0.2, 18.0)}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=slots["center"]["y"],
+                 lights=[{"x": round(P.cx), "y": round(P.p(0, YT, 6)[1]), "color": "#bfe0ff"}])
+
+
+# ------------------------------------------------------------------- 55. phòng điều khiển báo động đỏ
+def _monitor(c, cx, base, w, h, rng, alert=False) -> None:
+    c.drawRect(_R(cx - w * 0.06, base - h * 0.2, cx + w * 0.06, base), fill("#2a2e38"))
+    c.drawPath(oval(cx, base, w * 0.22, h * 0.05), fill("#2a2e38"))
+    t = base - h * 0.2 - h
+    c.drawPath(rrect(cx - w / 2, t, cx + w / 2, t + h, 8), fill("#15171e"))
+    vgrad(c, cx - w / 2 + 10, t + 10, cx + w / 2 - 10, t + h - 10, ["#0e2a48", "#081830"])
+    for j in range(5):
+        yy = t + 26 + j * (h - 40) / 5
+        col = "#ff4a3a" if (alert and j == 1) else rng.choice(["#3ee08f", "#2fa8ff", "#8ab8d8"])
+        c.drawRect(_R(cx - w / 2 + 24, yy, cx - w / 2 + 24 + (w - 60) * rng.uniform(0.3, 0.9), yy + 10), fill(col, 0.8))
+    if alert:
+        c.drawRect(_R(cx - w / 2 + 10, t + 10, cx + w / 2 - 10, t + h - 10), stroke("#ff3b30", 8))
+
+
+def scene_phong_dieu_khien_bao_dong(tod: str) -> Scene:
+    bk = _Bake()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(55)
+    FL = 1800
+    c.drawRect(_R(0, 0, W, FL), fill("#1c2030"))
+    _tile_grid(c, 0, 0, W, FL, 480, 360, "#232838", 4)
+    # ống đỏ
+    for (y, w_) in ((110, 34), (170, 22)):
+        c.drawRect(_R(0, y - w_ / 2, W, y + w_ / 2), fill("#a8281f"))
+        c.drawRect(_R(0, y - w_ / 2, W, y - w_ / 2 + 6), fill("#d8453a"))
+        for x in range(200, W, 600):
+            c.drawRect(_R(x, y - w_ / 2 - 8, x + 24, y + w_ / 2 + 8), fill("#6a1a14"))
+    for x in (240, 3600):
+        c.drawRect(_R(x - 20, 110, x + 20, FL), fill("#a8281f"))
+        c.drawCircle(x, 900, 46, fill("#c8302a"))
+        c.drawCircle(x, 900, 46, stroke("#6a1a14", 8))
+        c.drawLine(x - 40, 900, x + 40, 900, stroke("#6a1a14", 8))
+    # màn hình tường lớn: danh sách trạng thái
+    DL, DR, DT, DB = 700, 3140, 260, 1060
+    c.drawPath(rrect(DL - 30, DT - 30, DR + 30, DB + 30, 16), fill("#0c0e14"))
+    vgrad(c, DL, DT, DR, DB, ["#0a1a30", "#06101e"])
+    c.drawRect(_R(DL, DT, DR, DT + 110), fill("#c8302a"))
+    bk.text(c, "ALERT", DL + 260, DT + 55, 72, "#ffffff")
+    bk.text(c, "SYSTEM STATUS", DR - 420, DT + 55, 52, "#ffe0d8", max_w=700)
+    for j in range(7):
+        yy = DT + 150 + j * 108
+        if j == 3:
+            c.drawRect(_R(DL + 10, yy - 14, DR - 10, yy + 70), fill("#c8302a", 0.35))
+        c.drawCircle(DL + 60, yy + 28, 18, fill("#ff3b30" if j in (3, 6) else ("#ffb02e" if j == 1 else "#3ee08f")))
+        c.drawRect(_R(DL + 110, yy + 14, DL + 110 + rng.uniform(300, 700), yy + 42), fill("#8ab8d8", 0.7))
+        c.drawRect(_R(DL + 1000, yy + 14, DL + 1000 + rng.uniform(200, 500), yy + 42), fill("#5a7a98", 0.7))
+        c.drawRect(_R(DR - 400, yy + 10, DR - 400 + rng.uniform(100, 320), yy + 46), fill("#3ee08f" if j not in (3, 6) else "#ff3b30", 0.6))
+    for (l, r) in ((330, 620), (3220, 3510)):            # màn phụ: đồ thị
+        c.drawPath(rrect(l, 380, r, 760, 10), fill("#0c0e14"))
+        c.drawRect(_R(l + 14, 394, r - 14, 746), fill("#08142a"))
+        _ecg(c, l + 20, 520, r - 20, 60, "#3ee08f", 5, 140)
+        _sine(c, l + 20, 650, r - 20, 30, "#ff6a5a", 4, 90)
+    glow(c, (DL + DR) / 2, (DT + DB) / 2, 1500, "#3a6ab0", 0.2)
+    # đèn báo động xoay đỏ
+    beacons = [(520, 60), (1920, 60), (3320, 60)]
+    for i, (bx, by) in enumerate(beacons):
+        c.drawRect(_R(bx - 60, by - 60, bx + 60, by - 30), fill("#2a2e38"))
+        c.drawPath(rrect(bx - 50, by - 30, bx + 50, by + 50, 40), fill("#ff2a1a"))
+        ang = (0.6 if i % 2 else -0.6)
+        for sgn in (-1, 1):
+            a = math.pi / 2 + ang + sgn * 0.22
+            ex_, ey_ = bx + math.cos(a) * 2200 * (1 if i != 1 else 0.9), by + math.sin(a) * 2200
+            quad(c, [(bx, by + 10), (bx + 10, by + 10), (ex_ + 300, ey_), (ex_ - 300, ey_)], "#ff2a1a", 0.06)
+        glow(c, bx, by + 10, 420, "#ff2a1a", 0.7)
+    # dãy bàn điều khiển + màn hình
+    DKT = 1480
+    for (l, r) in ((360, 1760), (2080, 3480)):
+        for j, mx in enumerate(range(int(l + 230), int(r), 470)):
+            _monitor(c, mx, DKT, 380, 230, rng, alert=(j == 1))
+        c.drawRect(_R(l, DKT, r, DKT + 30), fill("#5a606c"))
+        c.drawRect(_R(l, DKT + 30, r, FL + 40), fill("#2e323c"))
+        c.drawRect(_R(l, DKT + 30, r, DKT + 44), fill("#3e4450"))
+        for x in range(int(l + 160), int(r), 470):
+            c.drawPath(rrect(x, DKT - 20, x + 200, DKT, 4), fill("#1d1f24"))
+            for b in range(3):
+                c.drawCircle(x - 40 + b * 18, DKT + 90, 7, fill(rng.choice(["#3ee08f", "#ff3b30", "#ffb02e"])))
+    _persp_floor(c, FL, "#14161e", "#1e2230", vx=1920, vy=1000, spacing=320, dz=0.1)
+    tint(s, "#ff8a7a", 0.35)
+    for (bx, by) in beacons:
+        glow(c, bx, by + 10, 900, "#ff2a1a", 0.35)
+        ellipse_glow(c, bx, FL + 120, 900, 150, "#ff2a1a", 0.25)
+    c.drawRect(_R(0, 0, W, H), fill("#ff1a0a", 0.06))
+    _vignette(c, 0.6)
+    mid = s.makeImageSnapshot()
+    slots = {"operator_left": {"x": 1060, "y": 1640, "scale": 0.9, "clip_bottom": DKT},
+             "operator_right": {"x": 2780, "y": 1640, "scale": 0.9, "clip_bottom": DKT},
+             "center": {"x": 1920, "y": 2080, "scale": 1.1}, "left": {"x": 800, "y": 2080, "scale": 1.1},
+             "right": {"x": 3050, "y": 2080, "scale": 1.1}}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=2080,
+                 lights=[{"x": bx, "y": by + 10, "color": "#ff2a1a"} for (bx, by) in beacons])
+
+
+# ------------------------------------------------------------------- 56. trạm xe buýt ven đường lúc bình minh + bốt điện thoại
+def _dawn_sky(c, t, b, sun_x, horizon) -> None:
+    vgrad(c, 0, t, W, b, ["#2e2e6a", "#6a4a90", "#c87aa8", "#f6a8a0", "#ffd2a0"], [0, 0.35, 0.65, 0.85, 1])
+    glow(c, sun_x, horizon, 900, "#ffd8a0", 0.45)
+    glow(c, sun_x, horizon, 260, "#fff0c8", 0.7)
+    c.drawCircle(sun_x, horizon, 110, fill("#fff2d0"))
+    rng = random.Random(int(sun_x))
+    for _ in range(9):
+        x, y = rng.uniform(0, W), rng.uniform(t + 150, horizon - 300)
+        c.drawPath(oval(x, y, rng.uniform(220, 520), rng.uniform(26, 50)), fill("#f6b8c0", rng.uniform(0.25, 0.5)))
+
+
+def _payphone(c, bk: _Bake, x, base, k) -> None:
+    c.drawRect(_R(x - 0.05 * k, base - 1.3 * k, x + 0.05 * k, base), fill("#5a6070"))
+    c.drawRect(_R(x - 0.18 * k, base - 0.06 * k, x + 0.18 * k, base), fill("#4a5060"))
+    hl, hr, ht, hb = x - 0.42 * k, x + 0.42 * k, base - 2.2 * k, base - 1.15 * k
+    c.drawPath(rrect(hl, ht, hr, hb, 0.08 * k), fill("#2f6fb0"))
+    c.drawPath(rrect(hl - 0.04 * k, ht - 0.06 * k, hr + 0.04 * k, ht + 0.16 * k, 0.06 * k), fill("#24588e"))
+    bk.text(c, "PHONE", x, ht + 0.05 * k, 0.13 * k, "#ffffff", max_w=0.7 * k)
+    bl, br, bt, bb = x - 0.22 * k, x + 0.22 * k, ht + 0.25 * k, hb - 0.06 * k
+    c.drawPath(rrect(bl, bt, br, bb, 0.04 * k), fill("#c9ccd2"))
+    c.drawRect(_R(bl + 0.05 * k, bt + 0.06 * k, br - 0.05 * k, bt + 0.16 * k), fill("#3a5a4a"))
+    for r_ in range(4):
+        for cc in range(3):
+            c.drawCircle(bl + 0.1 * k + cc * 0.12 * k, bt + 0.3 * k + r_ * 0.1 * k, 0.03 * k, fill("#5a606a"))
+    c.drawPath(capsule(br + 0.02 * k, bt + 0.05 * k, br + 0.02 * k, bt + 0.5 * k, 0.05 * k, 0.05 * k), fill("#1d1f24"))
+    c.drawLine(br + 0.02 * k, bt + 0.5 * k, br - 0.05 * k, bb - 0.05 * k, stroke("#1d1f24", max(2.0, 0.015 * k)))
+
+
+def scene_tram_xe_buyt_binh_minh(tod: str) -> Scene:
+    bk = _Bake()
+    sf = new_surface()
+    c = sf.getCanvas()
+    HZ = 1180
+    _dawn_sky(c, 0, HZ + 20, 3000, HZ - 40)
+    soft_hills(c, HZ, 240, "#7a5a8a", 561, n=5)
+    soft_hills(c, HZ + 30, 120, "#5a4a78", 562, n=7)
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(56)
+    for i in range(22):                       # hàng cây xa
+        x = i * 190 + rng.uniform(-40, 40)
+        round_tree(c, x, HZ + 20, rng.uniform(70, 120), "#4a3e66", "#3a3052", seed=i + 560)
+    c.drawRect(_R(0, HZ + 40, W, 1300), fill("#5e5a7a"))
+    c.drawRect(_R(0, 1300, W, 1560), fill("#4a4660"))
+    c.drawRect(_R(0, 1300, W, 1316), fill("#8a84a0"))
+    for x in range(-80, W, 400):
+        c.drawRect(_R(x, 1420, x + 220, 1436), fill("#f0c45a", 0.9))
+    c.drawRect(_R(0, 1544, W, 1560), fill("#d8d0dc"))
+    c.drawRect(_R(0, 1560, W, 1640), fill("#8a7e78"))
+    vgrad(c, 0, 1640, W, H, ["#6a7a5a", "#4a6a48"])
+    for _ in range(260):
+        x, y = rng.uniform(0, W), rng.uniform(1650, H)
+        h_ = (y - 1600) * 0.12 + 10
+        c.drawLine(x, y, x + rng.uniform(-8, 8), y - h_, stroke(rng.choice(["#7a8a60", "#5a7a50", "#8a9a6a"]), 4))
+    # cột điện + dây
+    tops = []
+    for (px, base, h_) in ((-100, 1300, 900), (1400, 1300, 900), (2900, 1300, 900)):
+        power_pole(c, px, base - h_, base, "#3a3450", 24)
+        tops.append((px, base - h_ + 50))
+    for i in range(len(tops) - 1):
+        for dy in (0, 70):
+            sag_wire(c, tops[i][0] - 90, tops[i][1] + dy, tops[i + 1][0] - 90, tops[i + 1][1] + dy, 40, "#2a2440", 4)
+            sag_wire(c, tops[i][0] + 90, tops[i][1] + dy, tops[i + 1][0] + 90, tops[i + 1][1] + dy, 40, "#2a2440", 4)
+    sag_wire(c, tops[-1][0] - 90, tops[-1][1], W + 50, tops[-1][1] + 30, 30, "#2a2440", 4)
+    # mái chờ xe buýt
+    k = 360.0
+    SL, SR, SB = 520, 1500, 1660
+    roof_y = SB - 2.5 * k
+    for x in (SL + 40, SR - 40):
+        c.drawRect(_R(x - 16, roof_y, x + 16, SB), fill("#6a7080"))
+    c.drawRect(_R(SL + 60, roof_y + 120, SR - 60, SB - 0.45 * k), fill("#cfe6ee", 0.35))
+    c.drawRect(_R(SL + 60, roof_y + 120, SR - 60, SB - 0.45 * k), stroke("#6a7080", 8))
+    c.drawPath(rrect(SR - 360, roof_y + 180, SR - 90, SB - 0.6 * k, 10), fill("#e8e0e8"))
+    c.drawCircle(SR - 225, roof_y + 360, 80, fill("#c87aa8", 0.6))
+    quad(c, [(SL - 60, roof_y + 30), (SR + 60, roof_y - 20), (SR + 60, roof_y + 30), (SL - 60, roof_y + 70)], "#3a5a8a")
+    quad(c, [(SL - 60, roof_y + 70), (SR + 60, roof_y + 30), (SR + 60, roof_y + 46), (SL - 60, roof_y + 86)], "#2a4068")
+    c.drawRect(_R(SL + 120, SB - 0.48 * k, SR - 120, SB - 0.42 * k), fill("#8a6a4a"))
+    for x in (SL + 160, SR - 160):
+        c.drawRect(_R(x - 8, SB - 0.42 * k, x + 8, SB), fill("#4a5060"))
+    c.drawRect(_R(SL - 80, SB - 10, SR + 80, SB + 20), fill("#a89a98"))
+    # biển trạm
+    px = SR + 230
+    c.drawRect(_R(px - 12, SB - 2.6 * k, px + 12, SB), fill("#6a7080"))
+    c.drawPath(rrect(px - 0.4 * k, SB - 2.9 * k, px + 0.4 * k, SB - 2.4 * k, 12), fill("#2f6fb0"))
+    c.drawPath(rrect(px - 0.37 * k, SB - 2.87 * k, px + 0.37 * k, SB - 2.43 * k, 10), stroke("#f4f6f8", 5))
+    bk.text(c, "BUS STOP", px, SB - 2.65 * k, 0.15 * k, "#ffffff", max_w=0.66 * k)
+    # bốt điện thoại công cộng
+    _payphone(c, bk, 2750, 1720, 380.0)
+    tint(s, "#e8b8d8", 0.18)
+    glow(c, 3000, HZ - 40, 1400, "#ffd8a0", 0.18)
+    _vignette(c, 0.35)
+    mid = s.makeImageSnapshot()
+    slots = {"center": {"x": 2000, "y": 2060, "scale": 1.0}, "left": {"x": 900, "y": 2060, "scale": 1.0},
+             "right": {"x": 3300, "y": 2060, "scale": 1.0}, "bench": {"x": 1010, "y": SB, "scale": 0.8},
+             "phone": {"x": 2580, "y": 1730, "scale": 0.85}}
+    return Scene(far, mid, slots=slots, baked_signs=bk.items, floor_y=2060, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": 3000, "y": HZ - 40, "color": "#ffd8a0"}])
+
+
+# ------------------------------------------------------------------- 57. sông lúc bình minh: đường chân trời + thuyền đuôi dài
+def _longtail_boat(c, x0, x1, wl, k, hull="#6a4630", stripe="#2f8ac8", canopy="#d8423a") -> None:
+    """Thuyền đuôi dài nhìn ngang: mũi cong vút bên phải, máy + trục dài ở đuôi trái. wl = mực nước."""
+    L = x1 - x0
+    p = skia.Path()
+    p.moveTo(x0, wl - 0.45 * k)
+    p.lineTo(x1 - L * 0.1, wl - 0.5 * k)
+    p.quadTo(x1, wl - 0.6 * k, x1 + 0.1 * k, wl - 1.3 * k)
+    p.quadTo(x1 - L * 0.02, wl - 0.2 * k, x1 - L * 0.16, wl + 0.08 * k)
+    p.lineTo(x0 + L * 0.06, wl + 0.08 * k)
+    p.close()
+    path_fill(c, p, hull)
+    c.drawLine(x0 + L * 0.03, wl - 0.3 * k, x1 - L * 0.06, wl - 0.36 * k, stroke(stripe, 0.07 * k))
+    c.drawPath(capsule(x1 + 0.05 * k, wl - 1.25 * k, x1 + 0.12 * k, wl - 1.4 * k, 0.04 * k, 0.02 * k), fill("#f3c94e"))
+    if canopy:
+        for xx in (x0 + L * 0.3, x0 + L * 0.68):
+            c.drawLine(xx, wl - 0.48 * k, xx, wl - 1.5 * k, stroke("#3a2a1e", 0.04 * k))
+        quad(c, [(x0 + L * 0.25, wl - 1.5 * k), (x0 + L * 0.73, wl - 1.5 * k), (x0 + L * 0.76, wl - 1.38 * k),
+                 (x0 + L * 0.22, wl - 1.38 * k)], canopy)
+    c.drawPath(rrect(x0 - 0.1 * k, wl - 0.95 * k, x0 + 0.45 * k, wl - 0.5 * k, 0.08 * k), fill("#4a4e58"))
+    c.drawLine(x0 + 0.1 * k, wl - 0.6 * k, x0 - 1.6 * k, wl + 0.15 * k, stroke("#2a2e38", 0.06 * k))
+    c.drawPath(oval(x0 - 1.6 * k, wl + 0.15 * k, 0.2 * k, 0.06 * k), fill("#ffffff", 0.4))
+    c.drawPath(oval((x0 + x1) / 2, wl + 0.12 * k, L * 0.55, 0.08 * k), fill("#000000", 0.18))
+
+
+def scene_song_binh_minh_thanh_pho(tod: str) -> Scene:
+    sf = new_surface()
+    c = sf.getCanvas()
+    HZ = 1000
+    SX = 2400
+    _dawn_sky(c, 0, HZ + 10, SX, HZ - 60)
+    _skyline(c, HZ, 571, "#4a3a6e", 120, 460, lit="#ffd8a0", lit_p=0.05, beacons=True)
+    _skyline(c, HZ, 572, "#5e4a7e", 60, 220, wmin=90, wmax=220)
+    # cầu dây văng bên trái
+    c.drawRect(_R(-20, HZ - 80, 1500, HZ - 56), fill("#3a2e58"))
+    for tx in (420, 1100):
+        quad(c, [(tx - 26, HZ - 56), (tx + 26, HZ - 56), (tx + 12, HZ - 520), (tx - 12, HZ - 520)], "#3a2e58")
+        for j in range(1, 8):
+            c.drawLine(tx, HZ - 500 + j * 40, tx - j * 48, HZ - 80, stroke("#3a2e58", 3))
+            c.drawLine(tx, HZ - 500 + j * 40, tx + j * 48, HZ - 80, stroke("#3a2e58", 3))
+    sky = sf.makeImageSnapshot()
+    # mặt nước: phản chiếu bầu trời (lật) + vệt nắng
+    c.save()
+    c.clipRect(_R(0, HZ, W, H))
+    c.translate(0, 2 * HZ)
+    c.scale(1, -1)
+    c.drawImage(_blurred(sky, 14), 0, 0, skia.SamplingOptions(), fill("#ffffff", 0.55))
+    c.restore()
+    vgrad(c, 0, HZ, W, H, [("#5a4a80", 0.35), ("#2a2450", 0.8)])
+    rng = random.Random(57)
+    for i in range(60):
+        y = HZ + 12 + (i ** 1.5) * 2.0
+        if y > H:
+            break
+        w_ = 60 + i * 9
+        c.drawRect(_R(SX - w_ * rng.uniform(0.4, 1.0), y, SX + w_ * rng.uniform(0.4, 1.0), y + 4 + i * 0.25), fill("#ffe0b0", 0.55))
+    for _ in range(140):
+        x, y = rng.uniform(0, W), rng.uniform(HZ + 20, H)
+        c.drawLine(x, y, x + rng.uniform(40, 160) * (y - HZ) / 600, y, stroke("#d8b8e0", 3, 0.35))
+    far = sf.makeImageSnapshot()
+    s = new_surface()
+    c = s.getCanvas()
+    _longtail_boat(c, 3000, 3330, HZ + 70, 70, canopy="#2f8ac8")
+    _longtail_boat(c, 2700, 3000, HZ + 40, 40, hull="#4a3424", canopy=None)
+    _longtail_boat(c, 350, 1850, 1560, 330, hull="#7a4a2e", stripe="#e8c23a", canopy="#c8352e")
+    # bến gỗ tiền cảnh bên phải
+    DT = 1880
+    for x in range(2250, W + 100, 260):
+        c.drawRect(_R(x - 24, DT, x + 24, H), fill("#3a2a1e"))
+    c.drawRect(_R(2150, DT - 20, W + 20, DT + 70), fill("#8a6444"))
+    for x in range(2160, W, 90):
+        c.drawLine(x, DT - 20, x, DT + 70, stroke("#6a4a32", 4))
+    c.drawRect(_R(2150, DT + 70, W + 20, DT + 100), fill("#5a3e2a"))
+    for x in range(2250, W + 100, 520):
+        c.drawRect(_R(x - 16, DT - 480, x + 16, DT - 20), fill("#5a3e2a"))
+    c.drawRect(_R(2150, DT - 480, W + 20, DT - 450), fill("#6a4a32"))
+    c.drawRect(_R(2150, DT - 260, W + 20, DT - 240), fill("#6a4a32"))
+    tint(s, "#e8b0c8", 0.22)
+    glow(c, SX, HZ - 60, 1600, "#ffd8a0", 0.15)
+    _vignette(c, 0.35)
+    mid = s.makeImageSnapshot()
+    slots = {"pier_left": {"x": 2600, "y": DT + 20, "scale": 1.0}, "pier_right": {"x": 3300, "y": DT + 20, "scale": 1.0},
+             "center": {"x": 2950, "y": DT + 20, "scale": 1.0},
+             "boat": {"x": 1100, "y": 1470, "scale": 0.62, "clip_bottom": 1430}}
+    return Scene(far, mid, slots=slots, floor_y=DT + 20, parallax=(0.85, 1.0, 1.1),
+                 lights=[{"x": SX, "y": HZ - 60, "color": "#ffd8a0"}])
+
+
+# ------------------------------------------------------------------- 58. quán net cũ
+def scene_quan_net_cu(tod: str) -> Scene:
+    bk = _Bake()
+    P = Persp(f=1500, cx=W / 2, cy=1000, cam_h=1.45)
+    XW, YT, Z0, ZB = 3.6, 2.8, 0.8, 12.5
+    s = new_surface()
+    c = s.getCanvas()
+    rng = random.Random(58)
+    wall = "#8aa89a"
+    path_fill(c, P.plane_y(YT, -XW, XW, Z0, ZB), "#6e6e68")
+    path_fill(c, P.plane_y(0, -XW, XW, Z0, ZB), "#9a8e76")
+    _floor_tiles(c, P, -XW, XW, Z0, ZB, 0.5, "#766a54")
+    for _ in range(30):
+        x, z = rng.uniform(-3, 3), rng.uniform(1.5, 14)
+        cx_, cy_ = P.p(x, 0, z)
+        c.drawPath(oval(cx_, cy_, 0.5 * P.f / z, 0.1 * P.f / z), fill("#7a6a50", rng.uniform(0.1, 0.2)))
+    path_fill(c, P.face_z(ZB, -XW, XW, 0, YT), wall)
+    for sd in (-1, 1):
+        path_fill(c, P.wall_x(sd * XW, Z0, ZB, 0, YT), shade(wall, -0.1 if sd < 0 else -0.05))
+        path_fill(c, P.wall_x(sd * XW, Z0, ZB, 0, 0.9), shade(wall, -0.25))
+    # tường cuối: poster + bảng NET CAFE + quầy
+    for (x0, x1, col, shape) in ((-3.2, -2.2, "#3a4a8a", "c"), (-2.0, -1.0, "#8a2a3a", "t"), (1.2, 2.2, "#2a6a4a", "c"),
+                                 (2.4, 3.3, "#5a3a7a", "t")):
+        path_fill(c, P.face_z(ZB - 0.01, x0, x1, 1.3, 2.6), col)
+        a_ = P.p((x0 + x1) / 2, 2.0, ZB - 0.02)
+        r_ = 0.3 * P.f / ZB
+        if shape == "c":
+            c.drawCircle(a_[0], a_[1], r_, fill("#f3c94e", 0.8))
+        else:
+            quad(c, [(a_[0], a_[1] - r_), (a_[0] + r_, a_[1] + r_), (a_[0] - r_, a_[1] + r_)], "#e8e4dc")
+    nx, ny = P.p(0.1, 2.55, ZB - 0.02)
+    k = P.f / ZB
+    c.drawPath(rrect(nx - 0.9 * k, ny - 0.22 * k, nx + 0.9 * k, ny + 0.22 * k, 10), fill("#1a1d26"))
+    bk.text(c, "NET CAFE", nx, ny, 0.26 * k, "#ffffff", neon="#2fc4ff", max_w=1.6 * k)
+    bk.text(c, "24H", nx, ny + 0.45 * k, 0.2 * k, "#ffb02e")
+    path_fill(c, P.face_z(ZB - 0.8, -0.8, 0.9, 0, 1.05), "#7a4a2e")
+    path_fill(c, P.plane_y(1.05, -0.85, 0.95, ZB - 1.4, ZB - 0.8), "#9a6a44")
+    mx, my = P.p(0.5, 1.05, ZB - 1.0)
+    c.drawPath(rrect(mx - 0.25 * k, my - 0.4 * k, mx + 0.25 * k, my - 0.02 * k, 6), fill("#d8d0b8"))
+    c.drawRect(_R(mx - 0.2 * k, my - 0.36 * k, mx + 0.2 * k, my - 0.1 * k), fill("#2a6aa8"))
+    # dãy máy tính dọc hai tường (màn hình hướng ra lối đi), ghế đỏ quay lưng
+    glows = []
+    for sd in (-1, 1):
+        xd = sd * (XW - 0.75)
+        path_fill(c, P.plane_y(0.75, sd * XW, xd, Z0, ZB - 1.6), "#8a6a4a")
+        path_fill(c, P.wall_x(xd, Z0, ZB - 1.6, 0.0, 0.75), "#6a4e36")
+        z = ZB - 2.4
+        while z > 1.0:
+            zc = z + 0.45
+            path_fill(c, P.quad([(sd * (XW - 0.18), 0.78, zc - 0.32), (sd * (XW - 0.18), 0.78, zc + 0.32),
+                                 (sd * (XW - 0.18), 1.25, zc + 0.32), (sd * (XW - 0.18), 1.25, zc - 0.32)]), "#d8d0b8")
+            scr = rng.choice(["#2a6aa8", "#3a8a5a", "#6a3a8a", "#2a8aa8", "#1a2a4a"])
+            path_fill(c, P.quad([(sd * (XW - 0.2), 0.82, zc - 0.27), (sd * (XW - 0.2), 0.82, zc + 0.27),
+                                 (sd * (XW - 0.2), 1.21, zc + 0.27), (sd * (XW - 0.2), 1.21, zc - 0.27)]), scr)
+            glows.append((P.p(sd * (XW - 0.3), 1.0, zc), scr, P.f / zc))
+            path_fill(c, P.plane_y(0.76, sd * (XW - 0.6), sd * (XW - 0.3), zc - 0.25, zc + 0.25), "#2b2d33")
+            if rng.random() < 0.85:
+                cxs = sd * (XW - 1.25)
+                path_fill(c, P.wall_x(cxs, zc - 0.25, zc + 0.25, 0.45, 1.25), "#c8302a")
+                path_fill(c, P.wall_x(cxs + sd * 0.02, zc - 0.22, zc + 0.22, 0.5, 1.2), "#a8241f")
+                path_fill(c, P.plane_y(0.45, cxs, cxs + sd * 0.45, zc - 0.25, zc + 0.25), "#8a1f1a")
+                c.drawLine(*P.p(cxs + sd * 0.2, 0.45, zc), *P.p(cxs + sd * 0.2, 0.05, zc), stroke("#2b2d33", max(2.0, 0.04 * P.f / zc)))
+            z -= 1.0
+    # quạt trần + đèn tuýp
+    for zz in (3.0, 6.0, 9.0):
+        hx, hy = P.p(0, YT, zz)
+        k_ = P.f / zz
+        c.drawLine(hx, hy, hx, hy + 0.3 * k_, stroke("#3a3a40", max(2.0, 0.04 * k_)))
+        c.drawPath(oval(hx, hy + 0.32 * k_, 0.1 * k_, 0.04 * k_), fill("#3a3a40"))
+        for sgn in (-1, 1):
+            c.drawPath(oval(hx + sgn * 0.38 * k_, hy + 0.34 * k_, 0.32 * k_, 0.03 * k_), fill("#4a4a50"))
+        for xx in (-1.8, 1.8):
+            path_fill(c, P.plane_y(YT - 0.01, xx - 0.6, xx + 0.6, zz + 0.6, zz + 0.72), "#eef6ff")
+    tint(s, "#3a4878", 0.55)
+    darken(c, 0.22)
+    for ((gx, gy), col, k_) in glows:
+        glow(c, gx, gy, 0.8 * k_, "#8ac8ff", 0.4)
+    glow(c, nx, ny, 700, "#2fc4ff", 0.25)
+    _vignette(c, 0.55)
+    mid = s.makeImageSnapshot()
+    slots = {"center": P.slot(0, 2.8), "left": P.slot(-0.9, 3.4), "right": P.slot(0.9, 3.4), "far": P.slot(0.0, 9.0),
+             "counter": {**P.slot(0.2, ZB - 1.6), "clip_bottom": round(P.p(0, 1.05, ZB - 0.8)[1])}}
+    return Scene(None, mid, slots=slots, baked_signs=bk.items, floor_y=slots["center"]["y"],
+                 lights=[{"x": round(nx), "y": round(ny), "color": "#2fc4ff"}])
+
+
 LIBRARY_SCENES: dict[str, Callable[[str], Scene]] = {
     "cua_hang_quay_pov": scene_cua_hang_quay_pov,
     "cua_hang_tu_lanh": scene_cua_hang_tu_lanh,
@@ -4410,6 +7499,30 @@ LIBRARY_SCENES: dict[str, Callable[[str], Scene]] = {
     "tiem_tap_hoa_dem": scene_tiem_tap_hoa_dem,
     "toa_an": scene_toa_an,
     "phong_ky_tuc_xa": scene_phong_ky_tuc_xa,
+    # lô 3
+    "nha_ve_sinh_nu_truong": scene_nha_ve_sinh_nu_truong,
+    "lop_hoc_cu_dem": scene_lop_hoc_cu_dem,
+    "truong_hoc_dem": scene_truong_hoc_dem,
+    "sanh_tu_giay_truong": scene_sanh_tu_giay_truong,
+    "pho_dan_cu_may_ban_nuoc": scene_pho_dan_cu_may_ban_nuoc,
+    "loi_di_dai_dem": scene_loi_di_dai_dem,
+    "nha_tro_hai_tang": scene_nha_tro_hai_tang,
+    "phong_chieu_tatami": scene_phong_chieu_tatami,
+    "bep_quan_mi": scene_bep_quan_mi,
+    "phong_ngu_tv_cu": scene_phong_ngu_tv_cu,
+    # lô 4
+    "tang_trung_tam_dien_thoai": scene_tang_trung_tam_dien_thoai,
+    "sanh_thang_cuon": scene_sanh_thang_cuon,
+    "pho_nha_pho_dem": scene_pho_nha_pho_dem,
+    "ham_xe_b2": scene_ham_xe_b2,
+    "quan_mi_xe_day_dem": scene_quan_mi_xe_day_dem,
+    "tiem_giat_24h": scene_tiem_giat_24h,
+    "trung_tam_du_lieu_dem": scene_trung_tam_du_lieu_dem,
+    "phong_may_chu": scene_phong_may_chu,
+    "phong_dieu_khien_bao_dong": scene_phong_dieu_khien_bao_dong,
+    "tram_xe_buyt_binh_minh": scene_tram_xe_buyt_binh_minh,
+    "song_binh_minh_thanh_pho": scene_song_binh_minh_thanh_pho,
+    "quan_net_cu": scene_quan_net_cu,
 }
 
 # Thẻ tìm kiếm song ngữ cho cảnh thư viện (metadata, không vẽ vào ảnh).
@@ -4443,6 +7556,53 @@ LIBRARY_TAGS: dict[str, list[str]] = {
     "tiem_tap_hoa_dem": ["tiệm tạp hoá", "cửa cuốn", "quầy", "đồ ăn vặt", "snack shop", "grocery", "shop front"],
     "toa_an": ["toà án", "mặt tiền", "hàng cột", "bậc thềm", "court", "courthouse", "government building"],
     "phong_ky_tuc_xa": ["ký túc xá", "phòng trọ", "vali", "chuyển nhà", "thùng giấy", "dorm room", "suitcases"],
+    # lô 3
+    "nha_ve_sinh_nu_truong": ["nhà vệ sinh", "toilet nữ", "trường học", "buồng vệ sinh", "gương", "sàn ướt", "school toilet",
+                              "girls restroom", "toilet stall", "ma học đường"],
+    "lop_hoc_cu_dem": ["lớp học", "lớp học cũ", "trường học", "bàn ghế", "bảng đen", "đồng hồ", "tủ cá nhân", "classroom",
+                       "old classroom", "lockers", "school at night"],
+    "truong_hoc_dem": ["trường học", "trường tiểu học", "tháp đồng hồ", "hàng rào", "cổng trường", "school exterior",
+                       "elementary school", "clock tower", "school gate"],
+    "sanh_tu_giay_truong": ["tủ giày", "sảnh trường", "lối vào", "dép đi trong nhà", "bảng thông báo", "shoe lockers",
+                            "school entrance", "notice board", "glass doors"],
+    "pho_dan_cu_may_ban_nuoc": ["phố dân cư", "máy bán nước", "cột điện", "đèn đường", "gương cầu", "cổng đền", "tường rào",
+                                "residential street", "vending machines", "utility pole", "curved mirror", "shrine gate"],
+    "loi_di_dai_dem": ["lối đi", "hẻm dài", "cột đèn", "tường bê tông", "một điểm tụ", "long walkway", "night alley",
+                       "lamp posts"],
+    "nha_tro_hai_tang": ["nhà trọ", "chung cư cũ", "cầu thang sắt", "xe đạp", "hộp thư", "số phòng", "apartment exterior",
+                         "external stairs", "bicycles", "two-storey"],
+    "phong_chieu_tatami": ["phòng chiếu", "tatami", "cửa trượt", "đèn lồng giấy", "bàn thấp", "lịch treo tường",
+                           "tatami room", "sliding door", "paper lantern", "low table"],
+    "bep_quan_mi": ["bếp", "quán mì", "nồi nước dùng", "thực đơn", "rèm cửa", "chồng bát", "ramen kitchen",
+                    "noodle shop", "stock pot", "menu tags", "noren"],
+    "phong_ngu_tv_cu": ["phòng ngủ", "phòng tối", "tivi cũ", "nhiễu sóng", "chăn nệm gấp", "dark bedroom", "crt tv",
+                        "tv static", "futons"],
+    # lô 4
+    "tang_trung_tam_dien_thoai": ["trung tâm điện thoại", "sửa điện thoại", "ki-ốt", "ốp lưng", "dán màn hình", "nạp thẻ",
+                                  "trung tâm thương mại", "cửa cuốn", "phone mall", "phone repair", "kiosk", "case shop",
+                                  "mall corridor", "shutters"],
+    "sanh_thang_cuon": ["thang cuốn", "thang máy", "sảnh", "trung tâm thương mại", "hộp đèn quảng cáo", "escalator",
+                        "elevator", "mall lobby", "ad lightbox"],
+    "pho_nha_pho_dem": ["phố", "nhà phố", "biển hiệu", "đường trên cao", "xe máy", "mưa", "city street", "shophouses",
+                        "neon signs", "elevated road", "rain"],
+    "ham_xe_b2": ["hầm xe", "bãi đỗ xe ngầm", "tầng hầm", "cột bê tông", "ô tô", "underground parking", "car park",
+                  "basement", "b2", "pillars"],
+    "quan_mi_xe_day_dem": ["chợ đêm", "xe mì", "xe đẩy", "ghế nhựa", "bàn gấp", "đèn dây", "xe trái cây", "night market",
+                           "noodle cart", "street food", "plastic stools"],
+    "tiem_giat_24h": ["tiệm giặt", "máy giặt", "máy sấy", "giặt tự động", "máy bán bột giặt", "laundromat", "laundry",
+                      "washing machines", "storefront", "24h"],
+    "trung_tam_du_lieu_dem": ["trung tâm dữ liệu", "hàng rào", "kẽm gai", "cổng", "đèn pha", "khu vực cấm", "data center",
+                              "fence", "barbed wire", "restricted area", "floodlights"],
+    "phong_may_chu": ["phòng máy chủ", "tủ rack", "máy chủ", "đèn led", "máng cáp", "server room", "server racks",
+                      "data hall", "cable trays"],
+    "phong_dieu_khien_bao_dong": ["phòng điều khiển", "báo động", "đèn đỏ", "màn hình", "ống đỏ", "control room", "alarm",
+                                  "red alert", "monitors", "status wall"],
+    "tram_xe_buyt_binh_minh": ["trạm xe buýt", "bốt điện thoại", "ven đường", "bình minh", "đồng cỏ", "bus stop", "payphone",
+                               "roadside", "dawn", "countryside"],
+    "song_binh_minh_thanh_pho": ["sông", "bình minh", "thành phố", "thuyền đuôi dài", "cầu dây văng", "bến gỗ", "river",
+                                 "dawn", "skyline", "long-tail boat", "pier"],
+    "quan_net_cu": ["quán net", "tiệm internet", "máy tính", "ghế đỏ", "quạt trần", "internet cafe", "pc cafe",
+                    "computers", "gaming"],
 }
 
 
@@ -4458,10 +7618,20 @@ SCENES: dict[str, Callable[[str], Scene]] = {
 }
 
 TOD_VI = {"day": "ban ngày", "night": "ban đêm", "dusk": "hoàng hôn", "indoor": "trong nhà đèn sáng",
-          "dawn": "bình minh", "fog": "sáng sớm sương mù"}
-TOD_EN = {"day": "day", "night": "night", "dusk": "dusk", "indoor": "interior", "dawn": "dawn", "fog": "foggy morning"}
-# schema.LocationDef chỉ nhận day/night/dusk/indoor -> biến thể mới quy về mốc gần nhất
-TOD_SCHEMA = {"day": "day", "night": "night", "dusk": "dusk", "indoor": "indoor", "dawn": "dusk", "fog": "day"}
+          "dawn": "bình minh", "fog": "sáng sớm sương mù",
+          "closeup": "ban đêm, cận cảnh", "side": "ban đêm, góc bên",
+          "angle": "trong nhà, góc nghiêng", "corridor": "trong nhà, hành lang dài", "closed": "ban đêm, đã đóng cửa",
+          "rain": "ban đêm, mưa", "exterior": "ban đêm, mặt tiền ngoài"}
+TOD_EN = {"day": "day", "night": "night", "dusk": "dusk", "indoor": "interior", "dawn": "dawn", "fog": "foggy morning",
+          "closeup": "night, close-up", "side": "night, side angle",
+          "angle": "interior, side angle", "corridor": "interior, long corridor", "closed": "night, shutters down",
+          "rain": "night, rain", "exterior": "night, exterior"}
+# schema.LocationDef chỉ nhận day/night/dusk/indoor -> biến thể mới quy về mốc gần nhất.
+# Lô 3: biến thể khung hình 'closeup' (cận cửa buồng) / 'side' (góc bên có tủ) là cảnh đêm.
+TOD_SCHEMA = {"day": "day", "night": "night", "dusk": "dusk", "indoor": "indoor", "dawn": "dusk", "fog": "day",
+              "closeup": "night", "side": "night",
+              # lô 4: biến thể khung hình / trạng thái
+              "angle": "indoor", "corridor": "indoor", "closed": "night", "rain": "night", "exterior": "night"}
 
 
 # =================================================================== catalog -> thư mục tài sản
@@ -4618,7 +7788,11 @@ def make_location_stub(entry: dict, out_root: Path = LOCATIONS) -> Path:
 
 TOD_FLOW = {"day": "overcast daytime light", "night": "night, deep navy darkness, few light sources",
             "dusk": "dusk, indigo to mauve sky", "indoor": "bright cold fluorescent interior light",
-            "dawn": "dawn, lilac sky fading to peach horizon", "fog": "hazy early morning, thick beige-grey fog"}
+            "dawn": "dawn, lilac sky fading to peach horizon", "fog": "hazy early morning, thick beige-grey fog",
+            "closeup": "night, tight close-up framing", "side": "night, side view",
+            "angle": "bright mall interior, side angle", "corridor": "bright mall interior, long one-point corridor",
+            "closed": "night, shutters down, dim security lights", "rain": "night, heavy rain, wet reflections",
+            "exterior": "night, storefront exterior"}
 
 
 def _flow_prompts(entry: dict) -> dict:
@@ -4657,7 +7831,8 @@ def make_library_location(lid: str, out_root: Path = LOCATIONS) -> Path:
                                f" ({TOD_EN.get(tod, tod)}). " + ", ".join(tags))
         prof["description_en"] = entry.get("description_en", entry["name_en"])
     if scene.baked_signs:
-        prof["baked_text"] = [b["text"] for b in scene.baked_signs]
+        prof["baked_text"] = list(dict.fromkeys(b["text"] for b in scene.baked_signs))
+    prof["time_of_day"] = meta["time_of_day"]
     meta["flow_prompts"] = _flow_prompts(entry)
     meta["sign_texts"] = [sg["text"] for sg in scene.signs]
     meta["provenance"] = {"kind": "procedural_library", "generator": "storytoon.render.locgen", "catalog_id": base}

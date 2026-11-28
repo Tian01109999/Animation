@@ -5,6 +5,7 @@ Chạy:
   runtime\\venv\\Scripts\\python.exe -X utf8 tools\\make_character_library.py --only be_gai,bao_ve
   runtime\\venv\\Scripts\\python.exe -X utf8 tools\\make_character_library.py --sheets-only
   ... --out <thư mục>     (mặc định assets/characters)
+  ... --batch2 / --batch3 / --batch4   chỉ tạo nhân vật lô đó + ảnh duyệt logs/asset_review/batchN_characters.png
 
 Ảnh duyệt -> logs/asset_review/:
   characters_sheet.png         mọi nhân vật: chính diện + sau lưng + 3 biểu cảm cận
@@ -168,9 +169,13 @@ def library_ids(root: Path) -> list[str]:
     return [a["id"] for a in pg._load_catalog() if a.get("library") and (root / a["id"] / "character.json").exists()]
 
 
-def sheet_batch2(root: Path, ids: list[str], out: Path) -> None:
+BATCH3_SHEET_EXPRS = ("neutral", "happy", "scared", "crying", "cringe", "wide_grin", "slit_smile")
+BATCH4_SHEET_EXPRS = ("neutral", "laugh", "angry_vein", "hurt", "nervous", "smirk", "determined")
+
+
+def sheet_batch2(root: Path, ids: list[str], out: Path, exprs: tuple[str, ...] | None = None) -> None:
     """Mỗi nhân vật 1 hàng: chính diện, sau lưng, qua vai (bán thân sau lưng), pose che miệng, 7 biểu cảm cận."""
-    exprs = ("neutral", "happy", "laughing", "crying", "pained", "shocked", "smirk")
+    exprs = exprs or ("neutral", "happy", "laughing", "crying", "pained", "shocked", "smirk")
     fh, bw, cell, lab = 430, 200, 165, 34
     pose_w = 220
     W_ = 2 * bw + 260 + pose_w + cell * len(exprs) + 30
@@ -231,11 +236,37 @@ def main() -> None:
     ap.add_argument("--review-dir", default=str(REVIEW))
     ap.add_argument("--batch2", action="store_true",
                     help="chỉ nhân vật thư viện mở rộng (library: true) + ảnh duyệt batch2_characters.png")
+    ap.add_argument("--batch3", action="store_true",
+                    help="chỉ nhân vật lô 3 (batch: 3) + ảnh duyệt batch3_characters.png")
+    ap.add_argument("--batch4", action="store_true",
+                    help="chỉ nhân vật lô 4 (batch: 4) + ảnh duyệt batch4_characters.png")
     a = ap.parse_args()
     root = Path(a.out)
     only = [x.strip() for x in a.only.split(",") if x.strip()] or None
+    if a.batch4:
+        lib = [x["id"] for x in pg._load_catalog() if x.get("batch") == 4]
+        only = [i for i in lib if not only or i in only]
+        if not a.sheets_only:
+            print("Tạo nhân vật lô 4 ->", root)
+            build(root, only)
+        out = Path(a.review_dir) / "batch4_characters.png"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        sheet_batch2(root, [i for i in library_ids(root) if i in only], out, BATCH4_SHEET_EXPRS)
+        print("  ảnh duyệt:", out)
+        return
+    if a.batch3:
+        lib = [x["id"] for x in pg._load_catalog() if x.get("batch") == 3]
+        only = [i for i in lib if not only or i in only]
+        if not a.sheets_only:
+            print("Tạo nhân vật lô 3 ->", root)
+            build(root, only)
+        out = Path(a.review_dir) / "batch3_characters.png"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        sheet_batch2(root, [i for i in library_ids(root) if i in only], out, BATCH3_SHEET_EXPRS)
+        print("  ảnh duyệt:", out)
+        return
     if a.batch2:
-        lib = [x["id"] for x in pg._load_catalog() if x.get("library")]
+        lib = [x["id"] for x in pg._load_catalog() if x.get("library") and x.get("batch") not in (3, 4)]
         only = [i for i in lib if not only or i in only]
         if not a.sheets_only:
             print("Tạo nhân vật thư viện mở rộng ->", root)

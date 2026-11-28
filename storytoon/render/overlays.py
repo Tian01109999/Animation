@@ -1763,6 +1763,512 @@ def timeline_layer(ov: Overlay, W: int, H: int, end: float) -> Layer:
     return Layer(None, 0.0, end + 0.5, 0.3, 0.0, kind="timeline", draw_fn=draw, images=images, data=d)
 
 
+# ====================================================================== HUD lô 3 (info_card + data.variant)
+# Schema không có OverlayKind riêng cho các HUD này -> dùng kind "info_card" với data.variant:
+#   "knot_counter" : pill trên-phải: icon bùa + chấm (còn/đã dùng) + "xN" + chú thích ("KNOTS LEFT").
+#                    data: total(5), left(3), from(None) + change_at(s) -> mất 1 nút có hiệu ứng pop; caption.
+#   "countdown"    : thẻ kem, pill tối nhãn (title | data.label | "HIDE AND SEEK"), vòng tiến độ + số đếm ngược,
+#                    chú thích (subtitle | data.caption | "SECONDS LEFT"). data: start(10), end(start-dur), rate(1/s),
+#                    position center|tl|tr|bl|br (center làm tối nền).
+#   "live_replay"  : pill trên-trái (icon tua lại đỏ + @handle từ title | data.handle + tag "REPLAY"), timestamp
+#                    trên-phải (HH:MM:SS chạy theo giây), thanh tiến độ đỏ dưới đáy. data: timestamp, progress [p0, p1],
+#                    tag, running (true).
+# Chữ nhãn lấy từ title/subtitle/data (ngôn ngữ truyện); chú thích mặc định cố định bằng tiếng Anh.
+HUD_VARIANTS = ("knot_counter", "countdown", "live_replay")
+
+
+def _charm_icon(c: skia.Canvas, cx: float, cy: float, r: float) -> None:
+    body = rrect(cx - r * 0.62, cy - r * 0.55, cx + r * 0.62, cy + r * 0.95, r * 0.45)
+    c.drawPath(body, fill("#c8352e"))
+    c.drawPath(rrect(cx - r * 0.18, cy - r * 0.3, cx + r * 0.18, cy + r * 0.7, r * 0.06), fill("#f6efe0"))
+    c.drawPath(rrect(cx - r * 0.75, cy - r * 0.78, cx + r * 0.75, cy - r * 0.48, r * 0.15), fill("#a82a24"))
+    c.drawCircle(cx, cy - r * 0.63, r * 0.16, fill("#e8d9b0"))
+    c.drawArc(skia.Rect.MakeLTRB(cx - r * 0.25, cy - r * 1.15, cx + r * 0.25, cy - r * 0.62), 180, 180, False,
+              stroke("#e8d9b0", r * 0.1))
+
+
+def _knot_pill(total: int, left: int, caption: str, H: int) -> tuple[skia.Image, list[float], float]:
+    """Ảnh pill + toạ độ x tâm từng chấm + y tâm chấm (để vẽ pop)."""
+    ph = 0.074 * H
+    pad = ph * 0.38
+    ic = ph * 0.32
+    dr = ph * 0.13
+    gap = dr * 1.15
+    fnum = font(ph * 0.52, "extrabold")
+    fcap = font(ph * 0.21, "bold")
+    num = f"x{left}"
+    cap = _upper(caption)
+    capw = spaced_width(cap, fcap, ph * 0.03)
+    dots_w = total * dr * 2 + (total - 1) * gap
+    w = pad + ic * 2 + pad * 0.7 + dots_w + pad * 0.8 + fnum.measureText(num) + pad * 0.5 + capw + pad
+    sh = 0.02 * H
+    s, c = _surface(w + sh * 2, ph + sh * 2)
+    c.translate(sh, sh)
+    pill = rrect(0, 0, w, ph, ph / 2)
+    c.save()
+    c.translate(0, 0.006 * H)
+    c.drawPath(pill, _shadow_paint(0.5, sh * 0.5))
+    c.restore()
+    c.drawPath(pill, fill("#141418", 0.86))
+    c.drawPath(rrect(1, 1, w - 1, ph - 1, ph / 2), stroke("#ffffff", max(1.0, H / 900), 0.22))
+    x = pad
+    _charm_icon(c, x + ic, ph / 2, ic)
+    x += ic * 2 + pad * 0.7
+    xs = []
+    for i in range(total):
+        cx = x + dr + i * (dr * 2 + gap)
+        xs.append(cx + sh)
+        if i < left:
+            c.drawCircle(cx, ph / 2, dr, fill("#e5413a"))
+            c.drawCircle(cx - dr * 0.3, ph / 2 - dr * 0.3, dr * 0.28, fill("#ffffff", 0.6))
+        else:
+            c.drawCircle(cx, ph / 2, dr * 0.92, stroke("#8a8d96", max(1.5, dr * 0.22)))
+    x += dots_w + pad * 0.8
+    x += text(c, num, x, ph / 2 + fnum.getSize() * 0.36, fnum, "#ffffff") + pad * 0.5
+    spaced_text(c, cap, x, ph / 2 + fcap.getSize() * 0.36, fcap, "#f3c94e", ph * 0.03)
+    return s.makeImageSnapshot(), xs, ph / 2 + sh
+
+
+def knot_counter_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    d = dict(ov.data or {})
+    def num(v: Any, default: float) -> float:
+        try:
+            return float(v)
+        except (TypeError, ValueError):
+            return default
+
+    total = max(1, min(12, int(num(d.get("total"), 5))))
+    left = max(0, min(total, int(num(d.get("left", d.get("count")), 3))))
+    caption = str(d.get("caption") or ov.subtitle or "KNOTS LEFT")
+    frm = d.get("from")
+    frm = None if frm is None or num(frm, -1) < 0 else int(num(frm, 0))
+    change_at = num(d.get("change_at"), 0.8)
+    img1, xs, dy = _knot_pill(total, left, caption, H)
+    images = {"now": img1}
+    if frm is not None:
+        frm = max(left, min(total, int(frm)))
+        images["before"] = _knot_pill(total, frm, caption, H)[0]
+    x = W - 0.035 * W - img1.width() + 0.02 * H
+    y = top - 0.02 * H
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        u = layer.entering(t)
+        sy = (1 - ease_out(u)) * -0.05 * H
+        before = "before" in layer.images and t < change_at
+        img = layer.images["before" if before else "now"]
+        k = 1.0
+        if "before" in layer.images and change_at <= t < change_at + 0.35:
+            k = 1.0 + 0.08 * math.sin((t - change_at) / 0.35 * math.pi)
+        cv.save()
+        cv.translate(x + img.width() / 2, y + sy + img.height() / 2)
+        cv.scale(k, k)
+        cv.drawImage(img, -img.width() / 2, -img.height() / 2, LIN, skia.Paint(Alphaf=a))
+        cv.restore()
+        if "before" in layer.images and change_at <= t < change_at + 0.6 and frm is not None:
+            v = (t - change_at) / 0.6
+            for i in range(left, frm):     # chấm vừa mất: vòng đỏ nở ra rồi tắt
+                cx = x + xs[i]
+                cv.drawCircle(cx, y + sy + dy, 0.01 * H + v * 0.03 * H,
+                              stroke("#e5413a", max(1.5, 0.006 * H * (1 - v)), a * (1 - v)))
+
+    return Layer(None, 0.15, end - 0.05, 0.35, 0.25, kind="hud_knot_counter", draw_fn=draw, images=images, data=d)
+
+
+def countdown_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    d = dict(ov.data or {})
+    try:
+        start = float(d.get("start", 10))
+    except (TypeError, ValueError):
+        start = 10.0
+    try:
+        rate = float(d.get("rate", 1.0) or 1.0)
+    except (TypeError, ValueError):
+        rate = 1.0
+    try:
+        stop = float(d.get("end", max(0.0, start - rate * end)))
+    except (TypeError, ValueError):
+        stop = max(0.0, start - rate * end)
+    pos = str(d.get("position") or "center")
+    center = pos == "center"
+    k = 1.0 if center else 0.62
+    cw, ch = 0.34 * H * k, 0.44 * H * k
+    label = _upper(str(d.get("label") or ov.title or "HIDE AND SEEK"))
+    caption = _upper(str(d.get("caption") or ov.subtitle or "SECONDS LEFT"))
+    sh = 0.025 * H
+    s, c = _surface(cw + sh * 2, ch + sh * 2)
+    c.translate(sh, sh)
+    card = rrect(0, 0, cw, ch, 0.03 * H * k)
+    c.save()
+    c.translate(0, 0.01 * H)
+    c.drawPath(card, _shadow_paint(0.55, sh * 0.7))
+    c.restore()
+    c.drawPath(card, fill("#f3ede2"))
+    c.drawPath(rrect(0, 0, cw, ch, 0.03 * H * k), stroke("#d9cfbd", max(1.0, H / 700)))
+    pill_h = 0.05 * H * k
+    fl = fit_font(label, "extrabold", pill_h * 0.46, cw * 0.72)
+    pw = spaced_width(label, fl, pill_h * 0.05) + pill_h * 1.2
+    c.drawPath(rrect((cw - pw) / 2, 0.035 * H * k, (cw + pw) / 2, 0.035 * H * k + pill_h, pill_h / 2), fill("#1c1d22"))
+    spaced_text(c, label, cw / 2, 0.035 * H * k + pill_h / 2 + fl.getSize() * 0.36, fl, "#ffffff", pill_h * 0.05,
+                align="c")
+    rcx, rcy, rr = cw / 2, ch * 0.53, cw * 0.3
+    c.drawCircle(rcx, rcy, rr, stroke("#ddd3c2", rr * 0.16))
+    fcap = fit_font(caption, "bold", 0.02 * H * k, cw * 0.8)
+    spaced_text(c, caption, cw / 2, ch - 0.04 * H * k, fcap, "#8a8274", 0.003 * H * k, align="c")
+    img = s.makeImageSnapshot()
+    if center:
+        x, y = (W - img.width()) / 2, (H - img.height()) / 2 - 0.03 * H
+    else:
+        mx, my = 0.035 * W - sh, top - sh
+        x = mx if pos.endswith("l") else W - mx - img.width()
+        y = my if pos.startswith("t") else H - 0.2 * H - img.height()
+    fnum = font(rr * 0.95, "extrabold")
+    span = max(1e-6, abs(start - stop)) if start != stop else max(1.0, start)
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        u = layer.entering(t)
+        sc = 0.85 + 0.15 * ease_out_back(u) if u < 1 else 1.0
+        tt = max(0.0, t - layer.t0)
+        val = max(stop, start - tt * rate) if start >= stop else min(stop, start + tt * rate)
+        frac = max(0.0, min(1.0, val / max(start, 1e-6)))
+        n = int(math.ceil(val - 1e-6)) if start >= stop else int(math.floor(val))
+        cv.save()
+        cv.translate(x + img.width() / 2, y + img.height() / 2)
+        cv.scale(sc, sc)
+        ox, oy = -img.width() / 2, -img.height() / 2
+        cv.drawImage(img, ox, oy, LIN, skia.Paint(Alphaf=a))
+        cx, cy = ox + sh + rcx, oy + sh + rcy
+        p = stroke("#d0302a", rr * 0.16, a)
+        cv.drawArc(skia.Rect.MakeLTRB(cx - rr, cy - rr, cx + rr, cy + rr), -90, -360 * frac, False, p)
+        # chấm đầu cung
+        ang = math.radians(-90 - 360 * frac)
+        cv.drawCircle(cx + math.cos(ang) * rr, cy + math.sin(ang) * rr, rr * 0.12, fill("#ffffff", a))
+        txt = str(max(0, n))
+        since = abs(start - val) % 1.0          # thời gian (đơn vị số) kể từ nhịp đổi số gần nhất
+        pulse = 1.0 + 0.12 * max(0.0, 1 - since * 5) if abs(start - val) > 1e-6 else 1.0
+        f = fnum if pulse == 1.0 else font(rr * 0.95 * pulse, "extrabold")
+        text(cv, txt, cx, cy + f.getSize() * 0.36, f, "#1c1d22", a, align="c")
+        cv.restore()
+
+    return Layer(None, 0.1, end - 0.05, 0.3, 0.25, kind="hud_countdown", draw_fn=draw, images={"card": img},
+                 backdrop="blur" if center else None, backdrop_dim=0.3, data=d)
+
+
+def _rewind_icon(c: skia.Canvas, cx: float, cy: float, r: float) -> None:
+    c.drawCircle(cx, cy, r, fill("#e5413a"))
+    for dx in (-r * 0.42, r * 0.08):
+        c.drawPath(poly([(cx + dx + r * 0.42, cy - r * 0.38), (cx + dx + r * 0.42, cy + r * 0.38), (cx + dx - r * 0.05, cy)]),
+                   fill("#ffffff"))
+
+
+def live_replay_layer(ov: Overlay, W: int, H: int, end: float) -> Layer:
+    d = dict(ov.data or {})
+    handle = nfc(str(d.get("handle") or ov.title or "@user"))
+    if handle and not handle.startswith("@"):
+        handle = "@" + handle
+    tag = _upper(str(d.get("tag") or "REPLAY"))
+    ph = 0.066 * H
+    fh = font(ph * 0.4, "bold")
+    ft = font(ph * 0.26, "extrabold")
+    tagw = spaced_width(tag, ft, ph * 0.03) + ph * 0.5
+    w = ph * 0.15 + ph * 0.86 + ph * 0.3 + fh.measureText(handle) + ph * 0.35 + tagw + ph * 0.3
+    sh = 0.02 * H
+    s, c = _surface(w + sh * 2, ph + sh * 2)
+    c.translate(sh, sh)
+    pill = rrect(0, 0, w, ph, ph / 2)
+    c.save()
+    c.translate(0, 0.005 * H)
+    c.drawPath(pill, _shadow_paint(0.45, sh * 0.5))
+    c.restore()
+    c.drawPath(pill, fill("#141418", 0.82))
+    _rewind_icon(c, ph * 0.15 + ph * 0.43, ph / 2, ph * 0.36)
+    x = ph * 0.15 + ph * 0.86 + ph * 0.3
+    x += text(c, handle, x, ph / 2 + fh.getSize() * 0.36, fh, "#ffffff") + ph * 0.35
+    th = ph * 0.5
+    c.drawPath(rrect(x, (ph - th) / 2, x + tagw, (ph + th) / 2, th * 0.25), fill("#e5413a"))
+    spaced_text(c, tag, x + ph * 0.25, ph / 2 + ft.getSize() * 0.36, ft, "#ffffff", ph * 0.03)
+    images = {"pill": s.makeImageSnapshot()}
+    ts = str(d.get("timestamp") or "02:14:37")
+    base = None
+    m = re.match(r"^\s*(\d{1,2}):(\d{2})(?::(\d{2}))?\s*$", ts)
+    if m:
+        base = int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3) or 0)
+    running = d.get("running", True) is not False and base is not None
+    prog = d.get("progress") or [0.3, 0.42]
+    try:
+        p0, p1 = (float(prog[0]), float(prog[1])) if isinstance(prog, (list, tuple)) else (float(prog), float(prog))
+    except (TypeError, ValueError, IndexError):
+        p0, p1 = 0.3, 0.42
+    fts = font(0.036 * H, "bold")
+    mx, my = 0.035 * W, 0.045 * H
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        # dải tối mờ trên đỉnh cho HUD dễ đọc
+        cv.drawRect(skia.Rect.MakeLTRB(0, 0, W, 0.16 * H), skia.Paint(Shader=skia.GradientShader.MakeLinear(
+            [skia.Point(0, 0), skia.Point(0, 0.16 * H)], [color("#000000", 0.35 * a), color("#000000", 0.0)])))
+        cv.drawImage(layer.images["pill"], mx - sh, my - sh, LIN, skia.Paint(Alphaf=a))
+        if base is not None:
+            sec = base + (int(t) if running else 0)
+            s_ = f"{(sec // 3600) % 24:02d}:{(sec // 60) % 60:02d}:{sec % 60:02d}"
+        else:
+            s_ = nfc(ts)
+        tw = fts.measureText(s_)
+        tx, ty = W - mx - tw, my + ph / 2 + fts.getSize() * 0.36
+        sp = _shadow_paint(0.6 * a, 0.006 * H)
+        cv.drawString(s_, tx + 0.002 * H, ty + 0.003 * H, fts, sp)
+        cv.drawString(s_, tx, ty, fts, fill("#ffffff", a))
+        # thanh tiến độ đỏ dưới đáy
+        u = max(0.0, min(1.0, t / max(end, 0.01)))
+        pv = max(0.0, min(1.0, p0 + (p1 - p0) * u))
+        bh = 0.008 * H
+        by = H - 0.022 * H
+        cv.drawRect(skia.Rect.MakeLTRB(0, by, W, by + bh), fill("#ffffff", 0.28 * a))
+        cv.drawRect(skia.Rect.MakeLTRB(0, by, W * pv, by + bh), fill("#e5413a", a))
+        cv.drawCircle(W * pv, by + bh / 2, bh * 1.3, fill("#e5413a", a))
+
+    return Layer(None, 0.0, end + 0.5, 0.25, 0.0, kind="hud_live_replay", draw_fn=draw, images=images, data=d)
+
+
+# ====================================================================== HUD lô 4 (info_card + data.variant)
+#   "timer_hud"   : thẻ tối có góc ngoặc (bracket) trên-trái: icon vòng sáng + tên (title | data.name | "SUBJECT"),
+#                   đồng hồ đỏ lớn HH:MM:SS (data.timer, đếm lùi theo giây nếu data.running != false), dòng phụ
+#                   (subtitle | data.sub | "TIME LEFT"). data.position tl|tr|bl|br (mặc định tl).
+#   "hex_warning" : lục giác đỏ chứa số (data.number "1") + "WARNING" (data.label) + tiêu đề (title | data.title |
+#                   "SYSTEM ALERT") + "IN N SECONDS" (data.seconds, đếm lùi; data.unit "SECONDS"; data.prefix "IN").
+#                   data.position center|tl|tr (mặc định center = giữa-trên).
+#   "time_place"  : pill: icon vòng + "FRIDAY NIGHT | 21:12:50" (title | data.day, data.time chạy theo giây nếu
+#                   data.running != false) + dòng phụ (subtitle | data.sub | "ZONE A"). data.position tl|tr|bl|br.
+HUD_VARIANTS = HUD_VARIANTS + ("timer_hud", "hex_warning", "time_place")
+_RING_COLS = ["#35e0ff", "#5a8cff", "#a65cff", "#ff5ab4", "#ffb04a", "#35e0ff"]
+
+
+def _hud_on_top_right(d: dict[str, Any]) -> bool:
+    """HUD này có chiếm góc trên-phải không (để dời watermark)."""
+    v = str(d.get("variant") or "")
+    if v in ("knot_counter", "live_replay"):
+        return True
+    if v in ("countdown", "timer_hud", "time_place", "hex_warning"):
+        return str(d.get("position") or "") == "tr"
+    return False
+
+
+def _ring_icon(c: skia.Canvas, cx: float, cy: float, r: float, glow: bool = True) -> None:
+    sh = skia.GradientShader.MakeSweep(cx, cy, [color(x) for x in _RING_COLS])
+    w = r * 0.28
+    if glow:
+        g = skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=w * 2, Shader=sh)
+        g.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, max(0.5, w * 0.8)))
+        g.setAlphaf(0.7)
+        c.drawCircle(cx, cy, r, g)
+    c.drawCircle(cx, cy, r, skia.Paint(AntiAlias=True, Style=skia.Paint.kStroke_Style, StrokeWidth=w, Shader=sh))
+    c.drawCircle(cx, cy, r * 0.22, fill("#ffffff"))
+
+
+def _brackets(c: skia.Canvas, l: float, t: float, r: float, b: float, ln: float, w: float, col: str,
+              a: float = 1.0) -> None:
+    p = stroke(col, w, a)
+    p.setStrokeCap(skia.Paint.kSquare_Cap)
+    for x, y, dx, dy in ((l, t, 1, 1), (r, t, -1, 1), (l, b, 1, -1), (r, b, -1, -1)):
+        c.drawLine(x, y, x + dx * ln, y, p)
+        c.drawLine(x, y, x, y + dy * ln, p)
+
+
+def _hms(s: str) -> int | None:
+    m = re.match(r"^\s*(\d{1,3}):(\d{2})(?::(\d{2}))?\s*$", str(s or ""))
+    if not m:
+        return None
+    return int(m.group(1)) * 3600 + int(m.group(2)) * 60 + int(m.group(3) or 0)
+
+
+def _fmt_hms(sec: int) -> str:
+    sec = max(0, sec)
+    return f"{sec // 3600:02d}:{(sec // 60) % 60:02d}:{sec % 60:02d}"
+
+
+def _corner_xy(pos: str, w: float, h: float, W: int, H: int, top: float) -> tuple[float, float]:
+    mx = 0.035 * W
+    x = mx if not pos.endswith("r") else W - mx - w
+    y = top if pos.startswith("t") else H - 0.22 * H - h
+    return x, y
+
+
+def timer_hud_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    d = dict(ov.data or {})
+    name = _upper(str(d.get("name") or ov.title or "SUBJECT"))
+    sub = _upper(str(d.get("sub") or ov.subtitle or "TIME LEFT"))
+    ts = str(d.get("timer") or "23:41:07")
+    base = _hms(ts)
+    running = d.get("running", True) is not False and base is not None
+    cw, ch = 0.36 * H, 0.2 * H
+    sh = 0.02 * H
+    s, c = _surface(cw + sh * 2, ch + sh * 2)
+    c.translate(sh, sh)
+    box = rrect(0, 0, cw, ch, 0.008 * H)
+    c.save()
+    c.translate(0, 0.006 * H)
+    c.drawPath(box, _shadow_paint(0.5, sh * 0.5))
+    c.restore()
+    c.drawPath(box, fill("#0c0e18", 0.84))
+    _brackets(c, 0.004 * H, 0.004 * H, cw - 0.004 * H, ch - 0.004 * H, 0.03 * H, max(1.5, 0.004 * H), "#ffffff", 0.85)
+    ir = 0.026 * H
+    _ring_icon(c, 0.03 * H + ir, 0.035 * H + ir * 0.4, ir)
+    fn = fit_font(name, "extrabold", 0.026 * H, cw - 0.11 * H)
+    spaced_text(c, name, 0.1 * H, 0.035 * H + ir * 0.4 + fn.getSize() * 0.36, fn, "#ffffff", 0.002 * H)
+    fs = fit_font(sub, "bold", 0.016 * H, cw - 0.06 * H)
+    spaced_text(c, sub, 0.03 * H, ch - 0.022 * H, fs, "#9aa3bd", 0.002 * H)
+    img = s.makeImageSnapshot()
+    x, y = _corner_xy(str(d.get("position") or "tl"), img.width() - sh * 2, img.height() - sh * 2, W, H, top)
+    x -= sh
+    y -= sh
+    ft = fit_font("00:00:00" if base is not None and base < 360000 else ts, "extrabold", 0.068 * H, cw - 0.06 * H)
+    col = str(d.get("color") or "#ff3b3b")
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        u = layer.entering(t)
+        sx = (1 - ease_out(u)) * -0.04 * W
+        cv.drawImage(layer.images["card"], x + sx, y, LIN, skia.Paint(Alphaf=a))
+        val = _fmt_hms(base - int(max(0.0, t - layer.t0))) if running else (_fmt_hms(base) if base is not None else nfc(ts))
+        tx, ty = x + sx + sh + 0.03 * H, y + sh + ch * 0.74
+        gp = fill(col, 0.55 * a)
+        gp.setMaskFilter(skia.MaskFilter.MakeBlur(skia.kNormal_BlurStyle, 0.008 * H))
+        cv.drawString(val, tx, ty, ft, gp)
+        cv.drawString(val, tx, ty, ft, fill(col, a))
+
+    return Layer(None, 0.1, end - 0.05, 0.3, 0.25, kind="hud_timer", draw_fn=draw, images={"card": img}, data=d)
+
+
+def _hex_path(cx: float, cy: float, r: float) -> skia.Path:
+    return poly([(cx + r * math.cos(math.radians(30 + 60 * k)), cy + r * math.sin(math.radians(30 + 60 * k)))
+                 for k in range(6)])
+
+
+def hex_warning_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    d = dict(ov.data or {})
+    num = nfc(str(d.get("number", "1")))
+    label = _upper(str(d.get("label") or "WARNING"))
+    title = _upper(str(d.get("title") or ov.title or "SYSTEM ALERT"))
+    try:
+        secs = float(d.get("seconds", 10))
+    except (TypeError, ValueError):
+        secs = 10.0
+    counting = d.get("count", True) is not False
+    prefix = _upper(str(d.get("prefix") or "IN"))
+    unit = _upper(str(d.get("unit") or ov.subtitle or "SECONDS"))
+    hr = 0.07 * H
+    pad = 0.025 * H
+    fl = font(0.022 * H, "extrabold")
+    ftit = fit_font(title, "extrabold", 0.036 * H, 0.42 * H)
+    fsub = font(0.02 * H, "bold")
+    tw = max(spaced_width(label, fl, 0.004 * H), ftit.measureText(title),
+             spaced_width(f"{prefix} 000 {unit}", fsub, 0.002 * H))
+    cw, ch = pad + hr * 2 + pad + tw + pad * 1.4, hr * 2 + pad * 1.4
+    sh = 0.025 * H
+    s, c = _surface(cw + sh * 2, ch + sh * 2)
+    c.translate(sh, sh)
+    box = rrect(hr, 0.01 * H, cw, ch - 0.01 * H, 0.01 * H)
+    c.save()
+    c.translate(0, 0.006 * H)
+    c.drawPath(box, _shadow_paint(0.5, sh * 0.5))
+    c.restore()
+    c.drawPath(box, fill("#140a0c", 0.88))
+    c.drawPath(box, stroke("#ff3b3b", max(1.0, 0.0025 * H), 0.8))
+    hx, hy = pad + hr, ch / 2
+    c.drawPath(_hex_path(hx, hy, hr * 1.05), fill("#140a0c"))
+    c.drawPath(_hex_path(hx, hy, hr * 0.95), fill("#e02a2a"))
+    c.drawPath(_hex_path(hx, hy, hr * 0.78), stroke("#ffffff", max(1.0, 0.003 * H), 0.55))
+    fnum = fit_font(num, "extrabold", hr * 0.95, hr * 1.2)
+    text(c, num, hx, hy + fnum.getSize() * 0.36, fnum, "#ffffff", align="c")
+    tx = pad + hr * 2 + pad
+    spaced_text(c, label, tx, 0.05 * H, fl, "#ff4a4a", 0.004 * H)
+    text(c, title, tx, 0.098 * H, ftit, "#ffffff")
+    img = s.makeImageSnapshot()
+    pos = str(d.get("position") or "center")
+    if pos == "center":
+        x, y = (W - img.width()) / 2, top + 0.04 * H - sh
+    else:
+        x, y = _corner_xy(pos, img.width() - sh * 2, img.height() - sh * 2, W, H, top)
+        x -= sh
+        y -= sh
+    sub_y = sh + 0.14 * H
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        u = layer.entering(t)
+        k = 0.9 + 0.1 * ease_out_back(u) if u < 1 else 1.0
+        cv.save()
+        cv.translate(x + img.width() / 2, y + img.height() / 2)
+        cv.scale(k, k)
+        ox, oy = -img.width() / 2, -img.height() / 2
+        # nhịp đập đỏ quanh lục giác
+        ph = (t * 1.6) % 1.0
+        cv.drawPath(_hex_path(ox + sh + hx, oy + sh + hy, hr * (1.05 + 0.35 * ph)),
+                    stroke("#ff3b3b", max(1.0, 0.004 * H * (1 - ph)), a * (1 - ph)))
+        cv.drawImage(layer.images["card"], ox, oy, LIN, skia.Paint(Alphaf=a))
+        n = secs - (t - layer.t0) if counting else secs
+        n = max(0, int(math.ceil(n - 1e-6)))
+        spaced_text(cv, f"{prefix} {n} {unit}", ox + sh + tx, oy + sub_y, fsub, "#ffb0a8", 0.002 * H, a)
+        cv.restore()
+
+    return Layer(None, 0.1, end - 0.05, 0.25, 0.25, kind="hud_hex_warning", draw_fn=draw, images={"card": img}, data=d)
+
+
+def time_place_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    d = dict(ov.data or {})
+    day = _upper(str(d.get("day") or ov.title or "FRIDAY NIGHT"))
+    ts = str(d.get("time") or "21:12:50")
+    base = _hms(ts)
+    running = d.get("running", True) is not False and base is not None
+    sub = _upper(str(d.get("sub") or ov.subtitle or "ZONE A"))
+    ph = 0.07 * H
+    fm = font(ph * 0.4, "extrabold")
+    fsub = font(0.018 * H, "bold")
+    sample = f"{day}  |  {_fmt_hms(base) if base is not None else nfc(ts)}"
+    w = ph * 0.2 + ph * 0.7 + ph * 0.3 + fm.measureText(sample) + ph * 0.5
+    sh = 0.02 * H
+    s, c = _surface(w + sh * 2, ph + 0.045 * H + sh * 2)
+    c.translate(sh, sh)
+    pill = rrect(0, 0, w, ph, ph / 2)
+    c.save()
+    c.translate(0, 0.005 * H)
+    c.drawPath(pill, _shadow_paint(0.45, sh * 0.5))
+    c.restore()
+    c.drawPath(pill, fill("#0c0e18", 0.84))
+    c.drawPath(rrect(1, 1, w - 1, ph - 1, ph / 2), stroke("#ffffff", max(1.0, H / 900), 0.2))
+    _ring_icon(c, ph * 0.2 + ph * 0.35, ph / 2, ph * 0.24)
+    tx = ph * 0.2 + ph * 0.7 + ph * 0.3
+    dw = text(c, day + "  |  ", tx, ph / 2 + fm.getSize() * 0.36, fm, "#ffffff")
+    if sub:
+        spaced_text(c, sub, ph * 0.5 + 0.002 * H, ph + 0.033 * H + 0.002 * H, fsub, "#000000", 0.003 * H, 0.6)
+        spaced_text(c, sub, ph * 0.5, ph + 0.033 * H, fsub, "#e6e9f2", 0.003 * H)
+    img = s.makeImageSnapshot()
+    x, y = _corner_xy(str(d.get("position") or "tl"), img.width() - sh * 2, img.height() - sh * 2, W, H, top)
+    x -= sh
+    y -= sh
+    col = str(d.get("time_color") or "#7ad0ff")
+
+    def draw(layer: Layer, cv: skia.Canvas, t: float, a: float) -> None:
+        u = layer.entering(t)
+        sy = (1 - ease_out(u)) * -0.04 * H
+        cv.drawImage(layer.images["pill"], x, y + sy, LIN, skia.Paint(Alphaf=a))
+        val = _fmt_hms(base + int(max(0.0, t - layer.t0))) if running else (_fmt_hms(base) if base is not None else nfc(ts))
+        text(cv, val, x + sh + tx + dw, y + sy + sh + ph / 2 + fm.getSize() * 0.36, fm, col, a)
+
+    return Layer(None, 0.15, end - 0.05, 0.3, 0.25, kind="hud_time_place", draw_fn=draw, images={"pill": img}, data=d)
+
+
+def hud_layer(ov: Overlay, W: int, H: int, end: float, top: float) -> Layer:
+    v = str((ov.data or {}).get("variant") or "")
+    if v == "knot_counter":
+        return knot_counter_layer(ov, W, H, end, top)
+    if v == "countdown":
+        return countdown_layer(ov, W, H, end, top)
+    if v == "timer_hud":
+        return timer_hud_layer(ov, W, H, end, top)
+    if v == "hex_warning":
+        return hex_warning_layer(ov, W, H, end, top)
+    if v == "time_place":
+        return time_place_layer(ov, W, H, end, top)
+    return live_replay_layer(ov, W, H, end)
+
+
 # ====================================================================== thẻ thông tin / giá
 def render_info_card(ov: Overlay, W: int, H: int) -> skia.Image:
     d = dict(ov.data or {})
@@ -2112,6 +2618,9 @@ def build_overlays(shot: Shot, sb: Storyboard, tls: list[TimedLine], duration: f
                 full.append(map_card_layer(ov, W, H, end))
             elif ov.kind == "timeline":
                 full.append(timeline_layer(ov, W, H, end))
+            elif ov.kind == "info_card" and str(d.get("variant") or "") in HUD_VARIANTS:
+                hud = hud_layer(ov, W, H, end, margin_y + (0.13 * H if cctv_present else 0.0))
+                (layers if hud.kind != "hud_countdown" or d.get("position", "center") != "center" else full).append(hud)
             elif ov.kind == "info_card":
                 img = render_info_card(ov, W, H)
                 blur = d.get("blur_bg", True) is not False
@@ -2129,6 +2638,9 @@ def build_overlays(shot: Shot, sb: Storyboard, tls: list[TimedLine], duration: f
     if watermark:
         img = render_watermark(watermark, H)
         # CCTV chiếm các góc (REC, hộp đếm, timestamp, nhãn ô) -> watermark lên giữa-trên
-        pos = ((W - img.width()) / 2, 0.03 * H) if cctv_present else (W - img.width() - 0.03 * W, 0.04 * H)
+        # HUD lô 3 chiếm góc trên-phải (pill đếm nút, timestamp live replay, đếm ngược góc tr) -> cũng lên giữa-trên
+        hud_tr = any(o.kind == "info_card" and str((o.data or {}).get("variant") or "") in HUD_VARIANTS and
+                     _hud_on_top_right(o.data or {}) for o in shot.overlays)
+        pos = ((W - img.width()) / 2, 0.03 * H) if (cctv_present or hud_tr) else (W - img.width() - 0.03 * W, 0.04 * H)
         out.append(Layer(img, 0.0, end + 1, 0.0, 0.0, pos, kind="watermark"))
     return OverlaySet(out, badges, cctv_data)

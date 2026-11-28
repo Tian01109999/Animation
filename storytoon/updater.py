@@ -1,8 +1,19 @@
-"""Check public assets releases without GitHub credentials."""
+"""In-app updates: check, download, verify and install full app + assets update packages.
+
+A release is tagged `vX.Y.Z` and carries `StoryToon-Update-X.Y.Z.zip` plus `.sha256`.
+The zip holds root-relative files (EXE, storytoon/, assets/) and an `update.json`
+manifest: {"version": ..., "notes": ..., "delete": [paths removed since the last release]}.
+The download source is built here and never shown to the user.
+"""
 from __future__ import annotations
 
+import hashlib
 import json
 import re
+import shutil
+import tempfile
+import zipfile
+from pathlib import Path, PurePosixPath
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
@@ -10,6 +21,10 @@ from . import __version__, paths
 
 REPOSITORY = 'Tian01109999/Animation'
 ASSETS_VERSION_FILE = '.storytoon-assets-version.json'
+EXE_NAME = 'StoryToon-Desktop-Portable.exe'
+ALLOWED_ROOT_FILES = {EXE_NAME, EXE_NAME + '.config', 'README.md', 'update.json'}
+ALLOWED_TREES = ('storytoon/', 'assets/')
+_UA = {'User-Agent': 'StoryToon-Portable'}
 
 
 def assets_version() -> str:
@@ -28,47 +43,137 @@ def version_tuple(value: str) -> tuple[int, ...]:
     return parts + (0,) * (4 - len(parts))
 
 
+def _package_name(version: str) -> str:
+    return f'StoryToon-Update-{version}.zip'
+
+
+def _download_url(version: str, name: str) -> str:
+    return f'https://github.com/{REPOSITORY}/releases/download/v{version}/{name}'
+
+
 def check_release() -> dict:
-    result = {'current': assets_version(), 'app_version': __version__, 'kind': 'assets',
-              'available': False, 'version': '', 'url': '', 'error': ''}
+    """Newest stable update newer than this app. Never returns a link or source."""
+    result = {'current': __version__, 'app_version': __version__, 'kind': 'app',
+              'available': False, 'version': '', 'notes': '', 'error': ''}
     try:
         request = Request(f'https://api.github.com/repos/{REPOSITORY}/releases?per_page=100', headers={
-            'Accept': 'application/vnd.github+json',
-            'User-Agent': 'StoryToon-Portable', 'X-GitHub-Api-Version': '2022-11-28',
-        })
+            **_UA, 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28'})
         with urlopen(request, timeout=15) as response:
             releases = json.load(response)
-        candidates = []
         if not isinstance(releases, list):
             raise ValueError('Invalid release list')
+        candidates = []
         for release in releases:
             if not isinstance(release, dict) or release.get('draft') or release.get('prerelease'):
                 continue
             tag = release.get('tag_name', '')
-            if not isinstance(tag, str) or not tag.startswith('assets-v'):
+            if not isinstance(tag, str) or not re.fullmatch(r'v\d+\.\d+\.\d+', tag):
                 continue
-            version = tag.removeprefix('assets-v')
-            try:
-                numeric = version_tuple(version)
-            except ValueError:
-                continue
-            filename = f'StoryToon-Assets-{version}.zip'
-            names = {asset.get('name') for asset in release.get('assets', [])
-                     if isinstance(asset, dict) and asset.get('state') == 'uploaded'}
-            if filename in names and filename + '.sha256' in names:
-                candidates.append((numeric, version, tag))
+            version = tag[1:]
+            names = {a.get('name') for a in release.get('assets', [])
+                     if isinstance(a, dict) and a.get('state') == 'uploaded'}
+            package = _package_name(version)
+            if package in names and package + '.sha256' in names:
+                notes = release.get('body') if isinstance(release.get('body'), str) else ''
+                candidates.append((version_tuple(version), version, notes))
         if not candidates:
-            result['error'] = 'Chưa có gói assets ổn định được phát hành.'
             return result
-        numeric, version, tag = max(candidates)
-        result.update(version=version, available=numeric > version_tuple(result['current']))
-        # Construct the trusted URL locally; never open a URL supplied by metadata.
-        if result['available']:
-            result['url'] = f'https://github.com/{REPOSITORY}/releases/tag/{tag}'
+        _, version, notes = max(candidates)
+        result.update(version=version, notes=notes.strip()[:6000],
+                      available=version_tuple(version) > version_tuple(__version__))
     except HTTPError as exc:
-        result['error'] = ({403: 'GitHub đang giới hạn lượt kiểm tra. Vui lòng thử lại sau.',
-                            404: 'Chưa tìm thấy repository công khai hoặc bản phát hành.'}
-                           .get(exc.code, 'Không thể kiểm tra bản phát hành GitHub.'))
+        result['error'] = ('Máy chủ cập nhật đang giới hạn lượt kiểm tra. Vui lòng thử lại sau.'
+                           if exc.code == 403 else 'Không kiểm tra được bản cập nhật.')
     except (OSError, URLError, ValueError, TypeError, AttributeError):
         result['error'] = 'Không kiểm tra được cập nhật. Kiểm tra kết nối Internet và thử lại sau.'
     return result
+
+
+def _safe_name(name: str) -> str | None:
+    """Return the normalized member path if it may be installed, else None."""
+    if name.endswith('/'):
+        return None
+    p = PurePosixPath(name)
+    if p.is_absolute() or '..' in p.parts or ':' in name or '\\' in name:
+        raise ValueError(f'Đường dẫn không hợp lệ trong gói: {name}')
+    text = p.as_posix()
+    if text in ALLOWED_ROOT_FILES or text.startswith(ALLOWED_TREES):
+        return text
+    raise ValueError(f'File không được phép trong gói: {name}')
+
+
+def _fetch(url: str, dest: Path) -> None:
+    with urlopen(Request(url, headers=_UA), timeout=60) as response, dest.open('wb') as out:
+        shutil.copyfileobj(response, out, 1024 * 1024)
+
+
+def install_package(package: Path, root: Path | None = None) -> dict:
+    """Validate and install an already-verified update zip into the app folder."""
+    root = (root or paths.ROOT).resolve()
+    with zipfile.ZipFile(package) as archive:
+        if archive.testzip():
+            raise ValueError('Gói cập nhật bị hỏng.')
+        members = [(info, _safe_name(info.filename)) for info in archive.infolist()]
+        manifest = json.loads(archive.read('update.json').decode('utf-8'))
+        version = manifest['version']
+        version_tuple(version)
+        written = 0
+        for info, name in members:
+            if not name or name == 'update.json':
+                continue
+            target = root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            tmp = target.with_name(target.name + '.updating')
+            with archive.open(info) as src, tmp.open('wb') as out:
+                shutil.copyfileobj(src, out, 1024 * 1024)
+            if name == EXE_NAME and target.exists():
+                old = target.with_name(target.name + '.old')
+                old.unlink(missing_ok=True)
+                target.replace(old)          # a running EXE can be renamed, not overwritten
+            tmp.replace(target)
+            written += 1
+    removed = 0
+    for rel in manifest.get('delete', []):
+        if not isinstance(rel, str) or not rel.startswith(ALLOWED_TREES) or '..' in rel:
+            continue
+        target = root / rel
+        if target.is_file():
+            target.unlink()
+            removed += 1
+            parent = target.parent
+            while parent != root and parent.is_dir() and not any(parent.iterdir()):
+                parent.rmdir()
+                parent = parent.parent
+    return {'version': version, 'written': written, 'removed': removed}
+
+
+def download_and_install(version: str) -> dict:
+    """Download the package for `version`, verify SHA-256 and install it."""
+    version_tuple(version)
+    name = _package_name(version)
+    with tempfile.TemporaryDirectory(prefix='storytoon-update-') as tmp:
+        zip_path = Path(tmp) / name
+        sha_path = Path(tmp) / (name + '.sha256')
+        _fetch(_download_url(version, name + '.sha256'), sha_path)
+        expected = sha_path.read_text(encoding='ascii').split()[0].lower()
+        if not re.fullmatch(r'[0-9a-f]{64}', expected):
+            raise ValueError('Mã kiểm tra của gói không hợp lệ.')
+        _fetch(_download_url(version, name), zip_path)
+        with zip_path.open('rb') as stream:
+            actual = hashlib.file_digest(stream, 'sha256').hexdigest()
+        if actual != expected:
+            raise ValueError('Gói tải về không khớp mã kiểm tra. Hãy thử lại.')
+        return install_package(zip_path)
+
+
+def cleanup_previous() -> None:
+    """Remove the EXE left over from the last update (called at startup)."""
+    try:
+        (paths.ROOT / (EXE_NAME + '.old')).unlink(missing_ok=True)
+    except OSError:
+        pass
+    for leftover in paths.ROOT.glob('storytoon/**/*.updating'):
+        try:
+            leftover.unlink()
+        except OSError:
+            pass

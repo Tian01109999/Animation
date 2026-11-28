@@ -2199,6 +2199,8 @@ def make_insert(iid: str, kind: str, params: dict | None = None, out_dir: Path =
                        "generator": "storytoon.render.insertgen",
                        "note": "drawn offline from code; all baked-in text is English and fictional"},
     }
+    if e.get("library"):
+        meta["library"] = True
     (out_dir / f"{iid}.json").write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     return png
 
@@ -2222,6 +2224,23 @@ INSERTS.update(_batch2.INSERTS)
 SCREENS.update(_batch2.SCREENS)
 _TAGS.update(_batch2.TAGS)
 _PROPS.update(_batch2.PROPS)
+
+# lô 3 (bùa thắt nút, máy bán hàng, kẹo FREE, ảnh lớp, tranh đèn đường, bản đồ tàu, gõ cửa, tay găng, thông báo app...)
+from . import insertgen_batch3 as _batch3  # noqa: E402
+
+INSERTS.update(_batch3.INSERTS)
+SCREENS.update(_batch3.SCREENS)
+_TAGS.update(_batch3.TAGS)
+_PROPS.update(_batch3.PROPS)
+
+# lô 4 (app đếm ngược, màn hình chính, truy nã/livestream, vòng AI, bảng giá sửa máy, billboard, bảng hàng đợi,
+# laptop, upload, thẻ nhân viên, đồng hồ cơ, bát mì, túi quần phát sáng, CCTV, tóc giả + nón, USB, xe cộ...)
+from . import insertgen_batch4 as _batch4  # noqa: E402
+
+INSERTS.update(_batch4.INSERTS)
+SCREENS.update(_batch4.SCREENS)
+_TAGS.update(_batch4.TAGS)
+_PROPS.update(_batch4.PROPS)
 
 
 if __name__ == "__main__":  # python -m storytoon.render.insertgen [id ...]
