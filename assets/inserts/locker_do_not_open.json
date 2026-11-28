@@ -1,0 +1,29 @@
+{
+ "id": "locker_do_not_open",
+ "label": "Tủ đồ dán chữ X – DO NOT OPEN",
+ "label_en": "Taped locker, DO NOT OPEN",
+ "tags": [
+  "locker",
+  "do not open",
+  "taped",
+  "staff locker",
+  "forbidden"
+ ],
+ "props": [
+  "taped_locker",
+  "forbidden_locker",
+  "locker_x"
+ ],
+ "style": "cutout",
+ "image": "locker_do_not_open.png",
+ "kind": "locker_do_not_open",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

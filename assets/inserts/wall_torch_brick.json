@@ -1,0 +1,28 @@
+{
+ "id": "wall_torch_brick",
+ "label": "Đuốc cháy trên tường gạch",
+ "label_en": "Torch on a brick wall",
+ "tags": [
+  "torch",
+  "brick wall",
+  "dungeon",
+  "firelight",
+  "night"
+ ],
+ "props": [
+  "wall_torch",
+  "burning_torch"
+ ],
+ "style": "cutout",
+ "image": "wall_torch_brick.png",
+ "kind": "wall_torch_brick",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

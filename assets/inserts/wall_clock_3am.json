@@ -1,0 +1,30 @@
+{
+ "id": "wall_clock_3am",
+ "label": "Đồng hồ treo tường chỉ 3 giờ",
+ "label_en": "Wall clock at 3 AM",
+ "tags": [
+  "wall clock",
+  "3 am",
+  "three o'clock",
+  "night shift",
+  "time",
+  "hospital"
+ ],
+ "props": [
+  "wall_clock_3am",
+  "clock_3am",
+  "three_am_clock"
+ ],
+ "style": "cutout",
+ "image": "wall_clock_3am.png",
+ "kind": "wall_clock_3am",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

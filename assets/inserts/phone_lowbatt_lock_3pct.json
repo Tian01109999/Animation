@@ -1,0 +1,27 @@
+{
+ "id": "phone_lowbatt_lock_3pct",
+ "label": "Điện thoại pin 3%, màn khoá 17:31",
+ "label_en": "Phone 3% battery lock screen",
+ "tags": [
+  "phone",
+  "3 percent",
+  "low battery",
+  "lock screen",
+  "no signal"
+ ],
+ "props": [
+  "phone_lowbatt_lock_3pct"
+ ],
+ "style": "cutout",
+ "image": "phone_lowbatt_lock_3pct.png",
+ "kind": "phone_lowbatt_lock_3pct",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,28 @@
+{
+ "id": "nurse_cap_on_plastic",
+ "label": "Mũ y tá trên giường bọc nhựa",
+ "label_en": "Nurse cap on a plastic-wrapped bed",
+ "tags": [
+  "nurse cap",
+  "plastic sheet",
+  "bed 12",
+  "wet",
+  "left behind"
+ ],
+ "props": [
+  "nurse_cap",
+  "cap_on_plastic"
+ ],
+ "style": "cutout",
+ "image": "nurse_cap_on_plastic.png",
+ "kind": "nurse_cap_on_plastic",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

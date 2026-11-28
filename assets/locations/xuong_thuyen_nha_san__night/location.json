@@ -1,0 +1,73 @@
+{
+ "id": "xuong_thuyen_nha_san__night",
+ "name": "Xưởng đóng thuyền dưới gầm nhà sàn",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Xưởng đóng thuyền dưới gầm nhà sàn / Boat-building shed under a stilt house (ban đêm / night)",
+  "description": "Xưởng đóng thuyền dưới gầm nhà sàn, ban đêm. Open shed under a stilt house: ceiling joists, wooden pillars, a long unfinished boat hull on log rollers, wood shavings on the dirt floor, a gong on a wooden frame, river and stilt houses behind. (night). xưởng đóng thuyền, gầm nhà sàn, thuyền gỗ, con lăn gỗ, cồng, bờ sông, làng cổ, boat shed, boat building, under stilt house, wooden boat, gong, riverside, ban đêm, night",
+  "kind": "boat_shed",
+  "tags": [
+   "xưởng đóng thuyền",
+   "gầm nhà sàn",
+   "thuyền gỗ",
+   "con lăn gỗ",
+   "cồng",
+   "bờ sông",
+   "làng cổ",
+   "boat shed",
+   "boat building",
+   "under stilt house",
+   "wooden boat",
+   "gong",
+   "riverside",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "xuong_thuyen_nha_san",
+   "xuong_thuyen_nha_san__night"
+  ],
+  "catalog_id": "xuong_thuyen_nha_san",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn ngang: thân thuyền lớn giữa khung trên 2 con lăn gỗ, cồng treo giữa phía sau, cột gỗ tiền cảnh trái/giữa/phải; nhân vật đứng trước thân thuyền.",
+  "label_en": "Boat-building shed under a stilt house (night)",
+  "description_en": "Open shed under a stilt house: ceiling joists, wooden pillars, a long unfinished boat hull on log rollers, wood shavings on the dirt floor, a gong on a wooden frame, river and stilt houses behind.",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Boat-building shed under a Thai stilt house, long wooden boat hull on log rollers, gong, river behind, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "xuong_thuyen_nha_san"
+ },
+ "floor_y": 1760,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1760,
+   "scale": 0.95
+  },
+  "left": {
+   "x": 900,
+   "y": 1760,
+   "scale": 0.95
+  },
+  "right": {
+   "x": 2800,
+   "y": 1760,
+   "scale": 0.95
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Boat-building shed under a Thai stilt house, long wooden boat hull on log rollers, gong, river behind, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "night": "Boat-building shed under a Thai stilt house, long wooden boat hull on log rollers, gong, river behind, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

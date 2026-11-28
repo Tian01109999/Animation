@@ -2242,6 +2242,34 @@ SCREENS.update(_batch4.SCREENS)
 _TAGS.update(_batch4.TAGS)
 _PROPS.update(_batch4.PROPS)
 
+# lô 5 (bệnh viện ca đêm: bảng chuông gọi, đồng hồ 3h, nội quy, lịch trực, sổ chuông, bảng bệnh nhân, điện thoại bàn,
+# thuyền giấy, giấy SORRY, ảnh xé, mũ y tá, đồng hồ cài áo, chùm chìa khoá, nút gọi, máy sinh hiệu, dấu chân ướt...)
+from . import insertgen_batch5 as _batch5  # noqa: E402
+
+INSERTS.update(_batch5.INSERTS)
+_TAGS.update(_batch5.TAGS)
+_PROPS.update(_batch5.PROPS)
+
+# lô 6 (bệnh viện phần 2: nội quy trên bàn, lịch trực COPY, vòng tay bệnh nhân, máy sinh hiệu lớn, cuộc gọi/thư/ảnh,
+# ổ oxy, túi đồ, ảnh xé người cha, thuyền giấy trên gối, vệt bánh xe ướt)
+from . import insertgen_batch6 as _batch6  # noqa: E402
+
+INSERTS.update(_batch6.INSERTS)
+SCREENS.update(_batch6.SCREENS)
+_TAGS.update(_batch6.TAGS)
+_PROPS.update(_batch6.PROPS)
+
+# lô 7 (kinh đô cổ bị vây): gáo dừa, bản đồ than trên ván, bản đồ kinh đô 3 sông (+ trại địch), bản đồ trên tablet,
+# sơ đồ đốt móng tường, vết đục ván thuyền, cuốc vào hố cháy, cồng đêm, đầu tượng trong rễ, đèn dầu đất, đuốc tường gạch,
+# điện thoại pin 2% / tắt nguồn / ảnh bản đồ
+from . import insertgen_batch7 as _batch7  # noqa: E402
+
+_dup7 = (set(_batch7.INSERTS) & set(INSERTS)) | (set(_batch7.SCREENS) & set(SCREENS))
+INSERTS.update(_batch7.INSERTS)
+SCREENS.update(_batch7.SCREENS)
+_TAGS.update(_batch7.TAGS)
+_PROPS.update(_batch7.PROPS)
+
 
 if __name__ == "__main__":  # python -m storytoon.render.insertgen [id ...]
     import sys

@@ -1,0 +1,26 @@
+{
+ "id": "phone_letter_photo",
+ "label": "Điện thoại xem ảnh lá thư",
+ "label_en": "Phone showing a photo of a letter",
+ "tags": [
+  "phone",
+  "photo of letter",
+  "handwritten letter",
+  "message"
+ ],
+ "props": [
+  "phone_letter_photo"
+ ],
+ "style": "cutout",
+ "image": "phone_letter_photo.png",
+ "kind": "phone_letter_photo",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

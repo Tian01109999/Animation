@@ -1,0 +1,72 @@
+{
+ "id": "phe_tich_cay_bo_de__storm",
+ "name": "Phế tích chùa, đầu tượng trong rễ cây",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phế tích chùa, đầu tượng trong rễ cây / Temple ruins with a stone head in tree roots (chiều tối có bão / stormy evening, rain)",
+  "description": "Phế tích chùa, đầu tượng trong rễ cây, chiều tối có bão. Ruined temple ground: huge grey tree trunk with a stone head embraced by roots, crumbling brick stupa, broken brick walls, palms, grass and a brick walkway; dusk or storm with rain. (stormy evening, rain). phế tích, chùa đổ, cây bồ đề, đầu tượng trong rễ cây, tháp gạch, hoàng hôn, bão, temple ruins, tree roots, stone head, brick stupa, dusk, storm, chiều tối có bão",
+  "kind": "temple_ruins",
+  "tags": [
+   "phế tích",
+   "chùa đổ",
+   "cây bồ đề",
+   "đầu tượng trong rễ cây",
+   "tháp gạch",
+   "hoàng hôn",
+   "bão",
+   "temple ruins",
+   "tree roots",
+   "stone head",
+   "brick stupa",
+   "dusk",
+   "storm",
+   "chiều tối có bão"
+  ],
+  "time_variants": [
+   "phe_tich_cay_bo_de",
+   "phe_tich_cay_bo_de__storm"
+  ],
+  "catalog_id": "phe_tich_cay_bo_de",
+  "variant": "storm",
+  "style": "cutout",
+  "layout": "Thân cây lớn trái-giữa có đầu tượng, tháp gạch đổ trái, tường gạch vỡ phải, lối gạch tiền cảnh.",
+  "label_en": "Temple ruins with a stone head in tree roots (stormy evening, rain)",
+  "description_en": "Ruined temple ground: huge grey tree trunk with a stone head embraced by roots, crumbling brick stupa, broken brick walls, palms, grass and a brick walkway; dusk or storm with rain.",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Ancient temple ruins, stone head in tree roots, brick stupa, dusk, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phe_tich_cay_bo_de"
+ },
+ "floor_y": 1620,
+ "slots": {
+  "center": {
+   "x": 2200,
+   "y": 1620,
+   "scale": 0.85
+  },
+  "left": {
+   "x": 500,
+   "y": 1620,
+   "scale": 0.85
+  },
+  "right": {
+   "x": 3000,
+   "y": 1620,
+   "scale": 0.85
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "dusk": "Ancient temple ruins, stone head in tree roots, brick stupa, dusk, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "storm": "Ancient temple ruins, stone head in tree roots, brick stupa, dusk, dark storm clouds, rain, blowing leaves, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

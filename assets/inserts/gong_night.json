@@ -1,0 +1,28 @@
+{
+ "id": "gong_night",
+ "label": "Cồng treo khung gỗ ban đêm",
+ "label_en": "Gong on its frame at night",
+ "tags": [
+  "gong",
+  "alarm",
+  "night",
+  "bronze gong",
+  "wooden frame"
+ ],
+ "props": [
+  "gong",
+  "hanging_gong"
+ ],
+ "style": "cutout",
+ "image": "gong_night.png",
+ "kind": "gong_night",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

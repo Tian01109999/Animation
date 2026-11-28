@@ -96,6 +96,12 @@ BATCH3 = ["nha_ve_sinh_nu_truong", "lop_hoc_cu_dem", "truong_hoc_dem", "sanh_tu_
 BATCH4 = ["tang_trung_tam_dien_thoai", "sanh_thang_cuon", "pho_nha_pho_dem", "ham_xe_b2", "quan_mi_xe_day_dem",
           "tiem_giat_24h", "trung_tam_du_lieu_dem", "phong_may_chu", "phong_dieu_khien_bao_dong", "tram_xe_buyt_binh_minh",
           "song_binh_minh_thanh_pho", "quan_net_cu"]
+BATCH5 = ["phong_benh_chung_dem", "toa_benh_vien_mua_dem", "hanh_lang_tang4_benh_vien", "quay_truc_y_ta",
+          "giuong_benh_canh_cua_so", "phong_tu_do_nhan_vien", "pantry_benh_vien", "san_nha_go_hoang_hon",
+          "phong_truc_cu_radio"]
+BATCH7 = ["xuong_thuyen_nha_san", "san_xuong_thuyen_hoang_hon", "tuong_thanh_gach_khoi", "cong_truong_dao_chan_tuong",
+          "ham_gach_vom", "duong_ham_dot_mong", "phe_tich_cay_bo_de", "cho_ven_kenh_co", "chua_thap_prang",
+          "san_lang_nha_san"]
 
 
 def batch_sheet(ids: list[str], root: Path = LOCATIONS, out: Path = REVIEW / "batch2_locations.png") -> Path:
@@ -126,8 +132,22 @@ def main() -> None:
     ap.add_argument("--batch2", action="store_true", help="chỉ vẽ 12 địa điểm lô 2 + logs/asset_review/batch2_locations.png")
     ap.add_argument("--batch3", action="store_true", help="chỉ vẽ 10 địa điểm lô 3 + logs/asset_review/batch3_locations.png")
     ap.add_argument("--batch4", action="store_true", help="chỉ vẽ 12 địa điểm lô 4 + logs/asset_review/batch4_locations.png")
+    ap.add_argument("--batch5", action="store_true", help="chỉ vẽ 9 địa điểm lô 5 + logs/asset_review/batch5_locations.png")
+    ap.add_argument("--batch7", action="store_true", help="chỉ vẽ 10 địa điểm lô 7 + logs/asset_review/batch7_locations.png")
     a = ap.parse_args()
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s")
+    if a.batch7:
+        t = time.time()
+        paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH7)
+        print(f"lô 7: {len(paths)} thư mục ({time.time() - t:.1f}s)")
+        print("sheet:", batch_sheet(BATCH7, out=REVIEW / "batch7_locations.png"))
+        return
+    if a.batch5:
+        t = time.time()
+        paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH5)
+        print(f"lô 5: {len(paths)} thư mục ({time.time() - t:.1f}s)")
+        print("sheet:", batch_sheet(BATCH5, out=REVIEW / "batch5_locations.png"))
+        return
     if a.batch2:
         t = time.time()
         paths = locgen.make_catalog_locations(LOCATIONS, a.only or BATCH2)

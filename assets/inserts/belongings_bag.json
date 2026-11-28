@@ -1,0 +1,27 @@
+{
+ "id": "belongings_bag",
+ "label": "Túi nhựa đựng đồ bệnh nhân",
+ "label_en": "Patient belongings bag",
+ "tags": [
+  "belongings",
+  "plastic bag",
+  "patient items",
+  "personal effects"
+ ],
+ "props": [
+  "belongings_bag",
+  "patient_belongings"
+ ],
+ "style": "cutout",
+ "image": "belongings_bag.png",
+ "kind": "belongings_bag",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

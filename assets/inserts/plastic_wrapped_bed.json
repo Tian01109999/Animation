@@ -1,0 +1,28 @@
+{
+ "id": "plastic_wrapped_bed",
+ "label": "Tấm nhựa bọc giường phồng hình người",
+ "label_en": "Plastic-wrapped bed with a body shape",
+ "tags": [
+  "plastic",
+  "wrapped bed",
+  "body shape",
+  "bed 12",
+  "horror"
+ ],
+ "props": [
+  "plastic_bed",
+  "wrapped_bed"
+ ],
+ "style": "cutout",
+ "image": "plastic_wrapped_bed.png",
+ "kind": "plastic_wrapped_bed",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

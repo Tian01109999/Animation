@@ -1,0 +1,27 @@
+{
+ "id": "phone_lock_photo_msg",
+ "label": "Màn khoá: tin nhắn gửi ảnh lúc 2 giờ",
+ "label_en": "Lock screen: sent a photo",
+ "tags": [
+  "lock screen",
+  "notification",
+  "sent a photo",
+  "message",
+  "2 am"
+ ],
+ "props": [
+  "phone_lock_photo_msg"
+ ],
+ "style": "cutout",
+ "image": "phone_lock_photo_msg.png",
+ "kind": "phone_lock_photo_msg",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

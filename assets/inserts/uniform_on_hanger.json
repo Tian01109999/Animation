@@ -1,0 +1,29 @@
+{
+ "id": "uniform_on_hanger",
+ "label": "Bộ đồng phục y tá cũ trên móc",
+ "label_en": "Old nurse uniform on a hanger",
+ "tags": [
+  "nurse uniform",
+  "hanger",
+  "locker",
+  "old uniform",
+  "fob watch"
+ ],
+ "props": [
+  "uniform_hanger",
+  "nurse_uniform",
+  "old_uniform"
+ ],
+ "style": "cutout",
+ "image": "uniform_on_hanger.png",
+ "kind": "uniform_on_hanger",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

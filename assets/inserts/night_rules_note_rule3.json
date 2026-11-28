@@ -1,0 +1,28 @@
+{
+ "id": "night_rules_note_rule3",
+ "label": "Nội quy ca đêm – gạch đỏ điều 3",
+ "label_en": "Night-shift rules, rule 3 underlined",
+ "tags": [
+  "rules",
+  "night shift rules",
+  "underlined rule",
+  "curtain",
+  "bed 12"
+ ],
+ "props": [
+  "rules_underlined",
+  "rule_3_note"
+ ],
+ "style": "cutout",
+ "image": "night_rules_note_rule3.png",
+ "kind": "night_rules_note_rule3",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

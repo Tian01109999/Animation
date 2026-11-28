@@ -1,0 +1,26 @@
+{
+ "id": "clay_oil_lamps_three",
+ "label": "3 đèn dầu đất – còn 3 ngày",
+ "label_en": "Clay oil lamps, all lit",
+ "tags": [
+  "oil lamps",
+  "three days left",
+  "countdown",
+  "all lit"
+ ],
+ "props": [
+  "clay_oil_lamps_three"
+ ],
+ "style": "cutout",
+ "image": "clay_oil_lamps_three.png",
+ "kind": "clay_oil_lamps_three",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

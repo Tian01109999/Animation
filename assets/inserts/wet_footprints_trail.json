@@ -1,0 +1,29 @@
+{
+ "id": "wet_footprints_trail",
+ "label": "Vệt dấu chân ướt dẫn tới giường",
+ "label_en": "Trail of wet footprints toward a bed",
+ "tags": [
+  "wet footprints",
+  "footprints",
+  "water",
+  "floor",
+  "ghost",
+  "trail"
+ ],
+ "props": [
+  "footprint_trail",
+  "wet_footprint_trail"
+ ],
+ "style": "cutout",
+ "image": "wet_footprints_trail.png",
+ "kind": "wet_footprints_trail",
+ "camera_default": "pan_right",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

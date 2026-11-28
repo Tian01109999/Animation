@@ -1,0 +1,29 @@
+{
+ "id": "bed_call_button",
+ "label": "Nút gọi y tá đầu giường",
+ "label_en": "Bedside nurse call button",
+ "tags": [
+  "call button",
+  "nurse call button",
+  "bed",
+  "red button",
+  "cord"
+ ],
+ "props": [
+  "call_button",
+  "bed_call_button",
+  "nurse_button"
+ ],
+ "style": "cutout",
+ "image": "bed_call_button.png",
+ "kind": "bed_call_button",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

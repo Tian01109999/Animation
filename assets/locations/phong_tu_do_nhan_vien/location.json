@@ -1,0 +1,151 @@
+{
+ "id": "phong_tu_do_nhan_vien",
+ "name": "Phòng tủ đồ nhân viên",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "indoor",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng tủ đồ nhân viên / Staff locker room (trong nhà đèn sáng / interior)",
+  "description": "Phòng tủ đồ nhân viên, trong nhà đèn sáng. Staff locker room: eight grey lockers with numbered name tags, one crossed out with yellow tape and DO NOT OPEN, a wooden bench, cork board with notes, cracked grey walls. (interior). phòng thay đồ, tủ đồ, tủ khoá, nhân viên, băng dính chữ X, locker room, staff lockers, do not open, bench, trong nhà đèn sáng, indoor",
+  "kind": "locker_room",
+  "tags": [
+   "phòng thay đồ",
+   "tủ đồ",
+   "tủ khoá",
+   "nhân viên",
+   "băng dính chữ X",
+   "locker room",
+   "staff lockers",
+   "do not open",
+   "bench",
+   "trong nhà đèn sáng",
+   "indoor"
+  ],
+  "time_variants": [
+   "phong_tu_do_nhan_vien"
+  ],
+  "catalog_id": "phong_tu_do_nhan_vien",
+  "variant": "indoor",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: 8 tủ khoá xám (No.1...), 1 tủ dán X vàng + DO NOT OPEN (nướng), ghế băng gỗ, bảng ghim.",
+  "label_en": "Staff locker room (interior)",
+  "description_en": "Staff locker room: eight grey lockers with numbered name tags, one crossed out with yellow tape and DO NOT OPEN, a wooden bench, cork board with notes, cracked grey walls.",
+  "baked_text": [
+   "No.1",
+   "No.2",
+   "No.3",
+   "No.4",
+   "No.5",
+   "No.6",
+   "DO NOT OPEN",
+   "No.8"
+  ],
+  "time_of_day": "indoor"
+ },
+ "flow_prompt": "Staff locker room, row of grey lockers, one taped with an X, wooden bench, cork board, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_tu_do_nhan_vien"
+ },
+ "floor_y": 2060,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2060,
+   "scale": 1.05
+  },
+  "left": {
+   "x": 300,
+   "y": 2060,
+   "scale": 1.05
+  },
+  "right": {
+   "x": 3200,
+   "y": 2060,
+   "scale": 1.05
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "No.1",
+   "box": [
+    444,
+    1016,
+    546,
+    1064
+   ]
+  },
+  {
+   "text": "No.2",
+   "box": [
+    724,
+    1016,
+    826,
+    1064
+   ]
+  },
+  {
+   "text": "No.3",
+   "box": [
+    1004,
+    1016,
+    1106,
+    1064
+   ]
+  },
+  {
+   "text": "No.4",
+   "box": [
+    1284,
+    1016,
+    1386,
+    1064
+   ]
+  },
+  {
+   "text": "No.5",
+   "box": [
+    1564,
+    1016,
+    1666,
+    1064
+   ]
+  },
+  {
+   "text": "No.6",
+   "box": [
+    1844,
+    1016,
+    1946,
+    1064
+   ]
+  },
+  {
+   "text": "DO NOT OPEN",
+   "box": [
+    2055,
+    1216,
+    2295,
+    1264
+   ]
+  },
+  {
+   "text": "No.8",
+   "box": [
+    2404,
+    1016,
+    2506,
+    1064
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "indoor": "Staff locker room, row of grey lockers, one taped with an X, wooden bench, cork board, bright cold fluorescent interior light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

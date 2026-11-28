@@ -1,0 +1,27 @@
+{
+ "id": "rules_note_desk_rule4",
+ "label": "Nội quy – gạch đỏ điều 4",
+ "label_en": "Rules note, rule 4 underlined",
+ "tags": [
+  "rules",
+  "rule 4",
+  "forget everything",
+  "underlined",
+  "note"
+ ],
+ "props": [
+  "rules_note_desk_rule4"
+ ],
+ "style": "cutout",
+ "image": "rules_note_desk_rule4.png",
+ "kind": "rules_note_desk_rule4",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

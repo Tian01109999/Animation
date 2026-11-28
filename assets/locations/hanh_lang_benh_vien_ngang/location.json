@@ -1,0 +1,93 @@
+{
+ "id": "hanh_lang_benh_vien_ngang",
+ "name": "Hành lang bệnh viện nhìn ngang",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hành lang bệnh viện nhìn ngang / Hospital corridor, side view (ban đêm / night)",
+  "description": "Hành lang bệnh viện nhìn ngang, ban đêm. Flat side view of a hospital corridor: teal wall with dark green dado, fluorescent strips, cracks, a single green door on the left, cork board with notes, double ward doors with porthole windows and a blue WARD sign, beige handrail along the wall, red fire extinguisher, bench edge, dusty floor. (night). hành lang, bệnh viện, nhìn ngang, cửa phòng, cửa đôi, bảng ghim, bình chữa cháy, tay vịn, hospital corridor, side view, ward doors, ban đêm, night",
+  "kind": "hospital_corridor_side",
+  "tags": [
+   "hành lang",
+   "bệnh viện",
+   "nhìn ngang",
+   "cửa phòng",
+   "cửa đôi",
+   "bảng ghim",
+   "bình chữa cháy",
+   "tay vịn",
+   "hospital corridor",
+   "side view",
+   "ward doors",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hanh_lang_benh_vien_ngang"
+  ],
+  "catalog_id": "hanh_lang_benh_vien_ngang",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn ngang: cửa đơn trái, bảng ghim giữa, cửa đôi phòng bệnh + biển WARD (nướng) bên phải, tay vịn dọc tường, bình chữa cháy, mép ghế băng; nhân vật đi ngang trên sàn.",
+  "label_en": "Hospital corridor, side view (night)",
+  "description_en": "Flat side view of a hospital corridor: teal wall with dark green dado, fluorescent strips, cracks, a single green door on the left, cork board with notes, double ward doors with porthole windows and a blue WARD sign, beige handrail along the wall, red fire extinguisher, bench edge, dusty floor.",
+  "baked_text": [
+   "WARD"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Hospital corridor side view, teal wall, green doors, double ward doors with round windows, cork board, handrail, fire extinguisher, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hanh_lang_benh_vien_ngang"
+ },
+ "floor_y": 1880,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1880,
+   "scale": 0.9
+  },
+  "left": {
+   "x": 500,
+   "y": 1880,
+   "scale": 0.9
+  },
+  "right": {
+   "x": 3300,
+   "y": 1880,
+   "scale": 0.9
+  },
+  "door_left": {
+   "x": 920,
+   "y": 1850,
+   "scale": 0.88
+  },
+  "ward_door": {
+   "x": 3080,
+   "y": 1850,
+   "scale": 0.88
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "WARD",
+   "box": [
+    3024,
+    729,
+    3136,
+    781
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Hospital corridor side view, teal wall, green doors, double ward doors with round windows, cork board, handrail, fire extinguisher, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

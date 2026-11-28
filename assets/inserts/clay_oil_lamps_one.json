@@ -1,0 +1,26 @@
+{
+ "id": "clay_oil_lamps_one",
+ "label": "3 đèn dầu đất – còn 1 ngày",
+ "label_en": "Clay oil lamps, one lit",
+ "tags": [
+  "oil lamps",
+  "one day left",
+  "countdown",
+  "last flame"
+ ],
+ "props": [
+  "clay_oil_lamps_one"
+ ],
+ "style": "cutout",
+ "image": "clay_oil_lamps_one.png",
+ "kind": "clay_oil_lamps_one",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

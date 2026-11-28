@@ -1,0 +1,28 @@
+{
+ "id": "nurse_call_panel_off",
+ "label": "Bảng chuông gọi y tá – chưa sáng",
+ "label_en": "Nurse call panel, all unlit",
+ "tags": [
+  "nurse call",
+  "call bell panel",
+  "hospital",
+  "unlit",
+  "nurse station"
+ ],
+ "props": [
+  "call_panel_off",
+  "nurse_call_panel_off"
+ ],
+ "style": "cutout",
+ "image": "nurse_call_panel_off.png",
+ "kind": "nurse_call_panel_off",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,29 @@
+{
+ "id": "desk_phone_beige",
+ "label": "Điện thoại bàn màu kem",
+ "label_en": "Beige desk phone",
+ "tags": [
+  "desk phone",
+  "landline",
+  "telephone",
+  "nurse station",
+  "keypad"
+ ],
+ "props": [
+  "desk_phone",
+  "landline",
+  "beige_phone"
+ ],
+ "style": "cutout",
+ "image": "desk_phone_beige.png",
+ "kind": "desk_phone_beige",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

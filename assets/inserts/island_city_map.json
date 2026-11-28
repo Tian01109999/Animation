@@ -1,0 +1,29 @@
+{
+ "id": "island_city_map",
+ "label": "Bản đồ kinh đô cổ giữa 3 con sông",
+ "label_en": "Old capital ringed by three rivers",
+ "tags": [
+  "map",
+  "old capital",
+  "three rivers",
+  "island city",
+  "canals",
+  "walls"
+ ],
+ "props": [
+  "old_capital_map",
+  "city_map_rivers"
+ ],
+ "style": "cutout",
+ "image": "island_city_map.png",
+ "kind": "island_city_map",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

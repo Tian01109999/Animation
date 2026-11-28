@@ -1,0 +1,70 @@
+{
+ "id": "san_xuong_thuyen_hoang_hon",
+ "name": "Sàn xưởng thuyền lúc hoàng hôn",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sàn xưởng thuyền lúc hoàng hôn / Shed deck at dusk (hoàng hôn / dusk)",
+  "description": "Sàn xưởng thuyền lúc hoàng hôn, hoàng hôn. Plank deck under a shed at dusk with two log benches, dark posts, leaf-strewn yard, a white bench, a long city wall and faint temple spires against a pink sky. (dusk). sân xưởng, hoàng hôn, khúc gỗ, ngồi nghỉ, sàn gỗ, tường thành, chùa xa, shed deck, dusk, log bench, city wall, temple spires",
+  "kind": "boat_shed_deck",
+  "tags": [
+   "sân xưởng",
+   "hoàng hôn",
+   "khúc gỗ",
+   "ngồi nghỉ",
+   "sàn gỗ",
+   "tường thành",
+   "chùa xa",
+   "shed deck",
+   "dusk",
+   "log bench",
+   "city wall",
+   "temple spires"
+  ],
+  "time_variants": [
+   "san_xuong_thuyen_hoang_hon"
+  ],
+  "catalog_id": "san_xuong_thuyen_hoang_hon",
+  "variant": "dusk",
+  "style": "cutout",
+  "layout": "Sàn ván tiền cảnh với 2 khúc gỗ làm ghế (ngồi), cột nhà, tường thành dài phía sau.",
+  "label_en": "Shed deck at dusk (dusk)",
+  "description_en": "Plank deck under a shed at dusk with two log benches, dark posts, leaf-strewn yard, a white bench, a long city wall and faint temple spires against a pink sky.",
+  "time_of_day": "dusk"
+ },
+ "flow_prompt": "Wooden deck at dusk, log benches, posts, long city wall and temple spires behind, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "san_xuong_thuyen_hoang_hon"
+ },
+ "floor_y": 1880,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1880,
+   "scale": 0.95
+  },
+  "left": {
+   "x": 1200,
+   "y": 1880,
+   "scale": 0.95,
+   "pose": "sit"
+  },
+  "right": {
+   "x": 3000,
+   "y": 1880,
+   "scale": 0.95,
+   "pose": "sit"
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "dusk": "Wooden deck at dusk, log benches, posts, long city wall and temple spires behind, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,30 @@
+{
+ "id": "night_rules_note",
+ "label": "Tờ nội quy ca đêm dán tường",
+ "label_en": "Night-shift rules notice",
+ "tags": [
+  "rules",
+  "night shift rules",
+  "notice",
+  "hospital",
+  "do not go",
+  "head nurse"
+ ],
+ "props": [
+  "night_rules",
+  "shift_rules_note",
+  "rules_notice"
+ ],
+ "style": "cutout",
+ "image": "night_rules_note.png",
+ "kind": "night_rules_note",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

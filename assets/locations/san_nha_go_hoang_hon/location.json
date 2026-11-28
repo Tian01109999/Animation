@@ -1,0 +1,69 @@
+{
+ "id": "san_nha_go_hoang_hon",
+ "name": "Sân nhà gỗ lúc hoàng hôn (hồi tưởng)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sân nhà gỗ lúc hoàng hôn (hồi tưởng) / Wooden village yard at sunset (hoàng hôn / dusk)",
+  "description": "Sân nhà gỗ lúc hoàng hôn (hồi tưởng), hoàng hôn. Warm sunset flashback: wooden plank house wall on the left with a porch step and clay pot, palm tree on the right, glowing low sun, dirt yard with a shallow puddle, blurred grass in the foreground. (dusk). sân nhà, nhà gỗ, hoàng hôn, vũng nước, cây cau, quê, hồi tưởng, village yard, wooden house, sunset, puddle, flashback, dusk",
+  "kind": "village_yard",
+  "tags": [
+   "sân nhà",
+   "nhà gỗ",
+   "hoàng hôn",
+   "vũng nước",
+   "cây cau",
+   "quê",
+   "hồi tưởng",
+   "village yard",
+   "wooden house",
+   "sunset",
+   "puddle",
+   "flashback",
+   "dusk"
+  ],
+  "time_variants": [
+   "san_nha_go_hoang_hon"
+  ],
+  "catalog_id": "san_nha_go_hoang_hon",
+  "variant": "dusk",
+  "style": "cutout",
+  "layout": "Nhìn ngang: vách nhà gỗ trái, cây cau phải, mặt trời thấp, sân đất có vũng nước, cỏ tiền cảnh.",
+  "label_en": "Wooden village yard at sunset (dusk)",
+  "description_en": "Warm sunset flashback: wooden plank house wall on the left with a porch step and clay pot, palm tree on the right, glowing low sun, dirt yard with a shallow puddle, blurred grass in the foreground.",
+  "time_of_day": "dusk"
+ },
+ "flow_prompt": "Rural wooden house yard at sunset, palm tree, puddle, warm golden light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "san_nha_go_hoang_hon"
+ },
+ "floor_y": 1760,
+ "slots": {
+  "center": {
+   "x": 1700,
+   "y": 1760,
+   "scale": 0.7
+  },
+  "left": {
+   "x": 1200,
+   "y": 1760,
+   "scale": 0.7
+  },
+  "right": {
+   "x": 2900,
+   "y": 1900,
+   "scale": 0.95
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "dusk": "Rural wooden house yard at sunset, palm tree, puddle, warm golden light, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

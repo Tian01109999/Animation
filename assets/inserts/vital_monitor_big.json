@@ -1,0 +1,28 @@
+{
+ "id": "vital_monitor_big",
+ "label": "Máy sinh hiệu cận cảnh",
+ "label_en": "Vital-signs monitor close-up",
+ "tags": [
+  "vital signs",
+  "heart monitor",
+  "ecg",
+  "spo2",
+  "patient monitor"
+ ],
+ "props": [
+  "vital_monitor_big",
+  "big_heart_monitor"
+ ],
+ "style": "cutout",
+ "image": "vital_monitor_big.png",
+ "kind": "vital_monitor_big",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

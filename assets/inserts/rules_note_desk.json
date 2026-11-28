@@ -1,0 +1,27 @@
+{
+ "id": "rules_note_desk",
+ "label": "Tờ nội quy ca đêm trên bàn gỗ",
+ "label_en": "Night-shift rules note on a desk",
+ "tags": [
+  "rules",
+  "night shift rules",
+  "note",
+  "desk",
+  "head nurse"
+ ],
+ "props": [
+  "rules_note_desk"
+ ],
+ "style": "cutout",
+ "image": "rules_note_desk.png",
+ "kind": "rules_note_desk",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

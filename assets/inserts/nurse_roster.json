@@ -1,0 +1,29 @@
+{
+ "id": "nurse_roster",
+ "label": "Lịch trực y tá trên bàn gỗ",
+ "label_en": "Nurse duty roster on a desk",
+ "tags": [
+  "roster",
+  "duty schedule",
+  "shift table",
+  "nurses",
+  "hospital"
+ ],
+ "props": [
+  "nurse_roster",
+  "duty_roster",
+  "shift_roster"
+ ],
+ "style": "cutout",
+ "image": "nurse_roster.png",
+ "kind": "nurse_roster",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

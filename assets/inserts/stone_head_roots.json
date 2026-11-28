@@ -1,0 +1,27 @@
+{
+ "id": "stone_head_roots",
+ "label": "Đầu tượng đá trong rễ cây",
+ "label_en": "Stone head in tree roots",
+ "tags": [
+  "stone head",
+  "tree roots",
+  "ruins",
+  "statue head",
+  "ancient"
+ ],
+ "props": [
+  "stone_head_roots"
+ ],
+ "style": "cutout",
+ "image": "stone_head_roots.png",
+ "kind": "stone_head_roots",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

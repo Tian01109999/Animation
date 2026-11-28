@@ -1,0 +1,28 @@
+{
+ "id": "nurse_fob_watch",
+ "label": "Đồng hồ y tá cài trên áo",
+ "label_en": "Nurse fob watch on a uniform",
+ "tags": [
+  "fob watch",
+  "nurse watch",
+  "pinned watch",
+  "uniform",
+  "time"
+ ],
+ "props": [
+  "fob_watch",
+  "nurse_watch"
+ ],
+ "style": "cutout",
+ "image": "nurse_fob_watch.png",
+ "kind": "nurse_fob_watch",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

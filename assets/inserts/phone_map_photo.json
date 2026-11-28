@@ -1,0 +1,27 @@
+{
+ "id": "phone_map_photo",
+ "label": "Điện thoại xem ảnh bản đồ cổ, báo pin yếu",
+ "label_en": "Phone photo of an old map, low battery",
+ "tags": [
+  "phone",
+  "photo of map",
+  "old map",
+  "battery warning",
+  "turning off"
+ ],
+ "props": [
+  "phone_map_photo"
+ ],
+ "style": "cutout",
+ "image": "phone_map_photo.png",
+ "kind": "phone_map_photo",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

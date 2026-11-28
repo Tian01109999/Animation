@@ -1,0 +1,29 @@
+{
+ "id": "old_radio_glow",
+ "label": "Radio cũ phát sáng",
+ "label_en": "Old glowing radio",
+ "tags": [
+  "radio",
+  "old radio",
+  "vintage radio",
+  "glow",
+  "night"
+ ],
+ "props": [
+  "old_radio",
+  "vintage_radio",
+  "radio"
+ ],
+ "style": "cutout",
+ "image": "old_radio_glow.png",
+ "kind": "old_radio_glow",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

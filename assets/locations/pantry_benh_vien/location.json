@@ -1,0 +1,74 @@
+{
+ "id": "pantry_benh_vien",
+ "name": "Phòng nghỉ / pantry nhân viên",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng nghỉ / pantry nhân viên / Staff pantry (ban đêm / night)",
+  "description": "Phòng nghỉ / pantry nhân viên, ban đêm. Staff pantry at night: beige upper cabinets, rainy window, counter with condiment jars, two coffee cups on saucers on a teal-edged bar where characters sit behind. (night). phòng nghỉ, pantry, quầy, cà phê, tủ bếp, staff pantry, break room, coffee, counter, phòng nhân viên, văn phòng, phòng sau, kho, ban đêm, night",
+  "kind": "staff_pantry",
+  "tags": [
+   "phòng nghỉ",
+   "pantry",
+   "quầy",
+   "cà phê",
+   "tủ bếp",
+   "staff pantry",
+   "break room",
+   "coffee",
+   "counter",
+   "phòng nhân viên",
+   "văn phòng",
+   "phòng sau",
+   "kho",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "pantry_benh_vien"
+  ],
+  "catalog_id": "pantry_benh_vien",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng: tủ bếp trên màu be, cửa sổ mưa, quầy + 2 tách cà phê; nhân viên ngồi sau quầy (clip_bottom).",
+  "label_en": "Staff pantry (night)",
+  "description_en": "Staff pantry at night: beige upper cabinets, rainy window, counter with condiment jars, two coffee cups on saucers on a teal-edged bar where characters sit behind.",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Hospital staff pantry at night, beige cabinets, rainy window, counter with coffee cups, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "pantry_benh_vien"
+ },
+ "floor_y": 2160,
+ "slots": {
+  "seat_left": {
+   "x": 1230,
+   "y": 2160,
+   "scale": 1.15,
+   "clip_bottom": 1600
+  },
+  "seat_right": {
+   "x": 2160,
+   "y": 2160,
+   "scale": 1.15,
+   "clip_bottom": 1600
+  },
+  "center": {
+   "x": 1700,
+   "y": 2160,
+   "scale": 1.15,
+   "clip_bottom": 1600
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "night": "Hospital staff pantry at night, beige cabinets, rainy window, counter with coffee cups, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

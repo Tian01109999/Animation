@@ -113,6 +113,9 @@ def main() -> None:
     ap.add_argument("--batch3", action="store_true", help="only the batch-3 library inserts (insertgen_batch3)")
     ap.add_argument("--batch4", action="store_true",
                     help="only the batch-4 library inserts (insertgen_batch4); with --overlays: batch-4 HUD frames")
+    ap.add_argument("--batch5", action="store_true", help="only the batch-5 library inserts (insertgen_batch5)")
+    ap.add_argument("--batch6", action="store_true", help="only the batch-6 library inserts (insertgen_batch6)")
+    ap.add_argument("--batch7", action="store_true", help="only the batch-7 library inserts (insertgen_batch7)")
     ap.add_argument("--overlays", type=Path, metavar="DIR",
                     help="also render batch-3 (or batch-4 with --batch4) HUD overlay test frames into DIR")
     ap.add_argument("--out", type=Path, default=ROOT / "logs" / "asset_review" / "inserts_sheet.png")
@@ -127,6 +130,15 @@ def main() -> None:
     if a.batch4:
         from storytoon.render import insertgen_batch4
         lib = list(insertgen_batch4.INSERTS)
+    if a.batch5:
+        from storytoon.render import insertgen_batch5
+        lib = list(insertgen_batch5.INSERTS)
+    if a.batch6:
+        from storytoon.render import insertgen_batch6
+        lib = list(insertgen_batch6.INSERTS)
+    if a.batch7:
+        from storytoon.render import insertgen_batch7
+        lib = list(insertgen_batch7.INSERTS)
     if a.preview is not None:
         kinds = a.preview or lib or list(insertgen.INSERTS)
         items = [(k, insertgen.render_insert(k, None, (TW, TH))) for k in kinds]

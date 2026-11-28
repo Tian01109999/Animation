@@ -1,0 +1,28 @@
+{
+ "id": "roster_copy_stamp",
+ "label": "Bản sao lịch trực có dấu COPY",
+ "label_en": "Roster copy with COPY stamp",
+ "tags": [
+  "roster",
+  "copy",
+  "stamp",
+  "duty schedule",
+  "evidence"
+ ],
+ "props": [
+  "roster_copy",
+  "stamped_roster"
+ ],
+ "style": "cutout",
+ "image": "roster_copy_stamp.png",
+ "kind": "roster_copy_stamp",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

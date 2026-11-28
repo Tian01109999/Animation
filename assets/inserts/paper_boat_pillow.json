@@ -1,0 +1,27 @@
+{
+ "id": "paper_boat_pillow",
+ "label": "Thuyền giấy trên gối",
+ "label_en": "Paper boat on a pillow",
+ "tags": [
+  "paper boat",
+  "pillow",
+  "left behind",
+  "sign",
+  "bed"
+ ],
+ "props": [
+  "paper_boat_pillow"
+ ],
+ "style": "cutout",
+ "image": "paper_boat_pillow.png",
+ "kind": "paper_boat_pillow",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

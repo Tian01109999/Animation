@@ -1,0 +1,28 @@
+{
+ "id": "island_city_map_siege",
+ "label": "Bản đồ trại địch vây thành",
+ "label_en": "Siege camps around the city",
+ "tags": [
+  "siege map",
+  "enemy camps",
+  "attack arrows",
+  "ne corner",
+  "war"
+ ],
+ "props": [
+  "siege_map",
+  "enemy_camps_map"
+ ],
+ "style": "cutout",
+ "image": "island_city_map_siege.png",
+ "kind": "island_city_map_siege",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

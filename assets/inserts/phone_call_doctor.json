@@ -1,0 +1,26 @@
+{
+ "id": "phone_call_doctor",
+ "label": "Điện thoại đang gọi bác sĩ",
+ "label_en": "Phone calling the doctor",
+ "tags": [
+  "phone call",
+  "calling doctor",
+  "call screen",
+  "night"
+ ],
+ "props": [
+  "phone_call_doctor"
+ ],
+ "style": "cutout",
+ "image": "phone_call_doctor.png",
+ "kind": "phone_call_doctor",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

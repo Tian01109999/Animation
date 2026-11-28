@@ -1,0 +1,27 @@
+{
+ "id": "patient_board_closeup",
+ "label": "Bảng bệnh nhân cận – giường 9-12, tên mờ",
+ "label_en": "Patient board close-up, faded bed 12",
+ "tags": [
+  "patient board",
+  "whiteboard",
+  "bed 12",
+  "faded name",
+  "ghost"
+ ],
+ "props": [
+  "patient_board_closeup"
+ ],
+ "style": "cutout",
+ "image": "patient_board_closeup.png",
+ "kind": "patient_board_closeup",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,71 @@
+{
+ "id": "tuong_thanh_gach_khoi",
+ "name": "Tường thành gạch, khói bốc phía sau",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Tường thành gạch, khói bốc phía sau / Brick city wall with smoke columns (ban ngày / day)",
+  "description": "Tường thành gạch, khói bốc phía sau, ban ngày. Long brick city wall with a pointed palisade on top, damaged plaster, white cannon-impact puffs, dark smoke columns rising behind, dusty ground with digging mounds, baskets and hoes, banana tree. (day). tường thành, thành gạch, hàng rào cọc, khói, bị vây, chiến tranh, đào đất, city wall, brick wall, palisade, smoke, siege, ancient city, ban ngày, day",
+  "kind": "city_wall",
+  "tags": [
+   "tường thành",
+   "thành gạch",
+   "hàng rào cọc",
+   "khói",
+   "bị vây",
+   "chiến tranh",
+   "đào đất",
+   "city wall",
+   "brick wall",
+   "palisade",
+   "smoke",
+   "siege",
+   "ancient city",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "tuong_thanh_gach_khoi"
+  ],
+  "catalog_id": "tuong_thanh_gach_khoi",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Tường thành ngang khung, khói sau tường, bãi đất trước tường; nhân vật đứng/quay lưng nhìn tường.",
+  "label_en": "Brick city wall with smoke columns (day)",
+  "description_en": "Long brick city wall with a pointed palisade on top, damaged plaster, white cannon-impact puffs, dark smoke columns rising behind, dusty ground with digging mounds, baskets and hoes, banana tree.",
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Ancient brick city wall with palisade, smoke columns behind, siege, dusty ground, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "tuong_thanh_gach_khoi"
+ },
+ "floor_y": 1940,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1940,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 1100,
+   "y": 1940,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2800,
+   "y": 1940,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Ancient brick city wall with palisade, smoke columns behind, siege, dusty ground, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

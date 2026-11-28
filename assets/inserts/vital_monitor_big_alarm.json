@@ -1,0 +1,27 @@
+{
+ "id": "vital_monitor_big_alarm",
+ "label": "Máy sinh hiệu – SpO2 tụt đỏ",
+ "label_en": "Monitor, SpO2 dropping (red)",
+ "tags": [
+  "vital signs",
+  "low oxygen",
+  "alarm",
+  "spo2 red",
+  "critical"
+ ],
+ "props": [
+  "vital_monitor_big_alarm"
+ ],
+ "style": "cutout",
+ "image": "vital_monitor_big_alarm.png",
+ "kind": "vital_monitor_big_alarm",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

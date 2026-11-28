@@ -1,0 +1,29 @@
+{
+ "id": "wood_map_city",
+ "label": "Bản đồ thành vẽ than trên ván gỗ",
+ "label_en": "Charcoal city map on wooden boards",
+ "tags": [
+  "map",
+  "charcoal map",
+  "wooden boards",
+  "city plan",
+  "market",
+  "temple"
+ ],
+ "props": [
+  "charcoal_map",
+  "wood_map"
+ ],
+ "style": "cutout",
+ "image": "wood_map_city.png",
+ "kind": "wood_map_city",
+ "camera_default": "pan_right",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

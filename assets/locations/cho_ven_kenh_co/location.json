@@ -1,0 +1,70 @@
+{
+ "id": "cho_ven_kenh_co",
+ "name": "Chợ cổ ven kênh",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chợ cổ ven kênh / Old riverside market (ban ngày / day)",
+  "description": "Chợ cổ ven kênh, ban ngày. Row of thatched stilt houses and market stalls along a canal in an old kingdom, white tower and stupas in the haze, wooden boats on green water. (day). chợ cổ, ven kênh, nhà sàn mái tranh, thuyền, tháp chùa, thời xưa, kinh đô, old market, canal, thatched stilt houses, boats, ancient kingdom, ban ngày, day",
+  "kind": "old_market",
+  "tags": [
+   "chợ cổ",
+   "ven kênh",
+   "nhà sàn mái tranh",
+   "thuyền",
+   "tháp chùa",
+   "thời xưa",
+   "kinh đô",
+   "old market",
+   "canal",
+   "thatched stilt houses",
+   "boats",
+   "ancient kingdom",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "cho_ven_kenh_co"
+  ],
+  "catalog_id": "cho_ven_kenh_co",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Dãy nhà sàn mái tranh + sạp hàng trên bờ, kênh tiền cảnh có thuyền; nhân vật nhỏ trên bờ.",
+  "label_en": "Old riverside market (day)",
+  "description_en": "Row of thatched stilt houses and market stalls along a canal in an old kingdom, white tower and stupas in the haze, wooden boats on green water.",
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Ancient Thai riverside market, thatched stilt houses, canal, boats, prang in haze, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cho_ven_kenh_co"
+ },
+ "floor_y": 1255,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1255,
+   "scale": 0.42
+  },
+  "left": {
+   "x": 1100,
+   "y": 1255,
+   "scale": 0.42
+  },
+  "right": {
+   "x": 2700,
+   "y": 1255,
+   "scale": 0.42
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Ancient Thai riverside market, thatched stilt houses, canal, boats, prang in haze, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

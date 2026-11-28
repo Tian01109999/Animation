@@ -1,0 +1,26 @@
+{
+ "id": "rules_note_desk_blur",
+ "label": "Tờ nội quy mờ (hồi ức)",
+ "label_en": "Blurred rules note",
+ "tags": [
+  "rules",
+  "blurred note",
+  "memory",
+  "underlined"
+ ],
+ "props": [
+  "rules_note_desk_blur"
+ ],
+ "style": "cutout",
+ "image": "rules_note_desk_blur.png",
+ "kind": "rules_note_desk_blur",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

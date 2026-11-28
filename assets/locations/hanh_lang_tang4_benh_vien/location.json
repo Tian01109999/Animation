@@ -1,0 +1,106 @@
+{
+ "id": "hanh_lang_tang4_benh_vien",
+ "name": "Hành lang tầng 4 khu bệnh",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hành lang tầng 4 khu bệnh / Hospital ward corridor, floor 4 (ban đêm / night)",
+  "description": "Hành lang tầng 4 khu bệnh, ban đêm. Hospital corridor in one-point perspective: teal walls with dark green dado, beige handrails on both sides, doors, ceiling strip lights, rainy window with bokeh at the end, hanging sign MEMORIAL WING - FLOOR 4, small FLOOR 4 sign and blue WARD sign, dust specks on the floor. (night). hành lang, bệnh viện, tầng 4, tay vịn, biển chỉ dẫn, hospital corridor, floor 4, handrails, ward sign, ban đêm, night",
+  "kind": "hospital_corridor",
+  "tags": [
+   "hành lang",
+   "bệnh viện",
+   "tầng 4",
+   "tay vịn",
+   "biển chỉ dẫn",
+   "hospital corridor",
+   "floor 4",
+   "handrails",
+   "ward sign",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "hanh_lang_tang4_benh_vien"
+  ],
+  "catalog_id": "hanh_lang_tang4_benh_vien",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "1 điểm tụ: tường xanh ngọc, tay vịn be, cửa phòng, đèn trần, cửa sổ cuối hành lang, biển MEMORIAL WING - FLOOR 4 / FLOOR 4 / WARD (nướng).",
+  "label_en": "Hospital ward corridor, floor 4 (night)",
+  "description_en": "Hospital corridor in one-point perspective: teal walls with dark green dado, beige handrails on both sides, doors, ceiling strip lights, rainy window with bokeh at the end, hanging sign MEMORIAL WING - FLOOR 4, small FLOOR 4 sign and blue WARD sign, dust specks on the floor.",
+  "baked_text": [
+   "MEMORIAL WING - FLOOR 4",
+   "FLOOR 4",
+   "WARD"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Hospital corridor one point perspective, teal walls, beige handrails, hanging signs, window at the end, night, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "hanh_lang_tang4_benh_vien"
+ },
+ "floor_y": 1680,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1680,
+   "scale": 1.109
+  },
+  "left": {
+   "x": 1695,
+   "y": 1480,
+   "scale": 0.832
+  },
+  "right": {
+   "x": 2145,
+   "y": 1480,
+   "scale": 0.832
+  },
+  "far": {
+   "x": 1920,
+   "y": 1120,
+   "scale": 0.333
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "MEMORIAL WING - FLOOR 4",
+   "box": [
+    1632,
+    303,
+    2208,
+    361
+   ]
+  },
+  {
+   "text": "FLOOR 4",
+   "box": [
+    1701,
+    716,
+    1806,
+    744
+   ]
+  },
+  {
+   "text": "WARD",
+   "box": [
+    2093,
+    658,
+    2160,
+    690
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Hospital corridor one point perspective, teal walls, beige handrails, hanging signs, window at the end, night, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

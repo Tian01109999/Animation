@@ -1,0 +1,27 @@
+{
+ "id": "wall_undermine_diagram",
+ "label": "Sơ đồ đốt móng làm sập tường thành",
+ "label_en": "Why the wall fell (diagram)",
+ "tags": [
+  "diagram",
+  "wall collapse",
+  "tunnel",
+  "fire under foundation",
+  "siege tactic"
+ ],
+ "props": [
+  "wall_undermine_diagram"
+ ],
+ "style": "cutout",
+ "image": "wall_undermine_diagram.png",
+ "kind": "wall_undermine_diagram",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

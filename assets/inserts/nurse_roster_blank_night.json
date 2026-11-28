@@ -1,0 +1,28 @@
+{
+ "id": "nurse_roster_blank_night",
+ "label": "Lịch trực – ca đêm còn trống",
+ "label_en": "Nurse roster, night shift blank",
+ "tags": [
+  "roster",
+  "duty schedule",
+  "empty night shift",
+  "nurses",
+  "hospital"
+ ],
+ "props": [
+  "roster_blank_night",
+  "empty_night_shift"
+ ],
+ "style": "cutout",
+ "image": "nurse_roster_blank_night.png",
+ "kind": "nurse_roster_blank_night",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

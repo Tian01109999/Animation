@@ -1,0 +1,27 @@
+{
+ "id": "desk_coffee_phone",
+ "label": "Mặt bàn: tách cà phê + điện thoại úp",
+ "label_en": "Desk top: coffee and phone",
+ "tags": [
+  "desk",
+  "coffee",
+  "phone face down",
+  "top view",
+  "waiting"
+ ],
+ "props": [
+  "desk_coffee_phone"
+ ],
+ "style": "cutout",
+ "image": "desk_coffee_phone.png",
+ "kind": "desk_coffee_phone",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

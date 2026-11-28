@@ -1,0 +1,29 @@
+{
+ "id": "oxygen_outlet",
+ "label": "Ổ khí oxy O2/AIR + lưu lượng kế",
+ "label_en": "Oxygen wall outlet with flowmeter",
+ "tags": [
+  "oxygen",
+  "o2 outlet",
+  "flowmeter",
+  "wall gas panel",
+  "hospital"
+ ],
+ "props": [
+  "oxygen_outlet",
+  "o2_outlet",
+  "flowmeter"
+ ],
+ "style": "cutout",
+ "image": "oxygen_outlet.png",
+ "kind": "oxygen_outlet",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

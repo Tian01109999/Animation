@@ -1,0 +1,428 @@
+{
+ "id": "quay_truc_y_ta",
+ "name": "Quầy trực y tá (bảng chuông, đồng hồ, bảng bệnh nhân)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Quầy trực y tá (bảng chuông, đồng hồ, bảng bệnh nhân) / Nurse station wall (ban đêm / night)",
+  "description": "Quầy trực y tá (bảng chuông, đồng hồ, bảng bệnh nhân), ban đêm. Nurse station wall: NURSE CALL panel with 12 maroon bed buttons, wall clock, WARD 4 PATIENTS whiteboard with bed list (bed 12 only a red dash), rules note, binders, desk counter with printer, files, mug, beige phone and desk lamp. Variant call12: button 12 glows red and the clock reads 3:00. (night). quầy trực, y tá, bảng chuông gọi, đồng hồ, bảng bệnh nhân, nội quy, nurse station, call panel, patient board, 3 am, ban đêm, night",
+  "kind": "nurse_station",
+  "tags": [
+   "quầy trực",
+   "y tá",
+   "bảng chuông gọi",
+   "đồng hồ",
+   "bảng bệnh nhân",
+   "nội quy",
+   "nurse station",
+   "call panel",
+   "patient board",
+   "3 am",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "quay_truc_y_ta",
+   "quay_truc_y_ta__call12"
+  ],
+  "catalog_id": "quay_truc_y_ta",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Nhìn thẳng tường quầy trực: bảng NURSE CALL 1-12, đồng hồ, bảng WARD 4 PATIENTS, tờ nội quy, kệ hồ sơ, mặt quầy (máy in, cốc, điện thoại, đèn bàn). Biến thể call12: nút 12 đỏ, 3 giờ.",
+  "label_en": "Nurse station wall (night)",
+  "description_en": "Nurse station wall: NURSE CALL panel with 12 maroon bed buttons, wall clock, WARD 4 PATIENTS whiteboard with bed list (bed 12 only a red dash), rules note, binders, desk counter with printer, files, mug, beige phone and desk lamp. Variant call12: button 12 glows red and the clock reads 3:00.",
+  "baked_text": [
+   "NURSE CALL",
+   "1",
+   "2",
+   "3",
+   "4",
+   "5",
+   "6",
+   "7",
+   "8",
+   "9",
+   "10",
+   "11",
+   "12",
+   "WARD 4 PATIENTS",
+   "Aunt B.",
+   "Uncle S.",
+   "Grandma P.",
+   "Uncle C.",
+   "Aunt L.",
+   "Grandpa C.",
+   "Uncle P.",
+   "Grandma K.",
+   "Uncle T.",
+   "Aunt S."
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Hospital nurse station wall with nurse call light panel, wall clock, patient whiteboard, desk with phone and lamp, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "quay_truc_y_ta"
+ },
+ "floor_y": 2100,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 2100,
+   "scale": 1.15
+  },
+  "left": {
+   "x": 420,
+   "y": 2100,
+   "scale": 1.15
+  },
+  "right": {
+   "x": 3300,
+   "y": 2100,
+   "scale": 1.15
+  },
+  "behind_desk": {
+   "x": 1700,
+   "y": 2160,
+   "scale": 1.2,
+   "clip_bottom": 1770
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "NURSE CALL",
+   "box": [
+    562,
+    686,
+    818,
+    734
+   ]
+  },
+  {
+   "text": "1",
+   "box": [
+    317,
+    811,
+    353,
+    879
+   ]
+  },
+  {
+   "text": "2",
+   "box": [
+    457,
+    811,
+    493,
+    879
+   ]
+  },
+  {
+   "text": "3",
+   "box": [
+    597,
+    811,
+    633,
+    879
+   ]
+  },
+  {
+   "text": "4",
+   "box": [
+    737,
+    811,
+    773,
+    879
+   ]
+  },
+  {
+   "text": "5",
+   "box": [
+    877,
+    811,
+    913,
+    879
+   ]
+  },
+  {
+   "text": "6",
+   "box": [
+    1017,
+    811,
+    1053,
+    879
+   ]
+  },
+  {
+   "text": "7",
+   "box": [
+    317,
+    991,
+    353,
+    1059
+   ]
+  },
+  {
+   "text": "8",
+   "box": [
+    457,
+    991,
+    493,
+    1059
+   ]
+  },
+  {
+   "text": "9",
+   "box": [
+    597,
+    991,
+    633,
+    1059
+   ]
+  },
+  {
+   "text": "10",
+   "box": [
+    719,
+    991,
+    791,
+    1059
+   ]
+  },
+  {
+   "text": "11",
+   "box": [
+    859,
+    991,
+    931,
+    1059
+   ]
+  },
+  {
+   "text": "12",
+   "box": [
+    999,
+    991,
+    1071,
+    1059
+   ]
+  },
+  {
+   "text": "WARD 4 PATIENTS",
+   "box": [
+    2180,
+    650,
+    2660,
+    710
+   ]
+  },
+  {
+   "text": "1",
+   "box": [
+    1898,
+    748,
+    1922,
+    792
+   ]
+  },
+  {
+   "text": "Aunt B.",
+   "box": [
+    2004,
+    750,
+    2156,
+    790
+   ]
+  },
+  {
+   "text": "2",
+   "box": [
+    1898,
+    836,
+    1922,
+    880
+   ]
+  },
+  {
+   "text": "Uncle S.",
+   "box": [
+    1993,
+    838,
+    2167,
+    878
+   ]
+  },
+  {
+   "text": "3",
+   "box": [
+    1898,
+    924,
+    1922,
+    968
+   ]
+  },
+  {
+   "text": "Grandma P.",
+   "box": [
+    1971,
+    926,
+    2189,
+    966
+   ]
+  },
+  {
+   "text": "4",
+   "box": [
+    1898,
+    1012,
+    1922,
+    1056
+   ]
+  },
+  {
+   "text": "Uncle C.",
+   "box": [
+    1993,
+    1014,
+    2167,
+    1054
+   ]
+  },
+  {
+   "text": "5",
+   "box": [
+    1898,
+    1100,
+    1922,
+    1144
+   ]
+  },
+  {
+   "text": "Aunt L.",
+   "box": [
+    2004,
+    1102,
+    2156,
+    1142
+   ]
+  },
+  {
+   "text": "6",
+   "box": [
+    1898,
+    1188,
+    1922,
+    1232
+   ]
+  },
+  {
+   "text": "Grandpa C.",
+   "box": [
+    1971,
+    1190,
+    2189,
+    1230
+   ]
+  },
+  {
+   "text": "7",
+   "box": [
+    2458,
+    748,
+    2482,
+    792
+   ]
+  },
+  {
+   "text": "8",
+   "box": [
+    2458,
+    836,
+    2482,
+    880
+   ]
+  },
+  {
+   "text": "Uncle P.",
+   "box": [
+    2553,
+    838,
+    2727,
+    878
+   ]
+  },
+  {
+   "text": "9",
+   "box": [
+    2458,
+    924,
+    2482,
+    968
+   ]
+  },
+  {
+   "text": "Grandma K.",
+   "box": [
+    2531,
+    926,
+    2749,
+    966
+   ]
+  },
+  {
+   "text": "10",
+   "box": [
+    2447,
+    1012,
+    2493,
+    1056
+   ]
+  },
+  {
+   "text": "Uncle T.",
+   "box": [
+    2553,
+    1014,
+    2727,
+    1054
+   ]
+  },
+  {
+   "text": "11",
+   "box": [
+    2447,
+    1100,
+    2493,
+    1144
+   ]
+  },
+  {
+   "text": "Aunt S.",
+   "box": [
+    2564,
+    1102,
+    2716,
+    1142
+   ]
+  },
+  {
+   "text": "12",
+   "box": [
+    2447,
+    1188,
+    2493,
+    1232
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Hospital nurse station wall with nurse call light panel, wall clock, patient whiteboard, desk with phone and lamp, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "call12": "Hospital nurse station wall with nurse call light panel, wall clock, patient whiteboard, desk with phone and lamp, night, one call light glowing red, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

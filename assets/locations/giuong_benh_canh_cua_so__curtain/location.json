@@ -1,0 +1,85 @@
+{
+ "id": "giuong_benh_canh_cua_so__curtain",
+ "name": "Giường bệnh cạnh cửa sổ mưa",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Giường bệnh cạnh cửa sổ mưa / Hospital bed by a rainy window (ban đêm, sau rèm giường 12 / night, behind the bed-12 curtain)",
+  "description": "Giường bệnh cạnh cửa sổ mưa, ban đêm, sau rèm giường 12. Side view of a single hospital bed beside a big rainy night window with tree silhouettes: bed number plate, wall unit with call lights, call cord with red button, beige nightstand with glass and cup. Variant curtain: bed 12, bare mattress, pale striped curtain covering the left side. (night, behind the bed-12 curtain). giường bệnh, cửa sổ, mưa, tủ đầu giường, nút gọi, rèm, hospital bed, rainy window, bedside, curtain, ban đêm, sau rèm giường 12",
+  "kind": "hospital_bedside",
+  "tags": [
+   "giường bệnh",
+   "cửa sổ",
+   "mưa",
+   "tủ đầu giường",
+   "nút gọi",
+   "rèm",
+   "hospital bed",
+   "rainy window",
+   "bedside",
+   "curtain",
+   "ban đêm, sau rèm giường 12"
+  ],
+  "time_variants": [
+   "giuong_benh_canh_cua_so",
+   "giuong_benh_canh_cua_so__curtain",
+   "giuong_benh_canh_cua_so__monitor"
+  ],
+  "catalog_id": "giuong_benh_canh_cua_so",
+  "variant": "curtain",
+  "style": "cutout",
+  "layout": "Nhìn ngang: giường đơn, cửa sổ mưa lớn, biển số giường, hộp gọi y tá, tủ đầu giường. Biến thể curtain: giường 12 trống, rèm sọc mờ bên trái.",
+  "label_en": "Hospital bed by a rainy window (night, behind the bed-12 curtain)",
+  "description_en": "Side view of a single hospital bed beside a big rainy night window with tree silhouettes: bed number plate, wall unit with call lights, call cord with red button, beige nightstand with glass and cup. Variant curtain: bed 12, bare mattress, pale striped curtain covering the left side.",
+  "baked_text": [
+   "12"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Single hospital bed by a large rainy night window, nightstand, call button cord, teal wall, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "giuong_benh_canh_cua_so"
+ },
+ "floor_y": 1990,
+ "slots": {
+  "left": {
+   "x": 1600,
+   "y": 1990,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 3000,
+   "y": 1990,
+   "scale": 1.0
+  },
+  "center": {
+   "x": 2700,
+   "y": 1990,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "12",
+   "box": [
+    864,
+    367,
+    966,
+    463
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Single hospital bed by a large rainy night window, nightstand, call button cord, teal wall, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "curtain": "Single hospital bed by a large rainy night window, nightstand, call button cord, teal wall, night, pale translucent curtain in foreground, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "monitor": "Single hospital bed by a large rainy night window, nightstand, call button cord, teal wall, night, IV pole with vital monitor, visitor chair, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

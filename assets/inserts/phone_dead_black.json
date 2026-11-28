@@ -1,0 +1,27 @@
+{
+ "id": "phone_dead_black",
+ "label": "Điện thoại hết pin, màn đen",
+ "label_en": "Dead phone, black screen",
+ "tags": [
+  "phone",
+  "dead phone",
+  "black screen",
+  "battery died"
+ ],
+ "props": [
+  "dead_phone",
+  "black_phone"
+ ],
+ "style": "cutout",
+ "image": "phone_dead_black.png",
+ "kind": "phone_dead_black",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

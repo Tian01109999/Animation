@@ -1,0 +1,205 @@
+{
+ "id": "phong_benh_chung_dem__dark",
+ "name": "Phòng bệnh chung ban đêm (giường 2–12)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Phòng bệnh chung ban đêm (giường 2–12) / Long hospital ward at night (ban đêm, tắt đèn / night, lights out)",
+  "description": "Phòng bệnh chung ban đêm (giường 2–12), ban đêm, tắt đèn. Long hospital ward in one-point perspective: two rows of numbered beds (2-6 left, 7-11 right) with headboards against the walls, beige nightstands, red call buttons on cords, numbered wall plates, night windows on the left wall, fluorescent strips, floor light pools; at the far end a window, a pale curtain bay around bed 12 and a white cabinet. Variant dark: lights out, faint red glow behind the curtain. (night, lights out). phòng bệnh, phòng bệnh chung, giường bệnh, bệnh viện, rèm, giường 12, ca đêm, hospital ward, ward beds, curtain, night shift, lights out, ban đêm, tắt đèn, dark",
+  "kind": "hospital_ward",
+  "tags": [
+   "phòng bệnh",
+   "phòng bệnh chung",
+   "giường bệnh",
+   "bệnh viện",
+   "rèm",
+   "giường 12",
+   "ca đêm",
+   "hospital ward",
+   "ward beds",
+   "curtain",
+   "night shift",
+   "lights out",
+   "ban đêm, tắt đèn",
+   "dark"
+  ],
+  "time_variants": [
+   "phong_benh_chung_dem",
+   "phong_benh_chung_dem__dark"
+  ],
+  "catalog_id": "phong_benh_chung_dem",
+  "variant": "dark",
+  "style": "cutout",
+  "layout": "1 điểm tụ: hai dãy giường đánh số (nướng) sát tường, tủ đầu giường, nút gọi đỏ, cửa sổ tường trái, đèn tuýp trần; cuối phòng cửa sổ + rèm quây giường 12 + tủ trắng. Biến thể dark: tắt đèn, ánh đỏ sau rèm.",
+  "label_en": "Long hospital ward at night (night, lights out)",
+  "description_en": "Long hospital ward in one-point perspective: two rows of numbered beds (2-6 left, 7-11 right) with headboards against the walls, beige nightstands, red call buttons on cords, numbered wall plates, night windows on the left wall, fluorescent strips, floor light pools; at the far end a window, a pale curtain bay around bed 12 and a white cabinet. Variant dark: lights out, faint red glow behind the curtain.",
+  "baked_text": [
+   "12",
+   "7",
+   "6",
+   "11",
+   "5",
+   "10",
+   "4",
+   "9",
+   "3",
+   "8",
+   "2"
+  ],
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Long hospital ward at night, one point perspective, two rows of numbered beds, curtains around the last bed, fluorescent ceiling lights, teal walls, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "phong_benh_chung_dem"
+ },
+ "floor_y": 1471,
+ "slots": {
+  "center": {
+   "x": 1920,
+   "y": 1471,
+   "scale": 0.792
+  },
+  "left": {
+   "x": 1647,
+   "y": 1336,
+   "scale": 0.605
+  },
+  "right": {
+   "x": 2193,
+   "y": 1336,
+   "scale": 0.605
+  },
+  "far": {
+   "x": 1932,
+   "y": 1100,
+   "scale": 0.277
+  },
+  "bed12": {
+   "x": 1950,
+   "y": 1021,
+   "scale": 0.168
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "12",
+   "box": [
+    1913,
+    856,
+    1927,
+    869
+   ]
+  },
+  {
+   "text": "7",
+   "box": [
+    1565,
+    858,
+    1574,
+    874
+   ]
+  },
+  {
+   "text": "6",
+   "box": [
+    1496,
+    849,
+    1506,
+    869
+   ]
+  },
+  {
+   "text": "11",
+   "box": [
+    2329,
+    849,
+    2349,
+    869
+   ]
+  },
+  {
+   "text": "5",
+   "box": [
+    1393,
+    837,
+    1406,
+    861
+   ]
+  },
+  {
+   "text": "10",
+   "box": [
+    2428,
+    837,
+    2453,
+    861
+   ]
+  },
+  {
+   "text": "4",
+   "box": [
+    1224,
+    816,
+    1242,
+    849
+   ]
+  },
+  {
+   "text": "9",
+   "box": [
+    2598,
+    816,
+    2616,
+    849
+   ]
+  },
+  {
+   "text": "3",
+   "box": [
+    897,
+    776,
+    923,
+    825
+   ]
+  },
+  {
+   "text": "8",
+   "box": [
+    2917,
+    776,
+    2943,
+    825
+   ]
+  },
+  {
+   "text": "2",
+   "box": [
+    -16,
+    662,
+    39,
+    764
+   ]
+  },
+  {
+   "text": "7",
+   "box": [
+    3801,
+    662,
+    3856,
+    764
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "night": "Long hospital ward at night, one point perspective, two rows of numbered beds, curtains around the last bed, fluorescent ceiling lights, teal walls, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "dark": "Long hospital ward at night, one point perspective, two rows of numbered beds, curtains around the last bed, fluorescent ceiling lights, teal walls, night, lights off, faint red glow, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,26 @@
+{
+ "id": "call_log_empty",
+ "label": "Sổ chuông gọi trống trơn",
+ "label_en": "Empty call-bell log",
+ "tags": [
+  "call log",
+  "empty log",
+  "no entries",
+  "night shift"
+ ],
+ "props": [
+  "call_log_empty"
+ ],
+ "style": "cutout",
+ "image": "call_log_empty.png",
+ "kind": "call_log_empty",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,67 @@
+{
+ "id": "duong_ham_dot_mong",
+ "name": "Đường hầm khung gỗ đốt móng tường",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Đường hầm khung gỗ đốt móng tường / Timber tunnel with a fire (ban đêm / night)",
+  "description": "Đường hầm khung gỗ đốt móng tường, ban đêm. Underground tunnel with receding timber frames, earth walls, firewood stacked on both sides and a fire burning at the far end; variant: big blaze with embers. (night). đường hầm, khung gỗ, lửa, củi, đốt móng tường, dưới lòng đất, tunnel, timber frames, fire, firewood, underground, undermining, ban đêm, night",
+  "kind": "tunnel",
+  "tags": [
+   "đường hầm",
+   "khung gỗ",
+   "lửa",
+   "củi",
+   "đốt móng tường",
+   "dưới lòng đất",
+   "tunnel",
+   "timber frames",
+   "fire",
+   "firewood",
+   "underground",
+   "undermining",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "duong_ham_dot_mong",
+   "duong_ham_dot_mong__blaze"
+  ],
+  "catalog_id": "duong_ham_dot_mong",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Phối cảnh trung tâm, lửa cuối hầm, củi xếp hai bên.",
+  "label_en": "Timber tunnel with a fire (night)",
+  "description_en": "Underground tunnel with receding timber frames, earth walls, firewood stacked on both sides and a fire burning at the far end; variant: big blaze with embers.",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Timber-framed underground tunnel, firewood stacks, fire at the end, embers, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "duong_ham_dot_mong"
+ },
+ "floor_y": 2050,
+ "slots": {
+  "center": {
+   "x": 1500,
+   "y": 2050,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2400,
+   "y": 2050,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "night": "Timber-framed underground tunnel, firewood stacks, fire at the end, embers, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "blaze": "Timber-framed underground tunnel, firewood stacks, fire at the end, embers, roaring fire at the tunnel end, flying embers, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -7874,3 +7874,26 @@ def preview(lid: str, tod: str | None = None, with_signs: bool = True) -> skia.I
         entry = catalog_entry(lid) or {}
         return LIBRARY_SCENES[lid](tod or (entry.get("time_variants") or ["night"])[0]).composite(with_signs)
     return render_scene(lid, tod).composite(with_signs=with_signs)
+
+
+# lô 5 (bệnh viện ca đêm): phòng bệnh chung, toà nhà dưới mưa, hành lang tầng 4, quầy trực, giường cạnh cửa sổ,
+# phòng tủ đồ, pantry, sân nhà gỗ hoàng hôn (hồi tưởng), phòng trực cũ có radio
+from . import locgen_batch5 as _batch5  # noqa: E402
+
+LIBRARY_SCENES.update(_batch5.LIBRARY_SCENES)
+LIBRARY_TAGS.update(_batch5.LIBRARY_TAGS)
+TOD_VI.update(_batch5.TOD_VI)
+TOD_EN.update(_batch5.TOD_EN)
+TOD_SCHEMA.update(_batch5.TOD_SCHEMA)
+TOD_FLOW.update(_batch5.TOD_FLOW)
+
+# lô 7 (kinh đô cổ bị vây): xưởng thuyền gầm nhà sàn, sân xưởng hoàng hôn, tường thành + khói, chỗ đào chân tường,
+# hầm gạch vòm, đường hầm đốt móng, phế tích cây bồ đề, chợ ven kênh, chùa tháp prang, sân làng nhà sàn
+from . import locgen_batch7 as _batch7  # noqa: E402
+
+LIBRARY_SCENES.update(_batch7.LIBRARY_SCENES)
+LIBRARY_TAGS.update(_batch7.LIBRARY_TAGS)
+TOD_VI.update(_batch7.TOD_VI)
+TOD_EN.update(_batch7.TOD_EN)
+TOD_SCHEMA.update(_batch7.TOD_SCHEMA)
+TOD_FLOW.update(_batch7.TOD_FLOW)

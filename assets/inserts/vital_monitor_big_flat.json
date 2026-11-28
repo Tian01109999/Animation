@@ -1,0 +1,27 @@
+{
+ "id": "vital_monitor_big_flat",
+ "label": "Máy sinh hiệu – đường thẳng (tử vong)",
+ "label_en": "Monitor flatline",
+ "tags": [
+  "flatline",
+  "death",
+  "monitor zero",
+  "heart stopped"
+ ],
+ "props": [
+  "flatline_monitor",
+  "flatline"
+ ],
+ "style": "cutout",
+ "image": "vital_monitor_big_flat.png",
+ "kind": "vital_monitor_big_flat",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

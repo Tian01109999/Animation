@@ -1,0 +1,27 @@
+{
+ "id": "torn_photo_man",
+ "label": "Nửa tấm ảnh xé – người đàn ông áo vàng",
+ "label_en": "Torn photo half: man in yellow",
+ "tags": [
+  "torn photo",
+  "father",
+  "yellow shirt",
+  "memory",
+  "photo half"
+ ],
+ "props": [
+  "torn_photo_man"
+ ],
+ "style": "cutout",
+ "image": "torn_photo_man.png",
+ "kind": "torn_photo_man",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

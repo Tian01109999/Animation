@@ -1,0 +1,75 @@
+{
+ "id": "ham_gach_vom",
+ "name": "Hầm gạch vòm (ngục)",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "night",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Hầm gạch vòm (ngục) / Vaulted brick cellar (ban đêm / night)",
+  "description": "Hầm gạch vòm (ngục), ban đêm. Barrel-vaulted brick cellar: brick stairs up to a barred window with a light shaft, wall torch, brick ledge bench, bucket, straw on the floor; variant: torch lit. (night). hầm gạch, ngục, vòm gạch, cửa song, cầu thang, đuốc, rơm, bị giam, brick cellar, vaulted dungeon, barred window, stairs, torch, prison, ban đêm, night",
+  "kind": "brick_cellar",
+  "tags": [
+   "hầm gạch",
+   "ngục",
+   "vòm gạch",
+   "cửa song",
+   "cầu thang",
+   "đuốc",
+   "rơm",
+   "bị giam",
+   "brick cellar",
+   "vaulted dungeon",
+   "barred window",
+   "stairs",
+   "torch",
+   "prison",
+   "ban đêm",
+   "night"
+  ],
+  "time_variants": [
+   "ham_gach_vom",
+   "ham_gach_vom__torch"
+  ],
+  "catalog_id": "ham_gach_vom",
+  "variant": "night",
+  "style": "cutout",
+  "layout": "Vòm gạch, cầu thang + cửa song bên phải, bệ gạch bên trái (ngồi), đuốc trên tường.",
+  "label_en": "Vaulted brick cellar (night)",
+  "description_en": "Barrel-vaulted brick cellar: brick stairs up to a barred window with a light shaft, wall torch, brick ledge bench, bucket, straw on the floor; variant: torch lit.",
+  "time_of_day": "night"
+ },
+ "flow_prompt": "Vaulted brick dungeon cellar, barred window at top of stairs, light shaft, torch, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "ham_gach_vom"
+ },
+ "floor_y": 1960,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1960,
+   "scale": 1.0
+  },
+  "bench": {
+   "x": 800,
+   "y": 1700,
+   "scale": 0.95,
+   "pose": "sit"
+  },
+  "stairs": {
+   "x": 2900,
+   "y": 1180,
+   "scale": 0.85
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "night": "Vaulted brick dungeon cellar, barred window at top of stairs, light shaft, torch, night, deep navy darkness, few light sources, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "torch": "Vaulted brick dungeon cellar, barred window at top of stairs, light shaft, torch, warm torchlight on brick, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

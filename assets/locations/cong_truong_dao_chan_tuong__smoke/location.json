@@ -1,0 +1,74 @@
+{
+ "id": "cong_truong_dao_chan_tuong__smoke",
+ "name": "Chỗ đào hầm dưới chân tường",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chỗ đào hầm dưới chân tường / Digging site at the foot of the wall (ban ngày, hố bốc khói đỏ lửa / day, smoking glowing hole)",
+  "description": "Chỗ đào hầm dưới chân tường, ban ngày, hố bốc khói đỏ lửa. Close brick wall with ragged plaster, a dark hole in the ground with a plank, dirt mounds, woven baskets and hoes; variant: smoke and orange glow from the hole. (day, smoking glowing hole). đào hầm, chân tường, hố đất, cuốc, sọt, tường gạch, khói, than hồng, digging, foot of the wall, hole, hoe, baskets, undermining, ban ngày, hố bốc khói đỏ lửa, smoke",
+  "kind": "dig_site",
+  "tags": [
+   "đào hầm",
+   "chân tường",
+   "hố đất",
+   "cuốc",
+   "sọt",
+   "tường gạch",
+   "khói",
+   "than hồng",
+   "digging",
+   "foot of the wall",
+   "hole",
+   "hoe",
+   "baskets",
+   "undermining",
+   "ban ngày, hố bốc khói đỏ lửa",
+   "smoke"
+  ],
+  "time_variants": [
+   "cong_truong_dao_chan_tuong",
+   "cong_truong_dao_chan_tuong__smoke"
+  ],
+  "catalog_id": "cong_truong_dao_chan_tuong",
+  "variant": "smoke",
+  "style": "cutout",
+  "layout": "Tường gạch phía sau, hố giữa khung, đống đất + sọt + cuốc hai bên.",
+  "label_en": "Digging site at the foot of the wall (day, smoking glowing hole)",
+  "description_en": "Close brick wall with ragged plaster, a dark hole in the ground with a plank, dirt mounds, woven baskets and hoes; variant: smoke and orange glow from the hole.",
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Digging a hole at the foot of a brick wall, dirt mounds, baskets, hoes, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "cong_truong_dao_chan_tuong"
+ },
+ "floor_y": 1900,
+ "slots": {
+  "center": {
+   "x": 1200,
+   "y": 1900,
+   "scale": 1.0
+  },
+  "left": {
+   "x": 1000,
+   "y": 1900,
+   "scale": 1.0
+  },
+  "right": {
+   "x": 2700,
+   "y": 1900,
+   "scale": 1.0
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Digging a hole at the foot of a brick wall, dirt mounds, baskets, hoes, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "smoke": "Digging a hole at the foot of a brick wall, dirt mounds, baskets, hoes, day, smoke column and orange glow from the hole, embers, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

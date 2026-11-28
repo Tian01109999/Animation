@@ -1782,6 +1782,686 @@
       "params": {
         "jugs": 3
       }
+    },
+    {
+      "id": "nurse_call_panel",
+      "name_vi": "Bảng chuông gọi y tá – giường 12 sáng đỏ",
+      "name_en": "Nurse call panel, bed 12 lit",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "nurse_call_panel_off",
+      "name_vi": "Bảng chuông gọi y tá – chưa sáng",
+      "name_en": "Nurse call panel, all unlit",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wall_clock_3am",
+      "name_vi": "Đồng hồ treo tường chỉ 3 giờ",
+      "name_en": "Wall clock at 3 AM",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wall_clock_255",
+      "name_vi": "Đồng hồ treo tường 2 giờ 55",
+      "name_en": "Wall clock at 2:55",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "night_rules_note",
+      "name_vi": "Tờ nội quy ca đêm dán tường",
+      "name_en": "Night-shift rules notice",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "night_rules_note_rule3",
+      "name_vi": "Nội quy ca đêm – gạch đỏ điều 3",
+      "name_en": "Night-shift rules, rule 3 underlined",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "nurse_roster",
+      "name_vi": "Lịch trực y tá trên bàn gỗ",
+      "name_en": "Nurse duty roster on a desk",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "nurse_roster_blank_night",
+      "name_vi": "Lịch trực – ca đêm còn trống",
+      "name_en": "Nurse roster, night shift blank",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "call_bell_log",
+      "name_vi": "Sổ ghi chuông gọi ca đêm",
+      "name_en": "Night call-bell log",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "patient_board",
+      "name_vi": "Bảng tên bệnh nhân theo giường",
+      "name_en": "Ward patient whiteboard",
+      "bg": "none",
+      "camera_default": "pan_right",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "desk_phone_beige",
+      "name_vi": "Điện thoại bàn màu kem",
+      "name_en": "Beige desk phone",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "paper_boat",
+      "name_vi": "Thuyền giấy trên bàn",
+      "name_en": "Paper boat on a desk",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "sorry_note_folded",
+      "name_vi": "Tờ giấy mở ra – chữ SORRY",
+      "name_en": "Unfolded note reading SORRY",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "torn_photo_girl",
+      "name_vi": "Ảnh cũ bị xé – bé gái váy vàng",
+      "name_en": "Torn photo of a little girl",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "nurse_cap_on_plastic",
+      "name_vi": "Mũ y tá trên giường bọc nhựa",
+      "name_en": "Nurse cap on a plastic-wrapped bed",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "nurse_fob_watch",
+      "name_vi": "Đồng hồ y tá cài trên áo",
+      "name_en": "Nurse fob watch on a uniform",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "key_ring_belt",
+      "name_vi": "Chùm chìa khoá đeo thắt lưng",
+      "name_en": "Key ring on a belt",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "uniform_on_hanger",
+      "name_vi": "Bộ đồng phục y tá cũ trên móc",
+      "name_en": "Old nurse uniform on a hanger",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "bed_call_button",
+      "name_vi": "Nút gọi y tá đầu giường",
+      "name_en": "Bedside nurse call button",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "vital_signs_monitor",
+      "name_vi": "Máy theo dõi sinh hiệu",
+      "name_en": "Vital-signs monitor",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "plastic_wrapped_bed",
+      "name_vi": "Tấm nhựa bọc giường phồng hình người",
+      "name_en": "Plastic-wrapped bed with a body shape",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "old_radio_glow",
+      "name_vi": "Radio cũ phát sáng",
+      "name_en": "Old glowing radio",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "locker_do_not_open",
+      "name_vi": "Tủ đồ dán chữ X – DO NOT OPEN",
+      "name_en": "Taped locker, DO NOT OPEN",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wet_footprints_trail",
+      "name_vi": "Vệt dấu chân ướt dẫn tới giường",
+      "name_en": "Trail of wet footprints toward a bed",
+      "bg": "none",
+      "camera_default": "pan_right",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "rules_note_desk",
+      "name_vi": "Tờ nội quy ca đêm trên bàn gỗ",
+      "name_en": "Night-shift rules note on a desk",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "rules_note_desk_blank_pen",
+      "name_vi": "Tờ nội quy còn trống + cây bút",
+      "name_en": "Blank rules note with a pen",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "rules_note_desk_rule4",
+      "name_vi": "Nội quy – gạch đỏ điều 4",
+      "name_en": "Rules note, rule 4 underlined",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "rules_note_desk_blur",
+      "name_vi": "Tờ nội quy mờ (hồi ức)",
+      "name_en": "Blurred rules note",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "roster_copy_stamp",
+      "name_vi": "Bản sao lịch trực có dấu COPY",
+      "name_en": "Roster copy with COPY stamp",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "desk_coffee_phone",
+      "name_vi": "Mặt bàn: tách cà phê + điện thoại úp",
+      "name_en": "Desk top: coffee and phone",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "desk_coffee_phone_roster",
+      "name_vi": "Mặt bàn: cà phê, điện thoại, bản lịch trực",
+      "name_en": "Desk top with roster copy",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "patient_wristband_unknown",
+      "name_vi": "Vòng tay bệnh nhân không rõ tên",
+      "name_en": "Unknown patient wristband",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "patient_wristband_named",
+      "name_vi": "Vòng tay bệnh nhân đã ghi tên",
+      "name_en": "Wristband with name written",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "vital_monitor_big",
+      "name_vi": "Máy sinh hiệu cận cảnh",
+      "name_en": "Vital-signs monitor close-up",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "vital_monitor_big_alarm",
+      "name_vi": "Máy sinh hiệu – SpO2 tụt đỏ",
+      "name_en": "Monitor, SpO2 dropping (red)",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "vital_monitor_big_flat",
+      "name_vi": "Máy sinh hiệu – đường thẳng (tử vong)",
+      "name_en": "Monitor flatline",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_call_doctor",
+      "name_vi": "Điện thoại đang gọi bác sĩ",
+      "name_en": "Phone calling the doctor",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_lock_photo_msg",
+      "name_vi": "Màn khoá: tin nhắn gửi ảnh lúc 2 giờ",
+      "name_en": "Lock screen: sent a photo",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_letter_photo",
+      "name_vi": "Điện thoại xem ảnh lá thư",
+      "name_en": "Phone showing a photo of a letter",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_browser_blank",
+      "name_vi": "Điện thoại mở trình duyệt trống",
+      "name_en": "Phone with blank browser",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "letter_from_dad",
+      "name_vi": "Lá thư viết tay của bố",
+      "name_en": "Handwritten letter from dad",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "patient_board_closeup",
+      "name_vi": "Bảng bệnh nhân cận – giường 9-12, tên mờ",
+      "name_en": "Patient board close-up, faded bed 12",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "call_log_empty",
+      "name_vi": "Sổ chuông gọi trống trơn",
+      "name_en": "Empty call-bell log",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "oxygen_outlet",
+      "name_vi": "Ổ khí oxy O2/AIR + lưu lượng kế",
+      "name_en": "Oxygen wall outlet with flowmeter",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "belongings_bag",
+      "name_vi": "Túi nhựa đựng đồ bệnh nhân",
+      "name_en": "Patient belongings bag",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "torn_photo_man",
+      "name_vi": "Nửa tấm ảnh xé – người đàn ông áo vàng",
+      "name_en": "Torn photo half: man in yellow",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "paper_boat_pillow",
+      "name_vi": "Thuyền giấy trên gối",
+      "name_en": "Paper boat on a pillow",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wheel_tracks_wet",
+      "name_vi": "Vệt bánh xe ướt tới chân giường",
+      "name_en": "Wet wheel tracks to a bed",
+      "bg": "none",
+      "camera_default": "pan_right",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "coconut_bowl_rice",
+      "name_vi": "Gáo dừa nước có vài hạt gạo",
+      "name_en": "Coconut bowl with rice in water",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wood_map_city",
+      "name_vi": "Bản đồ thành vẽ than trên ván gỗ",
+      "name_en": "Charcoal city map on wooden boards",
+      "bg": "none",
+      "camera_default": "pan_right",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wood_map_city_route",
+      "name_vi": "Bản đồ ván gỗ – đang vẽ đường đi",
+      "name_en": "Wood map with a route being drawn",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "island_city_map",
+      "name_vi": "Bản đồ kinh đô cổ giữa 3 con sông",
+      "name_en": "Old capital ringed by three rivers",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "island_city_map_siege",
+      "name_vi": "Bản đồ trại địch vây thành",
+      "name_en": "Siege camps around the city",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "old_map_tablet",
+      "name_vi": "Bản đồ kênh cổ trên máy tính bảng",
+      "name_en": "Old canal map on a tablet",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wall_undermine_diagram",
+      "name_vi": "Sơ đồ đốt móng làm sập tường thành",
+      "name_en": "Why the wall fell (diagram)",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "boat_plank_chisel",
+      "name_vi": "Vết đục trên ván thuyền + phoi gỗ",
+      "name_en": "Chisel marks on a boat plank",
+      "bg": "none",
+      "camera_default": "pan_right",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "hoe_glowing_hole",
+      "name_vi": "Cuốc bổ trúng hố than đỏ bốc khói",
+      "name_en": "Hoe hits a glowing smoking hole",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "gong_night",
+      "name_vi": "Cồng treo khung gỗ ban đêm",
+      "name_en": "Gong on its frame at night",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "stone_head_roots",
+      "name_vi": "Đầu tượng đá trong rễ cây",
+      "name_en": "Stone head in tree roots",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "clay_oil_lamps",
+      "name_vi": "3 đèn dầu đất – còn 2 ngày",
+      "name_en": "Clay oil lamps, two lit",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "clay_oil_lamps_one",
+      "name_vi": "3 đèn dầu đất – còn 1 ngày",
+      "name_en": "Clay oil lamps, one lit",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "clay_oil_lamps_three",
+      "name_vi": "3 đèn dầu đất – còn 3 ngày",
+      "name_en": "Clay oil lamps, all lit",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "wall_torch_brick",
+      "name_vi": "Đuốc cháy trên tường gạch",
+      "name_en": "Torch on a brick wall",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_lowbatt_lock",
+      "name_vi": "Điện thoại pin 2%, màn khoá 18:31",
+      "name_en": "Phone 2% battery lock screen",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_lowbatt_lock_morning",
+      "name_vi": "Điện thoại pin 2%, màn khoá 06:18",
+      "name_en": "Phone 2% battery, morning",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_lowbatt_lock_3pct",
+      "name_vi": "Điện thoại pin 3%, màn khoá 17:31",
+      "name_en": "Phone 3% battery lock screen",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_dead_black",
+      "name_vi": "Điện thoại hết pin, màn đen",
+      "name_en": "Dead phone, black screen",
+      "bg": "none",
+      "camera_default": "static",
+      "hands": false,
+      "library": true,
+      "params": {}
+    },
+    {
+      "id": "phone_map_photo",
+      "name_vi": "Điện thoại xem ảnh bản đồ cổ, báo pin yếu",
+      "name_en": "Phone photo of an old map, low battery",
+      "bg": "none",
+      "camera_default": "push_in_slow",
+      "hands": false,
+      "library": true,
+      "params": {}
     }
   ]
 }

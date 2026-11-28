@@ -1,0 +1,30 @@
+{
+ "id": "sorry_note_folded",
+ "label": "Tờ giấy mở ra – chữ SORRY",
+ "label_en": "Unfolded note reading SORRY",
+ "tags": [
+  "note",
+  "sorry",
+  "apology",
+  "unfolded paper",
+  "message",
+  "creases"
+ ],
+ "props": [
+  "sorry_note",
+  "apology_note",
+  "unfolded_note"
+ ],
+ "style": "cutout",
+ "image": "sorry_note_folded.png",
+ "kind": "sorry_note_folded",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,27 @@
+{
+ "id": "boat_plank_chisel",
+ "label": "Vết đục trên ván thuyền + phoi gỗ",
+ "label_en": "Chisel marks on a boat plank",
+ "tags": [
+  "boat plank",
+  "chisel marks",
+  "wood shavings",
+  "boat building",
+  "carving"
+ ],
+ "props": [
+  "boat_plank_chisel"
+ ],
+ "style": "cutout",
+ "image": "boat_plank_chisel.png",
+ "kind": "boat_plank_chisel",
+ "camera_default": "pan_right",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

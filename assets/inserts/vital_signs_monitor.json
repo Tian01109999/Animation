@@ -1,0 +1,29 @@
+{
+ "id": "vital_signs_monitor",
+ "label": "Máy theo dõi sinh hiệu",
+ "label_en": "Vital-signs monitor",
+ "tags": [
+  "vital signs",
+  "heart monitor",
+  "ecg",
+  "patient monitor",
+  "hospital"
+ ],
+ "props": [
+  "vital_monitor",
+  "heart_monitor_screen",
+  "patient_monitor"
+ ],
+ "style": "cutout",
+ "image": "vital_signs_monitor.png",
+ "kind": "vital_signs_monitor",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

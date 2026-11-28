@@ -1,0 +1,27 @@
+{
+ "id": "desk_coffee_phone_roster",
+ "label": "Mặt bàn: cà phê, điện thoại, bản lịch trực",
+ "label_en": "Desk top with roster copy",
+ "tags": [
+  "desk",
+  "coffee",
+  "phone",
+  "roster copy",
+  "top view"
+ ],
+ "props": [
+  "desk_coffee_phone_roster"
+ ],
+ "style": "cutout",
+ "image": "desk_coffee_phone_roster.png",
+ "kind": "desk_coffee_phone_roster",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

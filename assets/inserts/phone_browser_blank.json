@@ -1,0 +1,26 @@
+{
+ "id": "phone_browser_blank",
+ "label": "Điện thoại mở trình duyệt trống",
+ "label_en": "Phone with blank browser",
+ "tags": [
+  "phone",
+  "browser",
+  "search",
+  "empty screen"
+ ],
+ "props": [
+  "phone_browser_blank"
+ ],
+ "style": "cutout",
+ "image": "phone_browser_blank.png",
+ "kind": "phone_browser_blank",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

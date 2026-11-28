@@ -1,0 +1,27 @@
+{
+ "id": "wheel_tracks_wet",
+ "label": "Vệt bánh xe ướt tới chân giường",
+ "label_en": "Wet wheel tracks to a bed",
+ "tags": [
+  "wheel tracks",
+  "wet floor",
+  "bed wheel",
+  "trail",
+  "ghost"
+ ],
+ "props": [
+  "wheel_tracks_wet"
+ ],
+ "style": "cutout",
+ "image": "wheel_tracks_wet.png",
+ "kind": "wheel_tracks_wet",
+ "camera_default": "pan_right",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

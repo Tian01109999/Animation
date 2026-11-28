@@ -1,0 +1,72 @@
+{
+ "id": "chua_thap_prang",
+ "name": "Chùa tháp prang trắng",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Chùa tháp prang trắng / White prang temple (ban ngày / day)",
+  "description": "Chùa tháp prang trắng, ban ngày. Tall white prang tower with a bell niche and steep stairs, bell stupas, a red-roofed hall on stilts, sugar palms; hazy day or dusk. (day). chùa, tháp prang, tháp trắng, điện mái đỏ, bảo tháp, chuông, kinh đô cổ, temple, prang tower, white tower, stupa, ancient temple, ban ngày, day",
+  "kind": "temple",
+  "tags": [
+   "chùa",
+   "tháp prang",
+   "tháp trắng",
+   "điện mái đỏ",
+   "bảo tháp",
+   "chuông",
+   "kinh đô cổ",
+   "temple",
+   "prang tower",
+   "white tower",
+   "stupa",
+   "ancient temple",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "chua_thap_prang",
+   "chua_thap_prang__dusk"
+  ],
+  "catalog_id": "chua_thap_prang",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Tháp prang giữa khung, bảo tháp hai bên, điện mái đỏ bên trái.",
+  "label_en": "White prang temple (day)",
+  "description_en": "Tall white prang tower with a bell niche and steep stairs, bell stupas, a red-roofed hall on stilts, sugar palms; hazy day or dusk.",
+  "time_of_day": "day"
+ },
+ "flow_prompt": "White Khmer-style prang tower temple, stupas, red-roof hall, hazy, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "chua_thap_prang"
+ },
+ "floor_y": 2000,
+ "slots": {
+  "center": {
+   "x": 1500,
+   "y": 2000,
+   "scale": 0.7
+  },
+  "left": {
+   "x": 700,
+   "y": 2000,
+   "scale": 0.7
+  },
+  "right": {
+   "x": 2700,
+   "y": 2000,
+   "scale": 0.7
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "White Khmer-style prang tower temple, stupas, red-roof hall, hazy, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "dusk": "White Khmer-style prang tower temple, stupas, red-roof hall, hazy, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

@@ -1,0 +1,28 @@
+{
+ "id": "wall_clock_255",
+ "label": "Đồng hồ treo tường 2 giờ 55",
+ "label_en": "Wall clock at 2:55",
+ "tags": [
+  "wall clock",
+  "2:55",
+  "before 3 am",
+  "night shift",
+  "time"
+ ],
+ "props": [
+  "wall_clock_255",
+  "clock_255"
+ ],
+ "style": "cutout",
+ "image": "wall_clock_255.png",
+ "kind": "wall_clock_255",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

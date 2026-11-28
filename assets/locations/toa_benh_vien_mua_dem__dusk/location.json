@@ -1,0 +1,103 @@
+{
+ "id": "toa_benh_vien_mua_dem__dusk",
+ "name": "Toà nhà bệnh viện dưới mưa đêm",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "dusk",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Toà nhà bệnh viện dưới mưa đêm / Hospital building in the night rain (hoàng hôn / dusk)",
+  "description": "Toà nhà bệnh viện dưới mưa đêm, hoàng hôn. Four-storey hospital block at night in heavy rain: grid of barred windows (top floor pale teal, lower floors mixed warm-lit and dark), cracks on the facade, roof sign DISTRICT HOSPITAL, blue MEMORIAL WING sign over the entrance, trees, street lamp, wet road and parked scooters. Variant redwindow: the last top-floor window glows red. (dusk). bệnh viện, toà nhà, mặt tiền, mưa, đêm, cửa sổ đỏ, hospital building, exterior, rain, memorial wing, toàn cảnh, bãi đỗ, hoàng hôn, dusk",
+  "kind": "hospital_exterior",
+  "tags": [
+   "bệnh viện",
+   "toà nhà",
+   "mặt tiền",
+   "mưa",
+   "đêm",
+   "cửa sổ đỏ",
+   "hospital building",
+   "exterior",
+   "rain",
+   "memorial wing",
+   "toàn cảnh",
+   "bãi đỗ",
+   "hoàng hôn",
+   "dusk"
+  ],
+  "time_variants": [
+   "toa_benh_vien_mua_dem",
+   "toa_benh_vien_mua_dem__redwindow",
+   "toa_benh_vien_mua_dem__dusk"
+  ],
+  "catalog_id": "toa_benh_vien_mua_dem",
+  "variant": "dusk",
+  "style": "cutout",
+  "layout": "Mặt tiền 4 tầng, lưới cửa sổ, biển DISTRICT HOSPITAL + MEMORIAL WING (nướng), cây, đèn đường, đường ướt, xe máy, mưa. Biến thể redwindow: ô cửa tầng trên cùng đỏ.",
+  "label_en": "Hospital building in the night rain (dusk)",
+  "description_en": "Four-storey hospital block at night in heavy rain: grid of barred windows (top floor pale teal, lower floors mixed warm-lit and dark), cracks on the facade, roof sign DISTRICT HOSPITAL, blue MEMORIAL WING sign over the entrance, trees, street lamp, wet road and parked scooters. Variant redwindow: the last top-floor window glows red.",
+  "baked_text": [
+   "MEMORIAL WING",
+   "DISTRICT HOSPITAL"
+  ],
+  "time_of_day": "dusk"
+ },
+ "flow_prompt": "Old four storey hospital building at night in heavy rain, grid of windows, sign over the entrance, trees and street lamp, wet road, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "toa_benh_vien_mua_dem"
+ },
+ "floor_y": 1960,
+ "slots": {
+  "center": {
+   "x": 1260,
+   "y": 1960,
+   "scale": 0.32
+  },
+  "entrance": {
+   "x": 1930,
+   "y": 1900,
+   "scale": 0.3
+  },
+  "left": {
+   "x": 780,
+   "y": 1960,
+   "scale": 0.32
+  },
+  "right": {
+   "x": 2000,
+   "y": 1960,
+   "scale": 0.32
+  }
+ },
+ "signs": [],
+ "baked_signs": [
+  {
+   "text": "MEMORIAL WING",
+   "box": [
+    1672,
+    1495,
+    2188,
+    1570
+   ]
+  },
+  {
+   "text": "DISTRICT HOSPITAL",
+   "box": [
+    1322,
+    64,
+    2518,
+    196
+   ]
+  }
+ ],
+ "flow_prompts": {
+  "rain": "Old four storey hospital building at night in heavy rain, grid of windows, sign over the entrance, trees and street lamp, wet road, night, heavy rain, wet reflections, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "redwindow": "Old four storey hospital building at night in heavy rain, grid of windows, sign over the entrance, trees and street lamp, wet road, night, heavy rain, one red-lit window, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+  "dusk": "Old four storey hospital building at night in heavy rain, grid of windows, sign over the entrance, trees and street lamp, wet road, dusk, indigo to mauve sky, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

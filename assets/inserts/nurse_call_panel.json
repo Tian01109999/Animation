@@ -1,0 +1,30 @@
+{
+ "id": "nurse_call_panel",
+ "label": "Bảng chuông gọi y tá – giường 12 sáng đỏ",
+ "label_en": "Nurse call panel, bed 12 lit",
+ "tags": [
+  "nurse call",
+  "call bell panel",
+  "bed 12",
+  "hospital",
+  "red light",
+  "nurse station"
+ ],
+ "props": [
+  "nurse_call_panel",
+  "call_bell_panel",
+  "call_panel"
+ ],
+ "style": "cutout",
+ "image": "nurse_call_panel.png",
+ "kind": "nurse_call_panel",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

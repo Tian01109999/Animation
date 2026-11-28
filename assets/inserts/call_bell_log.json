@@ -1,0 +1,30 @@
+{
+ "id": "call_bell_log",
+ "label": "Sổ ghi chuông gọi ca đêm",
+ "label_en": "Night call-bell log",
+ "tags": [
+  "call log",
+  "call bell log",
+  "night shift",
+  "bed 12",
+  "did not go",
+  "record"
+ ],
+ "props": [
+  "call_log",
+  "call_bell_log",
+  "bell_log"
+ ],
+ "style": "cutout",
+ "image": "call_bell_log.png",
+ "kind": "call_bell_log",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

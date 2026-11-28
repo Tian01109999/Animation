@@ -1,0 +1,76 @@
+{
+ "id": "san_lang_nha_san",
+ "name": "Sân làng có chòi hàng và nhà sàn",
+ "size": [
+  3840,
+  2160
+ ],
+ "time_of_day": "day",
+ "bg": "bg.png",
+ "profile": {
+  "label": "Sân làng có chòi hàng và nhà sàn / Village yard with stall hut and stilt house (ban ngày / day)",
+  "description": "Sân làng có chòi hàng và nhà sàn, ban ngày. Dirt village yard: thatched stall hut with a fringe and a bamboo table with a basket, tall stilt house with a ladder on the right, smoke in the hazy distance, fence posts in front. (day). sân làng, nhà sàn, chòi bán hàng, mái tranh, thang, làng cổ, thời xưa, village yard, stilt house, stall hut, thatched, ladder, ban ngày, day",
+  "kind": "village_yard",
+  "tags": [
+   "sân làng",
+   "nhà sàn",
+   "chòi bán hàng",
+   "mái tranh",
+   "thang",
+   "làng cổ",
+   "thời xưa",
+   "village yard",
+   "stilt house",
+   "stall hut",
+   "thatched",
+   "ladder",
+   "ban ngày",
+   "day"
+  ],
+  "time_variants": [
+   "san_lang_nha_san"
+  ],
+  "catalog_id": "san_lang_nha_san",
+  "variant": "day",
+  "style": "cutout",
+  "layout": "Chòi hàng trái-giữa (có chỗ ngồi), nhà sàn + thang bên phải, sân đất giữa.",
+  "label_en": "Village yard with stall hut and stilt house (day)",
+  "description_en": "Dirt village yard: thatched stall hut with a fringe and a bamboo table with a basket, tall stilt house with a ladder on the right, smoke in the hazy distance, fence posts in front.",
+  "time_of_day": "day"
+ },
+ "flow_prompt": "Old Thai village yard, thatched stall hut, stilt house with ladder, dusty, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9",
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.locgen",
+  "catalog_id": "san_lang_nha_san"
+ },
+ "floor_y": 1760,
+ "slots": {
+  "center": {
+   "x": 1900,
+   "y": 1760,
+   "scale": 0.75
+  },
+  "left": {
+   "x": 700,
+   "y": 1760,
+   "scale": 0.75
+  },
+  "right": {
+   "x": 2800,
+   "y": 1760,
+   "scale": 0.75
+  },
+  "stall": {
+   "x": 1700,
+   "y": 1620,
+   "scale": 0.7,
+   "pose": "sit"
+  }
+ },
+ "signs": [],
+ "flow_prompts": {
+  "day": "Old Thai village yard, thatched stall hut, stilt house with ladder, dusty, overcast daytime light, flat 2D vector illustration, cutout animation background, soft gradients, no outlines, subtle film grain, strong vignette, simple geometric shapes, muted cinematic horror mood, no people, no text, no logos, 16:9"
+ },
+ "sign_texts": []
+}

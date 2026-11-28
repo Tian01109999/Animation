@@ -1,0 +1,29 @@
+{
+ "id": "key_ring_belt",
+ "label": "Chùm chìa khoá đeo thắt lưng",
+ "label_en": "Key ring on a belt",
+ "tags": [
+  "keys",
+  "key ring",
+  "belt",
+  "head nurse",
+  "bunch of keys"
+ ],
+ "props": [
+  "key_ring",
+  "bunch_of_keys",
+  "keys_on_belt"
+ ],
+ "style": "cutout",
+ "image": "key_ring_belt.png",
+ "kind": "key_ring_belt",
+ "camera_default": "static",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

@@ -1,0 +1,28 @@
+{
+ "id": "old_map_tablet",
+ "label": "Bản đồ kênh cổ trên máy tính bảng",
+ "label_en": "Old canal map on a tablet",
+ "tags": [
+  "tablet",
+  "old map",
+  "canals",
+  "south gate",
+  "tour guide",
+  "history"
+ ],
+ "props": [
+  "old_map_tablet"
+ ],
+ "style": "cutout",
+ "image": "old_map_tablet.png",
+ "kind": "old_map_tablet",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

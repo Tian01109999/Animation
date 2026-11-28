@@ -1,0 +1,29 @@
+{
+ "id": "patient_board",
+ "label": "Bảng tên bệnh nhân theo giường",
+ "label_en": "Ward patient whiteboard",
+ "tags": [
+  "patient board",
+  "whiteboard",
+  "ward list",
+  "bed numbers",
+  "hospital"
+ ],
+ "props": [
+  "patient_board",
+  "ward_whiteboard",
+  "patient_list"
+ ],
+ "style": "cutout",
+ "image": "patient_board.png",
+ "kind": "patient_board",
+ "camera_default": "pan_right",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

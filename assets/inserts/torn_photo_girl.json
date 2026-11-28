@@ -1,0 +1,30 @@
+{
+ "id": "torn_photo_girl",
+ "label": "Ảnh cũ bị xé – bé gái váy vàng",
+ "label_en": "Torn photo of a little girl",
+ "tags": [
+  "photo",
+  "torn photo",
+  "little girl",
+  "yellow dress",
+  "memory",
+  "childhood"
+ ],
+ "props": [
+  "torn_photo",
+  "childhood_photo",
+  "girl_photo"
+ ],
+ "style": "cutout",
+ "image": "torn_photo_girl.png",
+ "kind": "torn_photo_girl",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}

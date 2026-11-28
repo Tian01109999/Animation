@@ -1,0 +1,28 @@
+{
+ "id": "patient_wristband_unknown",
+ "label": "Vòng tay bệnh nhân không rõ tên",
+ "label_en": "Unknown patient wristband",
+ "tags": [
+  "wristband",
+  "patient id",
+  "unknown patient",
+  "hospital band"
+ ],
+ "props": [
+  "wristband",
+  "patient_wristband",
+  "hospital_band"
+ ],
+ "style": "cutout",
+ "image": "patient_wristband_unknown.png",
+ "kind": "patient_wristband_unknown",
+ "camera_default": "push_in_slow",
+ "text_language": "en",
+ "params": {},
+ "provenance": {
+  "kind": "procedural_library",
+  "generator": "storytoon.render.insertgen",
+  "note": "drawn offline from code; all baked-in text is English and fictional"
+ },
+ "library": true
+}
