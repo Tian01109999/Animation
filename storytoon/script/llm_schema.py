@@ -52,7 +52,7 @@ _DESCRIPTIONS: dict[tuple[str, str], str] = {
     ("Shot", "focus"): "id nhân vật camera hướng vào (bắt buộc với close/extreme_close nếu có nhân vật)",
     ("Shot", "subtitle"): "Phụ đề ngắn <= 12 từ",
     ("Line", "speaker"): "'narrator' hoặc CharacterDef.id",
-    ("Shot", "music_mood"): " | ".join(vocab.MUSIC_MOODS) + " | null (giữ nhạc trước)",
+    ("Shot", "music_mood"): " | ".join(vocab.MUSIC_MOODS) + " | none (tắt nhạc) | null (không đổi)",
     ("Shot", "sfx"): "tên trong thư viện hiệu ứng (xem mục Âm thanh), vd door_knock, rain, police_siren, impact",
     ("Shot", "transition"): "chuyển cảnh VÀO shot: cut (mặc định) | fade | blur | white",
     ("CharacterInShot", "view"): "front | back (quay lưng / qua vai, tiền cảnh) | side",
@@ -102,7 +102,7 @@ def _enum_override(model: str, field: str) -> dict[str, Any] | None:
     if model == "CharacterInShot" and field == "action":
         return {"type": "string", "enum": list(vocab.ACTIONS)}
     if model == "Shot" and field == "music_mood":
-        return {"anyOf": [{"type": "string", "enum": list(vocab.MUSIC_MOODS)}, {"type": "null"}]}
+        return {"anyOf": [{"type": "string", "enum": [*vocab.MUSIC_MOODS, vocab.MUSIC_OFF]}, {"type": "null"}]}
     if model == "Shot" and field == "sfx":
         from ..audio import library
         names = sorted(library.sfx_guide())

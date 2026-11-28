@@ -35,6 +35,7 @@ OVERLAY_KINDS: Final[tuple[str, ...]] = (
 )
 
 # Tâm trạng nhạc nền; None = giữ nhạc của shot trước
+MUSIC_OFF: Final = "none"   # music_mood = "none" → tắt nhạc từ shot đó
 MUSIC_MOODS: Final[tuple[str, ...]] = (
     "calm", "warm", "sad", "mystery", "tense", "horror", "investigation", "action", "shock", "hopeful", "tech",
 )

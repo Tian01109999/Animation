@@ -182,13 +182,15 @@ def _clean_sfx(names: list[str]) -> list[str]:
             name = canon
         if name not in out:
             out.append(name)
-    return out[:3]
+    return out[:2]
 
 
 def _clamp_mood(mood: str | None) -> str | None:
     if not mood:
         return None
     m = slugify(mood, "")
+    if m in ("none", "silence", "off", "stop", "no_music", "mute"):
+        return vocab.MUSIC_OFF
     m = _MOOD_ALIASES.get(m, m)
     return m if m in vocab.MUSIC_MOODS else None
 

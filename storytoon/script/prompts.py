@@ -28,13 +28,17 @@ def _sound_section() -> str:
         sfx_lines = ("  - door_creak, footsteps, wind, heartbeat, whisper, crowd_night, sizzle, metal_clank, "
                      "glass_break, chop, gong")
     return f"""\
-- music_mood: chọn theo cảm xúc của CÂU CHUYỆN tại shot đó, null để giữ nhạc trước. Chỉ đặt khi tâm trạng \
-thực sự đổi (thường mỗi 5-20 shot), không đổi qua lại liên tục.
+- music_mood: nhạc nền là các ĐOẠN NGẮN đặt ở nhịp cảm xúc, KHÔNG phủ kín cả phim. Đặt mood ở shot bắt đầu \
+một nhịp cảm xúc rõ (mở đầu, nguy hiểm ập đến, phát hiện kinh hoàng, cao trào, kết thúc); mỗi đoạn tự tắt \
+sau khoảng 1 phút. Đặt "none" để tắt nhạc ở đoạn kể chuyện/hội thoại bình thường, lấy lời khai, giải thích — \
+khoảng lặng làm cảnh căng thẳng hơn. Đặt "none" ở shot ngay trước cú sốc rồi đặt shock/horror ở shot sốc. \
+null = không đổi. Nhạc chỉ nên có ở khoảng 40-60% thời lượng phim; không đặt mood ở mọi shot.
 {mood_lines}
-- sfx: CHỈ dùng tên trong danh sách dưới (tên khác bị bỏ). Tối đa 2-3 âm/shot, chỉ khi hành động/không gian \
-đó thật sự có trong lời kể hoặc hình (gõ cửa → door_knock; cảnh sát tới → police_siren; trời mưa → rain). \
-Âm nền (mưa, phố, chợ, côn trùng đêm, phòng máy…) đặt lặp lại ở MỌI shot liên tiếp cùng không gian đó để \
-nghe liền mạch; bỏ đi khi đổi cảnh. Âm một lần (hét, sấm, còi, chuông) chỉ đặt ở đúng shot sự việc xảy ra. \
+- sfx: CHỈ dùng tên trong danh sách dưới (tên khác bị bỏ). Tối đa 2 âm/shot, chỉ khi hành động/không gian \
+đó thật sự có trong lời kể hoặc hình của CHÍNH shot đó (gõ cửa → door_knock; cảnh sát tới → police_siren; \
+trời mưa → rain). Âm một lần chỉ kéo dài trong shot của nó nên đặt đúng shot sự việc xảy ra; đừng rải \
+hiệu ứng ở mọi shot — nhiều shot không cần âm nào. Âm nền (mưa, phố, chợ, côn trùng đêm, phòng máy…) đặt \
+lặp lại ở MỌI shot liên tiếp cùng không gian để nghe liền mạch; bỏ đi khi đổi cảnh. \
 Cú tiết lộ / phát hiện kinh hoàng: impact (có thể kèm riser ở shot ngay trước).
 {sfx_lines}"""
 

@@ -11,9 +11,11 @@
   vào/ra mềm, hạ nhỏ khi có lời.
 - File nhạc/sfx tìm qua catalog, rồi assets/music/<mood>.* và assets/sfx/<tên>.*; thiếu thì tạo bản thủ tục.
 
-Tham số tuỳ chọn trong config.yaml (không bắt buộc):
-    audio: {music_rms_db: -30, duck_db: -12, sfx_peak_db: -6, crossfade_s: 1.5,
-            ambience_rms_db: -34, ambience_duck_db: -6}
+Mức âm tính theo độ to giọng đọc của phim (RMS phần có tiếng). Tham số tuỳ chọn trong config.yaml:
+    audio: {music_below_voice_db: 18, duck_db: -8, music_cue_max_s: 60, music_rest_s: 20,
+            ambience_below_voice_db: 20, ambience_duck_db: -6, sfx_below_voice_db: 10, sfx_peak_db: -8,
+            crossfade_s: 2.0}
+    (music_rms_db / ambience_rms_db đặt cố định nếu muốn bỏ qua cách tính theo giọng)
 """
 from __future__ import annotations
 
@@ -51,6 +53,7 @@ _LIBRARY_FALLBACK = {"shock": "horror", "hopeful": "warm", "tech": "mystery", "a
 _PROCEDURAL_FALLBACK = {"warm": "calm", "hopeful": "calm", "investigation": "mystery", "tech": "mystery",
                         "action": "tense", "shock": "horror"}
 SILENT_MOODS = {"none", "silence", "off", "stop"}
+SFX_TAIL_S = 0.4      # âm một lần được kéo quá cuối shot tối đa bấy nhiêu giây rồi tắt dần
 SFX_ALIASES = {
     "crowd_night": "crowd", "crowd_day": "crowd", "market": "crowd", "murmur": "crowd",
     "knock": "door", "creak": "door", "door_creak": "door", "door_open": "door",
@@ -134,6 +137,32 @@ def _peak_normalize(x: np.ndarray, target_db: float) -> np.ndarray:
     return (x * (_db(target_db) / (float(np.abs(x).max()) + 1e-9))).astype(np.float32)
 
 
+def active_rms_db(x: np.ndarray, floor_db: float = -45.0) -> float | None:
+    """RMS (dBFS) chỉ tính các khung 10 ms có tiếng (bỏ khoảng lặng) — độ to cảm nhận của giọng/âm."""
+    mono = x if x.ndim == 1 else x.mean(axis=1)
+    hop = SR // 100
+    n = len(mono) // hop
+    if n == 0:
+        return None
+    fr = np.sqrt((mono[: n * hop].astype(np.float64).reshape(n, hop) ** 2).mean(axis=1))
+    act = fr[fr > _db(floor_db)]
+    if len(act) == 0:
+        return None
+    return float(20 * np.log10(np.sqrt((act ** 2).mean()) + 1e-12))
+
+
+def _loudness_normalize(x: np.ndarray, target_db: float, peak_cap_db: float) -> np.ndarray:
+    """Đưa âm về độ to `target_db` (RMS phần có tiếng) nhưng đỉnh không vượt `peak_cap_db`."""
+    cur = active_rms_db(x, floor_db=-60.0)
+    if cur is None:
+        return x.astype(np.float32)
+    gain = _db(target_db - cur)
+    peak = float(np.abs(x).max()) * gain
+    if peak > _db(peak_cap_db):
+        gain *= _db(peak_cap_db) / peak
+    return (x * gain).astype(np.float32)
+
+
 def duck_gain(voice: np.ndarray, duck_db: float, *, attack: float = 0.08, release: float = 0.45,
               threshold: float = 0.015) -> np.ndarray:
     """Hệ số khuếch đại cho nhạc (mỗi mẫu): 1 khi im lặng, duck_db khi có giọng."""
@@ -180,20 +209,40 @@ def soft_limit(x: np.ndarray, ceiling: float = 0.97, *, inplace: bool = False) -
 
 
 # ---------------------------------------------------------------- dàn dựng
-def music_segments(sb: Storyboard) -> list[tuple[str, float, float]]:
-    """[(mood, t_bắt_đầu, t_kết_thúc)] liên tục theo mood hiện hành."""
+def music_segments(sb: Storyboard, *, cue_max: float | None = None,
+                   rest: float | None = None) -> list[tuple[str, float, float]]:
+    """[(mood, t_bắt_đầu, t_kết_thúc)] — nhạc là các *đoạn* ở nhịp cảm xúc, không phủ kín cả phim.
+
+    Mỗi lần đặt mood mở một đoạn; đoạn kết thúc khi đổi mood, gặp "none", hoặc dài quá `cue_max` giây
+    (cắt ở ranh giới shot đầu tiên sau mốc đó) → im lặng tới lần đặt mood kế tiếp. Đặt lại đúng mood vừa
+    hết trong vòng `rest` giây thì bỏ qua, để có quãng lặng.
+    """
+    cue_max = float(get("audio.music_cue_max_s", 60)) if cue_max is None else cue_max
+    rest = float(get("audio.music_rest_s", 20)) if rest is None else rest
     segs: list[tuple[str, float, float]] = []
     cur: str | None = None
     start = 0.0
+    last_mood: str | None = None
+    last_end = -1e9
     offs = shot_offsets(sb)
     for off, shot in zip(offs, sb.shots):
         mood = (shot.music_mood or "").strip().lower() or None
+        if cur is not None and off - start >= cue_max:       # đoạn nhạc đủ dài → tắt ở điểm cắt cảnh này
+            segs.append((cur, start, off))
+            last_mood, last_end, cur = cur, off, None
         if mood is None or mood == cur:
             continue
-        if cur is not None and cur not in SILENT_MOODS:
+        if mood in SILENT_MOODS:
+            if cur is not None:
+                segs.append((cur, start, off))
+                last_mood, last_end, cur = cur, off, None
+            continue
+        if cur is None and mood == last_mood and off - last_end < rest:
+            continue                                          # vừa hết đoạn cùng tâm trạng → để lặng một lúc
+        if cur is not None:
             segs.append((cur, start, off))
         cur, start = mood, off
-    if cur is not None and cur not in SILENT_MOODS:
+    if cur is not None:
         segs.append((cur, start, film_duration(sb)))
     return [s for s in segs if s[2] - s[1] > 0.05]
 
@@ -226,10 +275,7 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
     out_wav = Path(out_wav)
     total = film_duration(storyboard)
     n = int(np.ceil(total * SR)) + 1
-    music_rms = float(get("audio.music_rms_db", -30))
-    duck_db = float(get("audio.duck_db", -12))
-    sfx_peak = float(get("audio.sfx_peak_db", -6))
-    xf_s = float(get("audio.crossfade_s", 1.5))
+    xf_s = float(get("audio.crossfade_s", 2.0))
 
     offs = shot_offsets(storyboard)
 
@@ -252,6 +298,20 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
 
     mix = np.repeat(voice[:, None], 2, axis=1)
 
+    # mọi mức âm tính tương đối theo độ to giọng đọc của chính phim này
+    voice_db = active_rms_db(voice)
+    voice_db = -16.0 if voice_db is None else min(max(voice_db, -26.0), -10.0)
+    music_rms = (float(get("audio.music_rms_db")) if get("audio.music_rms_db") is not None
+                 else voice_db - float(get("audio.music_below_voice_db", 18)))
+    duck_db = float(get("audio.duck_db", -8))
+    sfx_level = voice_db - float(get("audio.sfx_below_voice_db", 10))
+    sfx_peak = float(get("audio.sfx_peak_db", -8))
+    amb_rms = (float(get("audio.ambience_rms_db")) if get("audio.ambience_rms_db") is not None
+               else voice_db - float(get("audio.ambience_below_voice_db", 20)))
+    amb_duck = float(get("audio.ambience_duck_db", -6))
+    log.info("Mức âm: giọng %.1f dB · nhạc %.1f dB (−%.0f khi đọc) · nền %.1f dB · hiệu ứng %.1f dB",
+             voice_db, music_rms, -duck_db, amb_rms, sfx_level)
+
     # nhạc nền
     if music:
         bed = np.zeros((n, 2), dtype=np.float32)
@@ -267,23 +327,23 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
             if path not in cache:
                 cache[path] = _rms_normalize(audio_io.decode(path, channels=2), music_rms)
             a = int(t0 * SR)
-            is_last = t1 >= total - 1e-3
-            b = n if is_last else min(n, int(t1 * SR) + xf)
+            b = min(n, int(t1 * SR))            # kết thúc đúng điểm cắt cảnh, tắt dần trước đó
+            if b - a < SR:
+                continue
             seg = loop_to(cache[path], b - a)
-            fin = min(len(seg), xf if i > 0 else int(2.0 * SR))
+            fin = min(len(seg) // 3, int(1.5 * SR))
             seg[:fin] *= np.linspace(0, 1, fin, dtype=np.float32)[:, None]
-            fout = min(len(seg), int(2.5 * SR) if is_last else xf)
+            fout = min(len(seg) // 3, xf)
             seg[len(seg) - fout:] *= np.linspace(1, 0, fout, dtype=np.float32)[:, None]
             bed[a:b] += seg
         cache.clear()
-        bed *= duck_gain(voice, duck_db)[:, None]
+        # nhả chậm (1.2 s): nhạc không "bơm" to lên trong quãng nghỉ ngắn giữa các câu
+        bed *= duck_gain(voice, duck_db, release=1.2)[:, None]
         mix += bed
         del bed
 
     # hiệu ứng
     if sfx:
-        amb_rms = float(get("audio.ambience_rms_db", -34))
-        amb_duck = float(get("audio.ambience_duck_db", -6))
         # âm nền: lặp liền mạch trên cả chuỗi shot, vào/ra mềm, hạ nhỏ khi có lời
         runs = ambience_runs(storyboard, offs)
         if runs:
@@ -312,12 +372,21 @@ def build_soundtrack(storyboard: Storyboard, project_dir: Path, out_wav: Path, *
                 if name not in fx_cache:   # mỗi hiệu ứng chỉ tìm/giải mã 1 lần (phim dài lặp lại nhiều)
                     info = resolve_sound(name)
                     fx_cache[name] = (None if info is None or info.kind == "ambience" else
-                                      _peak_normalize(audio_io.decode(info.path, channels=2), sfx_peak))
+                                      _loudness_normalize(audio_io.decode(info.path, channels=2),
+                                                          sfx_level, sfx_peak))
                 fx = fx_cache[name]
                 if fx is None:
                     continue
+                # âm một lần chỉ kéo dài trong shot của nó (+0.4 s đuôi), tắt dần — khớp với hình
+                dur = shot.duration if shot.duration is not None else shot.min_duration
                 a = int(off * SR)
-                b = min(n, a + len(fx))
-                mix[a:b] += fx[: b - a]
+                length = min(len(fx), int((dur + SFX_TAIL_S) * SR), n - a)
+                if length <= 0:
+                    continue
+                seg = fx[:length].copy()
+                if length < len(fx):
+                    fo = min(length // 2, int(0.35 * SR))
+                    seg[length - fo:] *= np.linspace(1, 0, fo, dtype=np.float32)[:, None]
+                mix[a:a + length] += seg
 
     return audio_io.write_wav(out_wav, soft_limit(mix, inplace=True), SR)
